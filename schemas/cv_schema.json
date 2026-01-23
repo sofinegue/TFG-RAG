@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": ["nombre_apellidos", "puesto", "experiencia", "estudios", "hard skills", "soft skills"],
+  "properties": {
+    "experiencia": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "estudios": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hard skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "soft skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
