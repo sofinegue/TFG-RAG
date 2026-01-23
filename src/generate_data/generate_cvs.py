@@ -6,24 +6,26 @@ from src.generate_data.cv_dataloader import CVDataLoader
 
 
 NUM_CVS = 300
-OUTPUT_DIR = Path("data/cvs")
+OUTPUT_DIR_ES = Path("data/cvs/es")
+OUTPUT_DIR_EN = Path("data/cvs/en")
 
 random.seed(22)
 
 
-# Inicializar el loader de datos
-loader = CVDataLoader(data_dir='data/cv_plantilla')
+# Initialize data loaders for both languages
+loader_es = CVDataLoader(data_dir='data/cv_plantilla/es')
+loader_en = CVDataLoader(data_dir='data/cv_plantilla/en')
 
 
-# Funciones auxiliares
+# Helper functions
 
-def generar_nombre():
-    """Genera un nombre completo con apellidos"""
+def generar_nombre(loader):
+    """Generates a full name with surnames"""
     return f"{random.choice(loader.nombres)} {random.choice(loader.apellidos)} {random.choice(loader.apellidos)}"
 
 
-def generar_experiencia(puesto, min_años, max_años, num_experiencias_max=5):
-    """Genera descripciones de experiencia profesional"""
+def generar_experiencia(puesto, min_años, max_años, loader, num_experiencias_max=5):
+    """Generates professional experience descriptions"""
     n = random.randint(0, num_experiencias_max)
     experiencias = []
     
@@ -43,33 +45,34 @@ def generar_experiencia(puesto, min_años, max_años, num_experiencias_max=5):
     return experiencias
 
 
-def generar_estudios():
-    """Genera lista de estudios siguiendo una lógica realista"""
+def generar_estudios(loader):
+    """Generates list of studies following realistic logic"""
     estudios = []
     
-    # Decidir si incluir FP (60% de probabilidad de NO incluir)
+    # Decide if include VT (40% probability of including)
     incluir_fp = random.random() < 0.4
     
     if incluir_fp:
-        # FP: 1-3 elementos
+        # VT: 1-3 elements
         num_fp = min(random.randint(1, 3), len(loader.fp))
-        estudios.extend(random.sample(loader.fp, k=num_fp))
+        if num_fp > 0:
+            estudios.extend(random.sample(loader.fp, k=num_fp))
         
-        # Grado: 0-1 (opcional si hay FP)
+        # Bachelor: 0-1 (optional if VT)
         if random.random() < 0.5 and len(loader.grado) > 0:
             estudios.extend(random.sample(loader.grado, k=1))
     else:
-        # Sin FP: Grado obligatorio (1)
+        # No VT: Bachelor mandatory (1)
         if len(loader.grado) > 0:
             estudios.extend(random.sample(loader.grado, k=1))
     
-    # Máster: 0-2 (solo si hay Grado)
-    if any("Grado" in e or "Bachelor" in e for e in estudios):
+    # Master: 0-2 (only if Bachelor)
+    if any("Bachelor" in e or "Degree" in e for e in estudios):
         num_masters = random.randint(0, 2)
         if num_masters > 0 and len(loader.master) >= num_masters:
             estudios.extend(random.sample(loader.master, k=num_masters))
             
-            # Doctorado: 0-1 (solo si hay al menos 1 Máster)
+            # PhD: 0-1 (only if at least 1 Master)
             if num_masters >= 1 and random.random() < 0.5:
                 if len(loader.doctorado) > 0:
                     estudios.extend(random.sample(loader.doctorado, k=1))
@@ -78,8 +81,8 @@ def generar_estudios():
 
 
 def generar_lista(opciones, min_n, max_n):
-    """Genera una lista aleatoria de elementos de las opciones"""
-    # Ajustar el máximo si hay menos opciones disponibles
+    """Generates random list of elements from options"""
+    # Adjust max if less options available
     max_n = min(max_n, len(opciones))
     min_n = min(min_n, max_n)
     
@@ -90,20 +93,20 @@ def generar_lista(opciones, min_n, max_n):
     return random.sample(opciones, k=n)
 
 
-# Generación de CVs
+# CV Generation
 
-def generar_cv():
-    """Genera un CV completo con datos aleatorios"""
+def generar_cv(loader):
+    """Generates a complete CV with random data"""
     puesto = random.choice(loader.puestos)
     
-    # Combinar otros + cursos y certificaciones
+    # Combine others + courses and certifications
     otros_completo = loader.otros + loader.cursos_y_certificaciones
     
     return {
-        "nombre_apellidos": generar_nombre(),
+        "nombre_apellidos": generar_nombre(loader),
         "puesto": puesto,
-        "experiencia": generar_experiencia(puesto, min_años=0, max_años=4),
-        "estudios": generar_estudios(),
+        "experiencia": generar_experiencia(puesto, min_años=0, max_años=4, loader=loader),
+        "estudios": generar_estudios(loader),
         "hard_skills": generar_lista(loader.hard_skills, min_n=3, max_n=10),
         "soft_skills": generar_lista(loader.soft_skills, min_n=2, max_n=7),
         "otros": generar_lista(otros_completo, min_n=2, max_n=8)
@@ -111,43 +114,66 @@ def generar_cv():
 
 
 def main():
-    """Genera múltiples CVs y los guarda en archivos JSON"""
-    # Crear directorio de salida si no existe
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    """Generates multiple CVs in both languages and saves them in JSON files"""
+    # Create output directories if they don't exist
+    OUTPUT_DIR_ES.mkdir(parents=True, exist_ok=True)
+    OUTPUT_DIR_EN.mkdir(parents=True, exist_ok=True)
     
-    print(f"Iniciando generación de {NUM_CVS} CVs...")
-    print(f"Datos cargados:")
-    print(f"   - {len(loader.nombres)} nombres")
-    print(f"   - {len(loader.apellidos)} apellidos")
-    print(f"   - {len(loader.puestos)} puestos")
-    print(f"   - {len(loader.hard_skills)} hard skills")
-    print(f"   - {len(loader.soft_skills)} soft skills")
-    print(f"   - {len(loader.experiencia_templates)} templates de experiencia")
+    print(f"Iniciating generation of {NUM_CVS} CVs in Spanish and English...")
+    print(f"\nSpanish data loaded:")
+    print(f"   - {len(loader_es.nombres)} names")
+    print(f"   - {len(loader_es.apellidos)} surnames")
+    print(f"   - {len(loader_es.puestos)} positions")
+    print(f"   - {len(loader_es.hard_skills)} hard skills")
+    print(f"   - {len(loader_es.soft_skills)} soft skills")
+    print(f"   - {len(loader_es.experiencia_templates)} experience templates")
+    
+    print(f"\nEnglish data loaded:")
+    print(f"   - {len(loader_en.nombres)} names")
+    print(f"   - {len(loader_en.apellidos)} surnames")
+    print(f"   - {len(loader_en.puestos)} positions")
+    print(f"   - {len(loader_en.hard_skills)} hard skills")
+    print(f"   - {len(loader_en.soft_skills)} soft skills")
+    print(f"   - {len(loader_en.experiencia_templates)} experience templates")
     print()
     
-    # Generar CVs
+    # Generate CVs
     for i in range(1, NUM_CVS + 1):
-        cv = generar_cv()
-        filename = OUTPUT_DIR / f"cv_{i:03d}.json"
+        # Spanish CV
+        cv_es = generar_cv(loader_es)
+        filename_es = OUTPUT_DIR_ES / f"cv_{i:03d}.json"
         
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(cv, f, ensure_ascii=False, indent=2)
+        with open(filename_es, "w", encoding="utf-8") as f:
+            json.dump(cv_es, f, ensure_ascii=False, indent=2)
         
-        print(f"CV {i:03d} generado: {cv['nombre_apellidos']} - {cv['puesto']}")
+        # English CV
+        cv_en = generar_cv(loader_en)
+        filename_en = OUTPUT_DIR_EN / f"cv_{i:03d}.json"
+        
+        with open(filename_en, "w", encoding="utf-8") as f:
+            json.dump(cv_en, f, ensure_ascii=False, indent=2)
+        
+        if i % 50 == 0:
+            print(f"Generated {i}/{NUM_CVS} CVs in both languages...")
     
-    print(f"\nGeneración completada! {NUM_CVS} CVs guardados en: {OUTPUT_DIR.absolute()}")
+    print(f"\nGeneration completed! {NUM_CVS} CVs saved in both languages:")
+    print(f"   Spanish: {OUTPUT_DIR_ES.absolute()}")
+    print(f"   English: {OUTPUT_DIR_EN.absolute()}")
     
-    # Estadísticas
-    print("\nEstadísticas:")
-    total_size = sum(f.stat().st_size for f in OUTPUT_DIR.glob("cv_*.json"))
-    print(f"   - Tamaño total: {total_size / 1024:.2f} KB")
-    print(f"   - Promedio por CV: {total_size / NUM_CVS / 1024:.2f} KB")
+    # Statistics
+    print("\nStatistics:")
+    total_size_es = sum(f.stat().st_size for f in OUTPUT_DIR_ES.glob("cv_*.json"))
+    total_size_en = sum(f.stat().st_size for f in OUTPUT_DIR_EN.glob("cv_*.json"))
+    print(f"   Spanish CVs total size: {total_size_es / 1024:.2f} KB")
+    print(f"   Spanish CVs average: {total_size_es / NUM_CVS / 1024:.2f} KB per CV")
+    print(f"   English CVs total size: {total_size_en / 1024:.2f} KB")
+    print(f"   English CVs average: {total_size_en / NUM_CVS / 1024:.2f} KB per CV")
 
 
 if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(f"\nError durante la generación: {e}")
+        print(f"\nError during generation: {e}")
         import traceback
         traceback.print_exc()

@@ -1,7 +1,15 @@
 {
   "type": "object",
-  "required": ["nombre_apellidos", "puesto", "experiencia", "estudios", "hard skills", "soft skills"],
+  "required": ["nombre_apellidos", "puesto", "experiencia", "estudios", "hard_skills", "soft_skills", "otros"],
   "properties": {
+    "nombre_apellidos": {
+      "type": "string",
+      "minLength": 1
+    },
+    "puesto": {
+      "type": "string",
+      "minLength": 1
+    },
     "experiencia": {
       "type": "array",
       "items": { "type": "string" }
@@ -15,6 +23,10 @@
       "items": { "type": "string" }
     },
     "soft skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "otros": {
       "type": "array",
       "items": { "type": "string" }
     }

@@ -2,6 +2,6 @@
 __pycache__/
 *.pyc
 
-data/cvs
-data/autorizados_red/*
+data/cvs/*
+data/wikipedia/*
 data/eu/*

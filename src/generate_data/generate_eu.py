@@ -80,7 +80,7 @@ def run():
 
                 time.sleep(0.5)
 
-    print("\nFASE 1 COMPLETADA")
+    print("\nDESCARGA COMPLETADA")
 
 if __name__ == "__main__":
     run()

@@ -6,20 +6,16 @@ from typing import List
 class CVDataLoader:
     """
     Cargador de datos para generación de CVs.
-    Los archivos JSON se encuentran en data/cv/plantilla/
+    Los archivos JSON se encuentran en data/cv_plantilla/
     """
     
-    def __init__(self, data_dir='data/cv/plantilla'):
+    def __init__(self, data_dir='data/cv_plantilla/es'):
         self.data_dir = Path(data_dir)
-        self._cache = {}
     
-    def _load(self, filename: str) -> dict:
-        """Carga un archivo JSON con caché"""
-        if filename not in self._cache:
-            filepath = self.data_dir / filename
-            with open(filepath, 'r', encoding='utf-8') as f:
-                self._cache[filename] = json.load(f)
-        return self._cache[filename]
+    def _load(self, filename):
+        filepath = self.data_dir / filename
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return json.load(f)
     
     @property
     def nombres(self) -> List[str]:
@@ -64,16 +60,12 @@ class CVDataLoader:
     @property
     def cursos_y_certificaciones(self) -> List[str]:
         """Retorna lista de cursos y certificaciones"""
-        return self._load('formacion.json')['cursos_y_certificaciones']
+        return self._load('otros.json').get('cursos_y_certificaciones', [])
     
     @property
     def hard_skills(self) -> List[str]:
         """Retorna lista completa de hard skills"""
-        skills_data = self._load('skills.json')
-        # Combina hard_skills y hard_skills_parte_2 si existe
-        base_skills = skills_data.get('hard_skills', [])
-        extra_skills = skills_data.get('hard_skills_parte_2', [])
-        return base_skills + extra_skills
+        return self._load('skills.json')['hard_skills']
     
     @property
     def soft_skills(self) -> List[str]:
@@ -121,10 +113,6 @@ class CVDataLoader:
             'hard_skills': self.hard_skills,
             'soft_skills': self.soft_skills
         }
-    
-    def reload(self):
-        """Recarga todos los datos desde los archivos (útil en desarrollo)"""
-        self._cache.clear()
     
     def __repr__(self):
         return f"CVDataLoader(data_dir='{self.data_dir}')"
