@@ -115,8 +115,8 @@ def main():
     # Crear directorio de salida si no existe
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     
-    print(f"🚀 Iniciando generación de {NUM_CVS} CVs...")
-    print(f"📊 Datos cargados:")
+    print(f"Iniciando generación de {NUM_CVS} CVs...")
+    print(f"Datos cargados:")
     print(f"   - {len(loader.nombres)} nombres")
     print(f"   - {len(loader.apellidos)} apellidos")
     print(f"   - {len(loader.puestos)} puestos")
@@ -133,12 +133,12 @@ def main():
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(cv, f, ensure_ascii=False, indent=2)
         
-        print(f"✅ CV {i:03d} generado: {cv['nombre_apellidos']} - {cv['puesto']}")
+        print(f"CV {i:03d} generado: {cv['nombre_apellidos']} - {cv['puesto']}")
     
-    print(f"\n🎉 Generación completada! {NUM_CVS} CVs guardados en: {OUTPUT_DIR.absolute()}")
+    print(f"\nGeneración completada! {NUM_CVS} CVs guardados en: {OUTPUT_DIR.absolute()}")
     
     # Estadísticas
-    print("\n📈 Estadísticas:")
+    print("\nEstadísticas:")
     total_size = sum(f.stat().st_size for f in OUTPUT_DIR.glob("cv_*.json"))
     print(f"   - Tamaño total: {total_size / 1024:.2f} KB")
     print(f"   - Promedio por CV: {total_size / NUM_CVS / 1024:.2f} KB")
@@ -148,6 +148,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(f"\n❌ Error durante la generación: {e}")
+        print(f"\nError durante la generación: {e}")
         import traceback
         traceback.print_exc()
