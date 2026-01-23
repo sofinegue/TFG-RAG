@@ -34,7 +34,7 @@ class DataValidator:
             try:
                 with open(schema_file, 'r', encoding='utf-8') as f:
                     schemas[schema_name] = json.load(f)
-                logger.info(f"Esquema cargado: {schema_name}")
+                print(f"Esquema cargado: {schema_name}")
             except json.JSONDecodeError as e:
                 logger.error(f"Error al cargar esquema {schema_name}: {e}")
         
@@ -96,86 +96,65 @@ class DataValidator:
             return results
         
         json_files = list(dir_path.glob(pattern))
-        logger.info(f"Validando {len(json_files)} archivos en {dir_path}")
+        print(f"Validando {len(json_files)} archivos en {dir_path}")
         
         for json_file in json_files:
             is_valid, errors = self.validate_file(str(json_file), schema_name)
             results[str(json_file)] = (is_valid, errors)
         
         return results
-    
-    def print_results(self, results: Dict[str, Tuple[bool, List[str]]], verbose: bool = False):
-        """Imprime los resultados de validación de forma legible"""
-        valid_count = sum(1 for is_valid, _ in results.values() if is_valid)
-        invalid_count = len(results) - valid_count
-        
-        logger.info(f"\n{'='*70}")
-        logger.info(f"Resultados: {valid_count} válidos, {invalid_count} inválidos de {len(results)} totales")
-        logger.info(f"{'='*70}\n")
-        
-        for file_path, (is_valid, errors) in results.items():
-            status = "[OK]" if is_valid else "[FAIL]"
-            logger.info(f"{status} {file_path}")
-            
-            if not is_valid and verbose:
-                for error in errors:
-                    logger.error(f"   └─ {error}")
 
 
 def validate_cvs(validator: DataValidator, verbose: bool = False) -> Tuple[int, int]:
     """Valida todos los CVs generados (español e inglés)"""
-    logger.info("VALIDANDO CVs")
+    print("VALIDANDO CVs")
     
     total_valid = 0
     total_invalid = 0
     
     # Validar CVs en español
-    logger.info("\n[ES] Validando CVs en español...")
+    print("[ES] Validando CVs en español...")
     results_es = validator.validate_directory('data/cvs/es', 'cv_schema', '*.json')
-    # validator.print_results(results_es, verbose)
     total_valid += sum(1 for is_valid, _ in results_es.values() if is_valid)
     total_invalid += sum(1 for is_valid, _ in results_es.values() if not is_valid)
     
     # Validar CVs en inglés
-    logger.info("\n[EN] Validando CVs en inglés...")
+    print("[EN] Validando CVs en inglés...")
     results_en = validator.validate_directory('data/cvs/en', 'cv_schema', '*.json')
-    # validator.print_results(results_en, verbose)
     total_valid += sum(1 for is_valid, _ in results_en.values() if is_valid)
     total_invalid += sum(1 for is_valid, _ in results_en.values() if not is_valid)
     
-    logger.info(f"\nTotal CVs válidos: {total_valid}/{total_valid + total_invalid}")
+    print(f"\nTotal CVs válidos: {total_valid}/{total_valid + total_invalid}")
     return total_valid, total_invalid
 
 def validate_wikipedia(validator: DataValidator, verbose: bool = False) -> Tuple[int, int]:
     """Valida documentos de Wikipedia (si existe el esquema)"""    
-    logger.info("VALIDANDO WIKIPEDIA")
+    print("VALIDANDO WIKIPEDIA")
     
     total_valid = 0
     total_invalid = 0
     
     # Validar Wikipedia en español
-    logger.info("\n[ES] Validando documentos de Wikipedia en español...")
+    print("[ES] Validando documentos de Wikipedia en español...")
     results_es = validator.validate_directory('data/wikipedia/es/json', 'wikipedia_schema', '*.json')
     
     if results_es:
-        # validator.print_results(results_es, verbose)
         total_valid += sum(1 for is_valid, _ in results_es.values() if is_valid)
         total_invalid += sum(1 for is_valid, _ in results_es.values() if not is_valid)
     else:
         logger.warning("No se encontraron archivos para validar en data/wikipedia/es/json")
     
     # Validar Wikipedia en inglés
-    logger.info("\n[EN] Validando documentos de Wikipedia en inglés...")
+    print("[EN] Validando documentos de Wikipedia en inglés...")
     results_en = validator.validate_directory('data/wikipedia/en/json', 'wikipedia_schema', '*.json')
     
     if results_en:
-        # validator.print_results(results_en, verbose)
         total_valid += sum(1 for is_valid, _ in results_en.values() if is_valid)
         total_invalid += sum(1 for is_valid, _ in results_en.values() if not is_valid)
     else:
         logger.warning("No se encontraron archivos para validar en data/wikipedia/en/json")
     
-    logger.info(f"\nTotal documentos Wikipedia válidos: {total_valid}/{total_valid + total_invalid}")
+    print(f"\nTotal documentos Wikipedia válidos: {total_valid}/{total_valid + total_invalid}")
     return total_valid, total_invalid
 
 
@@ -199,18 +178,18 @@ def main():
         logger.error("No se encontraron esquemas. Verifica la carpeta 'schemas/'")
         return
     
-    logger.info(f"Esquemas disponibles: {', '.join(validator.schemas.keys())}\n")
+    print(f"Esquemas disponibles: {', '.join(validator.schemas.keys())}\n")
     
     total_valid = 0
     total_invalid = 0
     
     # Validar archivo específico
     if args.file and args.schema:
-        logger.info(f"\nValidando archivo específico: {args.file}")
+        print(f"\nValidando archivo específico: {args.file}")
         is_valid, errors = validator.validate_file(args.file, args.schema)
         
         if is_valid:
-            logger.info("[OK] Archivo válido")
+            print("[OK] Archivo válido")
         else:
             logger.error("[FAIL] Archivo inválido:")
             for error in errors:
@@ -231,10 +210,10 @@ def main():
         total_invalid += wiki_invalid
     
     # Resumen final
-    logger.info("RESUMEN FINAL")
-    logger.info(f"Total válidos: {total_valid}")
-    logger.info(f"Total inválidos: {total_invalid}")
-    logger.info(f"Tasa de validación: {total_valid/(total_valid+total_invalid)*100:.1f}%" if (total_valid+total_invalid) > 0 else "Sin datos")
+    print("RESUMEN FINAL")
+    print(f"Total válidos: {total_valid}")
+    print(f"Total inválidos: {total_invalid}")
+    print(f"Tasa de validación: {total_valid/(total_valid+total_invalid)*100:.1f}%" if (total_valid+total_invalid) > 0 else "Sin datos")
 
 
 if __name__ == "__main__":

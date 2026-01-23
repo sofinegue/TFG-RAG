@@ -5,7 +5,7 @@ from pathlib import Path
 import socket
 import urllib3
 
-# 🔒 Forzar IPv4 (evita fallos IPv6 en Windows)
+# Forzar IPv4 (evita fallos IPv6 en Windows)
 urllib3.util.connection.HAS_IPV6 = False
 
 # =========================
@@ -106,12 +106,13 @@ def get_page_content(lang, pageid):
     ]
 
     return {
-        "title": page["title"],
-        "language": lang,
+        "titulo": page["title"],
+        "idioma": lang,
         "pageid": pageid,
-        "categories": categories,
+        "categorias": categories,
         "url": f"https://{lang}.wikipedia.org/wiki/{page['title'].replace(' ', '_')}",
-        "text": page["extract"]
+        "contenido": page["extract"],
+        "fecha_descarga": time.strftime('%Y-%m-%dT%H:%M:%SZ')
     }
 
 # =========================
@@ -125,24 +126,24 @@ def save_document(lang, doc):
     json_dir.mkdir(parents=True, exist_ok=True)
     txt_dir.mkdir(parents=True, exist_ok=True)
 
-    safe_title = doc["title"].replace("/", "_")
+    safe_title = doc["titulo"].replace("/", "_")
 
     with open(json_dir / f"{safe_title}.json", "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=2)
 
     with open(txt_dir / f"{safe_title}.txt", "w", encoding="utf-8") as f:
-        f.write(doc["text"])
+        f.write(doc["contenido"])
 
 # =========================
 # PIPELINE PRINCIPAL
 # =========================
 
 def build_dataset():
-    print("📚 Construyendo dataset Wikipedia Literatura (ES / EN)")
-    print(f"📦 Máx. documentos por idioma: {MAX_PAGES_PER_LANGUAGE}\n")
+    print("[*] Construyendo dataset Wikipedia Literatura (ES / EN)")
+    print(f"[*] Máx. documentos por idioma: {MAX_PAGES_PER_LANGUAGE}\n")
 
     for lang in LANGUAGES:
-        print(f"\n🌍 Idioma: {lang.upper()}")
+        print(f"\n[*] Idioma: {lang.upper()}")
         collected = {}
         target = MAX_PAGES_PER_LANGUAGE
 
@@ -150,7 +151,7 @@ def build_dataset():
             if len(collected) >= target:
                 break
 
-            print(f"  📂 Categoría: {category}")
+            print(f"[*] Categoría: {category}")
             pages = get_pages_from_category(
                 lang,
                 category,
@@ -166,17 +167,17 @@ def build_dataset():
                     continue
 
                 save_document(lang, doc)
-                collected[page["pageid"]] = doc["title"]
+                collected[page["pageid"]] = doc["titulo"]
 
-                print(f"    ✅ {doc['title']}")
+                print(f"[OK] {doc['titulo']}")
                 time.sleep(SLEEP_TIME)
 
                 if len(collected) >= target:
                     break
 
-        print(f"  🎯 Total documentos guardados ({lang}): {len(collected)}")
+        print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
 
-    print("\n🏁 Dataset completado correctamente.")
+    print("\n[*] Dataset completado correctamente.")
 
 # =========================
 # EJECUCIÓN
