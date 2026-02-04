@@ -2,18 +2,14 @@ import requests
 import time
 import json
 from pathlib import Path
-import socket
 import urllib3
 
 # Forzar IPv4 (evita fallos IPv6 en Windows)
 urllib3.util.connection.HAS_IPV6 = False
 
-# =========================
-# CONFIGURACIÓN GENERAL
-# =========================
-
 LANGUAGES = ["en", "es"]
 MAX_PAGES_PER_LANGUAGE = 1000  # tamaño medio
+CLLIMIT = 20
 SLEEP_TIME = 0.5
 
 BASE_DIR = Path("data/wikipedia")
@@ -22,7 +18,6 @@ HEADERS = {
     "User-Agent": "TFG-RAG-Wikipedia-Dataset/1.0 (Academic use)"
 }
 
-# Categorías CANÓNICAS por idioma
 CATEGORIES = {
     "en": [
         "Category:Literature",
@@ -40,9 +35,6 @@ CATEGORIES = {
     ]
 }
 
-# =========================
-# UTILIDADES API
-# =========================
 
 def wikipedia_api(lang, params):
     url = f"https://{lang}.wikipedia.org/w/api.php"
@@ -50,10 +42,6 @@ def wikipedia_api(lang, params):
     response = requests.get(url, params=params, headers=HEADERS, timeout=30)
     response.raise_for_status()
     return response.json()
-
-# =========================
-# DESCUBRIR PÁGINAS
-# =========================
 
 def get_pages_from_category(lang, category, limit=500):
     pages = []
@@ -82,17 +70,13 @@ def get_pages_from_category(lang, category, limit=500):
 
     return pages[:limit]
 
-# =========================
-# DESCARGAR CONTENIDO
-# =========================
-
 def get_page_content(lang, pageid):
     params = {
         "action": "query",
         "pageids": pageid,
         "prop": "extracts|categories",
         "explaintext": True,
-        "cllimit": 20
+        "cllimit": CLLIMIT
     }
     data = wikipedia_api(lang, params)
     page = next(iter(data["query"]["pages"].values()))
@@ -115,10 +99,6 @@ def get_page_content(lang, pageid):
         "fecha_descarga": time.strftime('%Y-%m-%dT%H:%M:%SZ')
     }
 
-# =========================
-# GUARDAR ARCHIVOS
-# =========================
-
 def save_document(lang, doc):
     json_dir = BASE_DIR / lang / "json"
     txt_dir = BASE_DIR / lang / "txt"
@@ -134,12 +114,8 @@ def save_document(lang, doc):
     with open(txt_dir / f"{safe_title}.txt", "w", encoding="utf-8") as f:
         f.write(doc["contenido"])
 
-# =========================
-# PIPELINE PRINCIPAL
-# =========================
-
-def build_dataset():
-    print("[*] Construyendo dataset Wikipedia Literatura (ES / EN)")
+def main():
+    # print("[*] Construyendo dataset Wikipedia Literatura (ES / EN)")
     print(f"[*] Máx. documentos por idioma: {MAX_PAGES_PER_LANGUAGE}\n")
 
     for lang in LANGUAGES:
@@ -151,7 +127,7 @@ def build_dataset():
             if len(collected) >= target:
                 break
 
-            print(f"[*] Categoría: {category}")
+            # print(f"[*] Categoría: {category}")
             pages = get_pages_from_category(
                 lang,
                 category,
@@ -164,24 +140,21 @@ def build_dataset():
 
                 doc = get_page_content(lang, page["pageid"])
                 if not doc:
+                    print(f"[KO] {page['title']}")
                     continue
 
                 save_document(lang, doc)
                 collected[page["pageid"]] = doc["titulo"]
 
-                print(f"[OK] {doc['titulo']}")
+                # print(f"[OK] {doc['titulo']}")
                 time.sleep(SLEEP_TIME)
 
                 if len(collected) >= target:
                     break
 
-        print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
+        # print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
 
-    print("\n[*] Dataset completado correctamente.")
+    # print("\n[*] Dataset completado correctamente.")
 
-# =========================
-# EJECUCIÓN
-# =========================
-
-if __name__ == "__main__":
-    build_dataset()
+# if __name__ == "__main__":
+#     main()
