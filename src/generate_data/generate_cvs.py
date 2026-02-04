@@ -169,6 +169,23 @@ def main():
     print(f"   English CVs total size: {total_size_en / 1024:.2f} KB")
     print(f"   English CVs average: {total_size_en / NUM_CVS / 1024:.2f} KB per CV")
 
+# Por si en algún momento se necesita quitar espacios de las claves
+def normalize_keys(obj):
+    if isinstance(obj, dict):
+        new = {}
+        for k, v in obj.items():
+            new_key = k.replace(" ", "_").lower()
+            new[new_key] = normalize_keys(v)
+        return new
+    if isinstance(obj, list):
+        return [normalize_keys(x) for x in obj]
+    return obj
+
+# Uso:
+# data = json.load(f)
+# data = normalize_keys(data)
+
+
 
 if __name__ == "__main__":
     try:
