@@ -5,3 +5,5 @@ __pycache__/
 data/cvs/*
 data/wikipedia/*
 data/eu/*
+data/papers/*
+doc/*

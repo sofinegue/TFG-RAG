@@ -2,8 +2,7 @@ import json
 import logging
 from pathlib import Path
 from typing import List, Dict, Tuple
-import jsonschema
-from jsonschema import validate, ValidationError, Draft7Validator
+from jsonschema import validate, ValidationError
 
 
 # Configure logging
@@ -108,7 +107,7 @@ class DataValidator:
 def validate_cvs(validator: DataValidator, verbose: bool = False) -> Tuple[int, int]:
     """Valida todos los CVs generados (español e inglés)"""
     print("VALIDANDO CVs")
-    
+
     total_valid = 0
     total_invalid = 0
     
