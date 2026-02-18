@@ -7,3 +7,11 @@ data/wikipedia/*
 data/eu/*
 data/papers/*
 doc/*
+
+# Frontend dependencies and build artifacts
+frontend/node_modules/
+frontend/build/
+doc/frontend/node_modules/
+doc/frontend/build/
+**/frontend/node_modules/
+**/frontend/build/
