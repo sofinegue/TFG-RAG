@@ -166,6 +166,15 @@ def main():
 
     for lang in LANGUAGES:
         print(f"\n[*] Idioma: {lang.upper()}")
+
+        # If the language json folder already has the target number of documents,
+        # skip scraping to avoid redundant requests and cookie refreshes.
+        json_dir = BASE_DIR / lang / "json"
+        existing_json = len(list(json_dir.glob('*.json'))) if json_dir.exists() else 0
+        if existing_json >= MAX_PAGES_PER_LANGUAGE:
+            print(f"[*] Idioma: {lang.upper()} - ya completo ({existing_json}/{MAX_PAGES_PER_LANGUAGE}), se omite descarga")
+            continue
+
         refresh_cookies(lang)
         collected = {}
         target = MAX_PAGES_PER_LANGUAGE
@@ -192,7 +201,7 @@ def main():
                 save_document(lang, doc)
                 collected[page["pageid"]] = doc["titulo"]
 
-                print(f"[OK] {doc['titulo']}")
+                # print(f"[OK] {doc['titulo']}")
                 time.sleep(SLEEP_TIME)
 
                 if len(collected) >= target:
@@ -202,9 +211,6 @@ def main():
 
     print("\n[*] Dataset completado correctamente.")
 
-# =========================
-# EJECUCIÓN
-# =========================
 
-if __name__ == "__main__":
-    build_dataset()
+# if __name__ == "__main__":
+#     main()

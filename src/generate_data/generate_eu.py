@@ -118,6 +118,14 @@ def main():
         lang_dir = OUTPUT_DIR / lang_name.lower()
         lang_dir.mkdir(exist_ok=True)
 
+        # If the language folder already contains the expected number of PDFs,
+        # skip scraping to avoid re-downloading and WAF challenges.
+        expected_per_lang = len(SECTIONS) * 20
+        existing_pdfs = len(list(lang_dir.glob('*.pdf')))
+        if existing_pdfs >= expected_per_lang:
+            print(f"\nIdioma: {lang_name} - ya completo ({existing_pdfs}/{expected_per_lang}), se omite descarga")
+            continue
+
         print(f"\nIdioma: {lang_name}")
 
         for section, info in SECTIONS.items():

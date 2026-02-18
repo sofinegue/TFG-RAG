@@ -1,0 +1,59 @@
+# ========================================
+# RAG MODULAR CON AGENT BUILDER
+# ========================================
+
+# === OPENAI AGENTS SDK ===
+openai-agents
+
+# === CORE ===
+python-dotenv
+pydantic>=2.7.4
+typing-extensions
+
+# === LANGGRAPH ===
+langgraph==0.2.28
+langchain-core==0.3.15
+langgraph-checkpoint
+langchain-text-splitters==0.3.0
+nest-asyncio
+# === AZURE SERVICES (opcional - para retrieval adicional) ===
+azure-search-documents
+azure-core
+azure-identity
+azure-storage-blob
+azure-cosmos
+azure-ai-documentintelligence
+azure-ai-projects
+azure.data.tables
+# === WEB UI ===
+streamlit
+
+# === FASTAPI (opcional - para API REST) ===
+fastapi
+uvicorn[standard]
+python-multipart
+fastapi-swagger2
+
+# === UTILITIES ===
+requests
+tiktoken
+pymongo
+pytz
+aiohttp
+
+# === OBSERVABILITY (opcional) ===
+opentelemetry-instrumentation-fastapi
+
+# === VISUALIZATION (opcional - para grafo) ===
+graphviz
+ipython
+
+#=== BOT BUILDER ===
+botbuilder-core 
+botbuilder-schema
+
+#=== NPM ===
+npm
+
+#=== Markdown rendering ===
+markdown>=3.4.0
