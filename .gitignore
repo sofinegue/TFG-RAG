@@ -10,6 +10,8 @@ data/eu/*
 data/papers/*
 doc/*
 
+src_rag/*
+
 frontend/node_modules/*
 frontend/build/*
 frontend/public/*

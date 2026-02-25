@@ -3,3 +3,16 @@ beautifulsoup4==4.14.3
 selenium==4.40.0
 jsonlines==4.0.0
 jsonschema==4.26.0
+langchain-text-splitters==0.3.0
+pydantic>=2.7.4
+
+fastapi
+
+openai-agents
+
+azure-cosmos
+azure-search-documents
+azure-storage-blob
+azure.data.tables
+azure-ai-documentintelligence
+
