@@ -17,7 +17,7 @@ import os
 cosmosendpoint = Config.cosmos_endpoint  # ✅ minúsculas
 cosmoskey = Config.cosmos_key  # ✅ minúsculas
 dbname = Config.cosmosdb_database  # ✅ nombre corregido
-containerdbname = Config.cosmosdb_container  # ✅ nombre corregido
+containerdbname = Config.cosmosdb_container_cvs  # ✅ nombre corregido
 sublotes_flag = Config.sublotes_flag  # ✅ ya es bool, no necesita bool(int(...))
 
 # Cargar el tokenizador

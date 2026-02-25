@@ -1,0 +1,48 @@
+## MANAGE GITHUB USERS
+
+# Ver cuenta actual
+gh auth status
+
+# Cerrar sesión de la cuenta actual
+gh auth logout
+
+# Iniciar sesión con otra cuenta
+gh auth login
+
+# Si tienes múltiples cuentas ya autenticadas, cambiar entre ellas:
+gh auth switch
+
+## SANDBOX 
+
+PREFIJO PARA TODOS LOS RECURSOS
+investigation-rag
+
+
+REVISAR:
+    config.py
+    .env
+    main.py > conection_str
+
+
+
+Usuario (React Frontend)
+    ↓
+📤 POST /api/upload-documents
+    ↓
+🗄️ Azure Blob Storage (archivos originales)
+    ↓
+📋 Cosmos DB (metadata, status=PENDING)
+    ↓
+🔍 Document Intelligence (OCR/parsing)
+    ↓
+✂️ Chunking (markdown_percentage)
+    ↓
+🧮 Embeddings (get_embedding)
+    ↓
+🗄️ Cosmos DB (chunks con embeddings)
+    ↓
+🔄 Azure Search Indexer (automático)
+    ↓
+🔎 Azure AI Search Index ✅
+
+

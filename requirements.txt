@@ -7,12 +7,18 @@ langchain-text-splitters==0.3.0
 pydantic>=2.7.4
 
 fastapi
+uvicorn
 
 openai-agents
+pytz
+tiktoken
+aiohttp
+PyMuPDF
+python-dotenv
 
 azure-cosmos
 azure-search-documents
 azure-storage-blob
-azure.data.tables
+azure-data-tables
 azure-ai-documentintelligence
 

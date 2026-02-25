@@ -62,6 +62,7 @@ class RAGConfig:
     azure_storage_key: str = os.getenv("AZURE_STORAGEACCOUNT_KEY")
     azure_container_name: str = os.getenv("AZURE_STORAGE_NAME_INVESTIGATION", "plug-rag-docs")
     azure_container_configs: str = os.getenv("AZURE_CONTAINER_NAME_CONFIGS", "config-jsons")
+    azure_storage_account: str = os.getenv("AZURE_STORAGE_ACCOUNT")
     azure_storage_account_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_Assistants")
     azure_storage_key_assistants: str = os.getenv("AZURE_STORAGE_KEY_Assistants")
     azure_container_name_assistants: str = os.getenv("AZURE_CONTAINER_NAME_Assistants")
@@ -69,10 +70,9 @@ class RAGConfig:
     # === COSMOS DB ===
     cosmos_endpoint: str = os.getenv("COSMOS_ENDPOINT")
     cosmos_key: str = os.getenv("COSMOS_KEY")
-    cosmosdb_database: str = os.getenv("AZURE_COSMOSDB_DB_NAME", "RAG_DB")
-    cosmosdb_container: str = os.getenv("AZURE_COSMOSDB_COLLECTION_NAME", "Chunks")
+    cosmosdb_database: str = os.getenv("AZURE_COSMOSDB_DB_NAME", "SNA")
     cosmosdb_process_db: str = os.getenv("AZURE_COSMOSDB_PROCESSDOCUMENTS_DB_NAME")
-    cosmosdb_process_container: str = os.getenv("AZURE_COSMOSDB_COLLECTION_PROCESSDOCUMENTS_NAME")
+    cosmosdb_container_cvs: str = os.getenv("AZURE_COSMOSDB_COLLECTION_CVS", "Chunks-CVs")
     
     # === GUARDRAILS ===
     enable_input_guardrails: bool = os.getenv("ENABLE_INPUT_GUARDRAILS", "true").lower() == "true"
@@ -172,22 +172,6 @@ class RAGConfig:
     def get_embedding_model_config(self) -> ModelConfig:
         """Obtiene la configuración del modelo de embeddings actual"""
         return self.get_model_config(self.embedding_model)
-
-    @property
-    def azure_storage_account_assistants(self) -> str:
-        return self.azure_storage_account_assistants
-
-    @property
-    def azure_storage_key_assistants(self) -> str:
-        return self.azure_storage_key_assistants
-
-    @property
-    def azure_container_assistants(self) -> str:
-        return self.azure_container_name_assistants
-
-    @property
-    def azure_container_deleted_assistants(self) -> Optional[str]:
-        return self.azure_container_name_deleted_assistants
 
 # Instancia global
 config = RAGConfig()

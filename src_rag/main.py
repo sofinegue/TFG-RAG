@@ -37,7 +37,7 @@ app = FastAPI(title="RAG Backend API")
 # pero durante desarrollo necesitamos permitir localhost:3000
 ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React dev server
-    "https://pocs-rag-cvs-g4cfdbhug0c4eygw.westeurope-01.azurewebsites.net",
+    # "https://pocs-rag-cvs-g4cfdbhug0c4eygw.westeurope-01.azurewebsites.net",  # URL DESPLIEGUE
     os.getenv("FRONTEND_URL", "")  # URL personalizada si existe
 ]
 
