@@ -5,7 +5,7 @@ Crear índice y indexer de Azure Search con búsqueda híbrida
 from azure.search.documents.indexes import SearchIndexClient, SearchIndexerClient
 from azure.search.documents.indexes.models import *
 from azure.core.credentials import AzureKeyCredential
-from config import config
+from src.config import config
 from urllib.parse import quote_plus
 
 

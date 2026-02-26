@@ -19,14 +19,14 @@ import argparse
 import uuid
 
 from tqdm import tqdm
-from document_ingestion.cv_text_split import get_cv_text_split
-from document_ingestion.run_utils import (
+from src.document_ingestion.cv_text_split import get_cv_text_split
+from src.document_ingestion.run_utils import (
     add_common_args,
     generate_session_id,
 )
-from services.azure_storage_service import list_json_configs_from_blob
-from models.doc_model import DocEntity
-from config import config
+from src.services.azure_storage_service import list_json_configs_from_blob
+from src.models.doc_model import DocEntity
+from src.config import config
 
 
 # ---------------------------------------------------------------------------

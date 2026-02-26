@@ -1,7 +1,7 @@
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
 from azure.ai.documentintelligence.models import DocumentAnalysisFeature
-from config import Config as config
+from src.config import config
 # from helpers.kibana.helper_kibana import sendKibanaAPI
 from datetime import datetime
 import asyncio

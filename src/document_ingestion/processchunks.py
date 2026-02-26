@@ -1,7 +1,7 @@
-from config import config as Config
+from src.config import config
 import json
-from services.openai_service import get_embedding
-from services.cosmos_service import upload_doc_cosmos
+from src.services.openai_service import get_embedding
+from src.services.cosmos_service import upload_doc_cosmos
 from langchain_text_splitters import MarkdownHeaderTextSplitter  # ✅ CORREGIDO
 import uuid  # ✅ AÑADIDO (faltaba este import)
 from datetime import datetime
@@ -14,11 +14,11 @@ from typing import Any, Dict, List, Optional
 import os
 
 # Set Config Cosmos DB
-cosmosendpoint = Config.cosmos_endpoint  # ✅ minúsculas
-cosmoskey = Config.cosmos_key  # ✅ minúsculas
-dbname = Config.cosmosdb_database  # ✅ nombre corregido
-containerdbname = Config.cosmosdb_container_cvs  # ✅ nombre corregido
-sublotes_flag = Config.sublotes_flag  # ✅ ya es bool, no necesita bool(int(...))
+cosmosendpoint = config.cosmos_endpoint
+cosmoskey = config.cosmos_key
+dbname = config.cosmosdb_database
+containerdbname = config.cosmosdb_container_cvs
+sublotes_flag = config.sublotes_flag
 
 # Cargar el tokenizador
 encoding = tiktoken.get_encoding("cl100k_base")
@@ -39,7 +39,7 @@ def mark_existing_chunks_as_deleted(doc_title: str, cosmos_endpoint: str, cosmos
         int: Número de chunks marcados como borrados
     """
     try:
-        from services.cosmos_service import cosmos_container_connection
+        from src.services.cosmos_service import cosmos_container_connection
         
         container = cosmos_container_connection(cosmos_key, cosmos_endpoint, db_name, container_name)
         
@@ -141,7 +141,7 @@ def upload_chunks(index, page_number, title, array, content, blob_name, topl, ta
             "topLanguage": topl,
             "Tables": tables,
             "Formulas": formulas,
-            "embedding": get_embedding(embeddingcontent, Config.azure_openai_emb_name, SessionId, Call_id, CDU, doc_entity)
+            "embedding": get_embedding(embeddingcontent, config.azure_openai_emb_name, SessionId, Call_id, CDU, doc_entity)
         }
 
         ### COSMOS DB

@@ -1,29 +1,29 @@
-from services.azure_storage_service import get_specific_file_from_blob_container
-from config import Config
-from services.docintelligence_service import get_content_from_document
+from src.services.azure_storage_service import get_specific_file_from_blob_container
+from src.config import config
+from src.services.docintelligence_service import get_content_from_document
 from datetime import datetime
 import re
 import tiktoken
 import asyncio
 # from helpers import helper_adapter_kibana
-from models.Timestamps import Timestamps
-from models.doc_model import DocEntity
-from document_ingestion import processchunks
+from src.models.Timestamps import Timestamps
+from src.models.doc_model import DocEntity
+from src.document_ingestion import processchunks
 from difflib import SequenceMatcher
 
 # Set Config Azure Blob Storage
-storageaccountname = Config.azure_storage_account
-storageaccountkey = Config.azure_storage_key
-containername = Config.azure_container_name
-cosmosendpoint = Config.cosmos_endpoint
-cosmoskey = Config.cosmos_key
-dbname = Config.cosmosdb_database
-containerdbname = Config.cosmosdb_container
-sublotes_flag = Config.sublotes_flag
+storageaccountname = config.azure_storage_account
+storageaccountkey = config.azure_storage_key
+containername = config.azure_container_name
+cosmosendpoint = config.cosmos_endpoint
+cosmoskey = config.cosmos_key
+dbname = config.cosmosdb_database
+containerdbname = config.cosmosdb_container
+sublotes_flag = config.sublotes_flag
 # Cargar el tokenizador
-encoding = tiktoken.encoding_for_model(Config.azure_openai_emb_name)
+encoding = tiktoken.encoding_for_model(config.azure_openai_emb_name)
 # Sublotes True / False
-sublotes_flag = Config.sublotes_flag
+sublotes_flag = config.sublotes_flag
 
 def get_text_split(blob_name, docId, get_formulas: bool = False, SessionId="", doc_entity=None, CDU: str=""):
     if doc_entity is None:

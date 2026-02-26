@@ -3,7 +3,7 @@ Servicio de OpenAI para embeddings y completions
 """
 import tiktoken
 from openai import AzureOpenAI
-from config import config
+from src.config import config
 from datetime import datetime
 from typing import Optional
 

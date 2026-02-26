@@ -11,8 +11,8 @@ from azure.storage.blob import ContentSettings, generate_blob_sas, BlobSasPermis
 from datetime import datetime, timezone, timedelta
 
 from fastapi.responses import JSONResponse
-from config import config
-from models.doc_model import BlobRef
+from src.config import config
+from src.models.doc_model import BlobRef
 
 azure_storage_account = config.azure_storage_account
 azure_storage_key_assistants = config.azure_storage_key_assistants

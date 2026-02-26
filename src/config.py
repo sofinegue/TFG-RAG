@@ -175,6 +175,3 @@ class RAGConfig:
 
 # Instancia global
 config = RAGConfig()
-
-# Crear alias Config para compatibilidad con código de chunking
-Config = config

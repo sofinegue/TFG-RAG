@@ -32,15 +32,15 @@ from typing import Dict, Any
 
 from tqdm import tqdm
 
-from doc_ingestion.cv_chunking import CVProcessor, load_json
-from models.doc_model import DocEntity
-from services.azure_storage_service import get_specific_file_from_blob_container
-from services.openai_service import get_embedding
-from services.cosmos_service import upload_doc_cosmos
-from document_ingestion.processchunks import (
+from src.doc_ingestion.cv_chunking import CVProcessor, load_json
+from src.models.doc_model import DocEntity
+from src.services.azure_storage_service import get_specific_file_from_blob_container
+from src.services.openai_service import get_embedding
+from src.services.cosmos_service import upload_doc_cosmos
+from src.document_ingestion.processchunks import (
     mark_existing_chunks_as_deleted,
 )
-from config import config
+from src.config import config
 
 
 # ---------------------------------------------------------------------------

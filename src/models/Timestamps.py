@@ -1,6 +1,6 @@
 from datetime import datetime
 import pytz
-from config import Config
+from src.config import config  # noqa: F401
  
 class Timestamps:
     def __init__(self, nombre):

@@ -35,7 +35,7 @@ import argparse
 import uuid
 from pathlib import Path
 
-from document_ingestion.run_utils import (
+from src.document_ingestion.run_utils import (
     EXTENSIONS_ALL,
     EXTENSIONS_JSON,
     add_common_args,
@@ -43,8 +43,8 @@ from document_ingestion.run_utils import (
     generate_session_id,
     print_run_summary,
 )
-from document_ingestion.wikipedia_text_split import get_wikipedia_text_split
-from models.doc_model import DocEntity
+from src.document_ingestion.wikipedia_text_split import get_wikipedia_text_split
+from src.models.doc_model import DocEntity
 
 _FORMAT_CHOICES = ("json", "txt", "all")
 _FORMAT_EXTS: dict[str, frozenset[str]] = {

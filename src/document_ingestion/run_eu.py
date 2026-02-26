@@ -18,15 +18,15 @@ import logging
 import uuid
 from pathlib import Path
 
-from document_ingestion.doc_chunking import get_text_split
-from document_ingestion.run_utils import (
+from src.document_ingestion.doc_chunking import get_text_split
+from src.document_ingestion.run_utils import (
     EXTENSIONS_DOCS,
     add_common_args,
     collect_local_files,
     generate_session_id,
     print_run_summary,
 )
-from models.doc_model import DocEntity
+from src.models.doc_model import DocEntity
 
 # Configure logging
 logging.basicConfig(

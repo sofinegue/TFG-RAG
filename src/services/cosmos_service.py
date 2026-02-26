@@ -2,7 +2,7 @@
 Servicio de Cosmos DB para operaciones CRUD
 """
 from azure.cosmos import CosmosClient
-from config import config
+from src.config import config
 from datetime import datetime
 from typing import List, Dict, Optional
 
