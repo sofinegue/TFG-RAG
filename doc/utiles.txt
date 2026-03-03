@@ -54,13 +54,14 @@ La clase RAGConfig (dataclass) carga todas las variables de entorno desde un .en
 
 Variables relevantes para el pipeline:
 
-Variable	Uso
-azure_storage_account, azure_storage_key, azure_container_name	Conexión a Blob Storage (donde están tus docs)
-doc_intel_url, doc_intel_key	Azure Document Intelligence (OCR/extracción)
-cosmos_endpoint, cosmos_key, cosmosdb_database, cosmosdb_container_cvs	Cosmos DB (donde se guardan los chunks)
-azure_openai_url/MODELS_CONFIG	Azure OpenAI (para generar embeddings)
-azure_search_endpoint, azure_search_key, azure_search_index	Azure Search (índice de búsqueda)
-sublotes_flag	Flag de negocio para detectar "lotes/sublotes" en documentos
+Variable	                                                                Uso
+azure_storage_account, azure_storage_key, azure_container_name	            Conexión a Blob Storage (donde están tus docs)
+doc_intel_url, doc_intel_key	                                            Azure Document Intelligence (OCR/extracción)
+cosmos_endpoint, cosmos_key, cosmosdb_database, cosmosdb_container_cvs	    Cosmos DB (donde se guardan los chunks)
+azure_openai_url/MODELS_CONFIG	                                            Azure OpenAI (para generar embeddings)
+azure_search_endpoint, azure_search_key, azure_search_index	                Azure Search (índice de búsqueda)
+sublotes_flag	                                                            Flag de negocio para detectar "lotes/sublotes" en documentos
+
 La validación en __post_init__ asegura que al menos AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_KEY, COSMOS_ENDPOINT y COSMOS_KEY estén presentes.
 
 PASO 1: Crear el índice de Azure Search — create_index.py
@@ -106,7 +107,6 @@ PASO 2: Procesamiento de documentos — doc_chunking.py
 La función principal es get_text_split(). Recibe el nombre del blob y orquesta todo el pipeline para un documento. Veamos sub-paso a sub-paso:
 
 2.1 Descarga del Blob Storage (líneas 62-66)
-
 file_download = asyncio.run(get_specific_file_from_blob_container(
     storageaccountname, storageaccountkey, containername, docId, ...
 ))
@@ -157,13 +157,9 @@ eliminar_figuras_repetidas()	        Elimina <figure> duplicadas
 detect_and_remove_duplicate_tables()	Elimina tablas duplicadas (>20% de páginas)
 + 10 regex	                            Limpia: checkboxes masivos, fórmulas residuales, <figure> vacías, comentarios HTML, PageHeader, PageFooter, FigureContent, marcadores MIDDLE, etc.
 2.7 Chunking (línea 323) — Timestamp "07 ChunkingProcess"
-
 chunks = processchunks.markdown_percentage(filtered_full_content, 2000, 0.1, 1000, 3000)
-
 Parámetros: chunk_size=2000, overlap=10%, min_tokens=1000, max_tokens=3000.
-
 Detalle de markdown_percentage() en processchunks.py:424-468:
-
 Divide por encabezados markdown (H1-H5) usando MarkdownHeaderTextSplitter de LangChain
 Combina fragmentos pequeños (<min_tokens=1000 tokens) con un buffer acumulador
 Combina tablas cercanas con combinar_splits_tablas() — no separa tablas que estén a <50 chars de distancia
