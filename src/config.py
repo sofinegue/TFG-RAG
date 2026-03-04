@@ -64,7 +64,7 @@ class RAGConfig:
     azure_container_name: str = os.getenv("AZURE_CONTAINER_NAME", "investigation-rag-usecases")
     # azure_container_configs: str = os.getenv("AZURE_CONTAINER_NAME_CONFIGS", "config-jsons")
     # azure_storage_account_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_Assistants")
-    # azure_storage_key_assistants: str = os.getenv("AZURE_STORAGE_KEY_Assistants")
+    # azure_storage_key: str = os.getenv("azure_storage_key")
     # azure_container_name_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_NAME")
     # azure_container_name_deleted_assistants: Optional[str] = os.getenv("AZURE_CONTAINER_NAME_Deleted_Assistants")  # Esta variable no existe en el .env
 

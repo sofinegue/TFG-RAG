@@ -1,3 +1,10 @@
+"""
+src.generate_data.validate_data
+
+Módulo para validar los datos generados (CVs, Wikipedia) contra esquemas JSON predefinidos.
+Utiliza jsonschema para asegurar que los datos cumplen con la estructura esperada antes de subirlos a Cosmos DB.
+"""
+
 import json
 import logging
 from pathlib import Path

@@ -1,3 +1,10 @@
+"""
+src.generate_data.runner
+
+Runner para generación de datos sintéticos de prueba (CVs, EUs, Wikipedia).
+Ejecuta cada módulo de generación y validación, con manejo de errores para facilitar debugging.
+"""
+
 import traceback
 
 import src.generate_data.generate_cvs as generate_cvs

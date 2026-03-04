@@ -1,7 +1,7 @@
 # TFG-RAG
 
 
-## generate_data
+## ./src/generate_data
 
 The `generate_data` folder contains scripts for creating documents for the RAG (Retrieval-Augmented Generation) system. This folder includes:
 
@@ -12,8 +12,12 @@ This folder serves as the foundation for preparing training and operational data
 
 To generate valid synthetic data, run:
 
-    python -m src.generate_data.generate_valid_data
+    python -m src.generate_data.runner
 
+
+## ./src/document_ingestion
+
+The `document_ingestion` folder contains scripts for chunking all documents.
 
 
 

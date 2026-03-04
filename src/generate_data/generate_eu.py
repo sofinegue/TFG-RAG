@@ -1,3 +1,10 @@
+"""
+src.generate_data.generate_eu
+
+Módulo para descargar capítulos de legislación europea (EUR-Lex) en PDF, multilenguaje.
+Utiliza requests para descargar los PDFs, con manejo de cookies mediante Selenium para evitar bloqueos por parte del WAF de EUR-Lex. Guarda los PDFs organizados por idioma.
+"""
+
 import requests
 from pathlib import Path
 import time

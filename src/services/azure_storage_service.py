@@ -15,8 +15,8 @@ from src.config import config
 from src.models.doc_model import BlobRef
 
 azure_storage_account = config.azure_storage_account
-azure_storage_key_assistants = config.azure_storage_key_assistants
-azure_container_name_assistants = config.azure_container_name_assistants
+azure_storage_key = config.azure_storage_key
+azure_container_name = config.azure_container_name
 # azure_container_name_deleted_assistants = config.azure_container_name_deleted_assistants if config.agent_builder_openai_api_key else None
 
 
@@ -284,12 +284,12 @@ def save_assistant_id_to_blob(assistant_key: str, assistant_id: str) -> bool:
         connect_str = (
             f"DefaultEndpointsProtocol=https;"
             f"AccountName={azure_storage_account};"
-            f"AccountKey={azure_storage_key_assistants};"
+            f"AccountKey={azure_storage_key};"
             f"EndpointSuffix=core.windows.net"
         )
         
         blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-        container_client = blob_service_client.get_container_client(azure_container_name_assistants)
+        container_client = blob_service_client.get_container_client(azure_container_name)
         
         # ✅ EL BLOB SE LLAMA DIRECTAMENTE assistant_key.json (sin prefijo)
         blob_name = f"{assistant_key}.json"
@@ -425,150 +425,151 @@ def generate_shared_access_signature_blob_files(
     return sas_url
 
 
-def upload_assistant_config_to_blob(
-    assistant_config: dict,
-    assistant_id: str
-) -> str:
-    """
-    Sube una configuración de asistente al blob storage assistants-jsons
+# def upload_assistant_config_to_blob(
+#     assistant_config: dict,
+#     assistant_id: str
+# ) -> str:
+#     """
+#     Sube una configuración de asistente al blob storage assistants-jsons
     
-    Args:
-        assistant_config: Diccionario con la configuración del asistente
-        assistant_id: ID único del asistente
+#     Args:
+#         assistant_config: Diccionario con la configuración del asistente
+#         assistant_id: ID único del asistente
     
-    Returns:
-        Nombre del blob creado
-    """
-    blob_name = f"{assistant_id}.json"
+#     Returns:
+#         Nombre del blob creado
+#     """
+#     blob_name = f"{assistant_id}.json"
     
-    return upload_json_config_to_blob(
-        account_name=azure_storage_account,
-        account_key=azure_storage_key_assistants,
-        container_name=azure_container_name_assistants,
-        json_content=assistant_config,
-        blob_name=blob_name
-    )
+#     return upload_json_config_to_blob(
+#         account_name=azure_storage_account,
+#         account_key=azure_storage_key,
+#         container_name=azure_container_name,
+#         json_content=assistant_config,
+#         blob_name=blob_name
+#     )
 
-def download_assistant_config_from_blob(assistant_id: str) -> dict:
-    """
-    Descarga una configuración de asistente desde blob storage assistants-jsons
+# def download_assistant_config_from_blob(assistant_id: str) -> dict:
+#     """
+#     Descarga una configuración de asistente desde blob storage assistants-jsons
     
-    Args:
-        assistant_id: ID del asistente
+#     Args:
+#         assistant_id: ID del asistente
     
-    Returns:
-        Diccionario con la configuración del asistente
-    """
-    blob_name = f"{assistant_id}.json"
+#     Returns:
+#         Diccionario con la configuración del asistente
+#     """
+#     blob_name = f"{assistant_id}.json"
     
-    return download_json_config_from_blob(
-        account_name=azure_storage_account,
-        account_key=azure_storage_key_assistants,
-        container_name=azure_container_name_assistants,
-        blob_name=blob_name
-    )
+#     return download_json_config_from_blob(
+#         account_name=azure_storage_account,
+#         account_key=azure_storage_key,
+#         container_name=azure_container_name,
+#         blob_name=blob_name
+#     )
 
-def list_assistant_configs_from_blob() -> List[str]:
-    """
-    Lista todos los asistentes configurados en blob storage assistants-jsons
-    con validación de configuraciones (solo logging)
+# def list_assistant_configs_from_blob() -> List[str]:
+#     """
+#     Lista todos los asistentes configurados en blob storage assistants-jsons
+#     con validación de configuraciones (solo logging)
     
-    Returns:
-        Lista de IDs de asistentes (sin extensión .json)
-    """
-    all_configs = list_json_configs_from_blob(
-        account_name=azure_storage_account,
-        account_key=azure_storage_key_assistants,
-        container_name=azure_container_name_assistants,
-        prefix=""
-    )
+#     Returns:
+#         Lista de IDs de asistentes (sin extensión .json)
+#     """
+#     all_configs = list_json_configs_from_blob(
+#         account_name=azure_storage_account,
+#         account_key=azure_storage_key,
+#         container_name=azure_container_name,
+#         prefix=""
+#     )
     
-    print(f"🔍 Archivos encontrados: {all_configs}")
+#     print(f"🔍 Archivos encontrados: {all_configs}")
     
-    assistant_ids = [
-        blob.replace(".json", "")
-        for blob in all_configs
-        if blob.endswith(".json")
-    ]
+#     assistant_ids = [
+#         blob.replace(".json", "")
+#         for blob in all_configs
+#         if blob.endswith(".json")
+#     ]
     
-    print(f"🔍 IDs extraídos: {assistant_ids}")
+#     print(f"🔍 IDs extraídos: {assistant_ids}")
     
-    # ✅ VALIDAR CADA ASISTENTE (solo para logging, no cambia el return)
-    validation_stats = {"total": 0, "valid": 0, "with_warnings": 0, "invalid": 0}
+#     # ✅ VALIDAR CADA ASISTENTE (solo para logging, no cambia el return)
+#     validation_stats = {"total": 0, "valid": 0, "with_warnings": 0, "invalid": 0}
     
-    for assistant_id in assistant_ids:
-        try:
-            assistant_data = download_assistant_config_from_blob(assistant_id)
-            validation_stats["total"] += 1
+#     for assistant_id in assistant_ids:
+#         try:
+#             assistant_data = download_assistant_config_from_blob(assistant_id)
+#             validation_stats["total"] += 1
             
-            has_errors = False
-            has_warnings = False
+#             has_errors = False
+#             has_warnings = False
             
-            # ✅ VALIDACIÓN CONDICIONAL DE API KEY
-            api_type = assistant_data.get("api_type", "azure")
+#             # ✅ VALIDACIÓN CONDICIONAL DE API KEY
+#             api_type = assistant_data.get("api_type", "azure")
             
-            if api_type == "azure":
-                # Azure OpenAI Service: REQUIERE api_key
-                api_key = assistant_data.get("api_key", "").strip()
-                if not api_key:
-                    has_errors = True
-                    print(f"   ❌ CRÍTICO: '{assistant_id}' de tipo 'azure' NO tiene api_key")
-                    print(f"       Este asistente NO funcionará hasta que se configure una api_key válida")
-                    print(f"       Archivo: {assistant_id}.json en blob storage '{azure_container_name_assistants}'")
+#             if api_type == "azure":
+#                 # Azure OpenAI Service: REQUIERE api_key
+#                 api_key = assistant_data.get("api_key", "").strip()
+#                 if not api_key:
+#                     has_errors = True
+#                     print(f"   ❌ CRÍTICO: '{assistant_id}' de tipo 'azure' NO tiene api_key")
+#                     print(f"       Este asistente NO funcionará hasta que se configure una api_key válida")
+#                     print(f"       Archivo: {assistant_id}.json en blob storage '{azure_container_name}'")
             
-            # elif api_type == "azure_ai_projects":
-            #     # Azure AI Projects: NO requiere api_key (usa Azure AD)
-            #     print(f"   ℹ️ '{assistant_id}' usa Azure AD (no requiere api_key)")
+#             # elif api_type == "azure_ai_projects":
+#             #     # Azure AI Projects: NO requiere api_key (usa Azure AD)
+#             #     print(f"   ℹ️ '{assistant_id}' usa Azure AD (no requiere api_key)")
             
-            else:
-                pass
+#             else:
+#                 pass
             
-            # Validar campos requeridos
-            if not assistant_data.get("endpoint", "").strip():
-                has_errors = True
-                print(f"   ❌ '{assistant_id}' falta 'endpoint'")
+#             # Validar campos requeridos
+#             if not assistant_data.get("endpoint", "").strip():
+#                 has_errors = True
+#                 print(f"   ❌ '{assistant_id}' falta 'endpoint'")
             
-            if not assistant_data.get("deployment", "").strip():
-                has_errors = True
-                print(f"   ❌ '{assistant_id}' falta 'deployment'")
+#             if not assistant_data.get("deployment", "").strip():
+#                 has_errors = True
+#                 print(f"   ❌ '{assistant_id}' falta 'deployment'")
             
-            # Validar campos opcionales
-            if not assistant_data.get("vector_store_id", "").strip():
-                has_warnings = True
-                print(f"   ⚠️  '{assistant_id}' no tiene 'vector_store_id'")
+#             # Validar campos opcionales
+#             if not assistant_data.get("vector_store_id", "").strip():
+#                 has_warnings = True
+#                 print(f"   ⚠️  '{assistant_id}' no tiene 'vector_store_id'")
             
-            if not assistant_data.get("prompt", "").strip():
-                has_warnings = True
-                print(f"   ⚠️  '{assistant_id}' no tiene 'prompt' personalizado")
+#             if not assistant_data.get("prompt", "").strip():
+#                 has_warnings = True
+#                 print(f"   ⚠️  '{assistant_id}' no tiene 'prompt' personalizado")
             
-            # Actualizar stats
-            if has_errors:
-                validation_stats["invalid"] += 1
-                print(f"   ❌ '{assistant_id}' tiene ERRORES CRÍTICOS y NO funcionará")
-            elif has_warnings:
-                validation_stats["with_warnings"] += 1
-                print(f"   ⚠️  '{assistant_id}' tiene advertencias pero puede funcionar")
-            else:
-                validation_stats["valid"] += 1
-                print(f"   ✅ '{assistant_id}' validado correctamente")
+#             # Actualizar stats
+#             if has_errors:
+#                 validation_stats["invalid"] += 1
+#                 print(f"   ❌ '{assistant_id}' tiene ERRORES CRÍTICOS y NO funcionará")
+#             elif has_warnings:
+#                 validation_stats["with_warnings"] += 1
+#                 print(f"   ⚠️  '{assistant_id}' tiene advertencias pero puede funcionar")
+#             else:
+#                 validation_stats["valid"] += 1
+#                 print(f"   ✅ '{assistant_id}' validado correctamente")
             
-        except Exception as e:
-            print(f"   ❌ ERROR al validar '{assistant_id}': {e}")
-            validation_stats["invalid"] += 1
+#         except Exception as e:
+#             print(f"   ❌ ERROR al validar '{assistant_id}': {e}")
+#             validation_stats["invalid"] += 1
     
-    # Resumen
-    print(f"📊 Resumen de validación de asistentes:")
-    print(f"   Total: {validation_stats['total']}")
-    print(f"   ✅ Válidos: {validation_stats['valid']}")
-    print(f"   ⚠️  Con advertencias: {validation_stats['with_warnings']}")
-    print(f"   ❌ Inválidos: {validation_stats['invalid']}")
+#     # Resumen
+#     print(f"📊 Resumen de validación de asistentes:")
+#     print(f"   Total: {validation_stats['total']}")
+#     print(f"   ✅ Válidos: {validation_stats['valid']}")
+#     print(f"   ⚠️  Con advertencias: {validation_stats['with_warnings']}")
+#     print(f"   ❌ Inválidos: {validation_stats['invalid']}")
     
-    if validation_stats['invalid'] > 0:
-        print(f"\n⚠️  ATENCIÓN: {validation_stats['invalid']} asistente(s) NO funcionarán debido a errores críticos")
-        print(f"   Revisa los mensajes anteriores para corregir las configuraciones")
+#     if validation_stats['invalid'] > 0:
+#         print(f"\n⚠️  ATENCIÓN: {validation_stats['invalid']} asistente(s) NO funcionarán debido a errores críticos")
+#         print(f"   Revisa los mensajes anteriores para corregir las configuraciones")
     
-    # ✅ RETORNAR SOLO LA LISTA DE IDs
-    return assistant_ids
+#     # ✅ RETORNAR SOLO LA LISTA DE IDs
+#     return assistant_ids
+
 
 def get_users_from_table(
     account_name: Optional[str] = None,
@@ -604,7 +605,7 @@ def get_users_from_table(
     if not account_name:
         account_name = config.azure_storage_account
     if not account_key:
-        account_key = config.azure_storage_key_assistants
+        account_key = config.azure_storage_key
     
     # Crear connection string
     connection_string = (

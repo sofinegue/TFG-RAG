@@ -1,3 +1,10 @@
+"""
+src.generate_data.generate_cvs
+
+Módulo para generar CVs sintéticos en formato JSON, en español e inglés.
+Utiliza plantillas de datos (nombres, apellidos, puestos, habilidades, etc.) para crear CVs realistas, con lógica de generación que preserva relaciones entre experiencia, formación y habilidades. Guarda los CVs en archivos JSON organizados por idioma.
+"""
+
 import json
 import random
 from pathlib import Path

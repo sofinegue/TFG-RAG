@@ -1,3 +1,10 @@
+"""
+src.generate_data.generate_wikipedia
+
+Módulo para generar un dataset de Wikipedia (artículos de literatura) en inglés y español.
+Utiliza la API de Wikipedia para obtener artículos de categorías literarias, con manejo de cookies mediante Selenium para evitar bloqueos por parte de Wikipedia. Guarda los artículos en formato JSON y TXT.
+"""
+
 import requests
 import time
 import json
