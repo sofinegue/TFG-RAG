@@ -24,8 +24,8 @@ class RAGConfig:
     """Configuración completa del sistema RAG + Chunking"""
     
     # === IDENTIDAD DEL CLIENTE ===
-    client_name: str = os.getenv("CLIENT_NAME", "Demo Client")
-    project_name: str = os.getenv("PROJECT_NAME", "RAG Assistant")
+    # client_name: str = os.getenv("CLIENT_NAME", "Demo Client")
+    project_name: str = os.getenv("PROJECT_NAME", "RAG")
     language: str = os.getenv("LANGUAGE", "es")
 
     # === AGENT BUILDER ===
@@ -58,21 +58,23 @@ class RAGConfig:
     doc_intel_key: str = os.getenv("DOC_INTEL_KEY")
     
     # === AZURE STORAGE ===
-    azure_storage_account: str = os.getenv("AZURE_STORAGEACCOUNT")
-    azure_storage_key: str = os.getenv("AZURE_STORAGEACCOUNT_KEY")
-    azure_container_name: str = os.getenv("AZURE_STORAGE_NAME_INVESTIGATION", "plug-rag-docs")
-    azure_container_configs: str = os.getenv("AZURE_CONTAINER_NAME_CONFIGS", "config-jsons")
+    azure_storage_account_name: str = os.getenv("AZURE_STORAGE_ACCOUNT_NAME", "storagepocsrag")
     azure_storage_account: str = os.getenv("AZURE_STORAGE_ACCOUNT")
-    azure_storage_account_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_Assistants")
-    azure_storage_key_assistants: str = os.getenv("AZURE_STORAGE_KEY_Assistants")
-    azure_container_name_assistants: str = os.getenv("AZURE_CONTAINER_NAME_Assistants")
+    azure_storage_key: str = os.getenv("AZURE_STORAGE_ACCOUNT_KEY")
+    azure_container_name: str = os.getenv("AZURE_CONTAINER_NAME", "investigation-rag-usecases")
+    # azure_container_configs: str = os.getenv("AZURE_CONTAINER_NAME_CONFIGS", "config-jsons")
+    # azure_storage_account_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_Assistants")
+    # azure_storage_key_assistants: str = os.getenv("AZURE_STORAGE_KEY_Assistants")
+    # azure_container_name_assistants: str = os.getenv("AZURE_STORAGE_ACCOUNT_NAME")
     # azure_container_name_deleted_assistants: Optional[str] = os.getenv("AZURE_CONTAINER_NAME_Deleted_Assistants")  # Esta variable no existe en el .env
+
     # === COSMOS DB ===
     cosmos_endpoint: str = os.getenv("COSMOS_ENDPOINT")
     cosmos_key: str = os.getenv("COSMOS_KEY")
     cosmosdb_database: str = os.getenv("AZURE_COSMOSDB_DB_NAME", "SNA")
-    cosmosdb_process_db: str = os.getenv("AZURE_COSMOSDB_PROCESSDOCUMENTS_DB_NAME")
     cosmosdb_container_cvs: str = os.getenv("AZURE_COSMOSDB_COLLECTION_CVS", "Chunks-CVs")
+    cosmosdb_container_eu: str = os.getenv("AZURE_COSMOSDB_COLLECTION_EU", "Chunks-EU")
+    cosmosdb_container_wiki: str = os.getenv("AZURE_COSMOSDB_COLLECTION_WIKI", "Chunks-Wiki")
     
     # === GUARDRAILS ===
     enable_input_guardrails: bool = os.getenv("ENABLE_INPUT_GUARDRAILS", "true").lower() == "true"
