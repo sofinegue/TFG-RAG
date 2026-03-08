@@ -45,6 +45,7 @@ import json
 import re
 import uuid
 import tiktoken
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import List, Optional
 
@@ -185,14 +186,17 @@ def get_text_split_cv(
         print(f"  Generados {lchunks} chunks semánticos")
 
         # ──────────────────────────────────────────────────────────────────
-        # PASO 5: Embedding + subida a Cosmos DB
+        # PASO 5: Embedding + subida a Cosmos DB  (PARALELIZADO)
         # ──────────────────────────────────────────────────────────────────
         timestamps_List.append(Timestamps("06 uploadChunksToCosmos"))
 
-        for chunk_idx, chunk_data in enumerate(chunks, start=1):
+        def _process_single_chunk(chunk_idx: int, chunk_data: dict) -> str:
+            """Genera embedding y sube un único chunk a Cosmos DB.
+            Se ejecuta dentro de un ThreadPoolExecutor.
+            Devuelve un mensaje de estado."""
             chunk_type = chunk_data["type"]       # experience | education | skills
             chunk_content = chunk_data["content"]
-            chunk_metadata = chunk_data["metadata"]
+            chunk_metadata = {**chunk_data["metadata"]}  # copia para evitar race conditions
 
             # Merge global metadata
             chunk_metadata.update({
@@ -220,7 +224,7 @@ def get_text_split_cv(
             # Título legible para el chunk
             chunk_title = f"{cv.nombre_apellidos} — {chunk_type.capitalize()}"
 
-            # Construir documento Cosmos (misma estructura que processchunks.upload_chunks)
+            # Construir documento Cosmos
             paragraph_data = {
                 "id": _safe_cosmos_id(),
                 "chunkId": _generate_chunk_id(display_name, chunk_type, chunk_idx),
@@ -228,7 +232,10 @@ def get_text_split_cv(
                 "sourcePath": docId,
                 "sourceCollection": "cvs",
                 "sourceLanguage": source_language,
-                "sectionContent": chunk_content,
+                "content": chunk_content,
+                "chunk_type": chunk_type,
+                "nombre_apellidos": cv.nombre_apellidos,
+                "puesto": cv.puesto,
                 "QuestionsText": "",
                 "docSummary": "",
                 "Content_length": token_count,
@@ -251,6 +258,22 @@ def get_text_split_cv(
                 cosmosendpoint, cosmoskey, dbname, containerdbname,
                 paragraph_data, SessionId, Call_id, CDU,
             )
+            return f"Chunk {chunk_idx} ({chunk_type}) OK"
+
+        # Ejecutar los 3 chunks en paralelo (embedding + upload)
+        max_workers = min(lchunks, config.max_workers_docs or 3)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {
+                executor.submit(_process_single_chunk, idx, cdata): idx
+                for idx, cdata in enumerate(chunks, start=1)
+            }
+            for future in as_completed(futures):
+                try:
+                    msg = future.result()
+                    print(f"    ✓ {msg}")
+                except Exception as chunk_err:
+                    idx = futures[future]
+                    print(f"    ✗ Chunk {idx} falló: {chunk_err}")
 
         timestamps_List.append(Timestamps("07 done"))
         elapsed = (datetime.now() - startrun).total_seconds()

@@ -59,18 +59,18 @@ class CVProcessor:
 
     # ── Metadatos derivados ────────────────────────────────────────────────
 
-    def calculate_years_of_experience(self) -> int:
-        """Estima años totales de experiencia a partir de rangos de fechas."""
-        years = 0
-        for entry in self.experiencia:
-            matches = re.findall(r'(\d{4})\s*[-–]\s*(\d{4})', entry)
-            for start_str, end_str in matches:
-                try:
-                    diff = int(end_str) - int(start_str)
-                    years = max(years, diff)
-                except ValueError:
-                    pass
-        return years
+    # def calculate_years_of_experience(self) -> int:
+    #     """Estima años totales de experiencia a partir de rangos de fechas."""
+    #     years = 0
+    #     for entry in self.experiencia:
+    #         matches = re.findall(r'(\d{4})\s*[-–]\s*(\d{4})', entry)
+    #         for start_str, end_str in matches:
+    #             try:
+    #                 diff = int(end_str) - int(start_str)
+    #                 years = max(years, diff)
+    #             except ValueError:
+    #                 pass
+    #     return years
 
     # def get_skill_domains(self) -> List[str]:
     #     """Extrae dominios tecnológicos a partir de experiencia y hard_skills."""
@@ -111,12 +111,12 @@ class CVProcessor:
     def generate_experience_chunk(self) -> Dict[str, Any]:
         """Genera el chunk de experiencia profesional.
         
-        sectionContent incluye: puesto, experiencia, otros.
+        content incluye: puesto, experiencia, otros.
         """
         puesto_text = f"PUESTO: {self.puesto}" if self.puesto else ""
         exp_text = "\n".join(f"• {item}" for item in self.experiencia) if self.experiencia else "• Sin experiencia registrada"
         otros_text = "\n".join(f"• {item}" for item in self.otros) if self.otros else ""
-        years_exp = self.calculate_years_of_experience()
+        # years_exp = self.calculate_years_of_experience()
         # domains = self.get_skill_domains()
 
         content = f"NOMBRE_APELLIDOS: {self.nombre_apellidos}\n{puesto_text}\n\nEXPERIENCIA:\n{exp_text}"
@@ -129,8 +129,7 @@ class CVProcessor:
             "puesto": self.puesto,
             "experiencia": self.experiencia,
             "otros": self.otros,
-            "years_of_experience": years_exp,
-            # "skill_domains": domains,
+            # "years_of_experience": years_exp,
         }
 
         return {"type": "experience", "content": content, "metadata": metadata}
@@ -138,16 +137,12 @@ class CVProcessor:
     def generate_education_chunk(self) -> Dict[str, Any]:
         """Genera el chunk de formación académica.
         
-        sectionContent incluye: estudios, hard_skills.
+        content incluye: estudios, hard_skills.
         """
         edu_text = "\n".join(f"• {item}" for item in self.estudios) if self.estudios else "• Sin formación registrada"
         otros_text = "\n".join(f"• {item}" for item in self.otros) if self.otros else ""
-        hard_text = ", ".join(self.hard_skills) if self.hard_skills else ""
-        # levels = self._detect_education_levels()
 
         content = f"NOMBRE_APELLIDOS: {self.nombre_apellidos}\n\nESTUDIOS:\n{edu_text}"
-        if hard_text:
-            content += f"\n\nHARD_SKILLS:\n{hard_text}"
         if otros_text:
             content += f"\n\nOTROS:\n{otros_text}"
 
@@ -155,9 +150,7 @@ class CVProcessor:
             "chunk_type": "education",
             "nombre_apellidos": self.nombre_apellidos,
             "estudios": self.estudios,
-            "hard_skills": self.hard_skills,
             "otros": self.otros,
-            # "education_levels": levels,
         }
 
         return {"type": "education", "content": content, "metadata": metadata}
@@ -165,11 +158,10 @@ class CVProcessor:
     def generate_skills_chunk(self) -> Dict[str, Any]:
         """Genera el chunk de competencias.
         
-        sectionContent incluye: hard_skills, soft_skills, otros.
+        content incluye: hard_skills, soft_skills, otros.
         """
         hard_text = ", ".join(self.hard_skills) if self.hard_skills else "Sin hard skills registradas"
         soft_text = ", ".join(self.soft_skills) if self.soft_skills else "Sin soft skills registradas"
-        otros_text = "\n".join(f"• {item}" for item in self.otros) if self.otros else ""
 
         content = (
             f"NOMBRE_APELLIDOS: {self.nombre_apellidos}\n"
@@ -177,8 +169,6 @@ class CVProcessor:
             f"HARD_SKILLS:\n{hard_text}\n\n"
             f"SOFT_SKILLS:\n{soft_text}"
         )
-        if otros_text:
-            content += f"\n\nOTROS:\n{otros_text}"
 
         metadata = {
             "chunk_type": "skills",
@@ -186,7 +176,6 @@ class CVProcessor:
             "puesto": self.puesto,
             "hard_skills": self.hard_skills,
             "soft_skills": self.soft_skills,
-            "otros": self.otros,
         }
 
         return {"type": "skills", "content": content, "metadata": metadata}
@@ -206,7 +195,7 @@ class CVProcessor:
             "puesto": self.puesto,
             "language": language,
             # "skill_domains": self.get_skill_domains(),
-            "years_of_experience": self.calculate_years_of_experience(),
+            # "years_of_experience": self.calculate_years_of_experience(),
         }
 
 

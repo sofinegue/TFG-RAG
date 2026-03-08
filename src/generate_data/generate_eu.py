@@ -2,170 +2,200 @@
 src.generate_data.generate_eu
 
 Módulo para descargar capítulos de legislación europea (EUR-Lex) en PDF, multilenguaje.
-Utiliza requests para descargar los PDFs, con manejo de cookies mediante Selenium para evitar bloqueos por parte del WAF de EUR-Lex. Guarda los PDFs organizados por idioma.
 """
-
-import requests
-from pathlib import Path
+import os
+import re
 import time
-from selenium import webdriver
-from selenium.webdriver.edge.options import Options
+import unicodedata
+from datetime import datetime
+from urllib.parse import urlencode
+
+from anyio import Path
+import requests
+from bs4 import BeautifulSoup
 
 BASE = "https://eur-lex.europa.eu"
 
-OUTPUT_DIR = Path("data/eu")
+def normalize_lang(lang: str) -> str:
+    """EUR-Lex usa códigos tipo EN, ES, FR... en mayúsculas."""
+    return (lang or "EN").strip().upper()
 
-LANGUAGES = {
-    "en": "EN",
-    "es": "ES",
-    "fr": "FR",
-    "pt": "PT",
-    "it": "IT"
-}
+def ensure_dir(path: str):
+    os.makedirs(path, exist_ok=True)
 
-SECTIONS = {
-    "legislation": {
-        "pdf_base": "legislation",
-        "classification": "in-force"
-    },
-    "legislation-preparation": {
-        "pdf_base": "legislation-preparation",
-        "classification": "pending"
-    },
-    "inter-agree": {
-        "pdf_base": "inter-agree",
-        "classification": "in-force"
-    }
-}
+def fetch_html(url: str, max_retries=3, timeout=30):
+    for attempt in range(1, max_retries+1):
+        resp = requests.get(url, timeout=timeout)
+        if resp.status_code == 200 and resp.text:
+            return resp.text
+        time.sleep(1.5 * attempt)
+    raise RuntimeError(f"Error {resp.status_code} al obtener: {url}")
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0"
-}
+def guess_display_lang_from_txt_url(txt_url: str) -> str:
+    # El patrón clásico es /legal-content/EN/TXT/...
+    m = re.search(r"/legal-content/([A-Z]{2})/TXT/", txt_url)
+    return m.group(1) if m else "EN"
 
-#     "User-Agent": (
-#         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-#         "AppleWebKit/537.36 (KHTML, like Gecko) "
-#         "Chrome/120.0.0.0 Safari/537.36"
-#     ),
-#     "Accept": "application/pdf,*/*",
-# }
-
-# Return codes for download_pdf
-DOWNLOAD_OK = "ok"
-DOWNLOAD_CACHED = "cached"
-DOWNLOAD_FAILED = "failed"
-
-
-def refresh_waf_cookies(session):
-    """Open Edge, solve the WAF challenge, and update the session cookies."""
-    print("    [WAF] Refreshing cookies with Edge...")
-    opts = Options()
-    opts.add_argument("--disable-blink-features=AutomationControlled")
-    opts.add_experimental_option("excludeSwitches", ["enable-automation"])
-    driver = webdriver.Edge(options=opts)
-    driver.get(BASE)
-    # Wait until the WAF sets at least one cookie (up to 10s max)
-    for _ in range(20):
-        if driver.get_cookies():
-            break
-        time.sleep(0.5)
-    cookies = {c["name"]: c["value"] for c in driver.get_cookies()}
-    driver.quit()
-    session.cookies.update(cookies)
-    print(f"    [WAF] Cookies refreshed: {list(cookies.keys())}")
-
-
-def download_pdf(url, out_path, session):
-    """Download a PDF from *url* to *out_path*.
-
-    Uses a requests.Session that already carries the WAF cookies.
-    If a 202 (WAF challenge) is received, automatically refreshes
-    cookies and retries once.
-    Returns DOWNLOAD_OK, DOWNLOAD_CACHED, or DOWNLOAD_FAILED.
+def extract_consolidated_dates(txt_html: str):
     """
-    if out_path.exists():
-        return DOWNLOAD_CACHED
+    Extrae la lista de fechas (YYYY-MM-DD) del panel 'Hide/Show consolidated versions'.
+    La página actual de EUR-Lex coloca esas fechas en un <nav> lateral con enlaces.
+    """
+    soup = BeautifulSoup(txt_html, "html.parser")
 
-    for attempt in range(2):  # at most 1 retry after cookie refresh
-        try:
-            r = session.get(url, stream=True, timeout=60)
-            content_type = r.headers.get("Content-Type", "")
-            # print(f"      HTTP {r.status_code}, Content-Type: {content_type}")
+    # Buscar el bloque lateral por el título aproximado “consolidated versions”
+    # Hay variaciones según idioma; buscamos por anclas y patrones de fecha en los href.
+    date_links = []
 
-            if 200 <= r.status_code < 300 and "application/pdf" in content_type:
-                with open(out_path, "wb") as f:
-                    for chunk in r.iter_content(8192):
-                        f.write(chunk)
-                return DOWNLOAD_OK
+    # 1) Buscar enlaces que contengan .../TXT-YYYYMMDD en la 'uri' query
+    for a in soup.select("a[href]"):
+        href = a.get("href", "")
+        # Nos interesan los que apunten a TXT con sufijo -YYYYMMDD
+        if "CELEX:" in href and "/TXT" in href and "-20" in href:
+            # Extraer la parte -YYYYMMDD
+            m = re.search(r"-([12][0-9]{7})$", href)
+            if m:
+                yyyymmdd = m.group(1)
+                # Validar fecha
+                try:
+                    dt = datetime.strptime(yyyymmdd, "%Y%m%d")
+                    date_links.append((dt.date(), href))
+                except ValueError:
+                    pass
 
-            # 202 = WAF cookies expired → refresh and retry
-            if r.status_code == 202 and attempt == 0:
-                refresh_waf_cookies(session)
-                continue
+    # Quitar duplicados y ordenar
+    by_date = {}
+    for dt, href in date_links:
+        by_date[dt] = href
+    return [ (d, by_date[d]) for d in sorted(by_date.keys()) ]
 
-        except requests.RequestException as e:
-            print(f"      [ERROR] Request failed: {e}")
-            if attempt == 0:
-                refresh_waf_cookies(session)
-                continue
+def to_pdf_url(celex_consolidated: str, lang: str, date_yyyymmdd: str):
+    """
+    Construye la URL PDF consolidada de la forma:
+    https://eur-lex.europa.eu/legal-content/{LANG}/TXT/PDF/?uri=CELEX:{CELEX_CONSOLIDATED}/TXT-{YYYYMMDD}
+    """
+    lang = normalize_lang(lang)
+    query = {
+        "uri": f"CELEX:{celex_consolidated}/TXT-{date_yyyymmdd}"
+    }
+    return f"{BASE}/legal-content/{lang}/TXT/PDF/?{urlencode(query)}"
 
-    return DOWNLOAD_FAILED
+def to_txt_page_url(celex_consolidated: str, lang: str, date_yyyymmdd: str):
+    """
+    Devuelve la URL de la página HTML (no PDF) para inspección si hace falta:
+    https://eur-lex.europa.eu/legal-content/{LANG}/TXT/?uri=CELEX:{CELEX_CONSOLIDATED}/TXT-{YYYYMMDD}
+    """
+    lang = normalize_lang(lang)
+    query = {
+        "uri": f"CELEX:{celex_consolidated}/TXT-{date_yyyymmdd}"
+    }
+    return f"{BASE}/legal-content/{lang}/TXT/?{urlencode(query)}"
 
+def to_txt_root_url(celex_base: str, lang: str):
+    """
+    URL 'raíz' (HTML) desde la cual parsearemos las “consolidated versions”.
+    Suele ser la no-consolidada (p. ej. CELEX:12016M/TXT) o directamente la consolidada actual sin fecha.
+    """
+    lang = normalize_lang(lang)
+    query = { "uri": f"CELEX:{celex_base}/TXT" }
+    return f"{BASE}/legal-content/{lang}/TXT/?{urlencode(query)}"
 
-def main():
-    print("Descargando capitulos EUR-Lex (multilenguaje)")
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+def download_pdf(url: str, out_path: str, max_retries=3, timeout=60):
+    for attempt in range(1, max_retries+1):
+        r = requests.get(url, timeout=timeout)
+        if r.status_code == 200 and r.content:
+            with open(out_path, "wb") as f:
+                f.write(r.content)
+            return
+        time.sleep(1.5 * attempt)
+    raise RuntimeError(f"No se pudo descargar {url}; último status={r.status_code}")
 
-    # --- Create session and get initial WAF cookies ---
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    refresh_waf_cookies(session)
+def download_all_consolidated_pdfs(
+    celex_base_for_panel: str,
+    celex_consolidated_prefix: str,
+    lang="EN",
+    out_dir="../data/eu/"
+):
+    """
+    - celex_base_for_panel: CELEX cuya página TXT tiene el panel lateral de “consolidated versions”.
+        Ej: '12016M' (TEU base) o '12016E' (TFEU base).
+    - celex_consolidated_prefix: prefijo CELEX para construir cada PDF consolidado por fecha.
+        Ej: '02016M' (TEU consolidado) o '02016E' (TFEU consolidado).
+    - lang: idioma del PDF ('EN','ES',...)
+    - out_dir: carpeta de salida
+    """
+    lang = normalize_lang(lang)
+    root_url = to_txt_root_url(celex_base_for_panel, lang)
+    print(f"[INFO] Cargando página raíz para extraer fechas: {root_url}")
+    html = fetch_html(root_url)
+    consolidated = extract_consolidated_dates(html)
 
-    for lang_code, lang_name in LANGUAGES.items():
-        lang_dir = OUTPUT_DIR / lang_name.lower()
-        lang_dir.mkdir(exist_ok=True)
+    if not consolidated:
+        # Si no se encuentran enlaces con -YYYYMMDD, intentamos un idioma alternativo para parsear
+        alt_lang = "EN" if lang != "EN" else "ES"
+        alt_root = to_txt_root_url(celex_base_for_panel, alt_lang)
+        print(f"[WARN] No encontré fechas en {lang}; pruebo {alt_lang}: {alt_root}")
+        html = fetch_html(alt_root)
+        consolidated = extract_consolidated_dates(html)
 
-        # If the language folder already contains the expected number of PDFs,
-        # skip scraping to avoid re-downloading and WAF challenges.
-        expected_per_lang = len(SECTIONS) * 20
-        existing_pdfs = len(list(lang_dir.glob('*.pdf')))
-        if existing_pdfs >= expected_per_lang:
-            print(f"\nIdioma: {lang_name} - ya completo ({existing_pdfs}/{expected_per_lang}), se omite descarga")
+    if not consolidated:
+        raise RuntimeError("No fue posible localizar el panel de fechas consolidadas.")
+
+    print(f"[INFO] Fechas encontradas: {len(consolidated)}")
+    # Crear carpeta
+    subdir = os.path.join(out_dir, f"{celex_consolidated_prefix}_{lang}")
+    ensure_dir(subdir)
+
+    for dt, href in consolidated:
+        yyyymmdd = dt.strftime("%Y%m%d")
+        pdf_url = to_pdf_url(celex_consolidated_prefix, lang, yyyymmdd)
+        filename = f"{celex_consolidated_prefix}_{yyyymmdd}_{lang}.pdf"
+        out_path = os.path.join(subdir, filename)
+
+        # Evitar redescargas
+        if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+            print(f"  [SKIP] {filename}")
             continue
 
-        print(f"\nIdioma: {lang_name}")
+        print(f"  [GET] {pdf_url}")
+        try:
+            download_pdf(pdf_url, out_path)
+            time.sleep(0.5)  # cortesía
+        except Exception as ex:
+            print(f"  [ERR] {ex}")
 
-        for section, info in SECTIONS.items():
-            print(f"  Section: {section}")
+    print(f"[DONE] PDFs guardados en: {subdir}")
 
-            for chapter in range(1, 21):
-                chapter_str = f"{chapter:02d}"
-                file_code = f"20{chapter_str}"
-                file_name = f"{section}_{file_code}.pdf"
+def main():
+    OUTPUT_DIR = Path("data/eu")
 
-                # Include locale so the correct language version is fetched
-                pdf_url = (
-                    f"{BASE}/browse/pdf/directories/{info['pdf_base']}.html"
-                    f"?file=chapter%20{chapter_str}.pdf"
-                    f"&classification={info['classification']}"
-                    f"&locale={lang_code}"
-                )
-
-                out_path = lang_dir / file_name
-
-                result = download_pdf(pdf_url, out_path, session)
-
-                # if result == DOWNLOAD_OK:
-                #     print(f"    [OK]      {file_name}")
-                # elif result == DOWNLOAD_CACHED:
-                #     print(f"    [CACHED]  {file_name}")
-                # else:
-                if result == DOWNLOAD_FAILED:
-                    print(f"    [WARNING] {file_name} no disponible ({pdf_url})")
-
-                time.sleep(0.5)
-
-    print("\nDESCARGA COMPLETADA")
+    for lang in ["EN", "ES", "FR", "IT", "PT"]:
+        download_all_consolidated_pdfs(
+            celex_base_for_panel="12016M",
+            celex_consolidated_prefix="02016M",
+            lang=lang,              # Cambia a "ES" si quieres PDFs en español
+            out_dir=OUTPUT_DIR / lang.lower()
+        )
+        download_all_consolidated_pdfs(
+                celex_base_for_panel="12016E",
+                celex_consolidated_prefix="02016E",
+                lang=lang,
+                out_dir=OUTPUT_DIR / lang.lower()
+        )
 
 # if __name__ == "__main__":
-#     main()
+#     OUTPUT_DIR = Path("data/eu")
+
+#     for lang in ["EN", "ES", "FR", "IT", "PT"]:
+#         download_all_consolidated_pdfs(
+#             celex_base_for_panel="12016M",
+#             celex_consolidated_prefix="02016M",
+#             lang=lang,              # Cambia a "ES" si quieres PDFs en español
+#             out_dir=os.path.join(OUTPUT_DIR, lang.lower())
+#         )
+#         download_all_consolidated_pdfs(
+#                 celex_base_for_panel="12016E",
+#                 celex_consolidated_prefix="02016E",
+#                 lang=lang,
+#                 out_dir=os.path.join(OUTPUT_DIR, lang.lower())
+#         )

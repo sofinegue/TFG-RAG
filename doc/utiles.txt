@@ -71,7 +71,7 @@ Se ejecuta UNA VEZ, antes de procesar documentos. Función create_search_index()
 Campo	Tipo	Para qué
 id	String (key)	Identificador único del chunk
 chunkId	String	Hash SHA-256 del contenido (dedup)
-sectionContent	Searchable (es.microsoft)	Contenido del chunk — buscable por keyword
+content	Searchable (es.microsoft)	Contenido del chunk — buscable por keyword
 Title	Searchable	Título extraído del markdown
 docTitle	Searchable + filterable	Nombre del documento original
 QuestionsText	Searchable	Campo para preguntas generadas (vacío por ahora)
@@ -92,7 +92,7 @@ Perfil "vector-profile" asociado al campo embedding
 Configura la búsqueda semántica de Azure:
 
 Title field: Title
-Content fields: sectionContent, QuestionsText, docSummary
+Content fields: content, QuestionsText, docSummary
 Keywords fields: docTitle
 1.4 BM25 para keyword search (línea 139)
 

@@ -34,9 +34,19 @@ class RAGConfig:
     # === AZURE SEARCH ===
     azure_search_endpoint: str = os.getenv("AZURE_SEARCH_ENDPOINT")
     azure_search_key: str = os.getenv("AZURE_SEARCH_KEY")
-    azure_search_index: str = os.getenv("AZURE_SEARCH_INDEX")
-    azure_search_indexer: str = os.getenv("AZURE_SEARCH_INDEXER")
     azure_search_top_k: int = int(os.getenv("AZURE_SEARCH_TOP_K", "10"))
+
+    # --- Índices / indexers por caso de uso ---
+    azure_search_index_cvs: str = os.getenv("AZURE_SEARCH_INDEX_CVS", "index-cvs")
+    azure_search_index_eu: str = os.getenv("AZURE_SEARCH_INDEX_EU", "index-eu")
+    azure_search_index_wiki: str = os.getenv("AZURE_SEARCH_INDEX_WIKI", "index-wiki")
+    azure_search_indexer_cvs: str = os.getenv("AZURE_SEARCH_INDEXER_CVS", "indexer-cvs")
+    azure_search_indexer_eu: str = os.getenv("AZURE_SEARCH_INDEXER_EU", "indexer-eu")
+    azure_search_indexer_wiki: str = os.getenv("AZURE_SEARCH_INDEXER_WIKI", "indexer-wiki")
+
+    # (legacy / genérico — mantenido por retrocompatibilidad)
+    azure_search_index: str = os.getenv("AZURE_SEARCH_INDEX")
+    # azure_search_indexer: str = os.getenv("AZURE_SEARCH_INDEXER")
     
     # === MODELOS ===
     chat_model: str = os.getenv("CHAT_MODEL", "gpt4.1")

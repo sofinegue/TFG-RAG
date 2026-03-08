@@ -272,23 +272,89 @@ python -m document_ingestion.run_wikipedia --language en --format json --limit 2
 ```
 
 ### cv_text_split.py
-CV-specific chunking pipeline (fully implemented).
+> **Superseded** by `cvs/doc_chunking_cvs.py`. Kept for reference.
+
+Original CV-specific chunking pipeline.
+
+---
+
+### cvs/ (package)
+Self-contained CV chunking sub-package. Downloads structured CV JSONs from Azure Blob Storage, splits each into 3 semantic chunks, generates embeddings, and uploads to Cosmos DB.
+
+#### cvs/doc_chunking_cvs.py
+Main CV chunking pipeline entry point.
 
 **Functions:**
-- `get_cv_text_split(blob_name, doc_id, doc_entity, session_id, call_id, cdu)` — Complete CV processing pipeline:
-  1. Download CV JSON from Blob Storage
-  2. Parse into CVProcessor instance
-  3. Generate 3 semantic chunks (experience, education, skills)
-  4. Enrich each chunk with contextual metadata
-  5. Create embeddings for each chunk via Azure OpenAI
-  6. Upload all chunks to Cosmos DB with embeddings
+- `get_text_split_cv(docId, SessionId, doc_entity, CDU)` — Complete CV processing pipeline:
+  1. Download CV JSON from Azure Blob Storage (`data/cvs/<lang>/cv_XXX.json`)
+  2. Parse JSON into `CVProcessor` instance
+  3. Mark existing chunks as deleted in Cosmos DB (prevents duplicates)
+  4. Generate 3 semantic chunks via `CVProcessor.generate_semantic_chunks()`
+  5. Merge chunk-specific metadata with global CV metadata
+  6. Generate embedding vector for each chunk (Azure OpenAI `text-embedding-ada-002`)
+  7. Upload all 3 chunks to Cosmos DB container `Chunks-CVs`
 
-**Pipeline Details:**
-- Marks existing chunks as deleted before reprocessing (prevents duplicates)
-- Merges chunk-specific metadata with global CV metadata
-- Creates unique chunk IDs combining doc_id + chunk_type (e.g., `cvs/es/cv_001_exp`)
-- Embeds each chunk independently for better vector search
-- Supports logging and session traceability throughout
+**Cosmos Document Schema (per chunk):**
+```
+id, chunkId, docTitle, sourcePath, sourceCollection("cvs"),
+sourceLanguage, sectionContent, QuestionsText, docSummary,
+Content_length, isCreated, Pages, Title, Sections, nChunk,
+isDeleted, topLanguage, Tables, Formulas, embedding[], metadata{}
+```
+
+**Helper Functions:**
+- `_generate_chunk_id(blob_name, chunk_type, chunk_index)` — Deterministic MD5-based chunk ID
+- `_safe_cosmos_id()` — UUID sanitized for Azure Search (alphanumeric + `_`, `-`, `=`)
+
+#### cvs/processchunks_cvs.py
+CV-specific semantic chunking and metadata generation.
+
+**Chunking Strategy**: Each CV is split into **3 semantic chunks**:
+1. **Experience** (`experience`) — `sectionContent` = puesto + experiencia + otros
+2. **Education** (`education`) — `sectionContent` = estudios + hard_skills + otros
+3. **Skills** (`skills`) — `sectionContent` = hard_skills + soft_skills + otros
+
+Each chunk includes the candidate's `nombre_apellidos` for cross-referencing.
+
+**Classes:**
+- **`CVProcessor`** — Structured CV data processor
+  - `nombre_apellidos: str` — Full name
+  - `puesto: str` — Job position
+  - `experiencia: List[str]` — Professional experience entries
+  - `estudios: List[str]` — Education entries
+  - `hard_skills: List[str]` — Technical skills (accepts `"hard_skills"` or `"hard skills"`)
+  - `soft_skills: List[str]` — Soft/transversal skills
+  - `otros: List[str]` — Additional information (languages, certifications, etc.)
+
+**Methods:**
+- `from_dict(cls, d)` — Class method to construct CVProcessor from raw dictionary
+- `generate_semantic_chunks()` — Generate all 3 chunks (experience, education, skills)
+- `generate_experience_chunk()` — Experience chunk with `years_of_experience` metadata
+- `generate_education_chunk()` — Education chunk with estudios + hard_skills
+- `generate_skills_chunk()` — Skills chunk with hard + soft skills
+- `get_global_metadata(language)` — Global CV metadata (name, position, years of experience)
+- `calculate_years_of_experience()` — Parse date ranges in experience entries to estimate total years
+
+### runner.py
+CLI runner for batch processing all CV JSONs from Azure Blob Storage into Cosmos DB.
+
+**Functions:**
+- `run_cv_chunking(language)` — Process all CVs for a given language:
+  - Lists all JSON blobs under `data/cvs/<language>/`
+  - Creates `DocEntity` per CV with `cv_id = <lang>/cv_XXX.json`
+  - Calls `get_text_split_cv` for each CV
+  - Prints summary with OK/error counts
+- `main(language)` — Entry point: processes given language or auto-discovers all languages
+- `_list_cv(language)` — List all JSON blobs under `data/cvs/<language>/`
+- `_discover_languages()` — Auto-discover available languages by scanning blob prefixes
+- `_generate_session_id(language)` — Generate timestamped session ID (`CVS_ES_YYYYMMDD_HHMMSS`)
+
+**Usage:**
+```bash
+python -m src.document_ingestion.runner                  # all languages (auto-discover)
+python -m src.document_ingestion.runner --language es     # Spanish only
+python -m src.document_ingestion.runner --language en     # English only
+```
 
 ### wikipedia_text_split.py
 Wikipedia article chunking pipeline (mocked - implementation planned).
@@ -306,38 +372,9 @@ Wikipedia article chunking pipeline (mocked - implementation planned).
 The `doc_ingestion` folder contains specialized tools for CV and local file content extraction.
 
 ### cv_chunking.py
-CV-specific semantic chunking and metadata generation.
+> **Note:** The `CVProcessor` class has been moved to `document_ingestion/cvs/processchunks_cvs.py` as the canonical implementation. This file is kept for reference and local testing.
 
-**Chunking Strategy**: Each CV is split into **3 semantic chunks** instead of one monolithic chunk:
-1. **Experience Chunk** — Professional experience with role context
-2. **Education Chunk** — Formal education and qualifications
-3. **Skills Chunk** — Hard and soft technical/transversal skills
-
-This approach improves vector search by:
-- Creating focused chunks per topic (better semantic relevance)
-- Enabling targeted search (e.g., "find CVs with Python experience")
-- Preserving cross-references via enriched metadata
-- Scaling better than monolithic chunks in vector databases
-
-**Classes:**
-- **`CVProcessor`** — Structured CV data processor
-  - `nombre_apellidos: str` — Full name
-  - `puesto: str` — Job position
-  - `experiencia: List[str]` — Professional experience entries
-  - `estudios: List[str]` — Education entries
-  - `hard_skills: List[str]` — Technical skills
-  - `soft_skills: List[str]` — Soft/transversal skills
-  - `otros: List[str]` — Additional information
-
-**Methods:**
-- `generate_semantic_chunks()` — Generate all 3 chunks (experience, education, skills) with enriched metadata
-- `generate_experience_chunk()` — Create experience-focused chunk with years_of_experience, skill_domains metadata
-- `generate_education_chunk()` — Create education chunk with education_levels, num_studies metadata
-- `generate_skills_chunk()` — Create skills chunk with hard_skills, soft_skills counts metadata
-- `get_global_metadata(language)` — Extract global CV metadata (candidate name, position, skill domains, years of experience)
-- `calculate_years_of_experience()` — Parse experience entries to estimate total years
-- `get_skill_domains()` — Extract technical domains (backend, frontend, data, devops, mobile, ai/ml) from skills/experience
-- `from_dict(cls, d)` — Class method to construct CVProcessor from raw dictionary
+Original CV semantic chunking prototype with local file loading.
 
 **Utility Functions:**
 - `load_json(path)` — Load JSON file with UTF-8 encoding

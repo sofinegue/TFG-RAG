@@ -15,6 +15,7 @@ Uso:
 
 import argparse
 import uuid
+import json
 from datetime import datetime
 from typing import List, Optional
 
@@ -74,8 +75,8 @@ def _pretty_print_chunks(chunks: list) -> None:
         print(f"  Language: {chunk.get('sourceLanguage', '')}")
         print(f"{'=' * 70}")
 
-        print(f"\n--- sectionContent ---")
-        print(chunk.get("sectionContent", ""))
+        print(f"\n--- content ---")
+        print(chunk.get("content", ""))
 
         print(f"\n--- metadata ---")
         meta = chunk.get("metadata", {})
@@ -84,7 +85,7 @@ def _pretty_print_chunks(chunks: list) -> None:
         # Mostrar campos clave del documento Cosmos (sin embedding)
         print(f"\n--- campos Cosmos ---")
         cosmos_fields = {k: v for k, v in chunk.items()
-                         if k not in ("sectionContent", "metadata", "embedding")}
+                         if k not in ("content", "metadata", "embedding")}
         print(json.dumps(cosmos_fields, indent=2, ensure_ascii=False, default=str))
 
     print(f"\n{'=' * 70}")
