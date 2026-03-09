@@ -1,6 +1,6 @@
 
 """
-src.document_ingestion.runner
+src.document_ingestion.cvs.runner_cvs
 
 Runner para el pipeline de chunking de CVs.
 
@@ -8,9 +8,9 @@ Ejecuta el chunking sobre todos los CVs JSON almacenados en Blob Storage
 bajo ``data/cvs/<language>/`` y los sube a Cosmos DB.
 
 Uso:
-    python -m src.document_ingestion.runner                  # todos los idiomas
-    python -m src.document_ingestion.runner --language es     # solo español
-    python -m src.document_ingestion.runner --language en     # solo inglés
+    python -m src.document_ingestion.cvs.runner_cvs                   # todos los idiomas
+    python -m src.document_ingestion.cvs.runner_cvs --language es     # solo español
+    python -m src.document_ingestion.cvs.runner_cvs --language en     # solo inglés
 """
 
 import argparse
