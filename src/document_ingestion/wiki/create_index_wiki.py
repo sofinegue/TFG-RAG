@@ -139,6 +139,12 @@ def create_search_index():
             filterable=True,
             sortable=True,
         ),
+        SearchField(
+            name="Sections",
+            type=SearchFieldDataType.Collection(SearchFieldDataType.String),
+            searchable=True,
+            filterable=False,
+        ),
 
         # === VECTOR SEARCH ===
         SearchField(
@@ -180,6 +186,8 @@ def create_search_index():
             ],
             keywords_fields=[
                 SemanticField(field_name="docTitle"),
+                SemanticField(field_name="Sections"),
+                SemanticField(field_name="categories"),
             ],
         ),
     )
@@ -197,7 +205,7 @@ def create_search_index():
     result = client.create_or_update_index(index)
     print(f"✅ Índice Wiki creado: {result.name}")
     print(f"   - Vector Search: ✓  (HNSW / cosine)")
-    print(f"   - Semantic Search: ✓ (title=Title, content=content, kw=docTitle)")
+    print(f"   - Semantic Search: ✓ (title=Title, content=content, kw=docTitle, sections=Sections, categories=categories)")
     print(f"   - Keyword Search: ✓ (BM25)")
     print(f"   - Filtros: categories, pageid, wiki_url, sourceLanguage, isDeleted")
     print(f"   - Analyzer: standard.lucene (bilingüe es/en)")
@@ -215,10 +223,9 @@ def create_indexer():
         credential=AzureKeyCredential(config.azure_search_key),
     )
 
-    encoded_cosmos_key = quote_plus(config.cosmos_key)
     cosmos_connection_string = (
         f"AccountEndpoint={config.cosmos_endpoint};"
-        f"AccountKey={encoded_cosmos_key};"
+        f"AccountKey={config.cosmos_key};"
         f"Database={config.cosmosdb_database}"
     )
 
@@ -252,6 +259,7 @@ def create_indexer():
             FieldMapping(source_field_name="nChunk", target_field_name="nChunk"),
             FieldMapping(source_field_name="isDeleted", target_field_name="isDeleted"),
             FieldMapping(source_field_name="isCreated", target_field_name="isCreated"),
+            FieldMapping(source_field_name="Sections", target_field_name="Sections"),
             FieldMapping(source_field_name="embedding", target_field_name="embedding"),
             FieldMapping(source_field_name="QuestionsText", target_field_name="QuestionsText"),
             FieldMapping(source_field_name="docSummary", target_field_name="docSummary"),

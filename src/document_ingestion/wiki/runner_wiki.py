@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import List, Optional
 
@@ -84,10 +85,8 @@ def run_wiki_chunking(language: str) -> None:
     ok_count = 0
     err_count = 0
 
-    for idx, blob_path in enumerate(json_names, start=1):
+    def _process_article(blob_path: str) -> bool:
         short_name = blob_path.replace(BLOB_WIKI_PREFIX, "")
-        print(f"\n  [{idx}/{len(json_names)}] {short_name}")
-
         doc_entity = DocEntity(
             id=str(uuid.uuid4()),
             doc_id=blob_path,
@@ -99,17 +98,27 @@ def run_wiki_chunking(language: str) -> None:
             language=language,
         ).model_dump(exclude_none=True)
 
-        try:
-            get_text_split_wiki(
-                docId=blob_path,
-                SessionId=session_id,
-                doc_entity=doc_entity,
-                CDU="DOCPROCESS",
-            )
-            ok_count += 1
-        except Exception as e:
-            err_count += 1
-            print(f"    ERROR: {e}")
+        get_text_split_wiki(
+            docId=blob_path,
+            SessionId=session_id,
+            doc_entity=doc_entity,
+            CDU="DOCPROCESS",
+        )
+        return True
+
+    max_workers = min(len(json_names), config.max_workers_docs or 4)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_process_article, bp): bp for bp in json_names}
+        for idx, future in enumerate(as_completed(futures), start=1):
+            blob_path = futures[future]
+            short_name = blob_path.replace(BLOB_WIKI_PREFIX, "")
+            try:
+                future.result()
+                ok_count += 1
+                print(f"  [{idx}/{len(json_names)}] ✓ {short_name}")
+            except Exception as e:
+                err_count += 1
+                print(f"  [{idx}/{len(json_names)}] ✗ {short_name} — ERROR: {e}")
 
     print(f"\n{'-' * 60}")
     print(f"  Resultado ({language}): {ok_count} OK / {err_count} errores / {len(json_names)} total")
