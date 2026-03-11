@@ -17,7 +17,25 @@ To generate valid synthetic data, run:
 
 ## ./src/document_ingestion
 
-The `document_ingestion` folder contains scripts for chunking all documents.
+The `document_ingestion` folder contains scripts for processing, chunking, and indexing all documents. It is organized into subfolders by document type (`cvs/`, `wiki/`, `eu/`), each following the same two-step pipeline:
+
+### Paso 1 — Generar chunks y subirlos a Cosmos DB
+
+Ejecutar el `runner_*.py` correspondiente. Este script lee los documentos desde Azure Blob Storage, los trocea en chunks y los sube a Cosmos DB.
+
+    python -m src.document_ingestion.cvs.runner_cvs
+    python -m src.document_ingestion.wiki.runner_wiki
+    python -m src.document_ingestion.eu.runner_eu
+
+### Paso 2 — Crear el índice y el indexer en Azure AI Search
+
+Una vez los chunks están en Cosmos DB, ejecutar el `create_index_*.py` correspondiente. Este script crea el índice y el indexer en Azure AI Search, habilitando búsqueda vectorial y semántica sobre los chunks.
+
+    python -m src.document_ingestion.cvs.create_index_cvs
+    python -m src.document_ingestion.wiki.create_index_wiki
+    python -m src.document_ingestion.eu.create_index_eu
+
+> **Importante:** Siempre hay que ejecutar primero el `runner_*.py` antes que el `create_index_*.py`, ya que el indexer toma los datos de Cosmos DB.
 
 
 

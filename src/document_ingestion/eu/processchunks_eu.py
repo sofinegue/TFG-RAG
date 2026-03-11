@@ -46,6 +46,11 @@ from langchain_text_splitters import MarkdownHeaderTextSplitter
 from src.config import config
 from src.services.openai_service import get_embedding
 from src.services.cosmos_service import upload_doc_cosmos
+from src.document_ingestion.processchunks import (
+    combinar_splits_tablas, 
+    dividir_si_excede_max_tokens,
+    mark_existing_chunks_as_deleted
+)
 
 # Tokenizador (cl100k_base, igual que processchunks.py)
 encoding = tiktoken.get_encoding("cl100k_base")
@@ -58,98 +63,6 @@ containerdbname = config.cosmosdb_container_eu
 
 # Documentos ya verificados en esta sesión (evita marcar borrados en cada chunk)
 _checked_documents_eu: set = set()
-
-
-# ===========================================================================
-# Helpers de tabla (adaptados de processchunks.py)
-# ===========================================================================
-
-def es_tabla_markdown(contenido: str) -> bool:
-    """Determina si una sección contiene una tabla en formato Markdown."""
-    for linea in contenido.split("\n"):
-        if "|" in linea or re.match(r"^\s*---", linea):
-            return True
-    return False
-
-
-def dividir_con_solapamiento(texto: str, longitud: int, solapamiento: int) -> List[str]:
-    """Divide un texto en partes con solapamiento. No divide si contiene tabla Markdown."""
-    if longitud <= solapamiento:
-        raise ValueError("La longitud debe ser mayor que el solapamiento")
-    if es_tabla_markdown(texto):
-        return [texto]
-    partes = []
-    for i in range(0, len(texto), longitud - solapamiento):
-        parte = texto[i : i + longitud]
-        partes.append(parte)
-        if len(parte) < longitud:
-            break
-    return partes
-
-
-def dividir_chunk_con_tablas(chunk: str, max_tokens: int, distancia_tokens: int = 50) -> List[str]:
-    """Divide un chunk con tablas sin separar tablas entre sí."""
-    lineas = chunk.split("\n")
-    current_chunk = ""
-    final_chunks: List[str] = []
-    current_tokens = 0
-    last_table_end_tokens = None
-
-    for linea in lineas:
-        tokens_linea = len(encoding.encode(linea))
-        if es_tabla_markdown(linea):
-            if last_table_end_tokens is not None:
-                if current_tokens - last_table_end_tokens <= distancia_tokens:
-                    current_chunk += linea + "\n"
-                    current_tokens += tokens_linea
-                    continue
-            last_table_end_tokens = current_tokens + tokens_linea
-
-        if current_tokens + tokens_linea > max_tokens:
-            final_chunks.append(current_chunk.strip())
-            current_chunk = linea + "\n"
-            current_tokens = tokens_linea
-            last_table_end_tokens = None
-        else:
-            current_chunk += linea + "\n"
-            current_tokens += tokens_linea
-
-    if current_chunk:
-        final_chunks.append(current_chunk.strip())
-    return final_chunks
-
-
-def combinar_splits_tablas(sub_splits: List[str], max_tokens: int, distancia_maxima: int = 50) -> List[str]:
-    """Combina splits que contienen tablas o están cerca de ellas."""
-    final_splits: List[str] = []
-    i = 0
-    while i < len(sub_splits):
-        current_split = sub_splits[i]
-        current_tokens = len(encoding.encode(current_split))
-        if es_tabla_markdown(current_split) and i < len(sub_splits) - 1:
-            next_split = sub_splits[i + 1]
-            next_tokens = len(encoding.encode(next_split))
-            if es_tabla_markdown(next_split):
-                distancia = len(current_split) + len(next_split)
-                if distancia <= distancia_maxima and current_tokens + next_tokens <= max_tokens:
-                    current_split += next_split
-                    i += 1
-        final_splits.append(current_split)
-        i += 1
-    return final_splits
-
-
-def dividir_si_excede_max_tokens(
-    split: str, max_tokens: int, chunk_size: int, chunk_overlap_percentage: float
-) -> List[str]:
-    """Divide un split solo si excede max_tokens, respetando tablas."""
-    if len(encoding.encode(split)) > max_tokens:
-        if es_tabla_markdown(split):
-            return dividir_chunk_con_tablas(split, max_tokens)
-        overlap = int(chunk_size * chunk_overlap_percentage)
-        return dividir_con_solapamiento(split, chunk_size, overlap)
-    return [split]
-
 
 # ===========================================================================
 # Markdown chunking
@@ -317,7 +230,13 @@ def upload_chunk_eu(
         # Verificar y marcar chunks previos solo en el primer chunk de cada documento
         if index == 1 and blob_name not in _checked_documents_eu:
             print(f"  🔍 Verificando chunks previos de '{blob_name}'...")
-            mark_existing_chunks_as_deleted_eu(blob_name)
+            mark_existing_chunks_as_deleted(
+                doc_title=blob_name,
+                cosmos_endpoint=cosmosendpoint,
+                cosmos_key=cosmoskey,
+                db_name=dbname,
+                container_name=containerdbname,
+            )
             _checked_documents_eu.add(blob_name)
 
         raw_id = str(uuid.uuid4())
@@ -370,23 +289,6 @@ def upload_chunk_eu(
         )
     except Exception as err:
         print(f"ERROR subiendo chunk EU a Cosmos: {err}")
-
-
-# ===========================================================================
-# mark_existing_chunks_as_deleted  (reutiliza la de processchunks.py)
-# ===========================================================================
-
-def mark_existing_chunks_as_deleted_eu(doc_title: str) -> int:
-    """Marca como borrados todos los chunks previos del documento EU."""
-    from src.document_ingestion.processchunks import mark_existing_chunks_as_deleted
-    return mark_existing_chunks_as_deleted(
-        doc_title=doc_title,
-        cosmos_endpoint=cosmosendpoint,
-        cosmos_key=cosmoskey,
-        db_name=dbname,
-        container_name=containerdbname,
-    )
-
 
 # ===========================================================================
 # Helpers internos

@@ -47,6 +47,7 @@ from langchain_text_splitters import MarkdownHeaderTextSplitter
 from src.config import config
 from src.services.openai_service import get_embedding
 from src.services.cosmos_service import upload_doc_cosmos
+from src.document_ingestion.processchunks import mark_existing_chunks_as_deleted
 
 # Tokenizador
 encoding = tiktoken.encoding_for_model(config.azure_openai_emb_name)
@@ -260,7 +261,6 @@ def upload_chunk_wiki(
 # ===========================================================================
 
 def mark_existing_chunks_as_deleted_wiki(doc_title: str) -> int:
-    from src.document_ingestion.processchunks import mark_existing_chunks_as_deleted
     return mark_existing_chunks_as_deleted(
         doc_title=doc_title,
         cosmos_endpoint=cosmosendpoint,
