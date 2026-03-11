@@ -1,201 +1,272 @@
 """
-src.generate_data.generate_eu
+pruebas.py  Scraping del Diario Oficial de la UE (serie L)
 
-Módulo para descargar capítulos de legislación europea (EUR-Lex) en PDF, multilenguaje.
+Descarga todos los PDFs publicados en enero y febrero de 2026
+en el idioma configurado (por defecto ES).
+
+URL de índice diario:
+  https://eur-lex.europa.eu/oj/daily-view/L-series/default.html?ojDate=DDMMYYYY
+
+URL de PDF por documento:
+  https://eur-lex.europa.eu/legal-content/{LANG}/TXT/PDF/?uri=OJ:L_{YEAR}{NUM:05d}
 """
+
 import os
 import re
 import time
-import unicodedata
-from datetime import datetime
-from urllib.parse import urlencode
-
-from anyio import Path
 import requests
+import urllib.request
+from pathlib import Path
+from datetime import date
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 BASE = "https://eur-lex.europa.eu"
+TRANSIENT = {202, 429, 500, 502, 503, 504}
 
-def normalize_lang(lang: str) -> str:
-    """EUR-Lex usa códigos tipo EN, ES, FR... en mayúsculas."""
-    return (lang or "EN").strip().upper()
+OUTPUT_DIR = Path("data/eu")
+LANG =  ["ES", "EN", "FR", "IT", "PT"]
 
-def ensure_dir(path: str):
-    os.makedirs(path, exist_ok=True)
+# Fechas a procesar
+DATES = [
+    # date(2025, 12, 1),
+    date(2026, 1, 1),
+    date(2026, 2, 1),
+    # date(2026, 3, 1),
+]
 
-def fetch_html(url: str, max_retries=3, timeout=30):
-    for attempt in range(1, max_retries+1):
-        resp = requests.get(url, timeout=timeout)
-        if resp.status_code == 200 and resp.text:
-            return resp.text
-        time.sleep(1.5 * attempt)
-    raise RuntimeError(f"Error {resp.status_code} al obtener: {url}")
+# Hilos concurrentes para descargas
+DOWNLOAD_WORKERS = 5
 
-def guess_display_lang_from_txt_url(txt_url: str) -> str:
-    # El patrón clásico es /legal-content/EN/TXT/...
-    m = re.search(r"/legal-content/([A-Z]{2})/TXT/", txt_url)
-    return m.group(1) if m else "EN"
 
-def extract_consolidated_dates(txt_html: str):
-    """
-    Extrae la lista de fechas (YYYY-MM-DD) del panel 'Hide/Show consolidated versions'.
-    La página actual de EUR-Lex coloca esas fechas en un <nav> lateral con enlaces.
-    """
-    soup = BeautifulSoup(txt_html, "html.parser")
+# =====================================================================
+# 1) SESION Y SELENIUM
+# =====================================================================
 
-    # Buscar el bloque lateral por el título aproximado “consolidated versions”
-    # Hay variaciones según idioma; buscamos por anclas y patrones de fecha en los href.
-    date_links = []
+def _detect_proxy() -> str | None:
+    """Devuelve la URL del proxy HTTP del sistema (si existe)."""
+    proxies = urllib.request.getproxies()
+    return proxies.get("https") or proxies.get("http")
 
-    # 1) Buscar enlaces que contengan .../TXT-YYYYMMDD en la 'uri' query
-    for a in soup.select("a[href]"):
-        href = a.get("href", "")
-        # Nos interesan los que apunten a TXT con sufijo -YYYYMMDD
-        if "CELEX:" in href and "/TXT" in href and "-20" in href:
-            # Extraer la parte -YYYYMMDD
-            m = re.search(r"-([12][0-9]{7})$", href)
-            if m:
-                yyyymmdd = m.group(1)
-                # Validar fecha
-                try:
-                    dt = datetime.strptime(yyyymmdd, "%Y%m%d")
-                    date_links.append((dt.date(), href))
-                except ValueError:
-                    pass
 
-    # Quitar duplicados y ordenar
-    by_date = {}
-    for dt, href in date_links:
-        by_date[dt] = href
-    return [ (d, by_date[d]) for d in sorted(by_date.keys()) ]
+def make_session(lang: str = "ES") -> requests.Session:
+    s = requests.Session()
+    s.headers.update({
+        "User-Agent": "Mozilla/5.0 (compatible; SofiaRAGBot/1.0; +https://example.org)",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": f"{lang.lower()},{lang.lower()}-en;q=0.8,en;q=0.7",
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+    })
+    proxy = _detect_proxy()
+    if proxy:
+        print(f"[PROXY] Usando proxy del sistema: {proxy}")
+        s.proxies = {"http": proxy, "https": proxy}
+    return s
 
-def to_pdf_url(celex_consolidated: str, lang: str, date_yyyymmdd: str):
-    """
-    Construye la URL PDF consolidada de la forma:
-    https://eur-lex.europa.eu/legal-content/{LANG}/TXT/PDF/?uri=CELEX:{CELEX_CONSOLIDATED}/TXT-{YYYYMMDD}
-    """
-    lang = normalize_lang(lang)
-    query = {
-        "uri": f"CELEX:{celex_consolidated}/TXT-{date_yyyymmdd}"
-    }
-    return f"{BASE}/legal-content/{lang}/TXT/PDF/?{urlencode(query)}"
 
-def to_txt_page_url(celex_consolidated: str, lang: str, date_yyyymmdd: str):
-    """
-    Devuelve la URL de la página HTML (no PDF) para inspección si hace falta:
-    https://eur-lex.europa.eu/legal-content/{LANG}/TXT/?uri=CELEX:{CELEX_CONSOLIDATED}/TXT-{YYYYMMDD}
-    """
-    lang = normalize_lang(lang)
-    query = {
-        "uri": f"CELEX:{celex_consolidated}/TXT-{date_yyyymmdd}"
-    }
-    return f"{BASE}/legal-content/{lang}/TXT/?{urlencode(query)}"
+def make_driver() -> webdriver.Edge:
+    """Abre Edge con el proxy del sistema y tolerancia a errores SSL corporativos."""
+    opts = Options()
+    opts.add_argument("--disable-blink-features=AutomationControlled")
+    opts.add_experimental_option("excludeSwitches", ["enable-automation"])
+    opts.add_argument("--ignore-certificate-errors")
+    opts.add_argument("--ignore-ssl-errors")
+    opts.add_argument("--allow-insecure-localhost")
 
-def to_txt_root_url(celex_base: str, lang: str):
-    """
-    URL 'raíz' (HTML) desde la cual parsearemos las “consolidated versions”.
-    Suele ser la no-consolidada (p. ej. CELEX:12016M/TXT) o directamente la consolidada actual sin fecha.
-    """
-    lang = normalize_lang(lang)
-    query = { "uri": f"CELEX:{celex_base}/TXT" }
-    return f"{BASE}/legal-content/{lang}/TXT/?{urlencode(query)}"
+    proxy = _detect_proxy()
+    if proxy:
+        # Eliminar el esquema para Selenium (espera host:puerto)
+        proxy_host = proxy.replace("https://", "").replace("http://", "").rstrip("/")
+        opts.add_argument(f"--proxy-server={proxy_host}")
+        print(f"[PROXY] Edge usando proxy: {proxy_host}")
 
-def download_pdf(url: str, out_path: str, max_retries=3, timeout=60):
-    for attempt in range(1, max_retries+1):
-        r = requests.get(url, timeout=timeout)
-        if r.status_code == 200 and r.content:
-            with open(out_path, "wb") as f:
-                f.write(r.content)
-            return
-        time.sleep(1.5 * attempt)
-    raise RuntimeError(f"No se pudo descargar {url}; último status={r.status_code}")
+    return webdriver.Edge(options=opts)
 
-def download_all_consolidated_pdfs(
-    celex_base_for_panel: str,
-    celex_consolidated_prefix: str,
-    lang="EN",
-    out_dir="../data/eu/"
-):
-    """
-    - celex_base_for_panel: CELEX cuya página TXT tiene el panel lateral de “consolidated versions”.
-        Ej: '12016M' (TEU base) o '12016E' (TFEU base).
-    - celex_consolidated_prefix: prefijo CELEX para construir cada PDF consolidado por fecha.
-        Ej: '02016M' (TEU consolidado) o '02016E' (TFEU consolidado).
-    - lang: idioma del PDF ('EN','ES',...)
-    - out_dir: carpeta de salida
-    """
-    lang = normalize_lang(lang)
-    root_url = to_txt_root_url(celex_base_for_panel, lang)
-    print(f"[INFO] Cargando página raíz para extraer fechas: {root_url}")
-    html = fetch_html(root_url)
-    consolidated = extract_consolidated_dates(html)
 
-    if not consolidated:
-        # Si no se encuentran enlaces con -YYYYMMDD, intentamos un idioma alternativo para parsear
-        alt_lang = "EN" if lang != "EN" else "ES"
-        alt_root = to_txt_root_url(celex_base_for_panel, alt_lang)
-        print(f"[WARN] No encontré fechas en {lang}; pruebo {alt_lang}: {alt_root}")
-        html = fetch_html(alt_root)
-        consolidated = extract_consolidated_dates(html)
+def sync_cookies(driver: webdriver.Edge, session: requests.Session):
+    """Copia las cookies del driver a la sesion de requests."""
+    for c in driver.get_cookies():
+        session.cookies.set(c["name"], c["value"])
 
-    if not consolidated:
-        raise RuntimeError("No fue posible localizar el panel de fechas consolidadas.")
 
-    print(f"[INFO] Fechas encontradas: {len(consolidated)}")
-    # Crear carpeta
-    subdir = os.path.join(out_dir, f"{celex_consolidated_prefix}_{lang}")
-    ensure_dir(subdir)
+# =====================================================================
+# 2) DOWNLOAD CON RETRY / BACKOFF
+# =====================================================================
 
-    for dt, href in consolidated:
-        yyyymmdd = dt.strftime("%Y%m%d")
-        pdf_url = to_pdf_url(celex_consolidated_prefix, lang, yyyymmdd)
-        filename = f"{celex_consolidated_prefix}_{yyyymmdd}_{lang}.pdf"
-        out_path = os.path.join(subdir, filename)
-
-        # Evitar redescargas
-        if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
-            print(f"  [SKIP] {filename}")
+def download_binary(session: requests.Session, url: str, out_path: str,
+                    max_retries: int = 8, timeout: int = 60):
+    backoff = 1.0
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            r = session.get(url, timeout=timeout, allow_redirects=True, stream=True)
+        except requests.exceptions.ConnectionError as exc:
+            last_err = exc
+            print(f"  [RETRY {attempt+1}/{max_retries}] ConnectionError: {exc} — esperando {backoff:.1f}s")
+            time.sleep(backoff)
+            backoff = min(backoff * 2, 30.0)
             continue
 
-        print(f"  [GET] {pdf_url}")
-        try:
-            download_pdf(pdf_url, out_path)
-            time.sleep(0.5)  # cortesía
-        except Exception as ex:
-            print(f"  [ERR] {ex}")
+        if r.status_code == 200:
+            ct = r.headers.get("Content-Type", "").lower()
+            if "pdf" not in ct:
+                raise RuntimeError(
+                    f"Respuesta no es PDF (Content-Type: {ct}): {url}"
+                )
+            with open(out_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=16384):
+                    if chunk:
+                        f.write(chunk)
+            return
+        if r.status_code in TRANSIENT:
+            ra = r.headers.get("Retry-After")
+            sleep_s = float(ra) if (ra and ra.isdigit()) else backoff
+            print(f"  [RETRY {attempt+1}/{max_retries}] HTTP {r.status_code} — esperando {sleep_s:.1f}s")
+            time.sleep(sleep_s)
+            backoff = min(backoff * 1.8, 30.0)
+            continue
+        # Error no transitorio
+        time.sleep(backoff)
+        backoff = min(backoff * 1.8, 30.0)
+    raise RuntimeError(f"No se pudo descargar {url} tras {max_retries} intentos; último error: {last_err}")
 
-    print(f"[DONE] PDFs guardados en: {subdir}")
+
+# =====================================================================
+# 3) SCRAPING DEL INDICE DIARIO
+# =====================================================================
+
+def oj_daily_url(d: date) -> str:
+    """URL del indice diario en formato ojDate=DDMMYYYY."""
+    return (
+        f"{BASE}/oj/daily-view/L-series/default.html"
+        f"?ojDate={d.strftime('%d%m%Y')}"
+    )
+
+
+def extract_oj_uris(html: str) -> list:
+    """
+    Extrae todos los URIs OJ:L_* unicos del HTML del indice diario.
+    Detecta patrones como: uri=OJ:L_202600477
+    """
+    return sorted(set(re.findall(r"(OJ:L_\d+)", html)))
+
+
+def fetch_daily_page(driver: webdriver.Edge, session: requests.Session,
+                     d: date, timeout: float = 10.0) -> str:
+    """
+    Carga la pagina del indice diario con Selenium y espera a que
+    aparezca contenido real (links OJ o mensaje de no publicaciones)
+    en vez de dormir un tiempo fijo.
+    """
+    url = oj_daily_url(d)
+    driver.get(url)
+    try:
+        # Espera hasta que aparezca al menos un enlace OJ:L o el bloque de contenido
+        WebDriverWait(driver, timeout).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, "a[href*='OJ:L_'], .ojDailyViewContent, #documentView")
+            )
+        )
+    except Exception:
+        pass  # Si expira, usamos lo que hay
+    sync_cookies(driver, session)
+    return driver.page_source
+
+
+# =====================================================================
+# 4) DESCARGA DE PDFs
+# =====================================================================
+
+def pdf_url(oj_uri: str, lang: str) -> str:
+    return f"{BASE}/legal-content/{lang.upper()}/TXT/PDF/?uri={oj_uri}"
+
+
+def download_oj_pdf(session: requests.Session, oj_uri: str,
+                    lang: str, out_dir: Path):
+    safe = oj_uri.replace(":", "_")
+    out_path = out_dir / f"{safe}_{lang.upper()}.pdf"
+
+    if out_path.exists() and out_path.stat().st_size > 0:
+        return f"SKIP {out_path.name}"
+
+    url = pdf_url(oj_uri, lang)
+    try:
+        download_binary(session, url, str(out_path))
+        return f"OK   {out_path.name}"
+    except RuntimeError as e:
+        return f"ERR  {oj_uri}: {e}"
+
+
+# =====================================================================
+# 5) MAIN — dos fases: scraping (Selenium) + descarga (paralelo)
+# =====================================================================
 
 def main():
-    OUTPUT_DIR = Path("data/eu")
+    for lang in LANG:
+        session = make_session(lang)
+        driver = make_driver()
 
-    for lang in ["EN", "ES", "FR", "IT", "PT"]:
-        download_all_consolidated_pdfs(
-            celex_base_for_panel="12016M",
-            celex_consolidated_prefix="02016M",
-            lang=lang,              # Cambia a "ES" si quieres PDFs en español
-            out_dir=OUTPUT_DIR / lang.lower()
+        print("[INIT] Cargando EUR-Lex para obtener cookies WAF...")
+        driver.get(BASE)
+        # Espera a que cargue la portada antes de continuar
+        WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
-        download_all_consolidated_pdfs(
-                celex_base_for_panel="12016E",
-                celex_consolidated_prefix="02016E",
-                lang=lang,
-                out_dir=OUTPUT_DIR / lang.lower()
-        )
+        sync_cookies(driver, session)
+        print("[INIT] Cookies obtenidas.\n")
+
+        # ------------------------------------------------------------------
+        # FASE 1: Scraping secuencial con Selenium — recoge todos los URIs
+        # ------------------------------------------------------------------
+        print("[FASE 1] Scraping de índices diarios...\n")
+        work_items = []  # lista de (session, uri, lang, out_dir)
+
+        for d in DATES:
+            out_dir = OUTPUT_DIR / lang.lower()
+            out_dir.mkdir(parents=True, exist_ok=True)
+
+            print(f"  [DATE] {d}  ", end="", flush=True)
+            html = fetch_daily_page(driver, session, d)
+            uris = extract_oj_uris(html)
+
+            if not uris:
+                print("sin publicaciones")
+            else:
+                print(f"{len(uris)} doc(s)")
+                for uri in uris:
+                    work_items.append((session, uri, lang, out_dir))
+
+        driver.quit()
+
+        # ------------------------------------------------------------------
+        # FASE 2: Descargas en paralelo
+        # ------------------------------------------------------------------
+        total = len(work_items)
+        print(f"\n[FASE 2] Descargando {total} PDFs con {DOWNLOAD_WORKERS} hilos...\n")
+
+        done = 0
+        with ThreadPoolExecutor(max_workers=DOWNLOAD_WORKERS) as pool:
+            futures = {
+                pool.submit(download_oj_pdf, sess, uri, lg, d): uri
+                for sess, uri, lg, d in work_items
+            }
+            for fut in as_completed(futures):
+                done += 1
+                try:
+                    result = fut.result()
+                except Exception as exc:
+                    result = f"ERR  {futures[fut]}: {exc}"
+                print(f"  [{done}/{total}] {result}")
+
+        print(f"\n[DONE] {total} documentos procesados.")
+
 
 # if __name__ == "__main__":
-#     OUTPUT_DIR = Path("data/eu")
-
-#     for lang in ["EN", "ES", "FR", "IT", "PT"]:
-#         download_all_consolidated_pdfs(
-#             celex_base_for_panel="12016M",
-#             celex_consolidated_prefix="02016M",
-#             lang=lang,              # Cambia a "ES" si quieres PDFs en español
-#             out_dir=os.path.join(OUTPUT_DIR, lang.lower())
-#         )
-#         download_all_consolidated_pdfs(
-#                 celex_base_for_panel="12016E",
-#                 celex_consolidated_prefix="02016E",
-#                 lang=lang,
-#                 out_dir=os.path.join(OUTPUT_DIR, lang.lower())
-#         )
+#     main()

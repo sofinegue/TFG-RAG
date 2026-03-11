@@ -9,7 +9,7 @@ import traceback
 
 import src.generate_data.generate_cvs as generate_cvs
 import src.generate_data.generate_eu as generate_eu
-import src.generate_data.generate_wikipedia as generate_wikipedia
+import src.generate_data.generate_wiki as generate_wiki
 import src.generate_data.validate_data as validate
 
 def main():
@@ -29,7 +29,7 @@ def main():
 
     print("Generating Wikipedia data...")
     try:
-        generate_wikipedia.main()
+        generate_wiki.main()
     except Exception as e:
         print(f"\nError during wikipedia documents generation: {e}")
         traceback.print_exc()
