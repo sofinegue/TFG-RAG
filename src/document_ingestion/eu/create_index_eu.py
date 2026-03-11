@@ -135,6 +135,14 @@ def create_search_index():
             vector_search_dimensions=1536,
             vector_search_profile_name="vector-profile-eu",
         ),
+
+        # === SEMANTIC SEARCH ===
+        SearchField(
+            name="Sections",
+            type=SearchFieldDataType.Collection(SearchFieldDataType.String),
+            searchable=True,
+            filterable=False,
+        ),
     ]
 
     # --- Vector Search ---
@@ -169,6 +177,7 @@ def create_search_index():
             keywords_fields=[
                 SemanticField(field_name="docTitle"),
                 SemanticField(field_name="doc_type"),
+                SemanticField(field_name="Sections"),
             ],
         ),
     )
@@ -204,10 +213,9 @@ def create_indexer():
         credential=AzureKeyCredential(config.azure_search_key),
     )
 
-    encoded_cosmos_key = quote_plus(config.cosmos_key)
     cosmos_connection_string = (
         f"AccountEndpoint={config.cosmos_endpoint};"
-        f"AccountKey={encoded_cosmos_key};"
+        f"AccountKey={config.cosmos_key};"
         f"Database={config.cosmosdb_database}"
     )
 

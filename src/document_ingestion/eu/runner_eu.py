@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from typing import List, Optional
 
@@ -40,6 +41,8 @@ def _list_eu_pdfs(language: str) -> List[str]:
         f"AccountKey={config.azure_storage_key};"
         f"EndpointSuffix=core.windows.net"
     )
+    print(f"[DEBUG] Conectando a Blob Storage: cuenta={config.azure_storage_account_name}, container={config.azure_container_name}")
+    print(f"[DEBUG] Buscando blobs con prefijo: '{prefix}'")
     client = BlobServiceClient.from_connection_string(connect_str)
     container_client = client.get_container_client(config.azure_container_name)
 
@@ -48,6 +51,8 @@ def _list_eu_pdfs(language: str) -> List[str]:
         if blob.name.lower().endswith(".pdf"):
             pdf_files.append(blob.name)
     client.close()
+
+    print(f"[DEBUG] PDFs encontrados: {len(pdf_files)}")
     return sorted(pdf_files)
 
 
@@ -100,10 +105,8 @@ def run_eu_chunking(language: str) -> None:
     ok_count = 0
     err_count = 0
 
-    for idx, blob_path in enumerate(pdf_names, start=1):
+    def _process_pdf(blob_path: str) -> None:
         short_name = blob_path.replace(BLOB_EU_PREFIX, "")
-        print(f"\n  [{idx}/{len(pdf_names)}] {short_name}")
-
         doc_entity = DocEntity(
             id=str(uuid.uuid4()),
             doc_id=blob_path,
@@ -114,18 +117,26 @@ def run_eu_chunking(language: str) -> None:
             source_collection="eu",
             language=language,
         ).model_dump(exclude_none=True)
+        get_text_split_eu(
+            docId=blob_path,
+            SessionId=session_id,
+            doc_entity=doc_entity,
+            CDU="DOCPROCESS",
+        )
 
-        try:
-            get_text_split_eu(
-                docId=blob_path,
-                SessionId=session_id,
-                doc_entity=doc_entity,
-                CDU="DOCPROCESS",
-            )
-            ok_count += 1
-        except Exception as e:
-            err_count += 1
-            print(f"    ERROR: {e}")
+    max_workers = min(len(pdf_names), config.max_workers_docs or 4)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(_process_pdf, bp): bp for bp in pdf_names}
+        for idx, future in enumerate(as_completed(futures), start=1):
+            blob_path = futures[future]
+            short_name = blob_path.replace(BLOB_EU_PREFIX, "")
+            try:
+                future.result()
+                ok_count += 1
+                print(f"  [{idx}/{len(pdf_names)}] ✓ {short_name}")
+            except Exception as e:
+                err_count += 1
+                print(f"  [{idx}/{len(pdf_names)}] ✗ {short_name} — ERROR: {e}")
 
     print(f"\n{'-' * 60}")
     print(f"  Resultado ({language}): {ok_count} OK / {err_count} errores / {len(pdf_names)} total")
