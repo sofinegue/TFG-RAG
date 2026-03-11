@@ -47,7 +47,6 @@ from azure.search.documents.indexes.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 from src.config import config
-from urllib.parse import quote_plus
 
 
 # ===========================================================================
@@ -69,17 +68,17 @@ def create_search_index():
 
         # === CONTENIDO PRINCIPAL (keyword + semantic) ===
         SearchableField(
-            name="content",
+            name="content",  # raw text of all the chunk
             type=SearchFieldDataType.String,
             analyzer_name="es.microsoft",
         ),
         SearchableField(
-            name="Title",
+            name="Title",  # "Matthew Flores Wallace — Education"
             type=SearchFieldDataType.String,
             analyzer_name="es.microsoft",
         ),
         SearchableField(
-            name="docTitle",
+            name="docTitle",  # "en/cv_297.json"
             type=SearchFieldDataType.String,
             filterable=True,
             analyzer_name="es.microsoft",
@@ -87,19 +86,19 @@ def create_search_index():
 
         # === CAMPOS ESPECÍFICOS DE CV ===
         SimpleField(
-            name="chunk_type",
+            name="chunk_type",  # "education"
             type=SearchFieldDataType.String,
             filterable=True,       # experience | education | skills
             facetable=True,
         ),
         SearchableField(
-            name="nombre_apellidos",
+            name="nombre_apellidos",  # "Matthew Flores Wallace" 
             type=SearchFieldDataType.String,
             filterable=True,
             analyzer_name="es.microsoft",
         ),
-        SearchableField(
-            name="puesto",
+        SearchableField(  # NO ESTÁ SI chunk_type = educacion
+            name="puesto",  # "AI Research Scientist"
             type=SearchFieldDataType.String,
             filterable=True,
             facetable=True,
@@ -130,12 +129,7 @@ def create_search_index():
         SimpleField(name="sourceCollection", type=SearchFieldDataType.String, filterable=True),
         SimpleField(name="sourcePath", type=SearchFieldDataType.String, filterable=True),
         SimpleField(name="topLanguage", type=SearchFieldDataType.String, filterable=True),
-        SimpleField(
-            name="nChunk",
-            type=SearchFieldDataType.Int32,
-            filterable=True,
-            sortable=True,
-        ),
+        SimpleField(name="nChunk", type=SearchFieldDataType.Int32, filterable=True, sortable=True),
         SimpleField(name="isDeleted", type=SearchFieldDataType.Boolean, filterable=True),
         SimpleField(
             name="isCreated",
@@ -185,6 +179,7 @@ def create_search_index():
             keywords_fields=[
                 SemanticField(field_name="puesto"),
                 SemanticField(field_name="nombre_apellidos"),
+                SemanticField(field_name="chunk_type"),
             ],
         ),
     )
@@ -219,10 +214,9 @@ def create_indexer():
         credential=AzureKeyCredential(config.azure_search_key),
     )
 
-    encoded_cosmos_key = quote_plus(config.cosmos_key)
     cosmos_connection_string = (
         f"AccountEndpoint={config.cosmos_endpoint};"
-        f"AccountKey={encoded_cosmos_key};"
+        f"AccountKey={config.cosmos_key};"
         f"Database={config.cosmosdb_database}"
     )
 
@@ -279,7 +273,7 @@ if __name__ == "__main__":
     create_search_index()
 
     # Descomentar cuando estés listo para crear el indexer
-    # create_indexer()
+    create_indexer()
 
     print("\n" + "=" * 70)
     print("COMPLETADO")
