@@ -39,7 +39,7 @@ import uuid
 import tiktoken
 from collections import Counter
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from langchain_text_splitters import MarkdownHeaderTextSplitter  # usado en pruebas / comentado
 
@@ -47,7 +47,7 @@ from src.config import config
 from src.services.openai_service import get_embedding
 from src.services.cosmos_service import upload_doc_cosmos
 from src.document_ingestion.processchunks import (
-    split_markdown_by_sections,
+    split_markdown_with_hierarchy,
     mark_existing_chunks_as_deleted
 )
 
@@ -73,15 +73,15 @@ def markdown_chunk_eu(
     overlap_pct: float = 0.1,
     min_tokens: int = 1000,
     max_tokens: int = 8000,
-) -> List[str]:
-    """Divide contenido Markdown en chunks respetando encabezados (h1–h6).
+) -> List[Tuple[str, List[str]]]:
+    """Divide contenido Markdown en chunks con jerarquía de secciones.
 
-    Usa un splitter regex propio (split_markdown_by_sections) que:
-      - Produce exactamente 1 encabezado por chunk.
-      - Descarta secciones vacías.
-      - Subdivide con dividir_por_frases si la sección supera max_tokens.
+    Retorna List[Tuple[str, List[str]]]: (texto_chunk, secciones_completas).
+
+    Sub-chunks de continuación NO repiten el encabezado en el contenido;
+    la sección se propaga solo en la tupla (campo Sections en Cosmos).
     """
-    return split_markdown_by_sections(content, max_tokens)
+    return split_markdown_with_hierarchy(content, max_tokens, repeat_header=False)
 
 
 # ===========================================================================

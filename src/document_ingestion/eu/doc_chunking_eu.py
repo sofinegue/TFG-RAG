@@ -168,29 +168,25 @@ def get_text_split_eu(
 
         # ── PASO 5: Chunking ─────────────────────────────────────────
         timestamps.append(Timestamps("06 chunking"))
-        chunks = markdown_chunk_eu(full_content, 2000, 0.1, 1000, 5000)
-        lchunks = len(chunks)
+        chunk_data = markdown_chunk_eu(full_content, 2000, 0.1, 1000, 5000)
+        lchunks = len(chunk_data)
         print(f"  Generados {lchunks} chunks")
 
-        # ── PASO 6: Embedding + subida a Cosmos (PARALELIZADO) ────────
+        # ── PASO 6: Embedding + subida a Cosmos (PARALELIZADO) ────
         timestamps.append(Timestamps("07 uploadChunks"))
 
         # Detectar idioma más común
         top_lang = source_language
 
-        def _process_chunk(idx: int, chunk: str) -> str:
+        def _process_chunk(idx: int, chunk_item) -> str:
+            chunk, sections = chunk_item
             pages = re.findall(r"PG(\d+)", chunk)
             if pages:
                 page_range = f"{pages[0]}-{pages[-1]}" if pages[0] != pages[-1] else pages[0]
             else:
                 page_range = str(idx)
 
-            title = detect_title(chunk)
-            sections = (
-                detect_headers(chunk, 1)
-                + detect_headers(chunk, 2)
-                + detect_headers(chunk, 3)
-            )
+            title = detect_title(chunk) or (sections[-1] if sections else "")
 
             # Extraer tablas simples del chunk
             tables = re.findall(r"(\|(?:[^\n]*\|)+\n(?:\|[^\n]*\|)+)", chunk, re.MULTILINE)
@@ -215,7 +211,7 @@ def get_text_split_eu(
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {
                 executor.submit(_process_chunk, i, c): i
-                for i, c in enumerate(chunks, start=1)
+                for i, c in enumerate(chunk_data, start=1)
             }
             for future in as_completed(futures):
                 try:

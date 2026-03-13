@@ -400,23 +400,28 @@ def split_markdown_by_sections(content: str, max_tokens: int) -> List[str]:
     return result
 
 
-def split_markdown_with_hierarchy(content: str, max_tokens: int) -> List[Tuple[str, List[str]]]:
+def split_markdown_with_hierarchy(
+    content: str,
+    max_tokens: int,
+    repeat_header: bool = True,
+) -> List[Tuple[str, List[str]]]:
     """
-    Como split_markdown_by_sections, pero también devuelve la lista de encabezados
-    ancestros de cada chunk según la jerarquía del documento.
+    Divide Markdown en chunks con sección completa (ancestros + sección propia).
 
-    Ejemplo: para un h3 "Writing process" dentro del h2 "Process and methods",
-    devuelve (chunk_text, ["Process and methods"]).
+    Retorna List[Tuple[chunk_text, sections_list]] donde sections_list incluye
+    TODOS los niveles activos hasta el encabezado propio inclusive.
+
+    Parámetros:
+      repeat_header:  True  → el encabezado se repite al inicio de cada
+                             sub-chunk de continuación (útil para wiki, donde
+                             el embedding se beneficia del contexto de sección).
+                     False → los sub-chunks de continuación sólo contienen el
+                             cuerpo del texto; sección disponible en la tupla.
 
     Reglas:
-      - Los ancestros son los encabezados de nivel SUPERIOR al del chunk actual,
-        en orden del más genérico (h1) al más específico (inmediato superior).
-      - Las secciones vacías o de ruido no generan chunk, pero SÍ actualizan el
-        contexto de jerarquía para las secciones siguientes.
-      - Sub-chunks de continuación heredan los mismos ancestros.
-
-    Retorna:
-        list[tuple[str, list[str]]]: (texto_chunk, encabezados_ancestros).
+      - Secciones vacías o de ruido no generan chunk pero sí actualizan la
+        jerarquía para las secciones siguientes.
+      - Sub-chunks de continuación heredan el mismo sections_list.
     """
     positions = [m.start() for m in _MD_HEADER_RE.finditer(content)]
 
@@ -434,7 +439,7 @@ def split_markdown_with_hierarchy(content: str, max_tokens: int) -> List[Tuple[s
         result.extend((c, []) for c in dividir_por_frases(preamble, max_tokens))
 
     # Rastrea el encabezado más reciente de cada nivel (h1–h6)
-    active_ancestors: Dict[int, str] = {}
+    active_headers: Dict[int, str] = {}
 
     for i, start in enumerate(positions):
         end = positions[i + 1] if i + 1 < len(positions) else len(content)
@@ -451,21 +456,22 @@ def split_markdown_with_hierarchy(content: str, max_tokens: int) -> List[Tuple[s
         header_text = m.group(2).strip()
 
         # Registrar este nivel y limpiar los niveles subordinados
-        active_ancestors[level] = header_text
-        for deeper in [lvl for lvl in list(active_ancestors.keys()) if lvl > level]:
-            del active_ancestors[deeper]
+        active_headers[level] = header_text
+        for deeper in [lvl for lvl in list(active_headers.keys()) if lvl > level]:
+            del active_headers[deeper]
 
         # Aunque la sección esté vacía, seguimos actualizando la jerarquía
         if not body or not _tiene_contenido_real(body):
             continue
 
-        # Ancestros = niveles superiores al actual, orden h1 → padre inmediato
-        ancestors = [active_ancestors[lvl] for lvl in sorted(active_ancestors.keys()) if lvl < level]
+        # Sections completas: todos los niveles activos de h1 al propio
+        sections_list = [active_headers[lvl] for lvl in sorted(active_headers.keys())]
 
         sub_chunks = dividir_por_frases(section, max_tokens)
-        result.append((sub_chunks[0], ancestors))
+        result.append((sub_chunks[0], sections_list))
         for sub in sub_chunks[1:]:
-            result.append((header_line + "\n" + sub, ancestors))
+            chunk_text = (header_line + "\n" + sub) if repeat_header else sub
+            result.append((chunk_text, sections_list))
 
     return result
 
