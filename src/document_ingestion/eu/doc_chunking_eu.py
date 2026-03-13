@@ -168,7 +168,7 @@ def get_text_split_eu(
 
         # ── PASO 5: Chunking ─────────────────────────────────────────
         timestamps.append(Timestamps("06 chunking"))
-        chunks = markdown_chunk_eu(full_content, 2000, 0.1, 1000, 3000)
+        chunks = markdown_chunk_eu(full_content, 2000, 0.1, 1000, 5000)
         lchunks = len(chunks)
         print(f"  Generados {lchunks} chunks")
 
@@ -211,7 +211,7 @@ def get_text_split_eu(
             )
             return f"Chunk {idx}/{lchunks} OK"
 
-        max_workers = min(lchunks, config.max_workers_docs or 3)
+        max_workers = min(lchunks, config.max_workers_docs or 10)
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {
                 executor.submit(_process_chunk, i, c): i

@@ -10,7 +10,7 @@ import re
 import unicodedata
 from collections import Counter
 import tiktoken
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import os
 
 # Set Config Cosmos DB
@@ -238,6 +238,237 @@ def dividir_con_solapamiento(texto, longitud, solapamiento):
         if len(parte) < longitud:
             break  # No dividir más si la parte es más corta que la longitud solicitada
     return partes
+
+
+def dividir_por_frases(texto: str, max_tokens: int) -> List[str]:
+    """
+    Divide un texto en chunks sin superar max_tokens, respetando límites de frase.
+    Cuando necesita cortar, busca hacia atrás el último punto/signo de cierre de
+    oración para no cortar a mitad de frase. Como último recurso divide por palabras.
+    No solapa contenido entre chunks.
+
+    Parámetros:
+    texto (str): El texto a dividir.
+    max_tokens (int): Número máximo de tokens por chunk.
+
+    Retorna:
+    list: Lista de chunks resultantes.
+    """
+    if len(encoding.encode(texto)) <= max_tokens:
+        return [texto]
+
+    lineas = texto.split("\n")
+    chunks: List[str] = []
+    current_lines: List[str] = []
+    current_tokens = 0
+
+    def _flush_at(split_idx: int) -> None:
+        """Emite current_lines[:split_idx] como chunk; el resto queda como tail."""
+        nonlocal current_lines, current_tokens
+        if split_idx > 0:
+            chunks.append("\n".join(current_lines[:split_idx]))
+        tail = current_lines[split_idx:]
+        current_lines[:] = tail
+        current_tokens = sum(len(encoding.encode(l)) for l in current_lines)
+
+    for linea in lineas:
+        line_tokens = len(encoding.encode(linea))
+
+        if line_tokens > max_tokens:
+            # Línea individual demasiado larga: volcar lo actual y dividir por palabras
+            if current_lines:
+                _flush_at(len(current_lines))
+            palabras = linea.split(" ")
+            word_chunk: List[str] = []
+            word_tokens = 0
+            for palabra in palabras:
+                tok = len(encoding.encode(palabra))
+                if word_tokens + tok > max_tokens:
+                    if word_chunk:
+                        chunks.append(" ".join(word_chunk))
+                    word_chunk = [palabra]
+                    word_tokens = tok
+                else:
+                    word_chunk.append(palabra)
+                    word_tokens += tok
+            if word_chunk:
+                chunks.append(" ".join(word_chunk))
+
+        elif current_tokens + line_tokens > max_tokens:
+            # Busca hacia atrás el corte más cercano al final de oración
+            best_split = len(current_lines)  # fallback: cortar aquí
+            lookback_start = max(0, len(current_lines) - _LOOKBACK_MAX)
+            for i in range(len(current_lines) - 1, lookback_start - 1, -1):
+                if _SENTENCE_END_RE.search(current_lines[i]):
+                    best_split = i + 1
+                    break
+            _flush_at(best_split)
+            current_lines.append(linea)
+            current_tokens += line_tokens
+
+        else:
+            current_lines.append(linea)
+            current_tokens += line_tokens
+
+    if current_lines:
+        chunks.append("\n".join(current_lines))
+
+    return chunks if chunks else [texto]
+
+
+_HEADER_LINE_RE = re.compile(r"^\s*#{1,6}\s+\S")
+# Detecta final de oración: el último carácter visible es puntuación de cierre
+_SENTENCE_END_RE = re.compile(r'[.!?»\)]\s*$')
+# Máximo de líneas hacia atrás donde buscar un corte limpio de oración
+_LOOKBACK_MAX = 25
+
+
+def filtrar_splits_vacios(md_splits: List) -> List:
+    """
+    Descarta splits cuyo page_content sea solo líneas de encabezado Markdown
+    (secciones contenedoras sin texto propio). Compatible con strip_headers=False.
+    """
+    resultado = []
+    for split in md_splits:
+        lines = split.page_content.splitlines()
+        tiene_contenido = any(
+            line.strip() and not _HEADER_LINE_RE.match(line)
+            for line in lines
+        )
+        if tiene_contenido:
+            resultado.append(split)
+    return resultado
+
+
+# Regex para detectar líneas de encabezado Markdown (h1–h6) al inicio de línea
+_MD_HEADER_RE = re.compile(r'^#{1,6}\s+.+', re.MULTILINE)
+
+
+def _tiene_contenido_real(text: str, min_alpha: int = 50) -> bool:
+    """True si el texto tiene al menos min_alpha caracteres alfabéticos."""
+    return sum(1 for c in text if c.isalpha()) >= min_alpha
+
+
+def split_markdown_by_sections(content: str, max_tokens: int) -> List[str]:
+    """
+    Divide contenido Markdown en secciones usando regex sobre líneas de encabezado.
+    No depende de LangChain: evita el bug de duplicación de cabeceras.
+
+    Reglas:
+      - Cada sección = un encabezado (h1–h6) + su cuerpo de texto inmediato.
+      - Secciones vacías o sin contenido real (< 50 chars alfabéticos) se descartan.
+      - El preámbulo antes del primer encabezado se descarta si es puro ruido.
+      - Secciones largas se subdividen con dividir_por_frases; el encabezado se
+        repite al inicio de cada sub-chunk para preservar la metadata de sección.
+
+    Retorna:
+        list[str]: chunks listos para embedding.
+    """
+    positions = [m.start() for m in _MD_HEADER_RE.finditer(content)]
+
+    if not positions:
+        stripped = content.strip()
+        if stripped and _tiene_contenido_real(stripped):
+            return dividir_por_frases(stripped, max_tokens)
+        return []
+
+    result: List[str] = []
+
+    # Preámbulo antes del primer encabezado: solo si tiene contenido real
+    preamble = content[:positions[0]].strip()
+    if preamble and _tiene_contenido_real(preamble):
+        result.extend(dividir_por_frases(preamble, max_tokens))
+
+    for i, start in enumerate(positions):
+        end = positions[i + 1] if i + 1 < len(positions) else len(content)
+        section = content[start:end].strip()
+
+        lines = section.splitlines()
+        header_line = lines[0]  # La primera línea es siempre el encabezado
+        body = "\n".join(lines[1:]).strip()
+
+        if not body or not _tiene_contenido_real(body):
+            continue  # Sección vacía o de ruido: descartar
+
+        sub_chunks = dividir_por_frases(section, max_tokens)
+        result.append(sub_chunks[0])
+        for sub in sub_chunks[1:]:
+            # Repetir el encabezado en sub-chunks de continuación para que
+            # detect_headers/detect_sections extraigan la sección correctamente
+            result.append(header_line + "\n" + sub)
+
+    return result
+
+
+def split_markdown_with_hierarchy(content: str, max_tokens: int) -> List[Tuple[str, List[str]]]:
+    """
+    Como split_markdown_by_sections, pero también devuelve la lista de encabezados
+    ancestros de cada chunk según la jerarquía del documento.
+
+    Ejemplo: para un h3 "Writing process" dentro del h2 "Process and methods",
+    devuelve (chunk_text, ["Process and methods"]).
+
+    Reglas:
+      - Los ancestros son los encabezados de nivel SUPERIOR al del chunk actual,
+        en orden del más genérico (h1) al más específico (inmediato superior).
+      - Las secciones vacías o de ruido no generan chunk, pero SÍ actualizan el
+        contexto de jerarquía para las secciones siguientes.
+      - Sub-chunks de continuación heredan los mismos ancestros.
+
+    Retorna:
+        list[tuple[str, list[str]]]: (texto_chunk, encabezados_ancestros).
+    """
+    positions = [m.start() for m in _MD_HEADER_RE.finditer(content)]
+
+    if not positions:
+        stripped = content.strip()
+        if stripped and _tiene_contenido_real(stripped):
+            return [(c, []) for c in dividir_por_frases(stripped, max_tokens)]
+        return []
+
+    result: List[Tuple[str, List[str]]] = []
+
+    # Preámbulo antes del primer encabezado
+    preamble = content[:positions[0]].strip()
+    if preamble and _tiene_contenido_real(preamble):
+        result.extend((c, []) for c in dividir_por_frases(preamble, max_tokens))
+
+    # Rastrea el encabezado más reciente de cada nivel (h1–h6)
+    active_ancestors: Dict[int, str] = {}
+
+    for i, start in enumerate(positions):
+        end = positions[i + 1] if i + 1 < len(positions) else len(content)
+        section = content[start:end].strip()
+
+        lines = section.splitlines()
+        header_line = lines[0]
+        body = "\n".join(lines[1:]).strip()
+
+        m = re.match(r'^(#{1,6})\s+(.+)', header_line)
+        if not m:
+            continue
+        level = len(m.group(1))
+        header_text = m.group(2).strip()
+
+        # Registrar este nivel y limpiar los niveles subordinados
+        active_ancestors[level] = header_text
+        for deeper in [lvl for lvl in list(active_ancestors.keys()) if lvl > level]:
+            del active_ancestors[deeper]
+
+        # Aunque la sección esté vacía, seguimos actualizando la jerarquía
+        if not body or not _tiene_contenido_real(body):
+            continue
+
+        # Ancestros = niveles superiores al actual, orden h1 → padre inmediato
+        ancestors = [active_ancestors[lvl] for lvl in sorted(active_ancestors.keys()) if lvl < level]
+
+        sub_chunks = dividir_por_frases(section, max_tokens)
+        result.append((sub_chunks[0], ancestors))
+        for sub in sub_chunks[1:]:
+            result.append((header_line + "\n" + sub, ancestors))
+
+    return result
+
 
 # ==============================================================================
 # A partir de aquí no lo usamos, pero lo dejo por si ayuda a chunkear mejor eu

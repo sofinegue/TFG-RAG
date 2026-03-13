@@ -133,16 +133,19 @@ def get_text_split_wiki(
         # ── PASO 4: Convertir a Markdown y dividir en chunks ─────────
         timestamps.append(Timestamps("05 chunking"))
         markdown_text = wiki_text_to_markdown(article.text)
-        chunks = markdown_chunk_wiki(markdown_text, 2000, 0.1, 800, 3000)
-        lchunks = len(chunks)
+        chunk_data = markdown_chunk_wiki(markdown_text, 2000, 0.1, 800, 3000)
+        lchunks = len(chunk_data)
         print(f"  Generados {lchunks} chunks")
 
         # ── PASO 5: Embedding + subida a Cosmos (PARALELIZADO) ───────
         timestamps.append(Timestamps("06 uploadChunks"))
 
-        def _process_chunk(idx: int, chunk: str) -> str:
+        def _process_chunk(idx: int, chunk_item) -> str:
+            chunk, ancestors = chunk_item
             title = detect_title(chunk) or f"{article.title} — Chunk {idx}"
-            sections = detect_sections(chunk)
+            # Sections = ancestros (h2, h1…) + encabezados propios del chunk (h3…)
+            # dict.fromkeys preserva orden y elimina duplicados
+            sections = list(dict.fromkeys(ancestors + detect_sections(chunk)))
 
             upload_chunk_wiki(
                 index=idx,
@@ -162,7 +165,7 @@ def get_text_split_wiki(
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {
                 executor.submit(_process_chunk, i, c): i
-                for i, c in enumerate(chunks, start=1)
+                for i, c in enumerate(chunk_data, start=1)
             }
             for future in as_completed(futures):
                 try:

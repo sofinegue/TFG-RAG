@@ -40,14 +40,14 @@ import re
 import uuid
 import tiktoken
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
-from langchain_text_splitters import MarkdownHeaderTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter  # conservado como referencia, no usado en chunking
 
 from src.config import config
 from src.services.openai_service import get_embedding
 from src.services.cosmos_service import upload_doc_cosmos
-from src.document_ingestion.processchunks import mark_existing_chunks_as_deleted
+from src.document_ingestion.processchunks import split_markdown_with_hierarchy, mark_existing_chunks_as_deleted
 
 # Tokenizador
 encoding = tiktoken.encoding_for_model(config.azure_openai_emb_name)
@@ -122,54 +122,17 @@ def markdown_chunk_wiki(
     overlap_pct: float = 0.1,
     min_tokens: int = 800,
     max_tokens: int = 3000,
-) -> List[str]:
-    """Divide contenido Markdown de Wikipedia en chunks."""
-    headers_to_split_on = [
-        ("#", "Header 1"),
-        ("##", "Header 2"),
-        ("###", "Header 3"),
-        ("####", "Header 4"),
-        ("#####", "Header 5"),
-    ]
+) -> List[Tuple[str, List[str]]]:
+    """Divide contenido Markdown de Wikipedia en chunks con jerarquía de secciones.
 
-    splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on, strip_headers=False,
-    )
-    md_splits = splitter.split_text(content)
+    Retorna List[Tuple[str, List[str]]]: cada elemento es
+      (texto_del_chunk, lista_de_encabezados_ancestros).
 
-    # Fusionar fragmentos pequeños
-    combined: List[str] = []
-    buf = ""
-    for split in md_splits:
-        tokens = len(encoding.encode(split.page_content))
-        if tokens <= min_tokens:
-            buf += split.page_content + " \n "
-            if len(encoding.encode(buf)) > min_tokens:
-                combined.append(buf)
-                buf = ""
-        else:
-            if buf:
-                combined.append(buf)
-                buf = ""
-            combined.append(split.page_content)
-    if buf:
-        combined.append(buf)
-
-    # Subdividir chunks demasiado grandes
-    final: List[str] = []
-    for chunk in combined:
-        tcount = len(encoding.encode(chunk))
-        if tcount > 4000:
-            overlap = int(chunk_size * overlap_pct)
-            for i in range(0, len(chunk), chunk_size - overlap):
-                part = chunk[i : i + chunk_size]
-                final.append(part)
-                if len(part) < chunk_size:
-                    break
-        else:
-            final.append(chunk)
-
-    return final
+    Los encabezados ancestros son los títulos de sección de nivel superior al del
+    propio chunk. El llamador debe combinarlos con los encabezados propios del chunk
+    para construir el campo Sections completo.
+    """
+    return split_markdown_with_hierarchy(content, max_tokens)
 
 
 # ===========================================================================
@@ -177,13 +140,13 @@ def markdown_chunk_wiki(
 # ===========================================================================
 
 def detect_sections(content: str) -> List[str]:
-    """Extrae encabezados Markdown del chunk."""
+    """Extrae encabezados Markdown del chunk, sin duplicados."""
     headers = []
     for level in range(1, 6):
         pattern = r"^\s*{}(?!#)(.+)".format("#" * level)
         matches = re.findall(pattern, content, re.MULTILINE)
         headers.extend(h.strip() for h in matches)
-    return headers
+    return list(dict.fromkeys(headers))  # deduplicar preservando orden
 
 
 def detect_title(content: str) -> str:
@@ -213,7 +176,7 @@ def upload_chunk_wiki(
         safe_id = re.sub(r"[^a-zA-Z0-9_\-=]", "-", raw_id)
 
         token_count = len(encoding.encode(content))
-        chunkid = _generate_chunk_id(blob_name, content, title, str(index))
+        chunkid = _generate_chunk_id(blob_name, index)
 
         paragraph_data = {
             "id": safe_id,
@@ -231,7 +194,6 @@ def upload_chunk_wiki(
             "Content_length": token_count,
             "isCreated": datetime.now().isoformat(),
             "Pages": str(index),
-            "Title": title or f"{article.title} — Chunk {index}",
             "Sections": sections,
             "nChunk": index,
             "isDeleted": False,
@@ -274,6 +236,7 @@ def mark_existing_chunks_as_deleted_wiki(doc_title: str) -> int:
 # Helpers internos
 # ===========================================================================
 
-def _generate_chunk_id(doctitle: str, content: str, title: str, page: str) -> str:
-    raw = (doctitle + content + (title or "") + (page or "")).encode("utf-8")
-    return hashlib.sha256(raw).hexdigest()
+def _generate_chunk_id(blob_name: str, index: int) -> str:
+    """Genera un chunkId único en toda la BD: chunk{índice:04d}-{hash8 del documento}."""
+    doc_hash = hashlib.sha256(blob_name.encode("utf-8")).hexdigest()[:8]
+    return f"chunk{index:04d}-{doc_hash}"

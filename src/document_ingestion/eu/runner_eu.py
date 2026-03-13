@@ -7,9 +7,10 @@ Ejecuta el chunking sobre todos los PDFs de EUR-Lex almacenados en Blob Storage
 bajo ``data/eu/<language>/`` y los sube a Cosmos DB (Chunks-EU).
 
 Uso:
-    python -m src.document_ingestion.eu.runner_eu                  # todos los idiomas
-    python -m src.document_ingestion.eu.runner_eu --language en     # solo inglés
-    python -m src.document_ingestion.eu.runner_eu --language es     # solo español
+    python -m src.document_ingestion.eu.runner_eu                          # todos los idiomas
+    python -m src.document_ingestion.eu.runner_eu --language en             # solo inglés
+    python -m src.document_ingestion.eu.runner_eu --file legislation_2001.pdf --language en
+    python -m src.document_ingestion.eu.runner_eu --file data/eu/en/legislation_2001.pdf
 """
 from __future__ import annotations
 
@@ -157,6 +158,65 @@ def main(language: Optional[str] = None) -> None:
             run_eu_chunking(lang)
 
 
+def run_single_eu(file: str, language: Optional[str] = None) -> None:
+    """Procesa un único PDF EU dado su nombre o ruta de blob.
+
+    Parámetros
+    ----------
+    file :
+        Ruta completa del blob (``data/eu/en/legislation_2001.pdf``) o solo
+        el nombre del fichero (``legislation_2001.pdf``).  En este último caso
+        se requiere ``language``.
+    language :
+        Idioma (``en``, ``es``…).  Solo necesario si ``file`` no es una ruta
+        completa.
+    """
+    file = file.replace("\\", "/")
+
+    # Resolver ruta completa
+    if file.startswith("data/eu/"):
+        blob_path = file
+        parts = blob_path.split("/")
+        lang = parts[2] if len(parts) > 2 else (language or "en")
+    else:
+        if not language:
+            raise ValueError(
+                "--language es obligatorio cuando --file es solo un nombre de fichero."
+            )
+        lang = language.strip().lower()
+        fname = file if file.lower().endswith(".pdf") else file + ".pdf"
+        blob_path = f"{BLOB_EU_PREFIX}{lang}/{fname}"
+
+    session_id = _generate_session_id(lang)
+    short_name = blob_path.replace(BLOB_EU_PREFIX, "")
+
+    print(f"\n{'=' * 60}")
+    print(f"  CHUNKING EU — documento único")
+    print(f"  Blob path  : {blob_path}")
+    print(f"  Session ID : {session_id}")
+    print(f"{'=' * 60}")
+
+    doc_entity = DocEntity(
+        id=str(uuid.uuid4()),
+        doc_id=blob_path,
+        doc_nombre=short_name,
+        id_caso=f"eu-{lang}",
+        usuario="runner",
+        equipo="eu",
+        source_collection="eu",
+        language=lang,
+    ).model_dump(exclude_none=True)
+
+    get_text_split_eu(
+        docId=blob_path,
+        SessionId=session_id,
+        doc_entity=doc_entity,
+        CDU="DOCPROCESS",
+    )
+    print(f"\n  ✓ {short_name} procesado correctamente.")
+    print(f"{'=' * 60}\n")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Chunking de EU PDFs desde Azure Blob Storage → Cosmos DB",
@@ -167,5 +227,18 @@ if __name__ == "__main__":
         default=None,
         help="Idioma a procesar (en, es, fr, pt, it). Si no se indica, procesa todos.",
     )
+    parser.add_argument(
+        "--file",
+        type=str,
+        default=None,
+        help=(
+            "Procesa un único fichero. Acepta ruta completa de blob "
+            "(data/eu/en/doc.pdf) o solo el nombre (doc.pdf) junto con --language."
+        ),
+    )
     args = parser.parse_args()
-    main(language=args.language)
+
+    if args.file:
+        run_single_eu(args.file, language=args.language)
+    else:
+        main(language=args.language)

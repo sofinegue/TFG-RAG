@@ -227,7 +227,7 @@ def get_text_split_cv(
             # Construir documento Cosmos
             paragraph_data = {
                 "id": _safe_cosmos_id(),
-                "chunkId": _generate_chunk_id(display_name, chunk_type, chunk_idx),
+                "chunkId": _generate_chunk_id(display_name, chunk_idx),
                 "docTitle": display_name,
                 "sourcePath": docId,
                 "sourceCollection": "cvs",
@@ -303,10 +303,10 @@ def get_text_split_cv(
 # Helpers internos
 # ===========================================================================
 
-def _generate_chunk_id(blob_name: str, chunk_type: str, chunk_index: int) -> str:
-    """Genera un chunkId determinista basado en blob + tipo + índice."""
-    raw = f"{blob_name}|{chunk_type}|{chunk_index}"
-    return hashlib.md5(raw.encode("utf-8")).hexdigest()
+def _generate_chunk_id(blob_name: str, chunk_index: int) -> str:
+    """Genera un chunkId único en toda la BD: chunk{índice:04d}-{hash8 del documento}."""
+    doc_hash = hashlib.sha256(blob_name.encode("utf-8")).hexdigest()[:8]
+    return f"chunk{chunk_index:04d}-{doc_hash}"
 
 
 def _safe_cosmos_id() -> str:

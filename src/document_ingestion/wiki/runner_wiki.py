@@ -8,9 +8,10 @@ Blob Storage bajo ``data/wikipedia/<language>/json/`` y los sube a
 Cosmos DB (Chunks-Wiki).
 
 Uso:
-    python -m src.document_ingestion.wiki.runner_wiki                  # todos los idiomas
-    python -m src.document_ingestion.wiki.runner_wiki --language es     # solo español
-    python -m src.document_ingestion.wiki.runner_wiki --language en     # solo inglés
+    python -m src.document_ingestion.wiki.runner_wiki                          # todos los idiomas
+    python -m src.document_ingestion.wiki.runner_wiki --language es             # solo español
+    python -m src.document_ingestion.wiki.runner_wiki --file Writer.json --language en
+    python -m src.document_ingestion.wiki.runner_wiki --file data/wikipedia/en/json/Writer.json
 """
 from __future__ import annotations
 
@@ -139,6 +140,65 @@ def main(language: Optional[str] = None) -> None:
             run_wiki_chunking(lang)
 
 
+def run_single_wiki(file: str, language: Optional[str] = None) -> None:
+    """Procesa un único artículo Wikipedia dado su nombre o ruta de blob.
+
+    Parámetros
+    ----------
+    file :
+        Ruta completa del blob (``data/wikipedia/en/json/Writer.json``) o el
+        nombre/título del artículo (``Writer`` o ``Writer.json``).  En este
+        último caso se requiere ``language``.
+    language :
+        Idioma (``en``, ``es``).  Solo necesario si ``file`` no es una ruta
+        completa.
+    """
+    file = file.replace("\\", "/")
+
+    # Resolver ruta completa
+    if file.startswith("data/wikipedia/"):
+        blob_path = file
+        parts = blob_path.split("/")
+        lang = parts[2] if len(parts) > 2 else (language or "en")
+    else:
+        if not language:
+            raise ValueError(
+                "--language es obligatorio cuando --file es solo un nombre de fichero."
+            )
+        lang = language.strip().lower()
+        fname = file if file.lower().endswith(".json") else file + ".json"
+        blob_path = f"{BLOB_WIKI_PREFIX}{lang}/json/{fname}"
+
+    session_id = _generate_session_id(lang)
+    short_name = blob_path.replace(BLOB_WIKI_PREFIX, "")
+
+    print(f"\n{'=' * 60}")
+    print(f"  CHUNKING WIKI — documento único")
+    print(f"  Blob path  : {blob_path}")
+    print(f"  Session ID : {session_id}")
+    print(f"{'=' * 60}")
+
+    doc_entity = DocEntity(
+        id=str(uuid.uuid4()),
+        doc_id=blob_path,
+        doc_nombre=short_name,
+        id_caso=f"wiki-{lang}",
+        usuario="runner",
+        equipo="wikipedia",
+        source_collection="wikipedia",
+        language=lang,
+    ).model_dump(exclude_none=True)
+
+    get_text_split_wiki(
+        docId=blob_path,
+        SessionId=session_id,
+        doc_entity=doc_entity,
+        CDU="DOCPROCESS",
+    )
+    print(f"\n  ✓ {short_name} procesado correctamente.")
+    print(f"{'=' * 60}\n")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Chunking de Wikipedia desde Azure Blob Storage → Cosmos DB",
@@ -149,5 +209,19 @@ if __name__ == "__main__":
         default=None,
         help="Idioma a procesar (es, en). Si no se indica, procesa todos.",
     )
+    parser.add_argument(
+        "--file",
+        type=str,
+        default=None,
+        help=(
+            "Procesa un único artículo. Acepta ruta completa de blob "
+            "(data/wikipedia/en/json/Writer.json) o solo el nombre/título "
+            "(Writer o Writer.json) junto con --language."
+        ),
+    )
     args = parser.parse_args()
-    main(language=args.language)
+
+    if args.file:
+        run_single_wiki(args.file, language=args.language)
+    else:
+        main(language=args.language)

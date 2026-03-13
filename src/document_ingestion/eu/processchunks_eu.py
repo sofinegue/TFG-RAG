@@ -41,14 +41,13 @@ from collections import Counter
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from langchain_text_splitters import MarkdownHeaderTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter  # usado en pruebas / comentado
 
 from src.config import config
 from src.services.openai_service import get_embedding
 from src.services.cosmos_service import upload_doc_cosmos
 from src.document_ingestion.processchunks import (
-    combinar_splits_tablas, 
-    dividir_si_excede_max_tokens,
+    split_markdown_by_sections,
     mark_existing_chunks_as_deleted
 )
 
@@ -73,55 +72,16 @@ def markdown_chunk_eu(
     chunk_size: int = 2000,
     overlap_pct: float = 0.1,
     min_tokens: int = 1000,
-    max_tokens: int = 4000,
+    max_tokens: int = 8000,
 ) -> List[str]:
-    """Divide contenido Markdown en chunks respetando encabezados y tablas.
+    """Divide contenido Markdown en chunks respetando encabezados (h1–h6).
 
-    Réplica completa de ``processchunks.markdown_percentage`` adaptada para EU:
-    fusiona fragmentos pequeños, combina splits con tablas cercanas y solo
-    subdivide cuando un chunk supera max_tokens.
+    Usa un splitter regex propio (split_markdown_by_sections) que:
+      - Produce exactamente 1 encabezado por chunk.
+      - Descarta secciones vacías.
+      - Subdivide con dividir_por_frases si la sección supera max_tokens.
     """
-    headers_to_split_on = [
-        ("#", "Header 1"),
-        ("##", "Header 2"),
-        ("###", "Header 3"),
-        ("####", "Header 4"),
-        ("#####", "Header 5"),
-    ]
-
-    splitter = MarkdownHeaderTextSplitter(
-        headers_to_split_on=headers_to_split_on, strip_headers=False,
-    )
-    md_splits = splitter.split_text(content)
-
-    # Fusionar fragmentos pequeños
-    combined: List[str] = []
-    buf = ""
-    for split in md_splits:
-        tokens = len(encoding.encode(split.page_content))
-        if tokens <= min_tokens:
-            buf += split.page_content + " \n "
-            if len(encoding.encode(buf)) > min_tokens:
-                combined.append(buf)
-                buf = ""
-        else:
-            if buf:
-                combined.append(buf)
-                buf = ""
-            combined.append(split.page_content)
-    if buf:
-        combined.append(buf)
-
-    # Combinar splits con tablas cercanas antes de subdividir
-    combined = combinar_splits_tablas(combined, max_tokens)
-
-    # Subdividir solo si excede max_tokens, con lógica de tablas
-    final: List[str] = []
-    for chunk in combined:
-        sub = dividir_si_excede_max_tokens(chunk, max_tokens, chunk_size, overlap_pct)
-        final.extend(sub)
-
-    return final
+    return split_markdown_by_sections(content, max_tokens)
 
 
 # ===========================================================================
@@ -248,7 +208,7 @@ def upload_chunk_eu(
         content_clean = re.sub(r"PG\d+", "", content, flags=re.DOTALL).strip()
         embedding_content = content_clean.replace(":selected:", "").replace(":unselected:", "")
 
-        chunkid = _generate_chunk_id(blob_name, content_clean, title, page_range)
+        chunkid = _generate_chunk_id(blob_name, index)
         token_count = len(encoding.encode(content_clean))
         doc_type = detect_doc_type(blob_name)
 
@@ -266,7 +226,6 @@ def upload_chunk_eu(
             "Content_length": token_count,
             "isCreated": datetime.now().isoformat(),
             "Pages": page_range,
-            "Title": title,
             "Sections": sections,
             "nChunk": index,
             "isDeleted": False,
@@ -294,6 +253,17 @@ def upload_chunk_eu(
 # Helpers internos
 # ===========================================================================
 
-def _generate_chunk_id(doctitle: str, content: str, title: str, page: str) -> str:
-    raw = (doctitle + content + (title or "") + (page or "")).encode("utf-8")
-    return hashlib.sha256(raw).hexdigest()
+def _generate_chunk_id(blob_name: str, index: int) -> str:
+    """Genera un chunkId único en toda la BD: chunk{índice:04d}-{hash8 del documento}."""
+    doc_hash = hashlib.sha256(blob_name.encode("utf-8")).hexdigest()[:8]
+    return f"chunk{index:04d}-{doc_hash}"
+
+
+def mark_existing_chunks_as_deleted_eu(doc_title: str) -> int:
+    return mark_existing_chunks_as_deleted(
+        doc_title=doc_title,
+        cosmos_endpoint=cosmosendpoint,
+        cosmos_key=cosmoskey,
+        db_name=dbname,
+        container_name=containerdbname,
+    )
