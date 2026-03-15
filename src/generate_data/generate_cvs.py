@@ -7,6 +7,8 @@ Utiliza plantillas de datos (nombres, apellidos, puestos, habilidades, etc.) par
 
 import json
 import random
+# import traceback
+
 from pathlib import Path
 
 from src.generate_data.cv_dataloader import CVDataLoader
@@ -160,21 +162,21 @@ def main():
         with open(filename_en, "w", encoding="utf-8") as f:
             json.dump(cv_en, f, ensure_ascii=False, indent=2)
         
-        if i % 50 == 0:
-            print(f"Generated {i}/{NUM_CVS} CVs in both languages...")
+        # if i % 50 == 0:
+        #     print(f"Generated {i}/{NUM_CVS} CVs in both languages...")
     
     print(f"\nGeneration completed! {NUM_CVS} CVs saved in both languages:")
     print(f"   Spanish: {OUTPUT_DIR_ES.absolute()}")
     print(f"   English: {OUTPUT_DIR_EN.absolute()}")
     
-    # Statistics
-    print("\nStatistics:")
-    total_size_es = sum(f.stat().st_size for f in OUTPUT_DIR_ES.glob("cv_*.json"))
-    total_size_en = sum(f.stat().st_size for f in OUTPUT_DIR_EN.glob("cv_*.json"))
-    print(f"   Spanish CVs total size: {total_size_es / 1024:.2f} KB")
-    print(f"   Spanish CVs average: {total_size_es / NUM_CVS / 1024:.2f} KB per CV")
-    print(f"   English CVs total size: {total_size_en / 1024:.2f} KB")
-    print(f"   English CVs average: {total_size_en / NUM_CVS / 1024:.2f} KB per CV")
+    # # Statistics
+    # print("\nStatistics:")
+    # total_size_es = sum(f.stat().st_size for f in OUTPUT_DIR_ES.glob("cv_*.json"))
+    # total_size_en = sum(f.stat().st_size for f in OUTPUT_DIR_EN.glob("cv_*.json"))
+    # print(f"   Spanish CVs total size: {total_size_es / 1024:.2f} KB")
+    # print(f"   Spanish CVs average: {total_size_es / NUM_CVS / 1024:.2f} KB per CV")
+    # print(f"   English CVs total size: {total_size_en / 1024:.2f} KB")
+    # print(f"   English CVs average: {total_size_en / NUM_CVS / 1024:.2f} KB per CV")
 
 # Por si en algún momento se necesita quitar espacios de las claves
 def normalize_keys(obj):
@@ -194,10 +196,9 @@ def normalize_keys(obj):
 
 
 
-if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"\nError during generation: {e}")
-        import traceback
-        traceback.print_exc()
+# if __name__ == "__main__":
+#     try:
+#         main()
+#     except Exception as e:
+#         print(f"\nError during generation: {e}")
+#         traceback.print_exc()

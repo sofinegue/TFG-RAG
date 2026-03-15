@@ -9,7 +9,6 @@ import requests
 import time
 import json
 from pathlib import Path
-import socket
 import urllib3
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
@@ -21,6 +20,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 LANGUAGES = ["en", "es"]
 MAX_PAGES_PER_LANGUAGE = 1000  # tamaño medio
+CLLIMIT = 20
 SLEEP_TIME = 0.5
 
 BASE_DIR = Path("data/wikipedia")
@@ -29,7 +29,6 @@ HEADERS = {
     "User-Agent": "TFG-RAG-Wikipedia-Dataset/1.0 (Academic use)"
 }
 
-# Categorías CANÓNICAS por idioma
 CATEGORIES = {
     "en": [
         "Category:Literature",
@@ -78,10 +77,6 @@ def wikipedia_api(lang, params):
     response.raise_for_status()
     return response.json()
 
-# =========================
-# DESCUBRIR PÁGINAS
-# =========================
-
 def get_pages_from_category(lang, category, limit=500):
     pages = []
     cont = None
@@ -109,17 +104,13 @@ def get_pages_from_category(lang, category, limit=500):
 
     return pages[:limit]
 
-# =========================
-# DESCARGAR CONTENIDO
-# =========================
-
 def get_page_content(lang, pageid):
     params = {
         "action": "query",
         "pageids": pageid,
         "prop": "extracts|categories",
         "explaintext": True,
-        "cllimit": 20
+        "cllimit": CLLIMIT
     }
     data = wikipedia_api(lang, params)
     page = next(iter(data["query"]["pages"].values()))
@@ -141,10 +132,6 @@ def get_page_content(lang, pageid):
         "contenido": page["extract"],
         "fecha_descarga": time.strftime('%Y-%m-%dT%H:%M:%SZ')
     }
-
-# =========================
-# GUARDAR ARCHIVOS
-# =========================
 
 def save_document(lang, doc):
     json_dir = BASE_DIR / lang / "json"
@@ -190,7 +177,7 @@ def main():
             if len(collected) >= target:
                 break
 
-            print(f"[*] Categoría: {category}")
+            # print(f"[*] Categoría: {category}")
             pages = get_pages_from_category(
                 lang,
                 category,
@@ -203,20 +190,22 @@ def main():
 
                 doc = get_page_content(lang, page["pageid"])
                 if not doc:
+                    print(f"[KO] {page['title']}")
                     continue
 
                 save_document(lang, doc)
                 collected[page["pageid"]] = doc["titulo"]
 
                 # print(f"[OK] {doc['titulo']}")
+                # print(f"[OK] {doc['titulo']}")
                 time.sleep(SLEEP_TIME)
 
                 if len(collected) >= target:
                     break
 
-        print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
+        # print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
 
-    print("\n[*] Dataset completado correctamente.")
+    # print("\n[*] Dataset completado correctamente.")
 
 
 # if __name__ == "__main__":
