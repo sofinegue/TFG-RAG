@@ -270,7 +270,7 @@ if __name__ == "__main__":
     print("CREANDO INFRAESTRUCTURA AZURE SEARCH — CVs")
     print("=" * 70 + "\n")
 
-    # create_search_index()
+    create_search_index()
 
     # Descomentar cuando estés listo para crear el indexer
     create_indexer()

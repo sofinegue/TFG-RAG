@@ -295,13 +295,31 @@ def dividir_por_frases(texto: str, max_tokens: int) -> List[str]:
                 chunks.append(" ".join(word_chunk))
 
         elif current_tokens + line_tokens > max_tokens:
-            # Busca hacia atrás el corte más cercano al final de oración
             best_split = len(current_lines)  # fallback: cortar aquí
             lookback_start = max(0, len(current_lines) - _LOOKBACK_MAX)
+
+            # Prioridad 1: línea en blanco → límite de párrafo (corte más limpio)
+            found_blank = False
             for i in range(len(current_lines) - 1, lookback_start - 1, -1):
-                if _SENTENCE_END_RE.search(current_lines[i]):
+                if current_lines[i].strip() == "":
                     best_split = i + 1
+                    found_blank = True
                     break
+
+            # Prioridad 2: final de oración (fallback cuando no hay línea en blanco cercana)
+            if not found_blank:
+                for i in range(len(current_lines) - 1, lookback_start - 1, -1):
+                    if _SENTENCE_END_RE.search(current_lines[i]):
+                        best_split = i + 1
+                        break
+
+            # Absorber referencias cortas «(43)» que quedan justo tras el corte
+            # y pertenecen a la frase anterior (evitar dejarlas huérfanas al inicio
+            # del chunk siguiente)
+            while (best_split < len(current_lines)
+                   and re.match(r'^\s*\(\d+\)\s*$', current_lines[best_split])):
+                best_split += 1
+
             _flush_at(best_split)
             current_lines.append(linea)
             current_tokens += line_tokens
@@ -317,8 +335,11 @@ def dividir_por_frases(texto: str, max_tokens: int) -> List[str]:
 
 
 _HEADER_LINE_RE = re.compile(r"^\s*#{1,6}\s+\S")
-# Detecta final de oración: el último carácter visible es puntuación de cierre
-_SENTENCE_END_RE = re.compile(r'[.!?»\)]\s*$')
+# Detecta final de oración: el último carácter visible es puntuación de cierre.
+# NOTA: ')' excluido deliberadamente — en textos legales EU las líneas acaban
+# con ')' por referencias «Reglamento (UE)» o etiquetas «a)», «b)» que NO son
+# fin de frase; incluirlo producía cortes en mitad de oración.
+_SENTENCE_END_RE = re.compile(r'[.!?]\s*$')
 # Máximo de líneas hacia atrás donde buscar un corte limpio de oración
 _LOOKBACK_MAX = 25
 

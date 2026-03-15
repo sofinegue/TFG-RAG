@@ -282,7 +282,7 @@ if __name__ == "__main__":
     create_search_index()
 
     # Descomentar cuando estés listo para crear el indexer
-    # create_indexer()
+    create_indexer()
 
     print("\n" + "=" * 70)
     print("COMPLETADO")
