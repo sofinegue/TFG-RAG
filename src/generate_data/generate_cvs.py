@@ -1,3 +1,10 @@
+"""
+src.generate_data.generate_cvs
+
+Módulo para generar CVs sintéticos en formato JSON, en español e inglés.
+Utiliza plantillas de datos (nombres, apellidos, puestos, habilidades, etc.) para crear CVs realistas, con lógica de generación que preserva relaciones entre experiencia, formación y habilidades. Guarda los CVs en archivos JSON organizados por idioma.
+"""
+
 import json
 import random
 # import traceback
@@ -170,6 +177,23 @@ def main():
     # print(f"   Spanish CVs average: {total_size_es / NUM_CVS / 1024:.2f} KB per CV")
     # print(f"   English CVs total size: {total_size_en / 1024:.2f} KB")
     # print(f"   English CVs average: {total_size_en / NUM_CVS / 1024:.2f} KB per CV")
+
+# Por si en algún momento se necesita quitar espacios de las claves
+def normalize_keys(obj):
+    if isinstance(obj, dict):
+        new = {}
+        for k, v in obj.items():
+            new_key = k.replace(" ", "_").lower()
+            new[new_key] = normalize_keys(v)
+        return new
+    if isinstance(obj, list):
+        return [normalize_keys(x) for x in obj]
+    return obj
+
+# Uso:
+# data = json.load(f)
+# data = normalize_keys(data)
+
 
 
 # if __name__ == "__main__":

@@ -1,0 +1,110 @@
+=== EXPERIENCIA ===
+id: Identificador único del documento en la base de datos. 
+chunkId: Identificador del fragmento (chunk) específico dentro del documento procesado. 
+docTitle: Título del documento original o referencia interna al archivo fuente. 
+sourcePath: Ruta completa dentro del sistema de archivos donde se ubica el documento original. sourceCollection: Nombre de la colección o categoría a la que pertenece el documento. 
+sourceLanguage: Idioma del documento de origen. 
+content: Contenido textual del fragmento, generalmente extraído del CV o documento. 
+chunk_type: Tipo de fragmento (ej. experiencia, educación, skills). 
+nombre_apellidos: Nombre y apellidos del candidato extraídos del contenido. 
+puesto: Puesto o cargo profesional de la persona. 
+QuestionsText: Campo destinado para preguntas generadas; vacío en este caso.
+docSummary: Resumen del documento (si existe procesamiento previo).
+Content_length: Longitud del contenido en caracteres o tokens.
+isCreated: Timestamp ISO de creación del registro.
+Pages: Número de páginas de origen del documento.
+Title: Título amigable o generado para el fragmento.
+Sections: Lista de secciones del CV identificadas en el fragmento.
+nChunk: Número de fragmento (chunk) dentro del documento completo.
+isDeleted: Indica si el documento está marcado como eliminado.
+topLanguage: Idioma dominante detectado en el contenido.
+Tables: Lista de tablas detectadas en el documento.
+Formulas: Lista de fórmulas presentes.
+embedding: Vector numérico de representación semántica generado por un modelo de IA.
+metadata: Objeto con metadatos estructurados (chunk_type, nombre_apellidos, puesto, experiencia, otros, cv_id, chunk_index, language, skill_domains, years_of_experience).
+_rid: Identificador interno del recurso en Cosmos DB.
+_self: URI interno del documento dentro del contenedor en Cosmos DB.
+_etag: Identificador de control de versiones para concurrencia.
+_attachments: Ruta a los archivos adjuntos asociados.
+_ts: Timestamp UNIX de la última actualización del documento.
+
+=== SKILLS ===
+id: Identificador único del documento en la base de datos.
+chunkId: Identificador del fragmento (chunk) generado a partir del documento original.
+docTitle: Título o referencia al archivo fuente dentro del dataset.
+sourcePath: Ruta completa hacia el archivo original dentro del repositorio.
+sourceCollection: Colección o categoría a la que pertenece el documento.
+sourceLanguage: Idioma del documento original.
+content: Contenido textual procesado del fragmento, generalmente extraído del CV.
+chunk_type: Tipo de sección identificada (skills).
+nombre_apellidos: Nombre y apellidos de la persona extraídos del contenido.
+puesto: Puesto objetivo o rol profesional del candidato.
+QuestionsText: Campo destinado a preguntas generadas automáticamente; vacío.
+docSummary: Resumen del documento; vacío si no se ha generado.
+Content_length: Longitud del contenido del fragmento (caracteres o tokens).
+isCreated: Timestamp ISO de creación del registro.
+Pages: Número de páginas del documento de origen.
+Title: Título generado para el fragmento.
+Sections: Lista con las secciones identificadas en este fragmento.
+nChunk: Índice del fragmento dentro del documento.
+isDeleted: Indica si el documento está marcado como eliminado.
+topLanguage: Idioma predominante detectado en el contenido.
+Tables: Lista de tablas detectadas.
+Formulas: Lista de fórmulas encontradas.
+embedding: Embedding numérico del contenido.
+metadata: Conjunto estructurado de metadatos 
+chunk_type
+nombre_apellidos
+puesto
+hard_skills
+soft_skills
+cv_id
+chunk_index
+language
+skill_domains
+years_of_experience
+_rid: Identificador interno del recurso en Cosmos DB.
+_self: URI interna completa del documento en Cosmos DB.
+_etag: Etiqueta de versión para control de concurrencia.
+_attachments: Carpeta o ruta donde se almacenarían adjuntos.
+_ts: Timestamp UNIX de la última actualización.
+
+=== ESTUDIOS ===
+id: Identificador único del documento dentro de la base de datos.
+chunkId: Identificador único del fragmento (chunk) generado tras procesar el archivo.
+docTitle: Título o referencia al documento original dentro del dataset.
+sourcePath: Ruta completa del archivo original dentro del repositorio de CVs.
+sourceCollection: Colección a la que pertenece el documento ("cvs").
+sourceLanguage: Idioma detectado del documento original.
+content: Contenido textual procesado correspondiente al fragmento actual (sección de educación).
+chunk_type: Tipo de fragmento reconocido (education).
+nombre_apellidos: Nombre y apellidos del candidato extraídos del contenido.
+puesto: Puesto objetivo o rol profesional del candidato.
+QuestionsText: Campo reservado para posibles preguntas generadas; vacío.
+docSummary: Resumen del documento, vacío si no se ha generado.
+Content_length: Longitud del contenido del fragmento (caracteres o tokens).
+isCreated: Fecha y hora de creación del registro (ISO).
+Pages: Número total de páginas del documento de origen.
+Title: Título generado automáticamente para el fragmento (nombre + sección).
+Sections: Lista de secciones presentes en el fragmento (education).
+nChunk: Número de fragmento dentro del documento.
+isDeleted: Indicador de si el documento está marcado como eliminado.
+topLanguage: Idioma dominante detectado en el contenido del fragmento.
+Tables: Lista de tablas detectadas (vacía).
+Formulas: Lista de fórmulas detectadas (vacía).
+embedding: Vector numérico que representa el contenido mediante embeddings semánticos.
+metadata: Metadatos estructurados
+chunk_type
+nombre_apellidos
+estudios
+otros
+cv_id
+chunk_index
+language
+skill_domains
+years_of_experience
+_rid: Identificador interno del documento en Cosmos DB.
+_self: Ruta interna del recurso dentro de la base de datos.
+_etag: Cadena utilizada para control de versiones y concurrencia.
+_attachments: Ruta interna donde podrían almacenarse adjuntos.
+_ts: Timestamp UNIX de la última actualización del documento.

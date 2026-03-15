@@ -7,6 +7,8 @@ __pycache__/
 data/cvs/*
 data/wikipedia/*
 data/eu/*
+
+src_rag/*
 doc/*
 
 frontend/build/*
