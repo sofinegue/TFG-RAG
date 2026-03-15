@@ -1,3 +1,10 @@
+"""
+src.generate_data.cv_dataloader
+
+Módulo para cargar datos de plantillas de CVs en formato JSON, en español e inglés.
+Proporciona métodos para acceder a nombres, apellidos, puestos, habilidades, formación y otros elementos necesarios para generar CVs sintéticos.
+"""
+
 import json
 from pathlib import Path
 from typing import List

@@ -1,14 +1,15 @@
 .venv
 __pycache__/
 *.pyc
+
 .env
 
-frontend/build/
-frontend/node_modules/
-frontend/public/
+data/cvs/*
+data/wikipedia/*
+data/eu/*
 
+src_rag/*
 
-data/cvs/
-data/wikipedia/
-data/eu/
-doc/
+frontend/node_modules/*
+frontend/build/*
+frontend/public/*
