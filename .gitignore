@@ -2,8 +2,14 @@
 __pycache__/
 *.pyc
 
+.env
+
 data/cvs/*
 data/wikipedia/*
 data/eu/*
-data/papers/*
-doc/*
+
+src_rag/*
+
+frontend/node_modules/*
+frontend/build/*
+frontend/public/*

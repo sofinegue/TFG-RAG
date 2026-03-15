@@ -1,11 +1,22 @@
+"""
+src.generate_data.generate_wiki
+
+Módulo para generar un dataset de Wikipedia (artículos de literatura) en inglés y español.
+Utiliza la API de Wikipedia para obtener artículos de categorías literarias, con manejo de cookies mediante Selenium para evitar bloqueos por parte de Wikipedia. Guarda los artículos en formato JSON y TXT.
+"""
+
 import requests
 import time
 import json
 from pathlib import Path
 import urllib3
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options
 
 # Forzar IPv4 (evita fallos IPv6 en Windows)
 urllib3.util.connection.HAS_IPV6 = False
+# Suppress SSL warnings (corporate proxy intercepts HTTPS)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 LANGUAGES = ["en", "es"]
 MAX_PAGES_PER_LANGUAGE = 1000  # tamaño medio
@@ -36,10 +47,33 @@ CATEGORIES = {
 }
 
 
+# --- Session (initialized in main) ---
+session = None
+
+
+def refresh_cookies(lang):
+    """Open Edge, visit Wikipedia to get cookies (like generate_eu.py)."""
+    global session
+    print(f"    [COOKIES] Refreshing cookies via Edge for {lang}.wikipedia.org...")
+    opts = Options()
+    opts.add_argument("--disable-blink-features=AutomationControlled")
+    opts.add_experimental_option("excludeSwitches", ["enable-automation"])
+    driver = webdriver.Edge(options=opts)
+    driver.get(f"https://{lang}.wikipedia.org")
+    for _ in range(20):
+        if driver.get_cookies():
+            break
+        time.sleep(0.5)
+    cookies = {c["name"]: c["value"] for c in driver.get_cookies()}
+    driver.quit()
+    session.cookies.update(cookies)
+    print(f"    [COOKIES] Done: {list(cookies.keys())}")
+
+
 def wikipedia_api(lang, params):
     url = f"https://{lang}.wikipedia.org/w/api.php"
     params["format"] = "json"
-    response = requests.get(url, params=params, headers=HEADERS, timeout=30)
+    response = session.get(url, params=params, timeout=30)
     response.raise_for_status()
     return response.json()
 
@@ -115,11 +149,27 @@ def save_document(lang, doc):
         f.write(doc["contenido"])
 
 def main():
+    global session
     # print("[*] Construyendo dataset Wikipedia Literatura (ES / EN)")
     print(f"[*] Máx. documentos por idioma: {MAX_PAGES_PER_LANGUAGE}\n")
 
+    # --- Create session (consistent with generate_eu.py) ---
+    session = requests.Session()
+    session.headers.update(HEADERS)
+    session.verify = False  # corporate proxy intercepts SSL
+
     for lang in LANGUAGES:
         print(f"\n[*] Idioma: {lang.upper()}")
+
+        # If the language json folder already has the target number of documents,
+        # skip scraping to avoid redundant requests and cookie refreshes.
+        json_dir = BASE_DIR / lang / "json"
+        existing_json = len(list(json_dir.glob('*.json'))) if json_dir.exists() else 0
+        if existing_json >= MAX_PAGES_PER_LANGUAGE:
+            print(f"[*] Idioma: {lang.upper()} - ya completo ({existing_json}/{MAX_PAGES_PER_LANGUAGE}), se omite descarga")
+            continue
+
+        refresh_cookies(lang)
         collected = {}
         target = MAX_PAGES_PER_LANGUAGE
 
@@ -147,6 +197,7 @@ def main():
                 collected[page["pageid"]] = doc["titulo"]
 
                 # print(f"[OK] {doc['titulo']}")
+                # print(f"[OK] {doc['titulo']}")
                 time.sleep(SLEEP_TIME)
 
                 if len(collected) >= target:
@@ -155,6 +206,7 @@ def main():
         # print(f"[*] Total documentos guardados ({lang}): {len(collected)}")
 
     # print("\n[*] Dataset completado correctamente.")
+
 
 # if __name__ == "__main__":
 #     main()
