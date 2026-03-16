@@ -31,7 +31,8 @@ BASE = "https://eur-lex.europa.eu"
 TRANSIENT = {202, 429, 500, 502, 503, 504}
 
 OUTPUT_DIR = Path("data/eu")
-LANG =  ["ES", "EN", "FR", "IT", "PT"]
+# LANG =  ["ES", "EN", "FR", "IT", "PT"]
+LANG = ["ES"]  # Para pruebas, solo español
 
 # Fechas a procesar
 DATES = [
