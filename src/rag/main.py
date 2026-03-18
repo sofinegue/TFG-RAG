@@ -61,6 +61,9 @@ cosmos_client = CosmosClient(COSMOS_ENDPOINT, COSMOS_KEY)
 _db        = cosmos_client.get_database_client(COSMOS_DB)
 _container = _db.get_container_client(COSMOS_COLL)
 
+# Fallback en memoria cuando Cosmos no está disponible
+_mem_store: dict = {}
+
 MODEL_PRICING, PRICING_DATE = load_model_pricing()
 executor = ThreadPoolExecutor(max_workers=4)
 
@@ -92,13 +95,13 @@ USE_CASES = {
 }
 
 # ──────────────────────────────────────────────────────────────────────
-# Helpers de conversación (Cosmos DB)
+# Helpers de conversación (Cosmos DB con fallback en memoria)
 # ──────────────────────────────────────────────────────────────────────
 def get_conversation(conv_id: str):
     try:
         return _container.read_item(item=conv_id, partition_key=conv_id)
     except Exception:
-        return None
+        return _mem_store.get(conv_id)
 
 
 def create_new_conversation(user_id: str, use_case: str = "cvs"):
@@ -115,37 +118,39 @@ def create_new_conversation(user_id: str, use_case: str = "cvs"):
     }
     try:
         _container.create_item(body=doc)
-    except Exception as e:
-        print(f"⚠️ No se pudo crear la conversación en Cosmos: {e}")
+    except Exception:
+        _mem_store[new_id] = doc
     return new_id
 
 
 def update_conversation(conv_id: str, conv: dict):
+    if "convId" not in conv:
+        conv["convId"] = conv_id
     try:
-        if "convId" not in conv:
-            conv["convId"] = conv_id
         _container.upsert_item(body=conv)
-    except Exception as e:
-        print(f"⚠️ No se pudo actualizar conversación {conv_id}: {e}")
+    except Exception:
+        _mem_store[conv_id] = conv
 
 
 def update_title(conv_id: str, query: str):
+    item = get_conversation(conv_id)
+    if not item:
+        return
+    item["title"]  = query[:50] + ("..." if len(query) > 50 else "")
+    item["convId"] = conv_id
     try:
-        item = get_conversation(conv_id)
-        if item:
-            item["title"]  = query[:50] + ("..." if len(query) > 50 else "")
-            item["convId"] = conv_id
-            _container.upsert_item(body=item)
-    except Exception as e:
-        print(f"⚠️ No se pudo actualizar título {conv_id}: {e}")
+        _container.upsert_item(body=item)
+    except Exception:
+        _mem_store[conv_id] = item
 
 
 def delete_conversation(conv_id: str) -> bool:
+    _mem_store.pop(conv_id, None)
     try:
         _container.delete_item(item=conv_id, partition_key=conv_id)
         return True
     except Exception:
-        return False
+        return conv_id not in _mem_store
 
 
 def get_conversations_by_user(user_id: str) -> list:
@@ -156,7 +161,11 @@ def get_conversations_by_user(user_id: str) -> list:
         )
         return list(_container.query_items(query=query, enable_cross_partition_query=True))
     except Exception:
-        return []
+        return sorted(
+            [c for c in _mem_store.values() if c.get("user_id") == user_id],
+            key=lambda c: c.get("created_at", ""),
+            reverse=True,
+        )
 
 # ──────────────────────────────────────────────────────────────────────
 # ENDPOINTS
@@ -198,12 +207,14 @@ async def chat(
         current_conv    = get_conversation(conversation_id)
 
     if current_conv is None:
-        # Conversación en memoria si Cosmos no está disponible
+        # create_new_conversation ya guardó en _mem_store si Cosmos falló,
+        # pero por seguridad lo insertamos directamente aquí.
         current_conv = {
             "id": conversation_id, "convId": conversation_id,
             "user_id": user_id, "use_case": use_case,
             "query_count": 0, "messages": [], "title": query[:50],
         }
+        _mem_store[conversation_id] = current_conv
 
     if current_conv.get("query_count", 0) == 0:
         update_title(conversation_id, query)

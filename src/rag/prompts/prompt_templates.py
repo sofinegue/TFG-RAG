@@ -104,15 +104,20 @@ Tu misión es encontrar y listar TODOS los candidatos relevantes basándote en l
 - "¿alguien más?" → aporta candidatos DIFERENTES
 - "que no sea X" → excluye explícitamente a X
 
-[4] FORMATO:
-<p><strong>Encontré [X] candidatos con [criterio]:</strong></p>
-<p><strong>1. Nombre Completo</strong><br>[Descripción natural]. (CV: archivo.pdf)</p>
+[4] FORMATO (Markdown):
+**Encontré [X] candidatos con [criterio]:**
+
+**1. Nombre Completo**  
+[Descripción natural]. (CV: archivo.pdf)
+
 ...
-<p><strong>Resumen:</strong> [X] candidatos en {num_docs} CVs revisados.</p>
+
+**Resumen:** [X] candidatos en {num_docs} CVs revisados.
 
 Si no hay candidatos:
-<p><strong>No encontré candidatos con [criterio exacto].</strong></p>
-<p>Sugerencias: [alternativas concretas]</p>
+**No encontré candidatos con [criterio exacto].**
+
+Sugerencias: [alternativas concretas]
 
 [5] SINÓNIMOS AUTOMÁTICOS:
 - "Spark" → PySpark, Databricks, Spark SQL
@@ -160,15 +165,13 @@ basándote exclusivamente en los fragmentos de documentos proporcionados.
 
 [1] PRECISIÓN LEGAL: Cita artículos, párrafos y números de regulación cuando sea posible.
 
-[2] ESTRUCTURA DE RESPUESTA:
-<p><strong>Respuesta:</strong> [respuesta directa y concisa]</p>
+[2] ESTRUCTURA DE RESPUESTA (Markdown):
+**Respuesta:** [respuesta directa y concisa]
 
-<p><strong>Base normativa:</strong></p>
-<ul>
-  <li>[Documento], [Artículo/Sección] – [extracto relevante]</li>
-</ul>
+**Base normativa:**
+- [Documento], [Artículo/Sección] – [extracto relevante]
 
-<p><strong>Contexto adicional:</strong> [matices, excepciones o información complementaria si existe]</p>
+**Contexto adicional:** [matices, excepciones o información complementaria si existe]
 
 [3] HONESTIDAD: Si la información no está en los documentos proporcionados, indícalo claramente.
 No inventes referencias normativas.
@@ -212,15 +215,13 @@ basándose en artículos de Wikipedia.
 
 [1] RESPUESTA DIRECTA: Empieza con una respuesta concisa a la pregunta.
 
-[2] ESTRUCTURA:
-<p><strong>Respuesta:</strong> [respuesta directa]</p>
+[2] ESTRUCTURA (Markdown):
+**Respuesta:** [respuesta directa]
 
-<p><strong>Detalle:</strong> [explicación más completa extrayendo lo relevante de los artículos]</p>
+**Detalle:** [explicación más completa extrayendo lo relevante de los artículos]
 
-<p><strong>Fuentes:</strong></p>
-<ul>
-  <li>[Título del artículo Wikipedia] – [sección relevante]</li>
-</ul>
+**Fuentes:**
+- [Título del artículo Wikipedia] – [sección relevante]
 
 [3] PRECISIÓN: Usa únicamente información presente en los artículos. Si la pregunta va más allá
 de lo disponible en los fragmentos, indícalo.
@@ -257,5 +258,4 @@ Responde de forma clara y concisa. Máximo {max_chars} caracteres."""
 
 PREGUNTA: {query}
 
-Responde de forma clara y profesional. Máximo {max_chars} caracteres.
-Usa formato HTML (<p>, <ul>, <li>, <strong>) para estructurar la respuesta."""
+Responde de forma clara y profesional en formato Markdown. Máximo {max_chars} caracteres."""

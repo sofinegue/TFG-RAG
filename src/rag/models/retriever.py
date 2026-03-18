@@ -183,7 +183,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
                     )
                 ],
                 top=top_k,
-                select=["id", "chunkId", "content", "Title", "docTitle", "Pages"],
+                select=["id", "chunkId", "content", "Title", "docTitle"],
             )
 
             chunks = []
