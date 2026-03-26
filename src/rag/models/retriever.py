@@ -14,15 +14,7 @@ from azure.search.documents.models import VectorizedQuery
 from openai import AzureOpenAI
 
 from src.config import config
-from src.rag.prompts.prompt_templates import PromptTemplates
-
-
-# Mapeo de caso de uso → nombre del índice de Azure Search
-USE_CASE_INDEX_MAP = {
-    "cvs":  config.azure_search_index_cvs,
-    "eu":   config.azure_search_index_eu,
-    "wiki": config.azure_search_index_wiki,
-}
+from src.rag.handler import get_handler
 
 
 class ChunkData(TypedDict):
@@ -52,7 +44,6 @@ class Retriever:
 
     def __init__(self):
         self.config = config
-        self.prompts = PromptTemplates()
 
         # Clientes de OpenAI (compartidos para todos los índices)
         embedding_cfg = config.get_embedding_model_config()
@@ -75,7 +66,7 @@ class Retriever:
     # Creación de SearchClient por caso de uso (lazy, por query)
     # ------------------------------------------------------------------
     def _get_search_client(self, use_case: str) -> SearchClient:
-        index_name = USE_CASE_INDEX_MAP.get(use_case, config.azure_search_index_cvs)
+        index_name = get_handler(use_case).index_name
         return SearchClient(
             endpoint=config.azure_search_endpoint,
             index_name=index_name,
@@ -133,12 +124,12 @@ Responde SOLO con la query (expandida o sin cambios):"""
     # ------------------------------------------------------------------
     # Queries sintéticas (RAG Fusion)
     # ------------------------------------------------------------------
-    def generate_synthetic_queries(self, query: str) -> List[str]:
+    def generate_synthetic_queries(self, query: str, use_case: str = "cvs") -> List[str]:
         if not config.use_rag_fusion:
             return [query]
 
         k = config.rag_fusion_queries - 1
-        prompt = self.prompts.rag_fusion_synthetic_queries(query, k)
+        prompt = get_handler(use_case).build_rag_fusion_prompt(query, k)
 
         try:
             response = self.chat_client.chat.completions.create(
@@ -173,6 +164,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
             search_client = self._get_search_client(use_case)
             query_embedding = self.get_embedding(query)
 
+            handler = get_handler(use_case)
             results = search_client.search(
                 search_text=query,
                 vector_queries=[
@@ -183,23 +175,10 @@ Responde SOLO con la query (expandida o sin cambios):"""
                     )
                 ],
                 top=top_k,
-                select=["id", "chunkId", "content", "Title", "docTitle"],
+                select=handler.search_select_fields,
             )
 
-            chunks = []
-            for result in results:
-                chunks.append(
-                    {
-                        "chunk_id": result.get("chunkId") or result.get("id"),
-                        "id":       result.get("id"),
-                        "content":  result.get("content") or result.get("sectionContent", ""),
-                        "title":    result.get("Title", ""),
-                        "doc_title":result.get("docTitle", ""),
-                        "pages":    result.get("Pages", "N/A"),
-                        "score":    result.get("@search.score", 0),
-                        "reranker_score": 1.0,
-                    }
-                )
+            chunks = [handler.parse_search_result(r) for r in results]
             return chunks
         except Exception as e:
             print(f"Error en búsqueda híbrida ({use_case}): {e}")
@@ -208,30 +187,37 @@ Responde SOLO con la query (expandida o sin cambios):"""
     # ------------------------------------------------------------------
     # RAG Fusion – fusión con RRF
     # ------------------------------------------------------------------
-    def rag_fusion_retrieve(self, queries: List[str], use_case: str) -> List[ChunkData]:
-        all_chunks = []
+    def rag_fusion_retrieve(
+        self,
+        queries: List[str],
+        use_case: str,
+        retrieval_cfg: Dict = None,
+    ) -> List[ChunkData]:
+        retrieval_cfg  = retrieval_cfg or {}
+        top_k          = retrieval_cfg.get("top_k",               config.azure_search_top_k)
+        min_score      = retrieval_cfg.get("min_relevance_score", config.min_relevance_score)
+        max_chunks     = retrieval_cfg.get("max_chunks_used",     config.max_chunks_used)
 
+        all_chunks: List[Dict] = []
         with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = [executor.submit(self.hybrid_search, q, use_case) for q in queries]
+            futures = [executor.submit(self.hybrid_search, q, use_case, top_k) for q in queries]
             for future in futures:
                 all_chunks.extend(future.result())
 
         # RRF scoring
         chunk_scores: Dict[str, Dict] = {}
         for rank, chunk in enumerate(all_chunks, 1):
-            cid = chunk.get("chunk_id") or chunk.get("id") or str(rank)
+            cid       = chunk.get("chunk_id") or chunk.get("id") or str(rank)
             rrf_score = 1 / (60 + rank)
             if cid in chunk_scores:
                 chunk_scores[cid]["rrf_score"] += rrf_score
             else:
                 chunk["rrf_score"] = rrf_score
-                chunk_scores[cid] = chunk
+                chunk_scores[cid]  = chunk
 
-        ranked = sorted(
-            chunk_scores.values(), key=lambda x: x.get("rrf_score", 0), reverse=True
-        )
-        filtered = [c for c in ranked if c.get("reranker_score", 0) >= config.min_relevance_score]
-        return filtered[: config.max_chunks_used]
+        ranked   = sorted(chunk_scores.values(), key=lambda x: x.get("rrf_score", 0), reverse=True)
+        filtered = [c for c in ranked if c.get("reranker_score", 0) >= min_score]
+        return filtered[:max_chunks]
 
     # ------------------------------------------------------------------
     # Interfaz pública para LangGraph
@@ -250,12 +236,15 @@ Responde SOLO con la query (expandida o sin cambios):"""
         query   = state["query"]
         history = state.get("conversation_history", [])
 
+        handler       = get_handler(use_case)
+        retrieval_cfg = handler.get_retrieval_config()
+
         print(f"   🔍 Retrieval [{use_case}] – query: {query[:60]}")
-        expanded = self._expand_query_with_context(query, history)
-        synthetic_queries = self.generate_synthetic_queries(expanded)
+        expanded          = self._expand_query_with_context(query, history)
+        synthetic_queries = self.generate_synthetic_queries(expanded, use_case, retrieval_cfg)
         print(f"   📝 {len(synthetic_queries)} queries sintéticas")
 
-        chunks = self.rag_fusion_retrieve(synthetic_queries, use_case)
+        chunks = self.rag_fusion_retrieve(synthetic_queries, use_case, retrieval_cfg)
         print(f"   ✅ {len(chunks)} chunks recuperados")
 
         state["synthetic_queries"] = synthetic_queries

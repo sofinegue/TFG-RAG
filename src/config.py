@@ -97,6 +97,29 @@ class RAGConfig:
     rag_fusion_queries: int = int(os.getenv("RAG_FUSION_QUERIES", "5"))
     max_chunks_used: int = int(os.getenv("MAX_CHUNKS_USED", "20"))
     min_relevance_score: float = float(os.getenv("MIN_RELEVANCE_SCORE", "0.7"))
+
+    # === CVs – RETRIEVAL MASIVO ===
+    # Número de chunks a recuperar en la búsqueda directa (sin RAG Fusion)
+    cvs_top_k: int = int(os.getenv("CVS_TOP_K", "50"))
+    # Tamaño de lote al pasar chunks a mini-LLM
+    cvs_chunk_size: int = int(os.getenv("CVS_CHUNK_SIZE", "5"))
+    # Ruta al fichero historial de CVs
+    cvs_history_path: str = os.getenv("CVS_HISTORY_PATH", "data/cvs_history.json")
+    # Si True, grupo1 también pasa por mini-LLM; si False, extrae nombres directamente de doc_title
+    cvs_group1_use_llm: bool = os.getenv("CVS_GROUP1_USE_LLM", "false").lower() == "true"
+
+    # === CVs – FIABILIDAD ===
+    # Umbrales de score para clasificar chunks en 5 bandas de fiabilidad.
+    # T1 es el umbral más alto (mayor fiabilidad), T4 el más bajo:
+    #   grupo1: score >= T1          → nombres directamente (sin LLM)
+    #   grupo2: T2 <= score < T1     → mini-LLM
+    #   grupo3: T3 <= score < T2     → mini-LLM
+    #   grupo4: T4 <= score < T3     → mini-LLM
+    #   grupo5: score < T4           → mini-LLM
+    cvs_reliability_t1: float = float(os.getenv("CVS_RELIABILITY_T1", "0.9"))
+    cvs_reliability_t2: float = float(os.getenv("CVS_RELIABILITY_T2", "0.7"))
+    cvs_reliability_t3: float = float(os.getenv("CVS_RELIABILITY_T3", "0.5"))
+    cvs_reliability_t4: float = float(os.getenv("CVS_RELIABILITY_T4", "0.3"))
     
     # === CHUNKING ===
     sublotes_flag: bool = bool(int(os.getenv("SUBLOTES_FLAG", "0")))

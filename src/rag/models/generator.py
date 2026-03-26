@@ -13,7 +13,7 @@ from typing import List, Dict, TypedDict, Optional, AsyncGenerator
 from openai import AzureOpenAI
 
 from src.config import config
-from src.rag.prompts.prompt_templates import PromptTemplates
+from src.rag.handler import get_handler
 
 # Importación opcional del Agent Builder workflow
 try:
@@ -51,7 +51,6 @@ class Generator:
 
     def __init__(self):
         self.config = config
-        self.prompts = PromptTemplates()
         self.assistant_configs: Dict = {}
         if _AGENT_BUILDER_AVAILABLE:
             self.assistant_configs = self._load_all_assistant_configs()
@@ -144,7 +143,18 @@ class Generator:
     ):
         print(f"      🔧 Generando con GPT [{use_case}]...")
 
-        model_name = gpt_config.get("model", config.chat_model)
+        handler  = get_handler(use_case)
+        llm_cfg  = handler.get_llm_config()
+
+        # gpt_config (enviado por el cliente) tiene prioridad sobre los defaults del handler
+        model_name        = gpt_config.get("model")        or llm_cfg.get("model",             config.chat_model)
+        temperature       = gpt_config.get("temperature",       llm_cfg.get("temperature",       config.temperature))
+        max_tokens        = gpt_config.get("max_tokens",        llm_cfg.get("max_tokens",        config.max_tokens))
+        top_p             = gpt_config.get("top_p",             llm_cfg.get("top_p",             0.95))
+        frequency_penalty = gpt_config.get("frequency_penalty", llm_cfg.get("frequency_penalty", 0.0))
+        presence_penalty  = gpt_config.get("presence_penalty",  llm_cfg.get("presence_penalty",  0.0))
+        max_chunks        = gpt_config.get("max_chunks_used",   config.max_chunks_used)
+
         try:
             chat_cfg = config.get_model_config(model_name)
         except ValueError:
@@ -156,24 +166,13 @@ class Generator:
             azure_endpoint=chat_cfg.api_base,
         )
 
-        temperature       = gpt_config.get("temperature", config.temperature)
-        max_tokens        = gpt_config.get("max_tokens", config.max_tokens)
-        top_p             = gpt_config.get("top_p", 0.95)
-        max_chunks        = gpt_config.get("max_chunks_used", config.max_chunks_used)
-        custom_prompt     = gpt_config.get("prompt", "")
-        frequency_penalty = gpt_config.get("frequency_penalty", 0)
-        presence_penalty  = gpt_config.get("presence_penalty", 0)
+        # system_message: custom_prompt del cliente > system message del handler
+        system_message = gpt_config.get("prompt") or handler.get_system_message()
 
-        system_message = (
-            custom_prompt
-            or "Eres un asistente experto que responde preguntas basándose en el contexto proporcionado."
-        )
-
-        rag_prompt = self.prompts.rag_main_generation(
+        rag_prompt = handler.build_generation_prompt(
             query=query,
             context=chunks[:max_chunks],
             max_chars=config.max_answer_chars,
-            use_case=use_case,
         )
 
         messages = [{"role": "system", "content": system_message}]
@@ -192,8 +191,9 @@ class Generator:
             presence_penalty=presence_penalty,
         )
 
-        answer = response.choices[0].message.content
-        usage  = response.usage
+        raw_answer = response.choices[0].message.content
+        answer     = handler.post_process_answer(raw_answer)
+        usage      = response.usage
 
         usage_info = {
             "prompt_tokens":     usage.prompt_tokens,
