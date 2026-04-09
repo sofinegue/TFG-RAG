@@ -100,7 +100,7 @@ class RAGConfig:
 
     # === CVs – RETRIEVAL MASIVO ===
     # Número de chunks a recuperar en la búsqueda directa (sin RAG Fusion)
-    cvs_top_k: int = int(os.getenv("CVS_TOP_K", "50"))
+    cvs_top_k: int = int(os.getenv("AZURE_SEARCH_TOP_K_CVS", os.getenv("CVS_TOP_K", "50")))
     # Tamaño de lote al pasar chunks a mini-LLM
     cvs_chunk_size: int = int(os.getenv("CVS_CHUNK_SIZE", "5"))
     # Ruta al fichero historial de CVs

@@ -8,7 +8,7 @@ from typing import Dict, List
 
 
 class CVsPrompts:
-    """Prompts centrados en búsqueda de candidatos y análisis de CVs técnicos."""
+    """Prompts centrados en búsqueda de perfiles y análisis de CVs técnicos de la compañía."""
 
     # ------------------------------------------------------------------
     # Prompt principal de generación
@@ -33,9 +33,11 @@ class CVsPrompts:
 
         num_docs = len(unique_docs)
 
-        return f"""Eres un asistente de búsqueda de talento especializado en análisis de CVs técnicos.
+        return f"""Eres un asistente especializado en análisis de CVs técnicos de una empresa.
 
-Tu misión es encontrar y listar TODOS los candidatos relevantes basándote en los CVs proporcionados y el historial de conversación.
+Los CVs que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos a un puesto; son perfiles internos de la organización.
+
+Tu misión es encontrar y listar TODOS los perfiles relevantes basándote en los CVs proporcionados y el historial de conversación.
 
 **CONTEXTO – CVs DISPONIBLES ({num_docs} documentos únicos):**
 {context_text}
@@ -45,31 +47,31 @@ Tu misión es encontrar y listar TODOS los candidatos relevantes basándote en l
 
 **INSTRUCCIONES:**
 
-[1] COBERTURA COMPLETA: Lista TODOS los candidatos que cumplan el criterio. No te limites a "algunos ejemplos".
+[1] COBERTURA COMPLETA: Lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
 
-[2] ESTILO NATURAL: Para cada candidato escribe un párrafo fluido con:
+[2] ESTILO NATURAL: Para cada persona escribe un párrafo fluido con:
 - Nombre completo en negrita
 - Qué tiene (skill/certificación/experiencia)
 - Contexto relevante del CV (años, proyectos, otras skills)
 - Nombre del archivo entre paréntesis al final
 
 [3] HISTORIAL CONVERSACIONAL:
-- Pronombres plurales ("tienen", "son", etc.) → habla SOLO de candidatos mencionados antes
-- "¿alguien más?" → aporta candidatos DIFERENTES
+- Pronombres plurales ("tienen", "son", etc.) → habla SOLO de personas mencionadas antes
+- "¿alguien más?" → aporta perfiles DIFERENTES
 - "que no sea X" → excluye explícitamente a X
 
 [4] FORMATO (Markdown):
-**Encontré [X] candidatos con [criterio]:**
+**Encontré [X] perfiles con [criterio]:**
 
 **1. Nombre Completo**  
 [Descripción natural]. (CV: archivo.pdf)
 
 ...
 
-**Resumen:** [X] candidatos en {num_docs} CVs revisados.
+**Resumen:** [X] perfiles en {num_docs} CVs revisados.
 
-Si no hay candidatos:
-**No encontré candidatos con [criterio exacto].**
+Si no hay resultados:
+**No encontré perfiles con [criterio exacto].**
 
 Sugerencias: [alternativas concretas]
 
@@ -86,11 +88,11 @@ RESPONDE EN ESPAÑOL. Máximo {max_chars} caracteres."""
     # ------------------------------------------------------------------
     @staticmethod
     def rag_fusion(query: str, k: int) -> str:
-        return f"""Eres un experto en búsqueda de talento y recursos humanos técnicos.
+        return f"""Eres un experto en análisis de perfiles profesionales técnicos.
 
 Pregunta original: "{query}"
 
-Genera {k} versiones alternativas de esta pregunta para buscar candidatos en CVs que:
+Genera {k} versiones alternativas de esta pregunta para buscar perfiles en CVs de la compañía que:
 - Incluyan sinónimos de tecnologías (ej. "ML" → "Machine Learning", "aprendizaje automático")
 - Amplíen a certificaciones o roles relacionados (ej. "Python" → "Django, FastAPI, Pandas")
 - Consideren distintos niveles de experiencia (junior, senior, lead, principal)
@@ -114,8 +116,8 @@ Ejemplo:
             content   = chunk.get("content", "")[:600]
             context_text += f"\n[CV {i}] {doc_title}:\n{content}\n---"
 
-        return f"""Eres un asistente de búsqueda de talento. Tu tarea es analizar fragmentos de CVs
-y determinar si los candidatos son relevantes para la consulta del usuario.
+        return f"""Eres un asistente de análisis de perfiles profesionales. Tu tarea es analizar fragmentos de CVs
+de miembros de la compañía y determinar si son relevantes para la consulta del usuario.
 
 Fiabilidad de estos fragmentos: {reliability_label}
 
@@ -126,12 +128,76 @@ FRAGMENTOS DE CVs:
 {context_text}
 
 INSTRUCCIONES:
-- Analiza CADA fragmento y decide si el candidato es relevante para la consulta.
-- Para los candidatos relevantes, extrae su nombre completo y una breve justificación.
-- Si ninguno es relevante, indica "Ningún candidato relevante en este grupo."
+- Analiza CADA fragmento y decide si la persona es relevante para la consulta.
+- Para las personas relevantes, extrae su NOMBRE COMPLETO (nombre y apellidos) del contenido del CV y una breve justificación.
+- NUNCA devuelvas nombres de ficheros (ej. "cv_134.json"). Siempre busca el campo nombre_apellidos dentro del contenido.
+- Si ninguna es relevante, indica "Ningún perfil relevante en este grupo."
 
 FORMATO DE RESPUESTA:
 data: <lista de nombres completos relevantes separados por " | ", o "ninguno">
 reasoning: <explicación breve de por qué cada nombre fue incluido o excluido>
 
 Responde SOLO en el formato indicado."""
+
+    # ------------------------------------------------------------------
+    # Prompt de "Response Format" – ensamblaje final con LLM potente
+    # ------------------------------------------------------------------
+    @staticmethod
+    def response_format(query: str, groups: dict, max_chars: int) -> str:
+        """
+        Recibe los resultados de los 5 grupos de fiabilidad y pide
+        al LLM potente que genere la respuesta final para el usuario.
+        """
+        groups_text = ""
+        for gname in ("grupo1", "grupo2", "grupo3", "grupo4", "grupo5"):
+            g = groups.get(gname)
+            if not g:
+                continue
+            data = g.get("data", "ninguno")
+            if isinstance(data, list):
+                data = ", ".join(data) if data else "ninguno"
+            reasoning = g.get("reasoning", "")
+            reliability = g.get("reliability", gname)
+            groups_text += (
+                f"\n[{gname.upper()} — fiabilidad {reliability}]\n"
+                f"  Perfiles: {data}\n"
+                f"  Razonamiento: {reasoning}\n"
+            )
+
+        return f"""Eres un asistente especializado en análisis de CVs técnicos de una empresa.
+
+Los perfiles que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos.
+
+Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente consulta:
+
+**PREGUNTA DEL USUARIO:**
+{query}
+
+**RESULTADOS POR GRUPO DE FIABILIDAD:**
+{groups_text}
+
+**INSTRUCCIONES:**
+
+1. Genera una respuesta final clara y estructurada para el usuario.
+2. SIEMPRE muestra nombre y apellidos completos de cada persona. NUNCA muestres nombres de ficheros (ej. "cv_134.json", "es/cv 272.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
+2. Las personas del grupo 1 (fiabilidad más alta) son las más fiables; preséntalas primero y con más confianza.
+3. Las personas de grupos inferiores tienen menor certeza; preséntalas con matiz ("posiblemente", "podría ser relevante").
+4. Si un grupo devolvió "ninguno", no lo menciones salvo que todos devuelvan "ninguno".
+5. Agrupa los perfiles en una lista numerada con su nombre en negrita.
+6. Al final incluye un breve resumen: cuántas personas se encontraron y la distribución de fiabilidad.
+7. Si no hay perfiles en ningún grupo, indícalo claramente y sugiere reformular la consulta.
+
+**FORMATO (Markdown):**
+**Encontré [X] perfiles para [criterio]:**
+
+**Alta fiabilidad:**
+1. **Nombre** — razón
+...
+
+**Fiabilidad media/baja:**
+N. **Nombre** — razón (fiabilidad: XX%)
+...
+
+**Resumen:** [X] perfiles encontrados ([N] alta fiabilidad, [M] fiabilidad media/baja).
+
+Responde en español. Máximo {max_chars} caracteres."""

@@ -42,7 +42,7 @@ def _build_reliability_labels() -> Dict[str, str]:
 
 
 class CVsUseCaseHandler(BaseUseCaseHandler):
-    """Handler especializado en búsqueda de talento sobre un corpus de CVs."""
+    """Handler especializado en búsqueda de perfiles profesionales sobre un corpus de CVs de la compañía."""
 
     use_case_id = "cvs"
 
@@ -69,8 +69,8 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
 
     def get_system_message(self) -> str:
         return (
-            "Eres un asistente de búsqueda de talento especializado "
-            "en análisis de CVs técnicos del equipo EY."
+            "Eres un asistente especializado en análisis de CVs técnicos "
+            "de los miembros de la compañía."
         )
 
     # ── Retrieval ──────────────────────────────────────────────────────
@@ -78,7 +78,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
     def get_retrieval_config(self) -> Dict:
         """
         CVs usa búsqueda directa con alto top_k y sin RAG Fusion,
-        para maximizar la cobertura de candidatos a costa de precisión.
+        para maximizar la cobertura de perfiles a costa de precisión.
         """
         return {
             "top_k":               config.cvs_top_k,
@@ -88,6 +88,38 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
             "rag_fusion_queries":  1,
         }
 
+    # ── Extracción de nombre del contenido del chunk ───────────────────
+
+    @staticmethod
+    def _extract_name_from_chunk(chunk: Dict) -> str:
+        """
+        Extrae nombre_apellidos del contenido del chunk.
+        Busca patrones como 'NOMBRE_APELLIDOS: ...' o 'nombre_apellidos: ...'
+        dentro del texto. Si no lo encuentra, intenta extraer un nombre
+        propio con regex de capitalización.
+        """
+        content = chunk.get("content", "")
+
+        # Patrón 1: campo explícito NOMBRE_APELLIDOS / nombre_apellidos
+        m = re.search(
+            r"(?:NOMBRE_APELLIDOS|nombre_apellidos)\s*[:=]\s*[\"']?(.+?)[\"']?\s*(?:[,\n}]|$)",
+            content,
+            re.IGNORECASE,
+        )
+        if m:
+            return m.group(1).strip().strip("\"'")
+
+        # Patrón 2: campo "nombre" genérico
+        m = re.search(
+            r"(?:\"nombre\"|nombre)\s*[:=]\s*[\"']?(.+?)[\"']?\s*(?:[,\n}]|$)",
+            content,
+            re.IGNORECASE,
+        )
+        if m:
+            return m.group(1).strip().strip("\"'")
+
+        return ""
+
     # ── Clasificación por fiabilidad ───────────────────────────────────
 
     def classify_chunks_by_reliability(
@@ -95,6 +127,9 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
     ) -> Dict[str, List[Dict]]:
         """
         Divide chunks en 5 grupos según su score de Azure Search.
+
+        Como @search.score no está normalizado (puede ser > 1 en búsqueda
+        híbrida), primero se escala min-max al rango [0, 1].
 
         Umbrales leídos del .env (T1 > T2 > T3 > T4):
           grupo1: score >= T1  → alta fiabilidad, nombres directos
@@ -108,12 +143,23 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         t3 = config.cvs_reliability_t3
         t4 = config.cvs_reliability_t4
 
+        # ── Normalización min-max a [0, 1] ──
+        raw_scores = [c.get("score", 0.0) for c in chunks]
+        min_s = min(raw_scores) if raw_scores else 0.0
+        max_s = max(raw_scores) if raw_scores else 0.0
+        span  = max_s - min_s
+
+        for chunk in chunks:
+            raw = chunk.get("score", 0.0)
+            chunk["score_raw"]        = raw
+            chunk["score_normalized"] = ((raw - min_s) / span) if span > 0 else 0.0
+
         groups: Dict[str, List[Dict]] = {
             "grupo1": [], "grupo2": [], "grupo3": [],
             "grupo4": [], "grupo5": [],
         }
         for chunk in chunks:
-            score = chunk.get("score", 0.0)
+            score = chunk["score_normalized"]
             if score >= t1:
                 groups["grupo1"].append(chunk)
             elif score >= t2:
@@ -248,12 +294,10 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         # 2. Grupo 1 — comportamiento configurable vía CVS_GROUP1_USE_LLM
         g1_chunks = classified["grupo1"]
         if not config.cvs_group1_use_llm:
-            # Extracción directa: nombres del doc_title, sin llamada a LLM
+            # Extracción directa: nombre_apellidos del contenido del chunk
             names = []
             for chunk in g1_chunks:
-                doc_title = chunk.get("doc_title", "")
-                name = re.sub(r"\.(pdf|docx?|txt)$", "", doc_title, flags=re.IGNORECASE)
-                name = name.replace("_", " ").replace("-", " ").strip()
+                name = self._extract_name_from_chunk(chunk)
                 if name and name not in names:
                     names.append(name)
             groups_result["grupo1"] = {
@@ -300,3 +344,58 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         history_id = self.history.add_entry(query=query, groups=groups_result)
 
         return {"groups": groups_result, "history_id": history_id}
+
+    # ── Response Format: respuesta final con LLM potente ───────────────
+
+    def format_final_response(
+        self,
+        query: str,
+        groups_result: Dict,
+    ) -> tuple:
+        """
+        Paso 3 del diagrama: toma los resultados de todos los grupos
+        y los pasa a un LLM potente para generar la respuesta final
+        del usuario.
+
+        Devuelve (answer: str, usage_info: dict).
+        """
+        # Usar el modelo potente (gpt-4.1)
+        try:
+            chat_cfg = config.get_chat_model_config()
+        except ValueError:
+            chat_cfg = config.get_model_config(config.chat_model)
+
+        client = AzureOpenAI(
+            api_key=chat_cfg.api_key,
+            api_version=chat_cfg.api_version,
+            azure_endpoint=chat_cfg.api_base,
+        )
+
+        prompt = self.prompts.response_format(
+            query=query,
+            groups=groups_result,
+            max_chars=config.max_answer_chars,
+        )
+
+        system_message = self.get_system_message()
+
+        response = client.chat.completions.create(
+            model=chat_cfg.deployment,
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user",   "content": prompt},
+            ],
+            temperature=0.3,
+            max_tokens=config.max_tokens,
+        )
+
+        answer = response.choices[0].message.content
+        usage  = response.usage
+        usage_info = {
+            "prompt_tokens":     usage.prompt_tokens,
+            "completion_tokens": usage.completion_tokens,
+            "total_tokens":      usage.total_tokens,
+            "model":             chat_cfg.deployment,
+        }
+
+        return answer, usage_info

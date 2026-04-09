@@ -124,8 +124,9 @@ Responde SOLO con la query (expandida o sin cambios):"""
     # ------------------------------------------------------------------
     # Queries sintéticas (RAG Fusion)
     # ------------------------------------------------------------------
-    def generate_synthetic_queries(self, query: str, use_case: str = "cvs") -> List[str]:
-        if not config.use_rag_fusion:
+    def generate_synthetic_queries(self, query: str, use_case: str = "cvs", retrieval_cfg: Dict = None) -> List[str]:
+        use_rag_fusion = (retrieval_cfg or {}).get("use_rag_fusion", config.use_rag_fusion)
+        if not use_rag_fusion:
             return [query]
 
         k = config.rag_fusion_queries - 1
@@ -241,7 +242,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         print(f"   🔍 Retrieval [{use_case}] – query: {query[:60]}")
         expanded          = self._expand_query_with_context(query, history)
-        synthetic_queries = self.generate_synthetic_queries(expanded, use_case)
+        synthetic_queries = self.generate_synthetic_queries(expanded, use_case, retrieval_cfg)
         print(f"   📝 {len(synthetic_queries)} queries sintéticas")
 
         chunks = self.rag_fusion_retrieve(synthetic_queries, use_case, retrieval_cfg)

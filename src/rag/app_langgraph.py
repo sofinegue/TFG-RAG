@@ -13,6 +13,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from src.config import config
 from src.rag.models.generator import Generator
 from src.rag.models.retriever import Retriever
+from src.rag.handler import get_handler
 from src.rag.guardrails import guardrails_manager, GuardRailsViolation
 
 
@@ -30,6 +31,9 @@ class RAGState(TypedDict):
     # ── Retrieval ──────────────────────────────────────────────────────
     synthetic_queries: List[str]
     chunks_retrieved: List[Dict]
+
+    # ── CVS pipeline ───────────────────────────────────────────────────
+    cvs_groups: Dict          # resultado de process_query por grupo
 
     # ── Generación ─────────────────────────────────────────────────────
     answer: str
@@ -65,6 +69,7 @@ class RAGGraph:
         wf.add_node("validate_user_input", self.validate_user_input)
         wf.add_node("classify_context",    self.classify_context)
         wf.add_node("retrieve",            self.retrieve_chunks)
+        wf.add_node("process_cvs",         self.process_cvs)
         wf.add_node("generate",            self.generate_answer_async)
         wf.add_node("handle_error",        self.handle_error)
 
@@ -95,7 +100,16 @@ class RAGGraph:
             {"retrieve": "retrieve", "generate": "generate"},
         )
 
-        wf.add_edge("retrieve", "generate")
+        wf.add_conditional_edges(
+            "retrieve",
+            self.should_use_cvs_pipeline,
+            {"process_cvs": "process_cvs", "generate": "generate"},
+        )
+
+        if config.enable_output_guardrails:
+            wf.add_edge("process_cvs", "guardrails_output")
+        else:
+            wf.add_edge("process_cvs", END)
 
         if config.enable_output_guardrails:
             wf.add_edge("generate", "guardrails_output")
@@ -164,6 +178,58 @@ class RAGGraph:
             print(f"   ❌ Error en retrieval: {e}")
             state["chunks_retrieved"]  = []
             state["synthetic_queries"] = []
+        return state
+
+    def process_cvs(self, state: RAGState) -> RAGState:
+        """
+        Pipeline CVS completo:
+          1. classify_chunks_by_reliability  → 5 grupos
+          2. grupo1: extracción directa / mini-LLM
+          3. grupos 2-5: mini-LLM en lotes paralelos
+          4. Persistir en historial JSON
+          5. Response Format: LLM potente ensambla respuesta final
+        """
+        query  = state["query"]
+        chunks = state.get("chunks_retrieved", [])
+        handler = get_handler("cvs")
+
+        print(f"   📊 Pipeline CVS: {len(chunks)} chunks → clasificar por fiabilidad")
+
+        try:
+            # Pasos 1-4: classify + mini-LLMs + historial
+            result = handler.process_query(query, chunks)
+            groups = result["groups"]
+            state["cvs_groups"] = groups
+
+            # Log grupos
+            for gname, g in groups.items():
+                data = g.get("data", "ninguno")
+                count = len(data) if isinstance(data, list) else (0 if data == "ninguno" else data.count("|") + 1)
+                print(f"      {gname} ({g.get('reliability','')}): {count} perfiles")
+
+            # Paso 5: Response Format con LLM potente
+            print(f"   🎯 Response Format: ensamblando respuesta final...")
+            answer, usage_info = handler.format_final_response(query, groups)
+
+            state["answer"]      = answer
+            state["chunks_used"] = chunks
+            state["metadata"]    = {
+                "usage":       usage_info,
+                "model":       usage_info.get("model", "unknown"),
+                "use_case":    "cvs",
+                "rag_mode":    state.get("rag_mode", "gpt"),
+                "cvs_pipeline": True,
+                "history_id":  result.get("history_id"),
+            }
+            print(f"      ✅ Respuesta CVS generada ({len(answer)} chars, {usage_info.get('total_tokens', 0)} tokens)")
+
+        except Exception as e:
+            print(f"   ❌ Error en pipeline CVS: {e}")
+            import traceback; traceback.print_exc()
+            state["error"]  = str(e)
+            state["answer"] = f"<p>❌ Error procesando CVs: {e}</p>"
+            state["metadata"] = {"usage": {}, "error": str(e)}
+
         return state
 
     def generate_answer_async(self, state: RAGState) -> RAGState:
@@ -252,6 +318,10 @@ class RAGGraph:
     def should_retrieve(self, state: RAGState) -> str:
         return "retrieve" if state.get("use_retrieval", True) else "generate"
 
+    def should_use_cvs_pipeline(self, state: RAGState) -> str:
+        """Tras retrieve, si use_case es cvs se redirige al pipeline CVS."""
+        return "process_cvs" if state.get("use_case") == "cvs" else "generate"
+
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
@@ -294,6 +364,7 @@ class RAGGraph:
             chunks_used=[],
             chunks_retrieved=[],
             synthetic_queries=[],
+            cvs_groups={},
             metadata={},
             timestamps={},
             error="",
