@@ -241,7 +241,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         print(f"   🔍 Retrieval [{use_case}] – query: {query[:60]}")
         expanded          = self._expand_query_with_context(query, history)
-        synthetic_queries = self.generate_synthetic_queries(expanded, use_case, retrieval_cfg)
+        synthetic_queries = self.generate_synthetic_queries(expanded, use_case)
         print(f"   📝 {len(synthetic_queries)} queries sintéticas")
 
         chunks = self.rag_fusion_retrieve(synthetic_queries, use_case, retrieval_cfg)
