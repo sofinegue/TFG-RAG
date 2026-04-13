@@ -33,9 +33,7 @@ class CVsPrompts:
 
         num_docs = len(unique_docs)
 
-        return f"""Eres un asistente especializado en análisis de CVs técnicos de una empresa.
-
-Los CVs que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos a un puesto; son perfiles internos de la organización.
+        return f"""Los CVs que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos a un puesto; son perfiles internos de la organización.
 
 Tu misión es encontrar y listar TODOS los perfiles relevantes basándote en los CVs proporcionados y el historial de conversación.
 
@@ -164,9 +162,7 @@ Responde SOLO en el formato indicado."""
                 f"  Razonamiento: {reasoning}\n"
             )
 
-        return f"""Eres un asistente especializado en análisis de CVs técnicos de una empresa.
-
-Los perfiles que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos.
+        return f"""Los perfiles que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos.
 
 Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente consulta:
 
@@ -178,26 +174,34 @@ Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente c
 
 **INSTRUCCIONES:**
 
-1. Genera una respuesta final clara y estructurada para el usuario.
-2. SIEMPRE muestra nombre y apellidos completos de cada persona. NUNCA muestres nombres de ficheros (ej. "cv_134.json", "es/cv 272.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
-2. Las personas del grupo 1 (fiabilidad más alta) son las más fiables; preséntalas primero y con más confianza.
+1. SIEMPRE muestra nombre y apellidos completos de cada persona. NUNCA muestres nombres de ficheros (ej. "cv_134.json", "es/cv 272.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
+2. Las personas del grupo 1 (fiabilidad más alta) son las más fiables; preséntalas primero.
 3. Las personas de grupos inferiores tienen menor certeza; preséntalas con matiz ("posiblemente", "podría ser relevante").
 4. Si un grupo devolvió "ninguno", no lo menciones salvo que todos devuelvan "ninguno".
-5. Agrupa los perfiles en una lista numerada con su nombre en negrita.
-6. Al final incluye un breve resumen: cuántas personas se encontraron y la distribución de fiabilidad.
-7. Si no hay perfiles en ningún grupo, indícalo claramente y sugiere reformular la consulta.
+5. Si no hay perfiles en ningún grupo, indícalo claramente y sugiere reformular la consulta.
 
-**FORMATO (Markdown):**
+**FORMATO OBLIGATORIO (Markdown) — CADA persona en su PROPIA LÍNEA, nunca varias personas en un mismo párrafo:**
+
 **Encontré [X] perfiles para [criterio]:**
 
 **Alta fiabilidad:**
-1. **Nombre** — razón
-...
+1. **Nombre Completo** — razón breve
+2. **Nombre Completo** — razón breve
 
-**Fiabilidad media/baja:**
-N. **Nombre** — razón (fiabilidad: XX%)
-...
+**Fiabilidad media:**
+3. **Nombre Completo** — razón breve (fiabilidad: XX%)
+4. **Nombre Completo** — razón breve (fiabilidad: XX%)
 
-**Resumen:** [X] perfiles encontrados ([N] alta fiabilidad, [M] fiabilidad media/baja).
+**Fiabilidad baja:**
+N. **Nombre Completo** — razón breve (fiabilidad: XX%)
 
-Responde en español. Máximo {max_chars} caracteres."""
+**Resumen:** [X] perfiles encontrados ([N] alta, [M] media, [K] baja fiabilidad).
+
+REGLAS DE FORMATO ESTRICTAS:
+- CADA perfil debe ocupar EXACTAMENTE una línea: "N. **Nombre** — razón"
+- NUNCA agrupes varios nombres en una misma línea o párrafo.
+- Usa numeración continua (1, 2, 3...) sin reiniciar entre secciones.
+- Mantén las razones breves (máximo 10-15 palabras por perfil).
+- NO uses texto en prosa entre los perfiles.
+
+Responde en español."""

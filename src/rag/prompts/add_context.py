@@ -173,7 +173,7 @@ def _generate_qa(
         response = llm_client.chat.completions.create(
             model=deployment,
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.3,
+            temperature=config.temperature,
             max_tokens=400,
         )
         qa_text = response.choices[0].message.content.strip()
@@ -265,7 +265,7 @@ def _push_to_search(
 
 def enrich_chunks(
     use_case: str,
-    workers: int = 4,
+    workers: int = config.max_workers_docs,
     batch_size: int = 100,
     overwrite: bool = False,
     dry_run: bool = False,
@@ -353,8 +353,8 @@ def _parse_args() -> argparse.Namespace:
         help="Colección de Cosmos a procesar: cvs | eu | wiki",
     )
     parser.add_argument(
-        "--workers", type=int, default=4,
-        help="Número de hilos paralelos para llamadas al LLM (default: 4)",
+        "--workers", type=int, default=config.max_workers_docs,
+        help=f"Número de hilos paralelos para llamadas al LLM (default: {config.max_workers_docs})",
     )
     parser.add_argument(
         "--batch-size", type=int, default=100,

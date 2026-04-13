@@ -7,20 +7,15 @@ Estructura del JSON:
     {
       "id": "uuid",
       "timestamp": "ISO-8601",
-      "query": "pregunta del usuario",
-      "groups": {
-        "grupo1": {   // fiabilidad >= 0.90
-          "reliability": "≥90%",
+      "question": "pregunta del usuario",
+      "results": [
+        {
+          "reliability": 0.9,
           "data": ["Nombre Apellido", ...],
-          "reasoning": "Extraído directamente por score ≥ 0.90"
-        },
-        "grupo2": {
-          "reliability": "70-90%",
-          "data": "respuesta del mini-LLM",
-          "reasoning": "Generado con mini-LLM sobre N chunks"
+          "reasoning": "explicación"
         },
         ...
-      }
+      ]
     }
   ]
 }
@@ -66,20 +61,43 @@ class CvsHistory:
         """
         Añade una entrada al historial y devuelve su ID.
 
-        ``groups`` tiene la forma:
+        Convierte el dict de grupos al formato plano:
         {
-          "grupo1": {"reliability": "...", "data": [...], "reasoning": "..."},
-          "grupo2": {"reliability": "...", "data": "...", "reasoning": "..."},
-          ...
+          "question": "...",
+          "results": [
+            {"reliability": 0.9, "data": [...], "reasoning": "..."},
+            ...
+          ]
         }
         """
         data = self._load()
         entry_id = str(uuid.uuid4())
+
+        # Convertir groups dict → results array con reliability numérico
+        results = []
+        for gname in ("grupo1", "grupo2", "grupo3", "grupo4", "grupo5"):
+            g = groups.get(gname)
+            if not g:
+                continue
+            raw_data = g.get("data", "ninguno")
+            # Normalizar data a lista
+            if isinstance(raw_data, list):
+                data_list = raw_data
+            elif isinstance(raw_data, str) and raw_data.lower() != "ninguno":
+                data_list = [name.strip() for name in raw_data.split("|") if name.strip()]
+            else:
+                data_list = []
+            results.append({
+                "reliability": g.get("reliability_score", 0.0),
+                "data":        data_list,
+                "reasoning":   g.get("reasoning", ""),
+            })
+
         entry = {
             "id":        entry_id,
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
-            "query":     query,
-            "groups":    groups,
+            "question":  query,
+            "results":   results,
         }
         data["entries"].append(entry)
         self._save(data)

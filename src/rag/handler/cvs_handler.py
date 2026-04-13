@@ -340,7 +340,18 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
                         "reasoning":   "Sin chunks en este rango de fiabilidad.",
                     }
 
-        # 4. Persistir en historial
+        # 4. Añadir reliability_score numérico a cada grupo (para historial)
+        score_map = {
+            "grupo1": config.cvs_reliability_t1,
+            "grupo2": config.cvs_reliability_t2,
+            "grupo3": config.cvs_reliability_t3,
+            "grupo4": config.cvs_reliability_t4,
+            "grupo5": 0.0,
+        }
+        for gname, group in groups_result.items():
+            group["reliability_score"] = score_map.get(gname, 0.0)
+
+        # 5. Persistir en historial
         history_id = self.history.add_entry(query=query, groups=groups_result)
 
         return {"groups": groups_result, "history_id": history_id}
@@ -379,6 +390,10 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
 
         system_message = self.get_system_message()
 
+        # max_tokens alto para CVs: con muchos perfiles, la lista necesita espacio
+        # ~15 tokens por perfil * hasta 150 perfiles = ~2250, más headers y resumen
+        max_tokens_response = max(config.max_tokens, 4096)
+
         response = client.chat.completions.create(
             model=chat_cfg.deployment,
             messages=[
@@ -386,7 +401,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
                 {"role": "user",   "content": prompt},
             ],
             temperature=0.3,
-            max_tokens=config.max_tokens,
+            max_tokens=max_tokens_response,
         )
 
         answer = response.choices[0].message.content
