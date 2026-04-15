@@ -3,6 +3,14 @@ Prompts específicos para el caso de uso Wiki / Wikipedia.
 """
 from typing import Dict, List
 
+LANG_NAMES = {
+    "es": "español",
+    "en": "English",
+    "fr": "français",
+    "it": "italiano",
+    "pt": "português",
+}
+
 
 class WikiPrompts:
     """Prompts centrados en respuestas enciclopédicas basadas en artículos de Wikipedia."""
@@ -11,7 +19,7 @@ class WikiPrompts:
     # Prompt principal de generación
     # ------------------------------------------------------------------
     @staticmethod
-    def generation(query: str, context: List[Dict], max_chars: int) -> str:
+    def generation(query: str, context: List[Dict], max_chars: int, language: str = "es") -> str:
         context_text = ""
         unique_docs: set = set()
 
@@ -53,7 +61,7 @@ basándose en artículos de Wikipedia.
 [3] PRECISIÓN: Usa únicamente información presente en los artículos. Si la pregunta va más allá
 de lo disponible en los fragmentos, indícalo.
 
-[4] IDIOMA: Responde en el idioma de la pregunta (español por defecto).
+[4] IDIOMA: Responde en {LANG_NAMES.get(language, 'español')}.
 
 Máximo {max_chars} caracteres."""
 

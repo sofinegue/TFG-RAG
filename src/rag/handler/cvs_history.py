@@ -57,6 +57,7 @@ class CvsHistory:
         self,
         query: str,
         groups: Dict[str, Dict],
+        language: str = "es",
     ) -> str:
         """
         Añade una entrada al historial y devuelve su ID.
@@ -97,6 +98,7 @@ class CvsHistory:
             "id":        entry_id,
             "timestamp": datetime.now(tz=timezone.utc).isoformat(),
             "question":  query,
+            "language":  language,
             "results":   results,
         }
         data["entries"].append(entry)

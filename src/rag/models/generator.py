@@ -42,6 +42,7 @@ class GeneratorState(TypedDict):
     conversation_history: List[Dict]
     rag_mode: str
     use_case: str
+    language: str
     assistant_id: Optional[str]
     gpt_config: Dict
 
@@ -98,6 +99,7 @@ class Generator:
         assistant_id: str = None,
         gpt_config: Dict = None,
         use_case: str = "cvs",
+        language: str = "es",
     ):
         """
         Genera respuesta y devuelve (answer: str, usage_info: dict).
@@ -125,8 +127,7 @@ class Generator:
             last_query=last_query,
             last_response=last_response,
             gpt_config=gpt_config,
-            use_case=use_case,
-        )
+            use_case=use_case,            language=language,        )
 
     # ------------------------------------------------------------------
     # GPT interno
@@ -140,6 +141,7 @@ class Generator:
         last_response: str,
         gpt_config: Dict,
         use_case: str,
+        language: str = "es",
     ):
         print(f"      🔧 Generando con GPT [{use_case}]...")
 
@@ -173,6 +175,7 @@ class Generator:
             query=query,
             context=chunks[:max_chunks],
             max_chars=config.max_answer_chars,
+            language=language,
         )
 
         messages = [{"role": "system", "content": system_message}]
@@ -290,6 +293,7 @@ class Generator:
                 assistant_id=state.get("assistant_id"),
                 gpt_config=state.get("gpt_config", {}),
                 use_case=use_case,
+                language=state.get("language", "es"),
             )
 
             state["answer"]     = answer

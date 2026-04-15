@@ -59,8 +59,9 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         query: str,
         context: List[Dict],
         max_chars: int,
+        language: str = "es",
     ) -> str:
-        return self.prompts.generation(query, context, max_chars)
+        return self.prompts.generation(query, context, max_chars, language=language)
 
     def build_rag_fusion_prompt(self, query: str, k: int) -> str:
         return self.prompts.rag_fusion(query, k)
@@ -258,6 +259,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         self,
         query: str,
         chunks: List[Dict],
+        language: str = "es",
     ) -> Dict:
         """
         Pipeline principal para CVs:
@@ -346,13 +348,13 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
             "grupo2": config.cvs_reliability_t2,
             "grupo3": config.cvs_reliability_t3,
             "grupo4": config.cvs_reliability_t4,
-            "grupo5": 0.0,
+            "grupo5": config.cvs_reliability_t5,
         }
         for gname, group in groups_result.items():
             group["reliability_score"] = score_map.get(gname, 0.0)
 
         # 5. Persistir en historial
-        history_id = self.history.add_entry(query=query, groups=groups_result)
+        history_id = self.history.add_entry(query=query, groups=groups_result, language=language)
 
         return {"groups": groups_result, "history_id": history_id}
 
@@ -362,6 +364,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         self,
         query: str,
         groups_result: Dict,
+        language: str = "es",
     ) -> tuple:
         """
         Paso 3 del diagrama: toma los resultados de todos los grupos
@@ -386,6 +389,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
             query=query,
             groups=groups_result,
             max_chars=config.max_answer_chars,
+            language=language,
         )
 
         system_message = self.get_system_message()

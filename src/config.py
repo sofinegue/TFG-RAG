@@ -120,6 +120,7 @@ class RAGConfig:
     cvs_reliability_t2: float = float(os.getenv("CVS_RELIABILITY_T2", "0.7"))
     cvs_reliability_t3: float = float(os.getenv("CVS_RELIABILITY_T3", "0.5"))
     cvs_reliability_t4: float = float(os.getenv("CVS_RELIABILITY_T4", "0.3"))
+    cvs_reliability_t5: float = float(os.getenv("CVS_RELIABILITY_T5", "0.0"))
     
     # === CHUNKING ===
     sublotes_flag: bool = bool(int(os.getenv("SUBLOTES_FLAG", "0")))

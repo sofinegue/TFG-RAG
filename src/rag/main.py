@@ -183,6 +183,7 @@ async def chat(
     user_id:         Optional[str]  = Form(None),
     conversation_id: Optional[str]  = Form(None),
     use_case:        Optional[str]  = Form("cvs"),
+    language:        Optional[str]  = Form("es"),
     rag_mode:        Optional[str]  = Form("gpt"),
     show_timestamps: Optional[bool] = Form(False),
     assistant_id:    Optional[str]  = Form(None),
@@ -235,6 +236,7 @@ async def chat(
             conversation_history=conversation_history,
             rag_mode=rag_mode,
             use_case=use_case,
+            language=language or "es",
             assistant_id=assistant_id,
         )
     except Exception as e:

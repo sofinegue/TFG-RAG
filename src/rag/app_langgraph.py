@@ -22,6 +22,7 @@ class RAGState(TypedDict):
     query: str
     user_id: str
     use_case: str                     # "cvs" | "eu" | "wiki"
+    language: str                     # "es" | "en" | "fr" | "it" | "pt"
     conversation_history: List[Dict]
 
     # ── Clasificación ──────────────────────────────────────────────────
@@ -164,6 +165,7 @@ class RAGGraph:
             retriever_state = {
                 "query":                state["query"],
                 "use_case":             state.get("use_case", "cvs"),
+                "language":             state.get("language", "es"),
                 "user_id":              state["user_id"],
                 "conversation_history": state.get("conversation_history", []),
                 "chunks_retrieved":     [],
@@ -197,7 +199,7 @@ class RAGGraph:
 
         try:
             # Pasos 1-4: classify + mini-LLMs + historial
-            result = handler.process_query(query, chunks)
+            result = handler.process_query(query, chunks, language=state.get("language", "es"))
             groups = result["groups"]
             state["cvs_groups"] = groups
 
@@ -209,7 +211,7 @@ class RAGGraph:
 
             # Paso 5: Response Format con LLM potente
             print(f"   🎯 Response Format: ensamblando respuesta final...")
-            answer, usage_info = handler.format_final_response(query, groups)
+            answer, usage_info = handler.format_final_response(query, groups, language=state.get("language", "es"))
 
             state["answer"]      = answer
             state["chunks_used"] = chunks
@@ -265,6 +267,7 @@ class RAGGraph:
             "timestamps":           {},
             "rag_mode":             state.get("rag_mode", "gpt"),
             "use_case":             state.get("use_case", "cvs"),
+            "language":             state.get("language", "es"),
             "assistant_id":         state.get("assistant_id"),
             "gpt_config":           state.get("gpt_config", {}),
         }
@@ -347,12 +350,13 @@ class RAGGraph:
         conversation_history: List[Dict] = None,
         rag_mode: str = "gpt",
         use_case: str = "cvs",
+        language: str = "es",
         assistant_id: str = None,
         gpt_config: Dict = None,
     ) -> Dict:
         start = datetime.now()
         print(f"\n{'='*60}")
-        print(f"🚀 RAG [{use_case.upper()}] │ mode={rag_mode} │ user={user_id}")
+        print(f"🚀 RAG [{use_case.upper()}] │ mode={rag_mode} │ lang={language} │ user={user_id}")
         print(f"   Query: {query[:60]}{'...' if len(query) > 60 else ''}")
         print(f"{'='*60}")
 
@@ -360,6 +364,7 @@ class RAGGraph:
             query=query,
             user_id=user_id,
             use_case=use_case,
+            language=language,
             answer="",
             chunks_used=[],
             chunks_retrieved=[],

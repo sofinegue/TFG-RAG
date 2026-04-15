@@ -4,6 +4,7 @@ import MessageBubble from './MessageBubble';
 export default function ChatPanel({
   useCase,
   userId,
+  language,
   conversationId,
   onConversationCreated,
   onConversationUpdated,
@@ -69,6 +70,7 @@ export default function ChatPanel({
       form.append('query', text);
       form.append('user_id', userId);
       form.append('use_case', useCase.id);
+      form.append('language', language);
       if (activeConvId) form.append('conversation_id', activeConvId);
 
       const res = await fetch('/api/chat', { method: 'POST', body: form });
@@ -128,7 +130,7 @@ export default function ChatPanel({
     } finally {
       setLoading(false);
     }
-  }, [input, loading, userId, useCase, activeConvId, onConversationCreated, onConversationUpdated]);
+  }, [input, loading, userId, useCase, language, activeConvId, onConversationCreated, onConversationUpdated]);
 
   function handleKeyDown(e) {
     if (e.key === 'Enter' && !e.shiftKey) {

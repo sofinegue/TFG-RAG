@@ -28,6 +28,14 @@ sobreescriben únicamente los ganchos (hooks) necesarios para sus casos de uso.
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
+LANG_NAMES = {
+    "es": "español",
+    "en": "English",
+    "fr": "français",
+    "it": "italiano",
+    "pt": "português",
+}
+
 
 class BaseUseCaseHandler(ABC):
     """
@@ -49,6 +57,7 @@ class BaseUseCaseHandler(ABC):
         query: str,
         context: List[Dict],
         max_chars: int,
+        language: str = "es",
     ) -> str:
         """
         Construye el prompt principal que recibirá el LLM junto con los

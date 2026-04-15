@@ -3,6 +3,14 @@ Prompts específicos para el caso de uso EU / Legislación de la Unión Europea.
 """
 from typing import Dict, List
 
+LANG_NAMES = {
+    "es": "español",
+    "en": "English",
+    "fr": "français",
+    "it": "italiano",
+    "pt": "português",
+}
+
 
 class EUPrompts:
     """Prompts centrados en consultas sobre normativa, directivas y reglamentos de la UE."""
@@ -11,7 +19,7 @@ class EUPrompts:
     # Prompt principal de generación
     # ------------------------------------------------------------------
     @staticmethod
-    def generation(query: str, context: List[Dict], max_chars: int) -> str:
+    def generation(query: str, context: List[Dict], max_chars: int, language: str = "es") -> str:
         context_text = ""
         unique_docs: set = set()
 
@@ -56,7 +64,7 @@ basándote exclusivamente en los fragmentos de documentos proporcionados.
 [3] HONESTIDAD: Si la información no está en los documentos proporcionados, indícalo claramente.
 No inventes referencias normativas.
 
-[4] IDIOMA: Responde en el idioma de la pregunta (español por defecto).
+[4] IDIOMA: Responde en {LANG_NAMES.get(language, 'español')}.
 
 Máximo {max_chars} caracteres."""
 

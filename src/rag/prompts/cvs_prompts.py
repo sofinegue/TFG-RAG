@@ -6,6 +6,14 @@ los tests de prompts puedan validarlos de forma aislada.
 """
 from typing import Dict, List
 
+LANG_NAMES = {
+    "es": "español",
+    "en": "English",
+    "fr": "français",
+    "it": "italiano",
+    "pt": "português",
+}
+
 
 class CVsPrompts:
     """Prompts centrados en búsqueda de perfiles y análisis de CVs técnicos de la compañía."""
@@ -14,7 +22,7 @@ class CVsPrompts:
     # Prompt principal de generación
     # ------------------------------------------------------------------
     @staticmethod
-    def generation(query: str, context: List[Dict], max_chars: int) -> str:
+    def generation(query: str, context: List[Dict], max_chars: int, language: str = "es") -> str:
         context_text = ""
         unique_docs: set = set()
 
@@ -79,7 +87,7 @@ Sugerencias: [alternativas concretas]
 - "Senior" → Sr., Lead, Principal, Consultor Senior
 - "ML" → Machine Learning, Deep Learning, AI
 
-RESPONDE EN ESPAÑOL. Máximo {max_chars} caracteres."""
+RESPONDE EN {LANG_NAMES.get(language, 'español').upper()}. Máximo {max_chars} caracteres."""
 
     # ------------------------------------------------------------------
     # Prompt de RAG Fusion (adaptado al dominio de talento)
@@ -141,7 +149,7 @@ Responde SOLO en el formato indicado."""
     # Prompt de "Response Format" – ensamblaje final con LLM potente
     # ------------------------------------------------------------------
     @staticmethod
-    def response_format(query: str, groups: dict, max_chars: int) -> str:
+    def response_format(query: str, groups: dict, max_chars: int, language: str = "es") -> str:
         """
         Recibe los resultados de los 5 grupos de fiabilidad y pide
         al LLM potente que genere la respuesta final para el usuario.
@@ -204,4 +212,4 @@ REGLAS DE FORMATO ESTRICTAS:
 - Mantén las razones breves (máximo 10-15 palabras por perfil).
 - NO uses texto en prosa entre los perfiles.
 
-Responde en español."""
+Responde en {LANG_NAMES.get(language, 'español')}."""

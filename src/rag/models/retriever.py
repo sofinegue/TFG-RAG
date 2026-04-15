@@ -31,6 +31,7 @@ class ChunkData(TypedDict):
 class RetrieverState(TypedDict):
     query: str
     use_case: str
+    language: str
     synthetic_queries: List[str]
     chunks_retrieved: List[ChunkData]
     user_id: str
@@ -160,12 +161,17 @@ Responde SOLO con la query (expandida o sin cambios):"""
     # ------------------------------------------------------------------
     # Búsqueda híbrida en un índice concreto
     # ------------------------------------------------------------------
-    def hybrid_search(self, query: str, use_case: str, top_k: int = 10) -> List[Dict]:
+    def hybrid_search(self, query: str, use_case: str, top_k: int = 10, language: str = None) -> List[Dict]:
         try:
             search_client = self._get_search_client(use_case)
             query_embedding = self.get_embedding(query)
 
             handler = get_handler(use_case)
+
+            filter_expr = None
+            if language:
+                filter_expr = f"sourceLanguage eq '{language}'"
+
             results = search_client.search(
                 search_text=query,
                 vector_queries=[
@@ -175,6 +181,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
                         fields="embedding",
                     )
                 ],
+                filter=filter_expr,
                 top=top_k,
                 select=handler.search_select_fields,
             )
@@ -193,6 +200,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
         queries: List[str],
         use_case: str,
         retrieval_cfg: Dict = None,
+        language: str = None,
     ) -> List[ChunkData]:
         retrieval_cfg  = retrieval_cfg or {}
         top_k          = retrieval_cfg.get("top_k",               config.azure_search_top_k)
@@ -201,7 +209,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         all_chunks: List[Dict] = []
         with ThreadPoolExecutor(max_workers=5) as executor:
-            futures = [executor.submit(self.hybrid_search, q, use_case, top_k) for q in queries]
+            futures = [executor.submit(self.hybrid_search, q, use_case, top_k, language) for q in queries]
             for future in futures:
                 all_chunks.extend(future.result())
 
@@ -236,16 +244,17 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         query   = state["query"]
         history = state.get("conversation_history", [])
+        language = state.get("language", "es")
 
         handler       = get_handler(use_case)
         retrieval_cfg = handler.get_retrieval_config()
 
-        print(f"   🔍 Retrieval [{use_case}] – query: {query[:60]}")
+        print(f"   🔍 Retrieval [{use_case}] [lang={language}] – query: {query[:60]}")
         expanded          = self._expand_query_with_context(query, history)
         synthetic_queries = self.generate_synthetic_queries(expanded, use_case, retrieval_cfg)
         print(f"   📝 {len(synthetic_queries)} queries sintéticas")
 
-        chunks = self.rag_fusion_retrieve(synthetic_queries, use_case, retrieval_cfg)
+        chunks = self.rag_fusion_retrieve(synthetic_queries, use_case, retrieval_cfg, language=language)
         print(f"   ✅ {len(chunks)} chunks recuperados")
 
         state["synthetic_queries"] = synthetic_queries

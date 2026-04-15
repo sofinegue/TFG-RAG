@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import ChatPanel from './components/ChatPanel';
 import UseCaseSelector from './components/UseCaseSelector';
+import LanguageSelector from './components/LanguageSelector';
+
+const LANGUAGES_BY_USE_CASE = {
+  cvs:  [{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }],
+  wiki: [{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }],
+  eu:   [
+    { code: 'es', label: 'Español' },
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' },
+    { code: 'it', label: 'Italiano' },
+    { code: 'pt', label: 'Português' },
+  ],
+};
 
 const USE_CASE_DEFAULTS = [
   { id: 'cvs',  label: 'CVs / Talento',  description: 'Búsqueda en currículums', icon: '👤' },
@@ -21,10 +34,23 @@ function generateUserId() {
 export default function App() {
   const [useCases, setUseCases]         = useState(USE_CASE_DEFAULTS);
   const [activeCase, setActiveCase]     = useState('cvs');
+  const [language, setLanguage]         = useState('es');
   const [userId]                        = useState(generateUserId);
   const [conversations, setConversations] = useState([]);
   const [activeConvId, setActiveConvId]   = useState(null);
   const [sidebarOpen, setSidebarOpen]     = useState(true);
+
+  const availableLanguages = useMemo(
+    () => LANGUAGES_BY_USE_CASE[activeCase] || LANGUAGES_BY_USE_CASE.cvs,
+    [activeCase],
+  );
+
+  // Resetear idioma si no está disponible en el nuevo caso de uso
+  useEffect(() => {
+    if (!availableLanguages.find(l => l.code === language)) {
+      setLanguage(availableLanguages[0].code);
+    }
+  }, [availableLanguages, language]);
 
   // Cargar casos de uso del backend
   useEffect(() => {
@@ -93,6 +119,11 @@ export default function App() {
           activeCase={activeCase}
           onChange={(id) => { setActiveCase(id); setActiveConvId(null); }}
         />
+        <LanguageSelector
+          languages={availableLanguages}
+          activeLanguage={language}
+          onChange={setLanguage}
+        />
       </header>
 
       <div className="app-body">
@@ -112,6 +143,7 @@ export default function App() {
           key={`${activeCase}-${activeConvId}`}
           useCase={activeUseCase}
           userId={userId}
+          language={language}
           conversationId={activeConvId}
           onConversationCreated={handleConversationCreated}
           onConversationUpdated={handleConversationUpdated}

@@ -26,8 +26,9 @@ class EUUseCaseHandler(BaseUseCaseHandler):
         query: str,
         context: List[Dict],
         max_chars: int,
+        language: str = "es",
     ) -> str:
-        return self.prompts.generation(query, context, max_chars)
+        return self.prompts.generation(query, context, max_chars, language=language)
 
     def build_rag_fusion_prompt(self, query: str, k: int) -> str:
         return self.prompts.rag_fusion(query, k)

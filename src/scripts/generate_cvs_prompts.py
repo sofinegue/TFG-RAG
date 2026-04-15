@@ -20,6 +20,7 @@ CVS_RELIABILITY_T1 = config.cvs_reliability_t1
 CVS_RELIABILITY_T2 = config.cvs_reliability_t2
 CVS_RELIABILITY_T3 = config.cvs_reliability_t3
 CVS_RELIABILITY_T4 = config.cvs_reliability_t4
+CVS_RELIABILITY_T5 = config.cvs_reliability_t5
 
 # ── Datos de ejemplo para rellenar las plantillas ─────────────────────
 EXAMPLE_QUERY = "¿Quién tiene experiencia en Spark y certificaciones de Azure?"
