@@ -28,6 +28,16 @@ class RAGConfig:
     project_name: str = os.getenv("PROJECT_NAME", "RAG")
     language: str = os.getenv("LANGUAGE", "es")
 
+    # === NOMBRES DE IDIOMAS ===
+    # Mapeo de código ISO 639-1 → nombre legible del idioma.
+    # Se usa en los prompts para indicar al LLM en qué idioma responder.
+    # Configurable vía LANG_NAMES en .env (JSON). Por defecto: es, en, fr, it, pt.
+    _lang_names_raw: str = os.getenv(
+        "LANG_NAMES",
+        '{"es": "español", "en": "English", "fr": "français", "it": "italiano", "pt": "português"}',
+    )
+    lang_names: Dict[str, str] = None  # se inicializa en __post_init__
+
     # === AGENT BUILDER ===
     agent_builder_openai_api_key: str = os.getenv("AGENT_BUILDER_OPENAI_API_KEY")
 
@@ -170,8 +180,23 @@ class RAGConfig:
         if missing:
             raise ValueError(f"Variables requeridas faltantes: {', '.join(missing)}")
         
+        self._load_lang_names()
         self._load_models_config()
     
+    def _load_lang_names(self):
+        """Carga el mapeo de nombres de idiomas desde LANG_NAMES"""
+        try:
+            self.lang_names = json.loads(self._lang_names_raw)
+        except (json.JSONDecodeError, TypeError):
+            self.lang_names = {
+                "es": "español", "en": "English",
+                "fr": "français", "it": "italiano", "pt": "português",
+            }
+
+    def get_lang_name(self, code: str) -> str:
+        """Devuelve el nombre legible de un idioma dado su código ISO 639-1."""
+        return self.lang_names.get(code, "español")
+
     def _load_models_config(self):
         """Carga la configuración de modelos desde MODELS_CONFIG"""
         models_config_str = os.getenv("MODELS_CONFIG")

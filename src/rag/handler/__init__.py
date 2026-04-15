@@ -13,13 +13,12 @@ Uso:
 from src.config import config
 from src.rag.handler.base import BaseUseCaseHandler
 from src.rag.handler.cvs_handler import CVsUseCaseHandler
-from src.rag.handler.eu_handler import EUUseCaseHandler
-from src.rag.handler.wiki_handler import WikiUseCaseHandler
+from src.rag.handler.document_handler import DocumentHandler
 
 _REGISTRY: dict[str, BaseUseCaseHandler] = {
     "cvs":  CVsUseCaseHandler(config.azure_search_index_cvs),
-    "eu":   EUUseCaseHandler(config.azure_search_index_eu),
-    "wiki": WikiUseCaseHandler(config.azure_search_index_wiki),
+    "eu":   DocumentHandler("eu",   config.azure_search_index_eu),
+    "wiki": DocumentHandler("wiki", config.azure_search_index_wiki),
 }
 
 
@@ -43,4 +42,4 @@ def list_use_cases() -> list[str]:
 
 
 __all__ = ["get_handler", "list_use_cases", "BaseUseCaseHandler",
-           "CVsUseCaseHandler", "EUUseCaseHandler", "WikiUseCaseHandler"]
+           "CVsUseCaseHandler", "DocumentHandler"]

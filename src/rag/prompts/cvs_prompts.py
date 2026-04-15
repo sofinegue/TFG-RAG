@@ -6,13 +6,7 @@ los tests de prompts puedan validarlos de forma aislada.
 """
 from typing import Dict, List
 
-LANG_NAMES = {
-    "es": "español",
-    "en": "English",
-    "fr": "français",
-    "it": "italiano",
-    "pt": "português",
-}
+from src.config import config
 
 
 class CVsPrompts:
@@ -87,7 +81,7 @@ Sugerencias: [alternativas concretas]
 - "Senior" → Sr., Lead, Principal, Consultor Senior
 - "ML" → Machine Learning, Deep Learning, AI
 
-RESPONDE EN {LANG_NAMES.get(language, 'español').upper()}. Máximo {max_chars} caracteres."""
+RESPONDE EN {config.get_lang_name(language).upper()}. Máximo {max_chars} caracteres."""
 
     # ------------------------------------------------------------------
     # Prompt de RAG Fusion (adaptado al dominio de talento)
@@ -212,4 +206,4 @@ REGLAS DE FORMATO ESTRICTAS:
 - Mantén las razones breves (máximo 10-15 palabras por perfil).
 - NO uses texto en prosa entre los perfiles.
 
-Responde en {LANG_NAMES.get(language, 'español')}."""
+Responde en {config.get_lang_name(language)}."""

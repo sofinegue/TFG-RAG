@@ -3,13 +3,7 @@ Prompts específicos para el caso de uso Wiki / Wikipedia.
 """
 from typing import Dict, List
 
-LANG_NAMES = {
-    "es": "español",
-    "en": "English",
-    "fr": "français",
-    "it": "italiano",
-    "pt": "português",
-}
+from src.config import config
 
 
 class WikiPrompts:
@@ -61,7 +55,7 @@ basándose en artículos de Wikipedia.
 [3] PRECISIÓN: Usa únicamente información presente en los artículos. Si la pregunta va más allá
 de lo disponible en los fragmentos, indícalo.
 
-[4] IDIOMA: Responde en {LANG_NAMES.get(language, 'español')}.
+[4] IDIOMA: Responde en {config.get_lang_name(language)}.
 
 Máximo {max_chars} caracteres."""
 

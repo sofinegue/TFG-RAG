@@ -28,14 +28,6 @@ sobreescriben únicamente los ganchos (hooks) necesarios para sus casos de uso.
 from abc import ABC, abstractmethod
 from typing import Dict, List
 
-LANG_NAMES = {
-    "es": "español",
-    "en": "English",
-    "fr": "français",
-    "it": "italiano",
-    "pt": "português",
-}
-
 
 class BaseUseCaseHandler(ABC):
     """

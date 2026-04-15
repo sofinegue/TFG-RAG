@@ -3,13 +3,7 @@ Prompts específicos para el caso de uso EU / Legislación de la Unión Europea.
 """
 from typing import Dict, List
 
-LANG_NAMES = {
-    "es": "español",
-    "en": "English",
-    "fr": "français",
-    "it": "italiano",
-    "pt": "português",
-}
+from src.config import config
 
 
 class EUPrompts:
@@ -64,7 +58,7 @@ basándote exclusivamente en los fragmentos de documentos proporcionados.
 [3] HONESTIDAD: Si la información no está en los documentos proporcionados, indícalo claramente.
 No inventes referencias normativas.
 
-[4] IDIOMA: Responde en {LANG_NAMES.get(language, 'español')}.
+[4] IDIOMA: Responde en {config.get_lang_name(language)}.
 
 Máximo {max_chars} caracteres."""
 
