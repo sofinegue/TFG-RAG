@@ -29,6 +29,10 @@ from typing import List, Dict, Optional
 # helpers.py lee SEMAPHORE_LIMIT al importarse; Aura Free sólo admite ~3 conexiones.
 os.environ.setdefault("SEMAPHORE_LIMIT", "1")
 
+# Desactivar telemetría de Graphiti (PostHog) para evitar errores SSL
+# detrás de proxies corporativos.
+os.environ.setdefault("GRAPHITI_TELEMETRY_ENABLED", "false")
+
 from openai import AsyncAzureOpenAI
 
 from src.config import config
@@ -135,18 +139,24 @@ async def init_graphiti() -> Graphiti:
     reranker = OpenAIRerankerClient(client=azure_llm_client)
 
     # --- Driver Neo4j con pool limitado (Aura Free ≈ 3 conexiones) ---
+    # IMPORTANTE: en Aura, la DB no se llama 'neo4j' sino el ID de la instancia
+    # (p.ej. '6396cf17'). Se configura vía NEO4J_DATABASE en .env.
     neo4j_driver = Neo4jDriver(
         uri=config.neo4j_uri,
         user=config.neo4j_user,
         password=config.neo4j_password,
+        database=config.neo4j_database,
     )
-    # Reemplazar el cliente interno con uno que tenga pool size reducido
+    # Reemplazar el cliente interno con uno que tenga pool size reducido.
+    # Aura Free ≈ 3 conexiones simultáneas; pool=5 deja margen para
+    # las queries internas de add_episode (vector + fulltext en paralelo).
+    # Timeout reducido a 60s para fallar rápido en vez de colgar 5 min.
     await neo4j_driver.client.close()
     neo4j_driver.client = AsyncGraphDatabase.driver(
         uri=config.neo4j_uri,
         auth=(config.neo4j_user, config.neo4j_password),
-        max_connection_pool_size=3,
-        connection_acquisition_timeout=300,
+        max_connection_pool_size=5,
+        connection_acquisition_timeout=60,
     )
 
     # --- Instancia Graphiti ---
