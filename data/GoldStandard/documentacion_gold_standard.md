@@ -1,10 +1,22 @@
-# Documentación del Gold Standard — Caso de uso: CVs en Español
+# Documentación del Gold Standard — Evaluación del Sistema RAG
 
 ## 1. Introducción
 
 El **gold standard** (o *ground truth*) es un conjunto de pares pregunta-respuesta cuya corrección ha sido verificada de forma determinista. Su propósito es servir como referencia objetiva para evaluar la calidad de las respuestas de un sistema RAG (*Retrieval-Augmented Generation*). Al comparar las respuestas del sistema con las del gold standard, se pueden calcular métricas de rendimiento como precisión, recall, F1-score y exactitud.
 
-En esta sección se documenta el proceso de generación del gold standard para el **caso de uso de CVs en español**, que constituye el primero de los tres casos de uso evaluados en este trabajo.
+En este proyecto se han generado **seis gold standards** que cubren tres casos de uso en dos idiomas cada uno:
+
+| # | Caso de uso | Idioma | Preguntas | Documentos analizados |
+|---|---|---|---|---|
+| 1 | CVs | Español | 220 | 300 CVs |
+| 2 | CVs | Inglés | 220 | 300 CVs |
+| 3 | Wikipedia | Español | 200 | 182 artículos |
+| 4 | Wikipedia | Inglés | 200 | 133 artículos |
+| 5 | Documentos UE | Español | 206 | 19 documentos del DOUE |
+| 6 | Documentos UE | Inglés | *(pendiente de disponer de los PDFs en inglés)* | — |
+| | **Total** | | **1046** | |
+
+Cada gold standard ha sido generado mediante un enfoque **computacional y determinista**, sin intervención de modelos de lenguaje en la producción de respuestas, lo que garantiza una corrección del 100 % frente a los datos fuente.
 
 ---
 
