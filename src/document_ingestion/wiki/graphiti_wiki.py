@@ -20,9 +20,14 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 from typing import List, Dict, Optional
+
+# IMPORTANTE: limitar concurrencia de Graphiti ANTES de importar la librería.
+# helpers.py lee SEMAPHORE_LIMIT al importarse; Aura Free sólo admite ~3 conexiones.
+os.environ.setdefault("SEMAPHORE_LIMIT", "1")
 
 from openai import AsyncAzureOpenAI
 
@@ -36,6 +41,8 @@ from graphiti_core.llm_client.azure_openai_client import AzureOpenAILLMClient
 from graphiti_core.llm_client.config import LLMConfig
 from graphiti_core.embedder.azure_openai import AzureOpenAIEmbedderClient
 from graphiti_core.cross_encoder.openai_reranker_client import OpenAIRerankerClient
+from graphiti_core.driver.neo4j_driver import Neo4jDriver
+from neo4j import AsyncGraphDatabase
 
 logging.basicConfig(
     level=logging.INFO,
@@ -127,14 +134,29 @@ async def init_graphiti() -> Graphiti:
     # Reranker: usa el mismo cliente LLM de Azure
     reranker = OpenAIRerankerClient(client=azure_llm_client)
 
-    # --- Instancia Graphiti ---
-    graphiti = Graphiti(
+    # --- Driver Neo4j con pool limitado (Aura Free ≈ 3 conexiones) ---
+    neo4j_driver = Neo4jDriver(
         uri=config.neo4j_uri,
         user=config.neo4j_user,
         password=config.neo4j_password,
+    )
+    # Reemplazar el cliente interno con uno que tenga pool size reducido
+    await neo4j_driver.client.close()
+    neo4j_driver.client = AsyncGraphDatabase.driver(
+        uri=config.neo4j_uri,
+        auth=(config.neo4j_user, config.neo4j_password),
+        max_connection_pool_size=3,
+        connection_acquisition_timeout=300,
+    )
+
+    # --- Instancia Graphiti ---
+    # max_coroutines=1 para serializar queries Neo4j (Aura Free ~3 conexiones)
+    graphiti = Graphiti(
+        graph_driver=neo4j_driver,
         llm_client=llm_client,
         embedder=embedder,
         cross_encoder=reranker,
+        max_coroutines=1,
     )
 
     logger.info(
@@ -270,6 +292,7 @@ async def run_graphiti_wiki_pipeline(
     language: str = "es",
     group_id: str = "wiki_es",
     test_queries: Optional[List[str]] = None,
+    max_chunks: Optional[int] = None,
 ) -> dict:
     """
     Pipeline completo: lee chunks de Cosmos → construye grafo → búsqueda de prueba.
@@ -279,6 +302,7 @@ async def run_graphiti_wiki_pipeline(
         language: Idioma del artículo.
         group_id: ID de grupo para particionar el grafo.
         test_queries: Lista de consultas de prueba para ejecutar tras la ingesta.
+        max_chunks: Número máximo de chunks a ingestar (None = todos).
 
     Returns:
         Estadísticas de la ingesta.
@@ -288,6 +312,10 @@ async def run_graphiti_wiki_pipeline(
     if not chunks:
         logger.warning("No se encontraron chunks para '%s' (lang=%s)", doc_title, language)
         return {"error": "No chunks found"}
+
+    if max_chunks is not None:
+        logger.info("Limitando ingesta a %d/%d chunks", max_chunks, len(chunks))
+        chunks = chunks[:max_chunks]
 
     # 2. Inicializar Graphiti
     graphiti = await init_graphiti()
@@ -360,6 +388,12 @@ def main():
         default=["¿Qué tipos de escritores existen?", "¿Qué es un dramaturgo?"],
         help="Consultas de prueba para validar el grafo",
     )
+    parser.add_argument(
+        "--max_chunks",
+        type=int,
+        default=None,
+        help="Número máximo de chunks a ingestar (default: todos)",
+    )
 
     args = parser.parse_args()
 
@@ -369,6 +403,7 @@ def main():
             language=args.language,
             group_id=args.group_id,
             test_queries=args.test_query,
+            max_chunks=args.max_chunks,
         )
     )
 
