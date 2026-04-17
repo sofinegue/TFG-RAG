@@ -159,6 +159,11 @@ class RAGConfig:
         "¡Hola! Soy tu asistente RAG. ¿En qué puedo ayudarte?"
     )
     
+    # === NEO4J (Graphiti Knowledge Graph) ===
+    neo4j_uri: str = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+    neo4j_user: str = os.getenv("NEO4J_USER", "neo4j")
+    neo4j_password: str = os.getenv("NEO4J_PASSWORD", "password")
+
     # === LOGGING ===
     log_level: str = os.getenv("LOG_LEVEL", "INFO")
     enable_kibana: bool = os.getenv("KIBANA_ACTIVE", "false").lower() == "true"
