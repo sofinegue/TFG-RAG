@@ -4,7 +4,7 @@
 
 El **gold standard** (o *ground truth*) es un conjunto de pares pregunta-respuesta cuya corrección ha sido verificada de forma determinista. Su propósito es servir como referencia objetiva para evaluar la calidad de las respuestas de un sistema RAG (*Retrieval-Augmented Generation*). Al comparar las respuestas del sistema con las del gold standard, se pueden calcular métricas de rendimiento como precisión, recall, F1-score y exactitud.
 
-En este proyecto se han generado **seis gold standards** que cubren tres casos de uso en dos idiomas cada uno:
+En este proyecto se han generado **nueve gold standards** que cubren tres casos de uso en múltiples idiomas:
 
 | # | Caso de uso | Idioma | Preguntas | Documentos analizados |
 |---|---|---|---|---|
@@ -13,8 +13,11 @@ En este proyecto se han generado **seis gold standards** que cubren tres casos d
 | 3 | Wikipedia | Español | 200 | 182 artículos |
 | 4 | Wikipedia | Inglés | 200 | 133 artículos |
 | 5 | Documentos UE | Español | 206 | 19 documentos del DOUE |
-| 6 | Documentos UE | Inglés | *(pendiente de disponer de los PDFs en inglés)* | — |
-| | **Total** | | **1046** | |
+| 6 | Documentos UE | Inglés | 205 | 18 documentos del DOUE |
+| 7 | Documentos UE | Francés | 204 | 18 documentos del DOUE |
+| 8 | Documentos UE | Italiano | 204 | 18 documentos del DOUE |
+| 9 | Documentos UE | Portugués | 204 | 18 documentos del DOUE |
+| | **Total** | | **1.863** | |
 
 Cada gold standard ha sido generado mediante un enfoque **computacional y determinista**, sin intervención de modelos de lenguaje en la producción de respuestas, lo que garantiza una corrección del 100 % frente a los datos fuente.
 
@@ -85,26 +88,30 @@ Cada archivo JSON de CV contiene los siguientes campos (idénticos en ambos idio
 - **contenido**: Texto completo del artículo, incluyendo marcado de secciones (`== Sección ==`).
 - **fecha_descarga**: Fecha y hora en que se descargó el artículo.
 
-### 2.3 Caso de uso 3: Documentos de la Unión Europea (Español)
+### 2.3 Caso de uso 3: Documentos de la Unión Europea (5 idiomas)
 
-| Parámetro | Valor |
-|---|---|
-| Directorio de PDFs | `data/eu/es/` |
-| Directorio de JSONs extraídos | `data/eu/es/json/` |
-| Número de documentos | 19 |
-| Fuente | Diario Oficial de la Unión Europea (Serie L) |
-| Formato original | PDF |
-| Formato procesado | JSON (tras extracción con `pdfplumber`) |
+Los documentos de la UE están disponibles en cinco idiomas oficiales: español, inglés, francés, italiano y portugués.
+
+| Parámetro | Español | Inglés | Francés | Italiano | Portugués |
+|---|---|---|---|---|---|
+| Directorio de PDFs | `data/eu/es/` | `data/eu/en/` | `data/eu/fr/` | `data/eu/it/` | `data/eu/pt/` |
+| Directorio de JSONs | `data/eu/es/json/` | `data/eu/en/json/` | `data/eu/fr/json/` | `data/eu/it/json/` | `data/eu/pt/json/` |
+| Número de documentos | 19 | 18 | 18 | 18 | 18 |
+| Formato original | PDF | PDF | PDF | PDF | PDF |
+| Formato procesado | JSON | JSON | JSON | JSON | JSON |
+
+> **Nota**: La versión española incluye un documento adicional (`OJ_L_202690063_ES`) correspondiente a una corrección de errores que no está disponible en los demás idiomas. Por ello, el español tiene 19 documentos frente a los 18 del resto.
 
 #### Proceso de extracción de PDFs
 
-Los documentos de la UE se distribuyen en formato PDF. Para poder procesarlos computacionalmente, se implementó un script de extracción (`scripts/extraer_pdfs_eu.py`) que:
+Los documentos de la UE se distribuyen en formato PDF. Para poder procesarlos computacionalmente, se implementó un script de extracción (`scripts/extraer_pdfs_eu.py`) que procesa automáticamente todos los idiomas disponibles:
 
-1. Abre cada PDF con la librería `pdfplumber`.
-2. Extrae el texto de cada página individualmente, con manejo robusto de errores por página.
-3. Silencia el logging verbose de `pdfminer` para evitar interrupciones en documentos complejos.
-4. Omite archivos ya extraídos (ejecución incremental) para gestionar documentos de gran tamaño (el mayor tiene 2.400 páginas).
-5. Genera un archivo JSON por cada PDF con la siguiente estructura:
+1. Itera sobre cada subdirectorio de idioma en `data/eu/`.
+2. Abre cada PDF con la librería `pdfplumber`.
+3. Extrae el texto de cada página individualmente, con manejo robusto de errores por página (captura `BaseException` para gestionar errores internos de `pdfminer`).
+4. Silencia el logging verbose de `pdfminer` para evitar interrupciones en documentos complejos.
+5. Omite archivos ya extraídos (ejecución incremental) para gestionar documentos de gran tamaño (el mayor tiene 2.400 páginas).
+6. Genera un archivo JSON por cada PDF con la siguiente estructura:
 
 ```json
 {
@@ -118,13 +125,14 @@ Los documentos de la UE se distribuyen en formato PDF. Para poder procesarlos co
 
 #### Tipología de documentos de la UE
 
-Los 19 documentos se distribuyen en los siguientes tipos:
+Los documentos se distribuyen en los siguientes tipos (por idioma):
 
-| Tipo de documento | Cantidad |
-|---|---|
-| Reglamentos (de ejecución, delegados, ordinarios) | 10 |
-| Decisiones (de ejecución, PESC, ordinarias) | 8 |
-| Corrección de errores | 1 |
+| Tipo de documento | ES | EN / FR / IT / PT |
+|---|---|---|
+| Reglamentos (de ejecución, delegados, ordinarios) | 10 | 10 |
+| Decisiones (de ejecución, PESC, ordinarias) | 8 | 8 |
+| Corrección de errores | 1 | 0 |
+| **Total** | **19** | **18** |
 
 Los documentos cubren temáticas diversas: pesca y cuotas pesqueras, productos sanitarios, medidas restrictivas (sanciones), acuerdos internacionales (Marruecos, Túnez), plaguicidas, indicaciones geográficas, normas armonizadas, y política exterior y de seguridad común.
 
@@ -245,29 +253,45 @@ Se definieron **10 categorías** adaptadas a la naturaleza de artículos enciclo
 - Se extraen las **secciones** de los artículos mediante expresiones regulares.
 - Las preguntas de definición utilizan la primera frase del artículo como respuesta de referencia.
 
-### 4.3 Documentos de la UE (Español) — 206 preguntas
+### 4.3 Documentos de la UE (5 idiomas) — 204-206 preguntas cada uno
 
-Se definieron **10 categorías** diseñadas para documentos legislativos y regulatorios:
+Se definieron **10 categorías** diseñadas para documentos legislativos y regulatorios. Las categorías son equivalentes en todos los idiomas, adaptando la terminología y las expresiones regulares al idioma correspondiente:
 
-| # | Categoría | N.º preguntas | Descripción |
-|---|---|---|---|
-| 1 | `identificacion` | 25 | Tipo, título, fecha, órgano emisor y metadatos de un documento concreto |
-| 2 | `busqueda_por_tipo` | 15 | Filtrar documentos por tipo (reglamento, decisión, etc.) u órgano emisor |
-| 3 | `busqueda_por_contenido` | 30 | Buscar documentos que traten sobre un tema concreto (pesca, sanciones, etc.) |
-| 4 | `conteo` | 24 | Estadísticas: totales, medias, rankings, distribuciones por tipo |
-| 5 | `referencias_cruzadas` | 18 | Reglamentos/decisiones citados dentro de cada documento y relaciones inter-documentales |
-| 6 | `estructura` | 16 | Número de artículos, considerandos, anexos, disposiciones especiales |
-| 7 | `existencia` | 20 | ¿Hay documentos sobre X? ¿Se menciona Y? (con detalle de documentos) |
-| 8 | `listado` | 13 | Catálogo completo, por órgano, por tipo, por año |
-| 9 | `relaciones` | 24 | Comparaciones, agrupaciones temáticas, distribución temporal, países mencionados |
-| 10 | `contenido_especifico` | 21 | Artículos concretos, ámbito de aplicación, derogaciones, bases jurídicas, plazos |
-| | **Total** | **206** | |
+| # | Categoría (ES) | Categoría (EN) | Categoría (FR) | Categoría (IT) | Categoría (PT) | N.º preg. |
+|---|---|---|---|---|---|---|
+| 1 | `identificacion` | `identification` | `identification` | `identificazione` | `identificacao` | 25 |
+| 2 | `busqueda_por_tipo` | `search_by_type` | `recherche_par_type` | `ricerca_per_tipo` | `pesquisa_por_tipo` | 15 |
+| 3 | `busqueda_por_contenido` | `search_by_content` | `recherche_par_contenu` | `ricerca_per_contenuto` | `pesquisa_por_conteudo` | 30 |
+| 4 | `conteo` | `counting` | `comptage` | `conteggio` | `contagem` | 24 |
+| 5 | `referencias_cruzadas` | `cross_references` | `references_croisees` | `riferimenti_incrociati` | `referencias_cruzadas` | 18 |
+| 6 | `estructura` | `structure` | `structure` | `struttura` | `estrutura` | 16 |
+| 7 | `existencia` | `existence` | `existence` | `esistenza` | `existencia` | 20 |
+| 8 | `listado` | `listing` | `listage` | `elenco` | `listagem` | 13 |
+| 9 | `relaciones` | `relationships` | `relations` | `relazioni` | `relacoes` | 24 |
+| 10 | `contenido_especifico` | `specific_content` | `contenu_specifique` | `contenuto_specifico` | `conteudo_especifico` | 21 |
+| | **Total base** | | | | | **206** |
+
+> **Nota**: El total varía ligeramente entre idiomas (ES: 206, EN: 205, FR/IT/PT: 204) debido a diferencias en los datos disponibles (p. ej., el documento de corrección de errores solo existe en español) y a ajustes para garantizar la unicidad de todas las preguntas.
+
+**Adaptaciones por idioma:**
+
+Cada script adapta los siguientes elementos al idioma correspondiente:
+
+| Elemento | ES | EN | FR | IT | PT |
+|---|---|---|---|---|---|
+| Tipo: Reglamento | REGLAMENTO | REGULATION | RÈGLEMENT | REGOLAMENTO | REGULAMENTO |
+| Tipo: Decisión | DECISIÓN | DECISION | DÉCISION | DECISIONE | DECISÃO |
+| Órgano: Comisión | Comisión Europea | European Commission | Commission européenne | Commissione europea | Comissão Europeia |
+| Órgano: Consejo | Consejo | Council | Conseil | Consiglio | Conselho |
+| Artículo | Artículo | Article | Article | Articolo | Artigo |
+| Entrada en vigor | entrará en vigor | shall enter into force | entre en vigueur | entra in vigore | entra em vigor |
 
 **Particularidades del caso UE:**
 - Incluye una **fase previa de extracción de PDFs** a JSON, necesaria porque los documentos originales están en formato PDF.
 - Se extraen metadatos regulatorios de forma automatizada: tipo de acto jurídico, código numérico, órgano emisor, fecha de adopción, número de artículos y considerandos.
 - Se analizan las **referencias cruzadas** entre documentos (citas a otros reglamentos y decisiones de la UE).
 - Las preguntas cubren aspectos específicos del derecho de la UE: entrada en vigor, disposiciones transitorias, derogaciones, destinatarios, bases jurídicas.
+- Las expresiones regulares y plantillas de preguntas se adaptan a la terminología jurídica de cada idioma.
 
 ---
 
@@ -281,7 +305,7 @@ Todos los gold standards comparten una estructura JSON uniforme:
 {
   "gold_standard": {
     "caso_uso": "cvs | wikipedia | documentos_ue",
-    "idioma": "es | en",
+    "idioma": "es | en | fr | it | pt",
     "total_preguntas": N,
     "total_cvs_analizados | total_articulos_analizados | total_documentos_analizados": M,
     "fecha_generacion": "2026-04-17",
@@ -303,7 +327,7 @@ Todos los gold standards comparten una estructura JSON uniforme:
 | `respuesta` / `answer` | variable | La respuesta correcta (string, lista, número, objeto o booleano) |
 | `num_resultados` / `num_results` | int | (Solo listas) Número de elementos en la respuesta |
 
-> **Nota sobre la nomenclatura**: Los gold standards en español usan campos en español (`pregunta`, `respuesta`, `tipo_respuesta`), mientras que los de inglés usan campos en inglés (`question`, `answer`, `answer_type`). Esto facilita el procesamiento coherente con el idioma del gold standard.
+> **Nota sobre la nomenclatura**: Los gold standards en español usan campos en español (`pregunta`, `respuesta`, `tipo_respuesta`), mientras que los de inglés, francés, italiano y portugués usan campos en inglés (`question`, `answer`, `answer_type`). Esto facilita el procesamiento coherente con el idioma del gold standard.
 
 ---
 
@@ -425,7 +449,11 @@ Todos los gold standards comparten una estructura JSON uniforme:
 | Wikipedia ES | 200 | 182 artículos | 10 | 200/200 (100 %) | 17/04/2026 |
 | Wikipedia EN | 200 | 133 artículos | 10 | 200/200 (100 %) | 17/04/2026 |
 | Documentos UE ES | 206 | 19 documentos DOUE | 10 | 206/206 (100 %) | 17/04/2026 |
-| **Total** | **1.046** | | | **1.046/1.046** | |
+| Documentos UE EN | 205 | 18 documentos DOUE | 10 | 205/205 (100 %) | 17/04/2026 |
+| Documentos UE FR | 204 | 18 documentos DOUE | 10 | 204/204 (100 %) | 17/04/2026 |
+| Documentos UE IT | 204 | 18 documentos DOUE | 10 | 204/204 (100 %) | 17/04/2026 |
+| Documentos UE PT | 204 | 18 documentos DOUE | 10 | 204/204 (100 %) | 17/04/2026 |
+| **Total** | **1.863** | | | **1.863/1.863** | |
 
 ---
 
@@ -440,6 +468,10 @@ Todos los gold standards comparten una estructura JSON uniforme:
 | Gold standard Wikipedia ES | `data/GoldStandard/gold_standard_wikipedia_es.json` | 200 preguntas sobre artículos de Wikipedia en español |
 | Gold standard Wikipedia EN | `data/GoldStandard/gold_standard_wikipedia_en.json` | 200 preguntas sobre artículos de Wikipedia en inglés |
 | Gold standard UE ES | `data/GoldStandard/gold_standard_eu_es.json` | 206 preguntas sobre documentos de la UE en español |
+| Gold standard UE EN | `data/GoldStandard/gold_standard_eu_en.json` | 205 preguntas sobre documentos de la UE en inglés |
+| Gold standard UE FR | `data/GoldStandard/gold_standard_eu_fr.json` | 204 preguntas sobre documentos de la UE en francés |
+| Gold standard UE IT | `data/GoldStandard/gold_standard_eu_it.json` | 204 preguntas sobre documentos de la UE en italiano |
+| Gold standard UE PT | `data/GoldStandard/gold_standard_eu_pt.json` | 204 preguntas sobre documentos de la UE en portugués |
 
 ### 9.2 Scripts de generación
 
@@ -449,8 +481,12 @@ Todos los gold standards comparten una estructura JSON uniforme:
 | Generador CVs EN | `data/GoldStandard/scripts/generar_gold_standard_cvs_en.py` | Carga CVs en inglés, construye índices y genera 220 preguntas |
 | Generador Wikipedia ES | `data/GoldStandard/scripts/generar_gold_standard_wikipedia_es.py` | Carga artículos de Wikipedia en español y genera 200 preguntas |
 | Generador Wikipedia EN | `data/GoldStandard/scripts/generar_gold_standard_wikipedia_en.py` | Carga artículos de Wikipedia en inglés y genera 200 preguntas |
-| Generador UE ES | `data/GoldStandard/scripts/generar_gold_standard_eu_es.py` | Carga documentos de la UE y genera 206 preguntas |
-| Extractor de PDFs | `data/GoldStandard/scripts/extraer_pdfs_eu.py` | Convierte los PDFs de la UE a archivos JSON con `pdfplumber` |
+| Generador UE ES | `data/GoldStandard/scripts/generar_gold_standard_eu_es.py` | Carga documentos de la UE en español y genera 206 preguntas |
+| Generador UE EN | `data/GoldStandard/scripts/generar_gold_standard_eu_en.py` | Carga documentos de la UE en inglés y genera 205 preguntas |
+| Generador UE FR | `data/GoldStandard/scripts/generar_gold_standard_eu_fr.py` | Carga documentos de la UE en francés y genera 204 preguntas |
+| Generador UE IT | `data/GoldStandard/scripts/generar_gold_standard_eu_it.py` | Carga documentos de la UE en italiano y genera 204 preguntas |
+| Generador UE PT | `data/GoldStandard/scripts/generar_gold_standard_eu_pt.py` | Carga documentos de la UE en portugués y genera 204 preguntas |
+| Extractor de PDFs | `data/GoldStandard/scripts/extraer_pdfs_eu.py` | Convierte los PDFs de la UE a archivos JSON con `pdfplumber` (todos los idiomas) |
 
 ### 9.3 Documentación
 
@@ -500,12 +536,11 @@ La generación de estos gold standards constituye una contribución metodológic
 1. **Enfoque determinista**: A diferencia de trabajos que generan gold standards con LLMs (con riesgo de alucinación), aquí se garantiza la corrección de las respuestas al computarlas directamente desde los datos fuente.
 2. **Diversidad lingüística**: Cada pregunta tiene una formulación única, lo que permite evaluar la capacidad del sistema RAG para comprender variaciones de lenguaje natural.
 3. **Cobertura multi-dominio**: Se evalúa el mismo sistema RAG sobre tres dominios muy diferentes (recursos humanos, enciclopedia, legislación), lo que permite analizar su robustez.
-4. **Bilingüismo**: La evaluación en español e inglés permite medir el impacto del idioma en la calidad de las respuestas.
+4. **Multilingüismo**: La evaluación en cinco idiomas (español, inglés, francés, italiano y portugués) permite medir el impacto del idioma en la calidad de las respuestas.
 5. **Escalabilidad de la metodología**: Los scripts son reutilizables y extensibles a nuevos dominios o idiomas.
 
 ### 12.2 Limitaciones conocidas
 
 - **Dependencia de la calidad de los datos fuente**: Si los datos de partida contienen errores (p. ej., CVs con datos inconsistentes o PDFs mal formateados), las respuestas del gold standard heredarán esos errores.
 - **Extracción de PDFs**: La conversión de PDF a texto puede perder formato (tablas, columnas, notas al pie), lo que puede afectar a la precisión de las respuestas basadas en contenido textual.
-- **Cobertura temática**: Las preguntas cubren una selección amplia pero no exhaustiva de todas las posibles consultas. Un sistema RAG podría recibir preguntas no previstas en el gold standard.
-- **Gold standard UE en inglés**: Pendiente de disponer de los documentos PDF en inglés para completar el conjunto.
+- **Cobertura lingüística**: Las preguntas cubren una selección amplia pero no exhaustiva de todas las posibles consultas. Un sistema RAG podría recibir preguntas no previstas en el gold standard.

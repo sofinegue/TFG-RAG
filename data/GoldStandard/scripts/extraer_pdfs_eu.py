@@ -47,7 +47,7 @@ for lang_dir in sorted(EU_DIR.iterdir()):
                 for i, page in enumerate(pdf.pages):
                     try:
                         text = page.extract_text() or ""
-                    except Exception:
+                    except BaseException:
                         text = ""
                     paginas.append(text)
                     if (i + 1) % 100 == 0:
