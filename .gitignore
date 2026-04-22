@@ -10,7 +10,6 @@ data/wikipedia/*
 data/eu/*
 
 src_rag/*
-doc/*
 
 frontend/build/*
 frontend/node_modules/*

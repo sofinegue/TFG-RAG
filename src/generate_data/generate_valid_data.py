@@ -2,7 +2,7 @@ import traceback
 
 import src.generate_data.generate_cvs as generate_cvs
 import src.generate_data.generate_eu as generate_eu
-import src.generate_data.generate_wikipedia as generate_wikipedia
+import src.generate_data.generate_wiki as generate_wikipedia
 import src.generate_data.validate_data as validate
 
 def main():
@@ -33,4 +33,6 @@ def main():
     except Exception as e:
         print(f"\nError during validation: {e}")
         traceback.print_exc()
-    
+
+if __name__ == "__main__":
+    main()
