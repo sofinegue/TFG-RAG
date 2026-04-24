@@ -2,439 +2,174 @@
   "gold_standard": {
     "caso_uso": "wikipedia",
     "idioma": "es",
-    "total_preguntas": 200,
-    "total_articulos_analizados": 182,
+    "total_preguntas": 90,
+    "total_articulos_analizados": 187,
     "fecha_generacion": "2026-04-17",
     "categorias": {
-      "busqueda_por_categoria": 20,
-      "busqueda_por_contenido": 25,
-      "categorias_articulo": 15,
-      "conteo": 20,
-      "definicion": 30,
-      "existencia": 15,
-      "listado": 10,
-      "metadatos": 15,
-      "relaciones": 30,
-      "secciones": 20
+      "busqueda_por_categoria": 10,
+      "busqueda_por_contenido": 6,
+      "categorias_articulo": 8,
+      "conteo": 6,
+      "definicion": 21,
+      "existencia": 4,
+      "listado": 4,
+      "metadatos": 7,
+      "relaciones": 12,
+      "secciones": 12
     },
     "descripcion": "Gold standard para evaluar un sistema RAG sobre artículos de Wikipedia en español (temática: literatura y movimientos literarios). Contiene preguntas de definición, secciones, categorías, búsqueda por contenido, metadatos, conteo, existencia, listados y relaciones entre artículos. Todas las respuestas computadas de los datos.",
     "preguntas": [
       {
         "id": 1,
         "categoria": "definicion",
-        "pregunta": "¿Qué es Realismo literario?",
+        "pregunta": "¿Qué es Alchemised?",
         "tipo_respuesta": "texto",
-        "respuesta": "El realismo literario es una corriente estética que supuso una ruptura con el romanticismo, tanto en los aspectos ideológicos como en los formales, durante la segunda mitad del siglo XIX."
+        "respuesta": "Alchemised: No queda nadie a quien salvar es la edición en español de Alchemised, una novela de horror, fantasía oscura (dark fantasy) y romance gótico escrita por la autora estadounidense SenLinYu."
       },
       {
         "id": 2,
         "categoria": "definicion",
-        "pregunta": "Define el concepto de El buen salvaje (novela).",
-        "tipo_respuesta": "texto",
-        "respuesta": "El buen salvaje es una novela del escritor colombiano Eduardo Caballero Calderón."
-      },
-      {
-        "id": 3,
-        "categoria": "definicion",
-        "pregunta": "¿De qué trata el artículo sobre Clasicismo de Weimar?",
-        "tipo_respuesta": "texto",
-        "respuesta": "El Clasicismo de Weimar (en el alemán original, Weimarer Klassik o Weimarer Klassizismus) fue un movimiento cultural y literario europeo cuyas ideas centrales parten de la obra de Johann Wolfgang von Goethe y Johann Christoph Friedrich von Schiller en el periodo 1788–1832."
-      },
-      {
-        "id": 4,
-        "categoria": "definicion",
-        "pregunta": "Explica brevemente qué es Nueva narrativa norteña.",
-        "tipo_respuesta": "texto",
-        "respuesta": "La Nueva narrativa norteña (también conocida como Narrativa fronteriza) es un término que hace referencia a la literatura del Norte de México a finales del siglo XX y principios del siglo XXI, la cual"
-      },
-      {
-        "id": 5,
-        "categoria": "definicion",
-        "pregunta": "Dame una descripción de Catón castellano.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Se conoce como Catón Castellano o Castigos y ejemplos de Catón a las diversas traducciones e interpretaciones en castellano de la consagrada obra de tradición latina Disticha Catonis."
-      },
-      {
-        "id": 6,
-        "categoria": "definicion",
-        "pregunta": "¿Cómo se define Poesía en performance según la información disponible?",
-        "tipo_respuesta": "texto",
-        "respuesta": "La lectura de poesía en performance o lectura de performance es una lectura pública de textos poéticos o literarios efectuados, más a menudo por su autor en un espíritu que se compara con aquel de la prestación y que puede convocar a todas las artes y técnicos del teatro y de la escena donde la poesía y la literatura son siempre de primer plan."
-      },
-      {
-        "id": 7,
-        "categoria": "definicion",
-        "pregunta": "Necesito saber qué es Traducción literaria. ¿Puedes explicármelo?",
-        "tipo_respuesta": "texto",
-        "respuesta": "La traducción literaria es la traducción de textos que tienen la consideración de obras literarias (novelas, cuentos cortos, obras de teatro, poemas, etcétera)."
-      },
-      {
-        "id": 8,
-        "categoria": "definicion",
-        "pregunta": "Resume en una frase el tema de Poesía lárica.",
-        "tipo_respuesta": "texto",
-        "respuesta": "La poesía lárica o de los lares corresponde a la ética y estética fundada y promovida por el poeta chileno Jorge Teillier."
-      },
-      {
-        "id": 9,
-        "categoria": "definicion",
-        "pregunta": "¿Qué concepto designa el término Juan Taveras?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Juan Taveras Hernández (Santo Domingo, República Dominicana, 13 de enero de 1952), conocido como Juan TH, es un abogado, periodista, escritor y comentarista dominicano."
-      },
-      {
-        "id": 10,
-        "categoria": "definicion",
-        "pregunta": "¿En qué consiste Cosmopolitismo en la literatura?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Desde 1920 hasta 1945 el criollismo había dominado en la literatura hispanoamericana, pero después de la Segunda Guerra Mundial el Cosmopolitismo lo desplazó en casi todos los países; esta corriente sigue existiendo en la actualidad."
-      },
-      {
-        "id": 11,
-        "categoria": "definicion",
-        "pregunta": "Proporciona la definición de Décima (Perú).",
-        "tipo_respuesta": "texto",
-        "respuesta": "La Décima es un tipo de poesía peruana tradicional, es una cuarteta individual en tetrámetro trocaico, con un esquema \"abba\" o \"abcb\" en las rimas los cuales se piropeaba a una dama o se daba batalla contra otro ''poeta'', Comúnmente de naturaleza humorística, satírica o irónica, las décimas son raramente acompañadas de música."
-      },
-      {
-        "id": 12,
-        "categoria": "definicion",
-        "pregunta": "¿A qué se refiere el concepto de Chbab Srey?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Chbab Srey (en camboyano: ច្បាប់ស្រី , Chbăb Srei [ cɓap srəj ];  lit."
-      },
-      {
-        "id": 13,
-        "categoria": "definicion",
-        "pregunta": "Cuéntame sobre Poesía augusta. ¿Qué es exactamente?",
-        "tipo_respuesta": "texto",
-        "respuesta": "En la literatura inglesa, la poesía augusta es una rama de la literatura augusta, y se refiere a la poesía del siglo XVIII, específicamente la de la primera mitad de siglo."
-      },
-      {
-        "id": 14,
-        "categoria": "definicion",
-        "pregunta": "¿Cuál es el significado de Antología?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Una antología es una recopilación de obras notables por algún motivo en particular, de alguien o algo en específico (literarias, cinematográficas, musicales, etcétera)."
-      },
-      {
-        "id": 15,
-        "categoria": "definicion",
-        "pregunta": "Si busco Poesía arraigada, ¿qué información encuentro?",
-        "tipo_respuesta": "texto",
-        "respuesta": "La poesía arraigada fue un movimiento clasicista surgido en la poesía lírica española a partir de 1940, dentro de la llamada Primera generación de posguerra, de estética y temas opuestos a otra corriente, la poesía desarraigada."
-      },
-      {
-        "id": 16,
-        "categoria": "definicion",
-        "pregunta": "¿Podrías decirme qué es Poesía homoerótica hispanohebrea de forma concisa?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Entre los poetas hispanohebreos se dio una considerable producción de poesía homoerótica, género que, al igual que sus contemporáneos musulmanes, cultivaron los grandes poetas de la época, especialmente durante su «Siglo de oro» (alrededor del siglo XI)."
-      },
-      {
-        "id": 17,
-        "categoria": "definicion",
-        "pregunta": "Describe el concepto recogido bajo el nombre de Poesía náhuatl.",
-        "tipo_respuesta": "texto",
-        "respuesta": "La poesía náhuatl es un conjunto de poemas cosmogónicos —es decir que intentan explicar el origen del humano así como al amor, la belleza y el heroísmo; reflexionan sobre el sentido de la vida y expre"
-      },
-      {
-        "id": 18,
-        "categoria": "definicion",
-        "pregunta": "Quiero entender qué es Rubaiyat. Resúmelo.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Rubaiyat (رباعیات عمر خیام en persa) es el título que el poeta y traductor británico Edward Fitzgerald dio a una colección de poemas de Omar Jayam (1048-1131)."
-      },
-      {
-        "id": 19,
-        "categoria": "definicion",
-        "pregunta": "¿Qué información hay disponible sobre The Cadfael Chronicles?",
-        "tipo_respuesta": "texto",
-        "respuesta": "The Cadfael Chronicles (en español: Las Crónicas de Cadfael) es una serie de misterios históricos de asesinatos escrita por la autora inglesa Edith Pargeter (1913-1995) bajo el nombre de Ellis Peters."
-      },
-      {
-        "id": 20,
-        "categoria": "definicion",
-        "pregunta": "Explícame el tema de Tono (literatura) en pocas palabras.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Wikcionario  tiene definiciones y otra información sobre tono."
-      },
-      {
-        "id": 21,
-        "categoria": "definicion",
-        "pregunta": "¿Qué entendemos por Poetismo?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Poetismo (Poetismus en checo) es un movimiento artístico creado en Checoslovaquia que nunca cruzó las fronteras del país y por eso lo podemos considerar como un movimiento vanguardista exclusivo checo."
-      },
-      {
-        "id": 22,
-        "categoria": "definicion",
-        "pregunta": "Háblame sobre Lengua histórica.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Una lengua histórica es aquella que se ha constituido con el tiempo en una unidad leal y es identificada como tal tanto por sus hablantes como por los de otras lenguas."
-      },
-      {
-        "id": 23,
-        "categoria": "definicion",
-        "pregunta": "Me interesa saber qué es Círculo de Lovecraft. Dame una introducción.",
-        "tipo_respuesta": "texto",
-        "respuesta": "El Círculo de Lovecraft era un movimiento literario de escritores principalmente de la llamada weird fiction y que por lo general publicaban en las revistas pulp, especialmente Weird Tales."
-      },
-      {
-        "id": 24,
-        "categoria": "definicion",
-        "pregunta": "¿Qué puedes contarme acerca de Grupo de Coppet?",
-        "tipo_respuesta": "texto",
-        "respuesta": "El grupo de Coppet (Grupo Coppet), también conocido como el Círculo grupo de Coppet, fue una reunión intelectual y literaria informal centrada en Germaine de Staël durante el período de tiempo entre el establecimiento del Primer Imperio Napoleónico (1804) y la Restauración Borbónica (Restauración Borbónica en Francia) de 1814-1815."
-      },
-      {
-        "id": 25,
-        "categoria": "definicion",
-        "pregunta": "¿Cómo definirías Jorge Aristides Lira a partir de los datos?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Jorge Arístides Lira Prieto (31 de agosto de 1908,  Cuzco, Perú-2 de diciembre de 1984, Cuzco, Perú) fue un sacerdote católico, andino, peruano, peruanista –estudioso de la cultura peruana ancestral-, lexicógrafo, autor del primer diccionario quechua-español, estudioso de la herbolaria nativa y descubridor de la mezcla herbolaria ablandadora de rocas, con Jotcha."
-      },
-      {
-        "id": 26,
-        "categoria": "definicion",
-        "pregunta": "¿Qué se sabe sobre Epigrama?",
-        "tipo_respuesta": "texto",
-        "respuesta": "El epigrama (del griego antiguo ἐπί-γράφω: literalmente, 'sobreescribir' o 'escribir encima') es una composición poética breve que expresa un solo pensamiento principal, festivo o satírico, de forma ingeniosa."
-      },
-      {
-        "id": 27,
-        "categoria": "definicion",
-        "pregunta": "¿Tienes información sobre Movimiento de Vanguardia de Nicaragua? Resúmela.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Movimiento de Vanguardia fue un movimiento literario iniciado en 1931, en la ciudad de Granada, Nicaragua."
-      },
-      {
-        "id": 28,
-        "categoria": "definicion",
-        "pregunta": "Haz un breve resumen de lo que es Gustavo Olivo.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Gustavo de Jesús Olivo Peña (San Francisco de Macorís, República Dominicana, 24 de diciembre de 1958) es un periodista, escritor y narrador dominicano."
-      },
-      {
-        "id": 29,
-        "categoria": "definicion",
-        "pregunta": "Me gustaría que me aclararas qué es John Dies at the End (novela).",
+        "pregunta": "Define el concepto de John Dies at the End (novela).",
         "tipo_respuesta": "texto",
         "respuesta": "John Dies at the End es una novela cómica de terror lovecraftiana escrita por Jason Pargin (también conocido como David Wong) que se publicó por primera vez en línea como una serie web a partir de 2001, luego como un manuscrito editado en 2004 y un libro de bolsillo impreso en 2007, publicado por Permuted Press."
       },
       {
-        "id": 30,
+        "id": 3,
         "categoria": "definicion",
-        "pregunta": "¿En qué contexto aparece y qué significa Rima silábica?",
+        "pregunta": "¿De qué trata el artículo sobre Bloqueo del escritor?",
         "tipo_respuesta": "texto",
-        "respuesta": "Rima es un término lingüístico empleado para describir a una unidad fonológica dentro de una sílaba formada por el núcleo silábico (en español, una vocal), y la consonante o grupo de consonantes que conforman la coda, si existe."
+        "respuesta": "Bloqueo del escritor es la condición, que primordialmente le ocurre a un escritor pero que también se da en otros autores creativos, por la que pierden la capacidad para crear nuevo material creativo o el trabajo sufre retrasos."
       },
       {
-        "id": 31,
-        "categoria": "secciones",
-        "pregunta": "¿Qué secciones tiene el artículo sobre Tautograma?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Enlaces externos",
-          "Referencias"
-        ],
-        "num_resultados": 2
+        "id": 4,
+        "categoria": "definicion",
+        "pregunta": "Explica brevemente qué es Gnómica.",
+        "tipo_respuesta": "texto",
+        "respuesta": "Gnómica es un género de poesía que consiste en un conjunto de máximas puestas en verso como auxilio a la memoria."
       },
       {
-        "id": 32,
-        "categoria": "secciones",
-        "pregunta": "Lista los apartados del artículo de Poesía judía.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "El concepto de divinidad",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 3
+        "id": 5,
+        "categoria": "definicion",
+        "pregunta": "Dame una descripción de Misterio histórico.",
+        "tipo_respuesta": "texto",
+        "respuesta": "El misterio histórico es un subgénero de dos géneros literarios, la ficción histórica y la novela de misterio."
       },
       {
-        "id": 33,
-        "categoria": "secciones",
-        "pregunta": "¿Cuáles son los temas que se tratan en el artículo de Poesía taurina?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "= La fiesta nacional",
-          "= Llanto por Ignacio Sánchez Mejías",
-          "= Siglo XVII",
-          "= siglo XIX",
-          "= siglo XVI",
-          "= siglo XVIII",
-          "= siglo XX.",
-          "== Luis de Góngora",
-          "Adriano del Valle Rossi",
-          "Antonio Machado",
-          "Contexto",
-          "Enlaces externos",
-          "Federico García Lorca",
-          "Generación del 27",
-          "Generación del 98",
-          "Gerardo Diego",
-          "Jorge Guillén",
-          "Juan Ramón Jiménez",
-          "Manuel Machado",
-          "Miguel Hernández",
-          "Notas",
-          "Novecentismo",
-          "Pedro Garfias",
-          "Pedro Pérez Clotet",
-          "Pedro Salinas",
-          "Primera etapa hasta el siglo XVI",
-          "Rafael Alberti",
-          "Referencias",
-          "Segunda Generación del 27",
-          "Segunda etapa siglo XVI-XVIII",
-          "Tercera etapa siglo XIX-XX",
-          "Vicente Aleixandre"
-        ],
-        "num_resultados": 32
+        "id": 6,
+        "categoria": "definicion",
+        "pregunta": "¿Cómo se define Editorial Doble Ese según la información disponible?",
+        "tipo_respuesta": "texto",
+        "respuesta": "Editorial Doble Ese fue una editorial argentina fundada en mayo de 1965 por los poetas Roberto Jorge Santoro y Marcos Silber."
       },
       {
-        "id": 34,
-        "categoria": "secciones",
-        "pregunta": "¿En qué partes se divide el contenido de Literatura modernista?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Bibliografía",
-          "Introducción",
-          "La narrativa modernista I, escritores europeos",
-          "La narrativa modernista II, escritores estadounidenses",
-          "La poesía modernista",
-          "Lecturas adicionales",
-          "Narrativa",
-          "Orígenes y precursores",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 10
+        "id": 7,
+        "categoria": "definicion",
+        "pregunta": "Necesito saber qué es The Seafarer (poema). ¿Puedes explicármelo?",
+        "tipo_respuesta": "texto",
+        "respuesta": "The Seafarer (en español: El navegante) es un poema elegíaco en inglés antiguo de 124 líneas, seguido de la palabra \"Amén\"."
       },
       {
-        "id": 35,
-        "categoria": "secciones",
-        "pregunta": "Dame la estructura del artículo sobre Polígrafo (autor).",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Autores polígrafos",
-          "En literatura",
-          "Referencias",
-          "Uso despectivo"
-        ],
-        "num_resultados": 4
+        "id": 8,
+        "categoria": "definicion",
+        "pregunta": "Resume en una frase el tema de Julie Pfannenschmidt.",
+        "tipo_respuesta": "texto",
+        "respuesta": "Julie Pfannenschmidt, de soltera Burow (Kydullen, Prusia Oriental, 24 de febrero de 1806 - Bromberg, 20 de febrero de 1868) fue una escritora alemana."
       },
       {
-        "id": 36,
-        "categoria": "secciones",
-        "pregunta": "¿Qué subtemas aborda el artículo de Chbab Srey?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Historia",
-          "Impacto en la sociedad",
-          "Publicaciones",
-          "Referencias"
-        ],
-        "num_resultados": 4
+        "id": 9,
+        "categoria": "definicion",
+        "pregunta": "¿Qué concepto designa el término Fix-up?",
+        "tipo_respuesta": "texto",
+        "respuesta": "Un fix-up (o fixup) es una forma de novela creada a partir de una serie de cuentos que pueden o no haber estado relacionados entre sí inicialmente, pudiendo haber sido publicados por separado con anterioridad."
       },
       {
-        "id": 37,
-        "categoria": "secciones",
-        "pregunta": "Indica los encabezados del artículo sobre Letrismo.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Enlaces externos",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 3
+        "id": 10,
+        "categoria": "definicion",
+        "pregunta": "¿En qué consiste Bookstagram?",
+        "tipo_respuesta": "texto",
+        "respuesta": "El anglicismo bookstagram proviene de la unión de la palabra books, que significa «libros» en inglés, con el nombre de la aplicación de Instagram."
       },
       {
-        "id": 38,
-        "categoria": "secciones",
-        "pregunta": "¿De qué habla cada parte del artículo de Poesía homoerótica hispanohebrea?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Bibliografía",
-          "Contexto histórico",
-          "Crítica académica",
-          "Enlaces externos",
-          "Estrofas y géneros de la poesía hispanohebrea",
-          "Homoerotismo en la poesía hispanohebrea",
-          "Homosexualidad entre los hebreos en la Edad Media",
-          "La lengua literaria",
-          "La poesía hebrea litúrgica",
-          "Los reinos de taifas. El «Siglo de Oro»",
-          "Poesía hispanohebrea durante el Califato de Córdoba",
-          "Poesía hispanohebrea en al-Ándalus",
-          "Reconquista. Almorávides y almohades",
-          "Referencias",
-          "Sefarad",
-          "Véase también",
-          "Época Omeya y reinos de taifas"
-        ],
-        "num_resultados": 17
+        "id": 11,
+        "categoria": "definicion",
+        "pregunta": "Proporciona la definición de Realismo épico.",
+        "tipo_respuesta": "texto",
+        "respuesta": "Corriente de la literatura y del cine que tiende a mezclar la grandeza y el carácter sobrehumano de la épica con situaciones y personajes de caracteres más humanos, tendiendo a la profundización de las motivaciones de estos y de las circunstancias de la narración."
       },
       {
-        "id": 39,
-        "categoria": "secciones",
-        "pregunta": "Muéstrame el índice del artículo sobre Archivos Husserl.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "El establecimiento de la comunidad de investigación fenomenológica",
-          "Enlaces externos",
-          "Historia",
-          "La creación de archivos hermanos",
-          "Misión",
-          "Referencias"
-        ],
-        "num_resultados": 6
+        "id": 12,
+        "categoria": "definicion",
+        "pregunta": "¿A qué se refiere el concepto de Catón castellano?",
+        "tipo_respuesta": "texto",
+        "respuesta": "Se conoce como Catón Castellano o Castigos y ejemplos de Catón a las diversas traducciones e interpretaciones en castellano de la consagrada obra de tradición latina Disticha Catonis."
       },
       {
-        "id": 40,
-        "categoria": "secciones",
-        "pregunta": "¿Qué aspectos cubre el artículo de Diccionario de rimas?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "En español",
-          "En otros idiomas",
-          "Enlaces externos",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 5
+        "id": 13,
+        "categoria": "definicion",
+        "pregunta": "Cuéntame sobre Prosa poética. ¿Qué es exactamente?",
+        "tipo_respuesta": "texto",
+        "respuesta": "La prosa poética corresponde al segundo tipo de obras líricas que existen."
       },
       {
-        "id": 41,
-        "categoria": "secciones",
-        "pregunta": "Enumera las secciones que componen el artículo de Poetas brumosos.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Elenco de poetas brumosos",
-          "Enlaces externos",
-          "Historia",
-          "Referencias"
-        ],
-        "num_resultados": 4
+        "id": 14,
+        "categoria": "definicion",
+        "pregunta": "¿Cuál es el significado de Extinción (novela)?",
+        "tipo_respuesta": "texto",
+        "respuesta": "Extinción (en alemán: Auslöschung."
       },
       {
-        "id": 42,
-        "categoria": "secciones",
-        "pregunta": "¿Cuántas secciones tiene Enrica von Handel-Mazzetti y cuáles son?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Enlaces externos",
-          "Legado",
-          "Referencias",
-          "Vida"
-        ],
-        "num_resultados": 4
+        "id": 15,
+        "categoria": "definicion",
+        "pregunta": "Si busco Poesía dub, ¿qué información encuentro?",
+        "tipo_respuesta": "texto",
+        "respuesta": "La poesía dub (también conocido en inglés como poetry dub o dub poetry) es una forma de interpretación poética consistente en el recitado o declamación de versos sobre una base de música dub y reggae."
       },
       {
-        "id": 43,
+        "id": 16,
+        "categoria": "definicion",
+        "pregunta": "¿Podrías decirme qué es Epigrama de forma concisa?",
+        "tipo_respuesta": "texto",
+        "respuesta": "El epigrama (del griego antiguo ἐπί-γράφω: literalmente, 'sobreescribir' o 'escribir encima') es una composición poética breve que expresa un solo pensamiento principal, festivo o satírico, de forma ingeniosa."
+      },
+      {
+        "id": 17,
+        "categoria": "definicion",
+        "pregunta": "Describe el concepto recogido bajo el nombre de Positivismo.",
+        "tipo_respuesta": "texto",
+        "respuesta": "El positivismo o filosofía positiva es una teoría filosófica que se posiciona como una alternativa epistemológica tanto al empirismo como al racionalismo, sosteniendo que todo conocimiento genuino se limita a la interpretación de los hallazgos «positivos», es decir, reales, perceptibles sensorialmente y verificables."
+      },
+      {
+        "id": 18,
+        "categoria": "definicion",
+        "pregunta": "Quiero entender qué es Enrica von Handel-Mazzetti. Resúmelo.",
+        "tipo_respuesta": "texto",
+        "respuesta": "Enrica von Handel-Mazzetti (Viena, 10 de enero de 1871-Linz, 8 de abril de 1955) fue una poeta y escritora austríaca, conocida por escribir novelas históricas, en particular La pobre Margarita."
+      },
+      {
+        "id": 19,
+        "categoria": "definicion",
+        "pregunta": "¿Qué información hay disponible sobre Archivos Husserl?",
+        "tipo_respuesta": "texto",
+        "respuesta": "Los Archivos Husserl son centros de investigación reconocidos internacionalmente por el estudio y promoción de la fenomenología, encontrándose su principal sede en el Instituto Superior de Filosofía de la KU Leuven, Lovania."
+      },
+      {
+        "id": 20,
+        "categoria": "definicion",
+        "pregunta": "Explícame el tema de Lengua histórica en pocas palabras.",
+        "tipo_respuesta": "texto",
+        "respuesta": "Una lengua histórica es aquella que se ha constituido con el tiempo en una unidad leal y es identificada como tal tanto por sus hablantes como por los de otras lenguas."
+      },
+      {
+        "id": 21,
+        "categoria": "definicion",
+        "pregunta": "¿Qué entendemos por The Cadfael Chronicles?",
+        "tipo_respuesta": "texto",
+        "respuesta": "The Cadfael Chronicles (en español: Las Crónicas de Cadfael) es una serie de misterios históricos de asesinatos escrita por la autora inglesa Edith Pargeter (1913-1995) bajo el nombre de Ellis Peters."
+      },
+      {
+        "id": 22,
         "categoria": "secciones",
-        "pregunta": "Desglosa la estructura temática de Lidio Mosca Bustamante.",
+        "pregunta": "¿Qué secciones tiene el artículo sobre Lidio Mosca Bustamante?",
         "tipo_respuesta": "lista_secciones",
         "respuesta": [
           "Alemán (traducción)",
@@ -449,209 +184,210 @@
         "num_resultados": 8
       },
       {
-        "id": 44,
+        "id": 23,
         "categoria": "secciones",
-        "pregunta": "¿Qué puntos se desarrollan en el artículo de Epigrama?",
+        "pregunta": "Lista los apartados del artículo de Juan Taveras.",
         "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "= 1. Escuela dórico-peloponésica-occidental",
-          "= 2. Escuela jónico-egipcia",
-          "= 3. Escuela sirio-fenicia",
-          "Ejemplos de epigramas",
-          "El epigrama griego",
-          "El metro",
-          "Enlaces externos",
-          "Escuelas epigramáticas",
-          "Historia y características",
-          "Inicios",
-          "Las colecciones epigramáticas",
-          "Referencias",
-          "Trascendencia",
-          "Época helenística"
-        ],
-        "num_resultados": 14
-      },
-      {
-        "id": 45,
-        "categoria": "secciones",
-        "pregunta": "Dame los títulos de cada sección de Lilith's Brood.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Adaptaciones",
-          "Amanecer (1987)",
-          "Antecedentes",
-          "Enlaces externos",
-          "Estudios",
-          "Imago (1989)",
-          "Lecturas adicionales",
-          "Recepción",
-          "Referencias",
-          "Reseñas",
-          "Ritos de madurez (1988)",
-          "Sinopsis",
-          "Temas"
-        ],
-        "num_resultados": 13
-      },
-      {
-        "id": 46,
-        "categoria": "secciones",
-        "pregunta": "¿Qué tabla de contenidos tiene el artículo de Novela paralela?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Algunos ejemplos",
-          "Enlaces externos",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 4
-      },
-      {
-        "id": 47,
-        "categoria": "secciones",
-        "pregunta": "Revisa el artículo de Poesía escáldica y dime sus secciones principales.",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Enlaces externos",
-          "Flokkr",
-          "Mansöngr",
-          "Poemas",
-          "Referencias",
-          "Véase también"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 48,
-        "categoria": "secciones",
-        "pregunta": "¿En cuántas partes está organizado el artículo de Criptopoesia?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Comienzos",
-          "Enlaces externos",
-          "Exponentes",
-          "Referencias"
-        ],
-        "num_resultados": 4
-      },
-      {
-        "id": 49,
-        "categoria": "secciones",
-        "pregunta": "¿Cómo está estructurado el contenido de Generación Kindle?",
-        "tipo_respuesta": "lista_secciones",
-        "respuesta": [
-          "Enlaces externos",
-          "Origen",
+          "Biografía",
+          "Libros",
           "Referencias"
         ],
         "num_resultados": 3
       },
       {
-        "id": 50,
+        "id": 24,
         "categoria": "secciones",
-        "pregunta": "Detalla la organización del artículo sobre Extinción (novela).",
+        "pregunta": "¿Cuáles son los temas que se tratan en el artículo de Escritor?",
         "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "Adaptación teatral",
-          "Argumento",
-          "Austria",
-          "Autocrítica",
-          "Bibliografía",
-          "Clasificación y recepción",
-          "Ediciones",
-          "Estilo y estructura",
-          "Extinción",
-          "Intelectuales",
-          "Literatura y teatro",
-          "Narrador – Gambetti",
-          "Notas",
-          "Origen",
+          "Biógrafo",
+          "Bloguero",
+          "Columnista",
+          "Críticos",
+          "Diarista",
+          "Dramaturgo",
+          "Editor",
+          "Enciclopedista",
+          "Enlaces externos",
+          "Ensayista",
+          "Escriba",
+          "Escritor de cartas",
+          "Escritor técnico",
+          "Escritura controvertida",
+          "Guionista",
+          "Historiador",
+          "Investigador y académicos",
+          "La soledad del escritor",
+          "Letrista",
+          "Lexicógrafo",
+          "Libretista",
+          "Memorista",
+          "Motivaciones",
+          "Negro literario",
+          "Novelistas",
+          "Periodista",
+          "Poetas",
+          "Premios",
+          "Proceso y métodos",
+          "Protección y representación",
+          "Redactor de discursos",
+          "Redactor de informes",
           "Referencias",
-          "Risa",
-          "Temas, motivos, enfoques de interpretación."
+          "Satíricos",
+          "Tipos",
+          "Traductor",
+          "Véase también"
         ],
-        "num_resultados": 17
+        "num_resultados": 37
       },
       {
-        "id": 51,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿A qué categorías pertenece el artículo de Poesía árabe?",
-        "tipo_respuesta": "lista_categorias",
+        "id": 25,
+        "categoria": "secciones",
+        "pregunta": "¿En qué partes se divide el contenido de Diccionario de rimas?",
+        "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "Poesía",
-          "Poesía árabe"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 52,
-        "categoria": "categorias_articulo",
-        "pregunta": "Dime las categorías del artículo sobre Escolión.",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Géneros y formas musicales",
-          "Literatura en griego antiguo",
-          "Música de la Antigua Grecia",
-          "Poesía",
-          "Subgéneros líricos"
+          "En español",
+          "En otros idiomas",
+          "Enlaces externos",
+          "Referencias",
+          "Véase también"
         ],
         "num_resultados": 5
       },
       {
-        "id": 53,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿Bajo qué clasificación temática está Futurismo latino?",
-        "tipo_respuesta": "lista_categorias",
+        "id": 26,
+        "categoria": "secciones",
+        "pregunta": "Dame la estructura del artículo sobre Misterio histórico.",
+        "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "Ciencia ficción",
-          "Descolonización",
-          "Ficción especulativa",
-          "Futurismo",
-          "Movimientos literarios"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 54,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿En qué categorías se encuadra el artículo de Francisco López Martínez (pintor)?",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Movimientos artísticos de España",
-          "Movimientos artísticos del siglo XX",
-          "Movimientos literarios",
-          "Movimientos literarios de España",
-          "Pintores de España del siglo XX",
-          "Ultraísmo",
-          "Vanguardismo"
+          "Enlaces externos",
+          "Lista de detectives históricos ficticios",
+          "Orígenes",
+          "Popularización",
+          "Premios",
+          "Referencias",
+          "Variaciones"
         ],
         "num_resultados": 7
       },
       {
-        "id": 55,
-        "categoria": "categorias_articulo",
-        "pregunta": "Lista las etiquetas de clasificación del artículo La saga de los ancestros.",
-        "tipo_respuesta": "lista_categorias",
+        "id": 27,
+        "categoria": "secciones",
+        "pregunta": "¿Qué subtemas aborda el artículo de Revista El Barrilete?",
+        "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "Literatura juvenil",
-          "Novelas"
+          "Contenidos de las revistas, suplementos e informes ​​",
+          "Frecuencia de publicación de revista El Barrilete",
+          "Informes",
+          "Los informes",
+          "Orígenes",
+          "Primera época de la revista El Barrilete (1963-1967)",
+          "Prohibición y persecución",
+          "Referencias",
+          "Revistas",
+          "Revistas e informes en orden cronológico de publicación ​​",
+          "Segunda época de la revista El Barrilete (1968-1974)",
+          "Suplementos"
+        ],
+        "num_resultados": 12
+      },
+      {
+        "id": 28,
+        "categoria": "secciones",
+        "pregunta": "¿De qué habla cada parte del artículo de Libros de secretos?",
+        "tipo_respuesta": "lista_secciones",
+        "respuesta": [
+          "Bibliografía",
+          "Referencias"
         ],
         "num_resultados": 2
       },
       {
-        "id": 56,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿Qué temas abarca el artículo de Postumismo según sus categorías?",
-        "tipo_respuesta": "lista_categorias",
+        "id": 29,
+        "categoria": "secciones",
+        "pregunta": "Muéstrame el índice del artículo sobre Poesía dub.",
+        "tipo_respuesta": "lista_secciones",
         "respuesta": [
-          "Movimientos literarios"
+          "Poetas dub significativos",
+          "Referencias"
         ],
-        "num_resultados": 1
+        "num_resultados": 2
       },
       {
-        "id": 57,
+        "id": 30,
+        "categoria": "secciones",
+        "pregunta": "¿Qué aspectos cubre el artículo de Nueva Ola (ciencia ficción)?",
+        "tipo_respuesta": "lista_secciones",
+        "respuesta": [
+          "Autores",
+          "Enlaces externos",
+          "Véase también"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 31,
+        "categoria": "secciones",
+        "pregunta": "Enumera las secciones que componen el artículo de Titanismo.",
+        "tipo_respuesta": "lista_secciones",
+        "respuesta": [
+          "Filosofía y literatura",
+          "Notas",
+          "Romanticismo",
+          "Sturm und Drang"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 32,
+        "categoria": "secciones",
+        "pregunta": "¿Cuántas secciones tiene The Cadfael Chronicles y cuáles son?",
+        "tipo_respuesta": "lista_secciones",
+        "respuesta": [
+          "Adaptaciones",
+          "Antecedentes históricos",
+          "Aristocracia",
+          "Bibliografía",
+          "Biliografía",
+          "Cadfael y el amor",
+          "Cruzadas",
+          "Diferencias entre libros y series de televisión",
+          "Dramas de televisión",
+          "Enlaces externos",
+          "Guerra civil",
+          "Hermano Cadfael",
+          "Historias cortas",
+          "Notas",
+          "Novelas de Cadfael",
+          "Radio",
+          "Referencias",
+          "Teatro",
+          "Temas desarrollados"
+        ],
+        "num_resultados": 19
+      },
+      {
+        "id": 33,
+        "categoria": "secciones",
+        "pregunta": "Desglosa la estructura temática de Poesía metafísica.",
+        "tipo_respuesta": "lista_secciones",
+        "respuesta": [
+          "Bibliografía",
+          "Características",
+          "Definición",
+          "Enlaces externos",
+          "Poetas metafísicos",
+          "Reconocimiento en el siglo XX",
+          "Referencias",
+          "Un sentido de comunidad"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 34,
         "categoria": "categorias_articulo",
-        "pregunta": "Consulta las categorías asignadas a Método ideográmico.",
+        "pregunta": "¿A qué categorías pertenece el artículo de Método ideográmico?",
         "tipo_respuesta": "lista_categorias",
         "respuesta": [
           "Poesía"
@@ -659,121 +395,102 @@
         "num_resultados": 1
       },
       {
-        "id": 58,
+        "id": 35,
         "categoria": "categorias_articulo",
-        "pregunta": "¿Cómo está clasificado el artículo sobre Letrismo?",
+        "pregunta": "Dime las categorías del artículo sobre Rubaiyat.",
         "tipo_respuesta": "lista_categorias",
         "respuesta": [
-          "Movimientos literarios"
+          "Libros del siglo XI",
+          "Literatura en persa",
+          "Omar Jayam",
+          "Poesía"
         ],
-        "num_resultados": 1
+        "num_resultados": 4
       },
       {
-        "id": 59,
+        "id": 36,
         "categoria": "categorias_articulo",
-        "pregunta": "Indica las categorías temáticas de Nescio.",
+        "pregunta": "¿Bajo qué clasificación temática está Décima (Perú)?",
         "tipo_respuesta": "lista_categorias",
         "respuesta": [
-          "Escritores",
-          "Fallecidos en 1961",
-          "Hombres",
-          "Nacidos en 1882",
-          "Neerlandeses",
-          "Ámsterdam"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 60,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿Dentro de qué áreas se ubica Renacimiento vasco?",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Literatura del Romanticismo",
-          "Movimientos literarios",
-          "Música del Romanticismo"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 61,
-        "categoria": "categorias_articulo",
-        "pregunta": "Extrae las categorías del artículo A Lion Among Men.",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Hadas ficticias",
-          "Novelas",
-          "Novelas de 2008",
-          "Novelas de Estados Unidos",
-          "Novelas en inglés",
-          "Novelas fantásticas"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 62,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿Qué etiquetas clasificatorias tiene Poema en prosa?",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Poesía",
-          "Prosa",
-          "Subgéneros líricos"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 63,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿Con qué materias se relaciona el artículo Colección (edición)?",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Colecciones de libros",
-          "Literatura",
-          "Publicación"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 64,
-        "categoria": "categorias_articulo",
-        "pregunta": "Muéstrame la clasificación temática de Kavya.",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Movimientos literarios"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 65,
-        "categoria": "categorias_articulo",
-        "pregunta": "¿A qué campos del conocimiento pertenece Positivismo?",
-        "tipo_respuesta": "lista_categorias",
-        "respuesta": [
-          "Doctrinas filosóficas",
-          "Filosofía contemporánea",
-          "Historiografía",
-          "Movimientos literarios",
-          "Positivismo",
-          "Teorías sociológicas"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 66,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué artículos pertenecen a la categoría Realismo?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Naturalismo (literatura)",
-          "Realismo épico"
+          "Arte de Perú",
+          "Poesía"
         ],
         "num_resultados": 2
       },
       {
-        "id": 67,
+        "id": 37,
+        "categoria": "categorias_articulo",
+        "pregunta": "Lista las etiquetas de clasificación del artículo Piedra y cielo (movimiento).",
+        "tipo_respuesta": "lista_categorias",
+        "respuesta": [
+          "Círculos literarios",
+          "Darío Samper",
+          "Literatura de Colombia",
+          "Movimientos culturales",
+          "Poesía"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 38,
+        "categoria": "categorias_articulo",
+        "pregunta": "¿Qué temas abarca el artículo de Poesía moderna según sus categorías?",
+        "tipo_respuesta": "lista_categorias",
+        "respuesta": [
+          "Historia de la literatura",
+          "Historia de la literatura española",
+          "Literatura del Modernismo",
+          "Poesía",
+          "Poesía moderna"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 39,
+        "categoria": "categorias_articulo",
+        "pregunta": "Consulta las categorías asignadas a Gigi (novela).",
+        "tipo_respuesta": "lista_categorias",
+        "respuesta": [
+          "Colette",
+          "Cuentos de 1944",
+          "Cuentos de Francia",
+          "Cuentos en francés",
+          "Francesas",
+          "Novelas",
+          "Novelas adaptadas al cine",
+          "Novelas adaptadas al teatro",
+          "Novelas ambientadas en Francia"
+        ],
+        "num_resultados": 9
+      },
+      {
+        "id": 40,
+        "categoria": "categorias_articulo",
+        "pregunta": "¿Cómo está clasificado el artículo sobre Traducción literaria?",
+        "tipo_respuesta": "lista_categorias",
+        "respuesta": [
+          "Literatura",
+          "Traducción"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 41,
+        "categoria": "categorias_articulo",
+        "pregunta": "Indica las categorías temáticas de Libros de secretos.",
+        "tipo_respuesta": "lista_categorias",
+        "respuesta": [
+          "Libros por tipo",
+          "Literatura",
+          "Magia"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 42,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "Lista todos los artículos clasificados bajo Novela.",
+        "pregunta": "¿Qué artículos pertenecen a la categoría Novela?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "El buen salvaje (novela)",
@@ -782,33 +499,47 @@
         "num_resultados": 2
       },
       {
-        "id": 68,
+        "id": 43,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Cuáles son los artículos de la categoría Obras literarias?",
+        "pregunta": "Lista todos los artículos clasificados bajo Historia de la literatura española.",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
-          "El gran inquisidor",
-          "L.A. Confidential (novela)",
-          "Los fantasmas del sombrerero"
+          "Poesía arraigada",
+          "Poesía desarraigada",
+          "Poesía moderna"
         ],
         "num_resultados": 3
       },
       {
-        "id": 69,
+        "id": 44,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "Dame los artículos que están en la categoría Figuras retóricas.",
+        "pregunta": "Dame los artículos que están en la categoría Círculos literarios.",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
-          "Asonancia",
-          "Encabalgamiento",
-          "Esticomitia (métrica)"
+          "Escuela de las nuevas sensaciones",
+          "Piedra y cielo (movimiento)",
+          "Poetas brumosos"
         ],
         "num_resultados": 3
       },
       {
-        "id": 70,
+        "id": 45,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué temas están bajo la clasificación de Movimientos artísticos?",
+        "pregunta": "¿Qué temas están bajo la clasificación de Géneros literarios?",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "Bizarro (género literario)",
+          "Drama",
+          "Fix-up",
+          "Misterio histórico",
+          "Novela paralela"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 46,
+        "categoria": "busqueda_por_categoria",
+        "pregunta": "¿Cuántos y cuáles artículos hay bajo Movimientos artísticos?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "Creacionismo (poesía)",
@@ -818,158 +549,9 @@
         "num_resultados": 3
       },
       {
-        "id": 71,
+        "id": 47,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "Busca artículos en la categoría Novelas en inglés.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "A Lion Among Men",
-          "Conversaciones entre amigos",
-          "John Dies at the End (novela)"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 72,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Cuántos y cuáles artículos hay bajo Movimientos culturales de los años 1960?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Nueva Ola (ciencia ficción)",
-          "Nueva narrativa ecuatoriana",
-          "Tzantzismo"
-        ],
-        "num_resultados": 4
-      },
-      {
-        "id": 73,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Muéstrame todos los artículos de Poesía de Chile.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Creacionismo (poesía)",
-          "Poesía lárica"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 74,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué contenidos están categorizados como Literatura de Colombia?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "El buen salvaje (novela)",
-          "Piedra y cielo (movimiento)"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 75,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Encuentra los artículos pertenecientes a Literatura de América Latina.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Gótico latinoamericano",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 76,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Enumera los artículos que se clasifican dentro de Poesía del siglo XX.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Poesía arraigada",
-          "Poesía desarraigada"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 77,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Puedes listar los artículos etiquetados como Novelas de Estados Unidos?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "A Lion Among Men",
-          "John Dies at the End (novela)"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 78,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué artículos se relacionan con la categoría Poesía de Corea?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Miñosí",
-          "Sijo"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 79,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Identifica los artículos que pertenecen a Émile Zola.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Literatura del naturalismo",
-          "Naturalismo (literatura)"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 80,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Filtra los artículos por la categoría Vanguardismo.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Creacionismo (poesía)",
-          "Francisco López Martínez (pintor)",
-          "Ultraísmo"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 81,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Dentro de Literatura medieval, qué artículos tenemos disponibles?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Gnómica",
-          "Perqué (poesía)"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 82,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Revisa la categoría Escritores de República Dominicana y dime qué artículos contiene.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Gustavo Olivo",
-          "Juan Taveras"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 83,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué artículos comparten la categoría Literatura en alemán?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Enrica von Handel-Mazzetti",
-          "Extinción (novela)",
-          "Julie Pfannenschmidt",
-          "Lidio Mosca Bustamante"
-        ],
-        "num_resultados": 4
-      },
-      {
-        "id": 84,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "Dame un inventario de los artículos en Medios de comunicación de la ciudad de Buenos Aires.",
+        "pregunta": "Muéstrame todos los artículos de Medios de comunicación de la ciudad de Buenos Aires.",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "Editorial Papeles de Buenos Aires",
@@ -978,18 +560,51 @@
         "num_resultados": 2
       },
       {
-        "id": 85,
+        "id": 48,
         "categoria": "busqueda_por_categoria",
-        "pregunta": "Selecciona de la base de datos los artículos de la categoría Poesía árabe.",
+        "pregunta": "¿Qué contenidos están categorizados como Literatura juvenil?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
-          "Diván (poesía)",
-          "Poesía árabe"
+          "La saga de los ancestros",
+          "Poesía infantil"
         ],
         "num_resultados": 2
       },
       {
-        "id": 86,
+        "id": 49,
+        "categoria": "busqueda_por_categoria",
+        "pregunta": "Enumera los artículos que se clasifican dentro de Colecciones de libros.",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "Colección (edición)",
+          "Nuestros clásicos contemporáneos"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 50,
+        "categoria": "busqueda_por_categoria",
+        "pregunta": "¿Puedes listar los artículos etiquetados como Poetas?",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "Martina Pierra de Poo",
+          "Orlando Loayza Condori"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 51,
+        "categoria": "busqueda_por_categoria",
+        "pregunta": "Identifica los artículos que pertenecen a Literatura de Colombia.",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "El buen salvaje (novela)",
+          "Piedra y cielo (movimiento)"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 52,
         "categoria": "busqueda_por_contenido",
         "pregunta": "¿Qué artículos mencionan a García Márquez?",
         "tipo_respuesta": "lista_articulos",
@@ -1004,7 +619,7 @@
         "num_resultados": 6
       },
       {
-        "id": 87,
+        "id": 53,
         "categoria": "busqueda_por_contenido",
         "pregunta": "¿En qué artículos aparece Borges?",
         "tipo_respuesta": "lista_articulos",
@@ -1012,6 +627,7 @@
           "Boom latinoamericano",
           "Cosmopolitismo en la literatura",
           "Micrograma",
+          "Orlando Loayza Condori",
           "Realismo mágico",
           "Revista El Barrilete",
           "Revistas literarias del exilio español",
@@ -1019,10 +635,10 @@
           "Ultraísmo",
           "Vanguardismo iberoamericano"
         ],
-        "num_resultados": 9
+        "num_resultados": 10
       },
       {
-        "id": 88,
+        "id": 54,
         "categoria": "busqueda_por_contenido",
         "pregunta": "¿Qué artículos tratan o mencionan el surrealismo?",
         "tipo_respuesta": "lista_articulos",
@@ -1046,12 +662,13 @@
         "num_resultados": 15
       },
       {
-        "id": 89,
+        "id": 55,
         "categoria": "busqueda_por_contenido",
         "pregunta": "¿Cuáles artículos hacen referencia a la novela como género?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "A Lion Among Men",
+          "Alchemised",
           "Antología",
           "Arcadia (poesía)",
           "Autor",
@@ -1120,12 +737,13 @@
           "The Story of the Trapp Family Singers",
           "Traducción literaria",
           "Tzantzismo",
-          "Vanguardismo iberoamericano"
+          "Vanguardismo iberoamericano",
+          "Wehrwolf (novela)"
         ],
-        "num_resultados": 70
+        "num_resultados": 72
       },
       {
-        "id": 90,
+        "id": 56,
         "categoria": "busqueda_por_contenido",
         "pregunta": "Lista los artículos que contengan la palabra poesía.",
         "tipo_respuesta": "lista_articulos",
@@ -1229,98 +847,7 @@
         "num_resultados": 95
       },
       {
-        "id": 91,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos mencionan Latinoamérica o América Latina?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Bookstagram",
-          "Boom latinoamericano",
-          "Criollismo (literatura)",
-          "Epigrama",
-          "Gótico latinoamericano",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "Lidio Mosca Bustamante",
-          "McOndo",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Nueva narrativa ecuatoriana",
-          "Poesía visual",
-          "Postumismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 18
-      },
-      {
-        "id": 92,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿En cuáles artículos se hace referencia al siglo XX?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Arcadia (poesía)",
-          "Archivos Husserl",
-          "Boom latinoamericano",
-          "Chbab Srey",
-          "Creacionismo (poesía)",
-          "Criollismo (literatura)",
-          "Drama",
-          "Ecopoesía",
-          "Enrica von Handel-Mazzetti",
-          "Epigrama",
-          "Escritura asémica",
-          "Francisco López Martínez (pintor)",
-          "Generación literaria",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "Justa poética",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "Literatura",
-          "Literatura del absurdo",
-          "Literatura modernista",
-          "McOndo",
-          "Metapoesía",
-          "Micrograma",
-          "Misterio histórico",
-          "Miñosí",
-          "Negrismo",
-          "Nuestros clásicos contemporáneos",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Perqué (poesía)",
-          "Poesía",
-          "Poesía de la experiencia",
-          "Poesía en performance",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía lárica",
-          "Poesía metafísica",
-          "Poesía moderna",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Positivismo",
-          "Postumismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Renacimiento vasco",
-          "Revistas literarias del exilio español",
-          "Sijo",
-          "Traducción literaria",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 55
-      },
-      {
-        "id": 93,
+        "id": 57,
         "categoria": "busqueda_por_contenido",
         "pregunta": "Busca artículos que hablen sobre el romanticismo.",
         "tipo_respuesta": "lista_articulos",
@@ -1347,940 +874,76 @@
           "Realismo literario",
           "Realismo mágico",
           "Renacimiento vasco",
+          "Romance oscuro",
           "Titanismo"
         ],
-        "num_resultados": 23
+        "num_resultados": 24
       },
       {
-        "id": 94,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos tratan sobre vanguardias o movimientos vanguardistas?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Archivos Husserl",
-          "Autor",
-          "Bizarro (género literario)",
-          "Boom latinoamericano",
-          "Creacionismo (poesía)",
-          "Decadentismo",
-          "Drama",
-          "El grupo de poetas de Nueva York",
-          "Escritura asémica",
-          "Escuela de las nuevas sensaciones",
-          "Francisco López Martínez (pintor)",
-          "Generación Kindle",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "Letrismo",
-          "Literatura modernista",
-          "Literatura modernista en portugués",
-          "Metapoesía",
-          "Micrograma",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Nueva narrativa ecuatoriana",
-          "Poesía de la experiencia",
-          "Poesía fonética",
-          "Poesía moderna",
-          "Poesía taurina",
-          "Poesía visual",
-          "Polipoesía",
-          "Postumismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 33
-      },
-      {
-        "id": 95,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿En qué artículos se menciona la metáfora?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Extinción (novela)",
-          "Futurismo latino",
-          "Kavya",
-          "Letra (música)",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura taoísta",
-          "Matate, amor",
-          "Micrograma",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Piedra y cielo (movimiento)",
-          "Poesía",
-          "Poesía augusta",
-          "Poesía escáldica",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía metafísica",
-          "Poesía taurina",
-          "Revista El Barrilete",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 20
-      },
-      {
-        "id": 96,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Cuáles artículos abordan el tema de la narrativa?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Conflicto dramático",
-          "Edad de Oro de la ciencia ficción",
-          "Escritor",
-          "Futurismo latino",
-          "Generación de la Sangre",
-          "Gótico latinoamericano",
-          "Justa poética",
-          "Kavya",
-          "La Gruta (revista literaria)",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Matate, amor",
-          "McOndo",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Piero da Filicaia",
-          "Poema",
-          "Poesía",
-          "Poesía augusta",
-          "Poesía infantil",
-          "Post-Boom",
-          "Realismo literario",
-          "Realismo mágico",
-          "Subliteratura",
-          "Tzantzismo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 33
-      },
-      {
-        "id": 97,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos hacen referencia a Aristóteles?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Autor",
-          "Conflicto dramático",
-          "Drama",
-          "Literatura",
-          "Poesía",
-          "Polígrafo (autor)",
-          "Protréptico",
-          "Tema literario",
-          "Traducción literaria"
-        ],
-        "num_resultados": 9
-      },
-      {
-        "id": 98,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "Identifica los artículos que contengan información sobre el verso.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Arcadia (poesía)",
-          "Autor",
-          "Balada romántica (poesía)",
-          "Bookstagram",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Conflicto dramático",
-          "Cosmopolitismo en la literatura",
-          "Culturalismo",
-          "Decadentismo",
-          "Drama",
-          "Décima (Perú)",
-          "Ecopoesía",
-          "Edad de Oro de la ciencia ficción",
-          "Editorial Papeles de Buenos Aires",
-          "Encabalgamiento",
-          "Epigrama",
-          "Escansión",
-          "Escolión",
-          "Escritor",
-          "Escuela de las nuevas sensaciones",
-          "Esticomitia (métrica)",
-          "Generación de la Sangre",
-          "Gnómica",
-          "Jitanjáfora",
-          "John Dies at the End (novela)",
-          "Jorge Aristides Lira",
-          "Kavya",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "Letra (música)",
-          "Libros de secretos",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Macarronea",
-          "Martina Pierra de Poo",
-          "McOndo",
-          "Micrograma",
-          "Miñosí",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturaleza y romanticismo",
-          "Novela en verso",
-          "Novela paralela",
-          "Nueva narrativa ecuatoriana",
-          "Perqué (poesía)",
-          "Poema",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía dub",
-          "Poesía escáldica",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía lárica",
-          "Poesía metafísica",
-          "Poesía náhuatl",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Polipoesía",
-          "Positivismo",
-          "Postumismo",
-          "Primera escuela de Silesia",
-          "Prosa poética",
-          "Realismo literario",
-          "Redactor publicitario",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Rima interna",
-          "Rubaiyat",
-          "Sijo",
-          "Tautograma",
-          "Timing (arte)",
-          "Traducción literaria",
-          "Verso blanco"
-        ],
-        "num_resultados": 85
-      },
-      {
-        "id": 99,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿En cuáles artículos se menciona el cuento como género literario?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Antología",
-          "Arcadia (poesía)",
-          "Boom latinoamericano",
-          "Clasicismo de Weimar",
-          "Conflicto dramático",
-          "Cosmopolitismo en la literatura",
-          "Cuento de iniciación",
-          "Círculo de Lovecraft",
-          "Drama",
-          "Décima (Perú)",
-          "Edad de Oro de la ciencia ficción",
-          "El gran inquisidor",
-          "Escritor",
-          "Fix-up",
-          "Generación de la Sangre",
-          "Generación literaria",
-          "Gustavo Olivo",
-          "Gótico latinoamericano",
-          "Jorge Aristides Lira",
-          "Julie Pfannenschmidt",
-          "La Mujer (revista colombiana)",
-          "Lidio Mosca Bustamante",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Los fantasmas del sombrerero",
-          "Maximalismo (arte)",
-          "Misterio histórico",
-          "Naturalismo (literatura)",
-          "Nescio",
-          "Nueva narrativa ecuatoriana",
-          "Poesía augusta",
-          "Poesía taurina",
-          "Prosa poética",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Spoken word",
-          "The Cadfael Chronicles",
-          "Traducción literaria",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 42
-      },
-      {
-        "id": 100,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "Dame los artículos que traten sobre el realismo.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Bizarro (género literario)",
-          "Boom latinoamericano",
-          "Cosmopolitismo en la literatura",
-          "Culturalismo",
-          "Decadentismo",
-          "Edad de Oro de la ciencia ficción",
-          "El grupo de poetas de Nueva York",
-          "Escritura asémica",
-          "Francisco López Martínez (pintor)",
-          "Futurismo latino",
-          "Gótico latinoamericano",
-          "John Dies at the End (novela)",
-          "L.A. Confidential (novela)",
-          "Lidio Mosca Bustamante",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Maximalismo (arte)",
-          "McOndo",
-          "Micrograma",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía taurina",
-          "Poetas brumosos",
-          "Poetismo",
-          "Post-Boom",
-          "Realismo literario",
-          "Realismo mágico",
-          "Realismo épico",
-          "Revistas literarias del exilio español"
-        ],
-        "num_resultados": 36
-      },
-      {
-        "id": 101,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos contienen la palabra feminismo o femenina?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Chbab Srey",
-          "Escritura femenina",
-          "Grupo de Coppet",
-          "La Mujer (revista colombiana)",
-          "Literatura taoísta",
-          "Matate, amor",
-          "Poesía homoerótica hispanohebrea",
-          "Post-Boom",
-          "Revistas literarias del exilio español"
-        ],
-        "num_resultados": 9
-      },
-      {
-        "id": 102,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "Muéstrame artículos que hablen sobre teatro.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Conflicto dramático",
-          "Drama",
-          "El gran inquisidor",
-          "Escritor",
-          "Extinción (novela)",
-          "Francisco López Martínez (pintor)",
-          "Generación literaria",
-          "Gigi (novela)",
-          "Justa poética",
-          "La Mujer (revista colombiana)",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Martina Pierra de Poo",
-          "Matate, amor",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Novela paralela",
-          "Poema",
-          "Poesía",
-          "Poesía augusta",
-          "Poesía en performance",
-          "Poesía infantil",
-          "Poesía náhuatl",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poeta",
-          "Poetismo",
-          "Polipoesía",
-          "Realismo literario",
-          "Realismo épico",
-          "Revistas literarias del exilio español",
-          "The Cadfael Chronicles",
-          "Timing (arte)",
-          "Traducción literaria",
-          "Tzantzismo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 41
-      },
-      {
-        "id": 103,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos abordan el concepto de rima?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Archivos Husserl",
-          "Asonancia",
-          "Catón castellano",
-          "Culturalismo",
-          "Diccionario de rimas",
-          "Décima (Perú)",
-          "Día Mundial de la Poesía",
-          "Escansión",
-          "Escritor",
-          "Escritura asémica",
-          "Escritura femenina",
-          "Jorge Aristides Lira",
-          "Juan Taveras",
-          "Letra (música)",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Maximalismo (arte)",
-          "Micrograma",
-          "Miñosí",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Naturaleza y romanticismo",
-          "Nescio",
-          "Nuestros clásicos contemporáneos",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Perqué (poesía)",
-          "Poema",
-          "Poesía",
-          "Poesía desarraigada",
-          "Poesía en performance",
-          "Poesía escáldica",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía taurina",
-          "Poesía árabe",
-          "Poetismo",
-          "Positivismo",
-          "Post-Boom",
-          "Postumismo",
-          "Prosa poética",
-          "Realismo mágico",
-          "Revista El Barrilete",
-          "Rima interna",
-          "Rima silábica",
-          "Rubaiyat",
-          "Spoken word",
-          "The Cadfael Chronicles",
-          "Traducción literaria",
-          "Ultraísmo",
-          "Verso blanco"
-        ],
-        "num_resultados": 55
-      },
-      {
-        "id": 104,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "Busca artículos que mencionen la ficción.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Autor",
-          "Bizarro (género literario)",
-          "Boom latinoamericano",
-          "Conflicto dramático",
-          "Culturalismo",
-          "Círculo de Lovecraft",
-          "Edad de Oro de la ciencia ficción",
-          "El gran inquisidor",
-          "Escritor",
-          "Escritura asémica",
-          "Extinción (novela)",
-          "Fix-up",
-          "Futurismo latino",
-          "Generación de la Sangre",
-          "Generación literaria",
-          "Gótico latinoamericano",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Matate, amor",
-          "Maximalismo (arte)",
-          "Metapoesía",
-          "Misterio histórico",
-          "Novela en verso",
-          "Novela paralela",
-          "Nuestros clásicos contemporáneos",
-          "Nueva Ola (ciencia ficción)",
-          "Nueva narrativa ecuatoriana",
-          "Paraliteratura",
-          "Realismo literario",
-          "Realismo épico",
-          "Subliteratura",
-          "The Cadfael Chronicles",
-          "The Story of the Trapp Family Singers",
-          "Tzantzismo"
-        ],
-        "num_resultados": 35
-      },
-      {
-        "id": 105,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿En qué artículos se menciona España?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Alborada (música)",
-          "Autor",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Creacionismo (poesía)",
-          "Decadentismo",
-          "Drama",
-          "Ecopoesía",
-          "Epigrama",
-          "Escritor",
-          "Francisco López Martínez (pintor)",
-          "Generación Kindle",
-          "Generación literaria",
-          "Gnómica",
-          "Justa poética",
-          "Lengua histórica",
-          "Lidio Mosca Bustamante",
-          "Literatura del naturalismo",
-          "Matate, amor",
-          "Movimiento literario",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Nuestros clásicos contemporáneos",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Poesía arraigada",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía taurina",
-          "Poesía visual",
-          "Polipoesía",
-          "Realismo literario",
-          "Realismo mágico",
-          "Renacimiento vasco",
-          "Revistas literarias del exilio español",
-          "Saliendo de la Estación de Atocha (novela)",
-          "Subliteratura",
-          "Traducción literaria",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 43
-      },
-      {
-        "id": 106,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Cuáles artículos hacen referencia a la figura del escritor?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "A Lion Among Men",
-          "Arcadia (poesía)",
-          "Autor",
-          "Bloqueo del escritor",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Clasicismo de Weimar",
-          "Conversaciones entre amigos",
-          "Cosmopolitismo en la literatura",
-          "Criollismo (literatura)",
-          "Culturalismo",
-          "Círculo de Lovecraft",
-          "Decadentismo",
-          "Drama",
-          "Ecopoesía",
-          "Editorial Doble Ese",
-          "El buen salvaje (novela)",
-          "El gran inquisidor",
-          "El grupo de poetas de Nueva York",
-          "Encabalgamiento",
-          "Enrica von Handel-Mazzetti",
-          "Enrique Hambleton von Borstel",
-          "Epigrama",
-          "Escritor",
-          "Escritura asémica",
-          "Escritura femenina",
-          "Escuela de las nuevas sensaciones",
-          "Extinción (novela)",
-          "Fix-up",
-          "Futurismo latino",
-          "Generación Kindle",
-          "Generación de la Sangre",
-          "Generación del 99",
-          "Generación literaria",
-          "Gigi (novela)",
-          "Gnómica",
-          "Gustavo Olivo",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "Jorge Aristides Lira",
-          "Juan Taveras",
-          "Julie Pfannenschmidt",
-          "Justa poética",
-          "Kavya",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "La saga de los ancestros",
-          "Letra (música)",
-          "Lidio Mosca Bustamante",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Matate, amor",
-          "Maximalismo (arte)",
-          "McOndo",
-          "Micrograma",
-          "Misterio histórico",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Negrismo",
-          "Nescio",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Piedra y cielo (movimiento)",
-          "Poesía",
-          "Poesía de la experiencia",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía metafísica",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Poetismo",
-          "Polígrafo (autor)",
-          "Positivismo",
-          "Postumismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Renacimiento vasco",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Subliteratura",
-          "The Cadfael Chronicles",
-          "The Story of the Trapp Family Singers",
-          "Traducción literaria",
-          "Tzantzismo"
-        ],
-        "num_resultados": 91
-      },
-      {
-        "id": 107,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "Lista los artículos que traten la literatura o tradición oral.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "A Lion Among Men",
-          "Alborada (música)",
-          "Archivos Husserl",
-          "Autor",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Chbab Srey",
-          "Clasicismo de Weimar",
-          "Conflicto dramático",
-          "Culturalismo",
-          "Círculo de Lovecraft",
-          "Decadentismo",
-          "Drama",
-          "Décima (Perú)",
-          "Día Mundial de la Poesía",
-          "El gran inquisidor",
-          "Epigrama",
-          "Escritor",
-          "Futurismo latino",
-          "Generación de la Sangre",
-          "Gnómica",
-          "Jitanjáfora",
-          "Jorge Aristides Lira",
-          "L.A. Confidential (novela)",
-          "La Mujer (revista colombiana)",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "McOndo",
-          "Misterio histórico",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Poema",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía náhuatl",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Polipoesía",
-          "Realismo literario",
-          "Realismo mágico",
-          "Renacimiento vasco",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Sijo",
-          "Spoken word",
-          "The Cadfael Chronicles",
-          "Titanismo",
-          "Traducción literaria"
-        ],
-        "num_resultados": 61
-      },
-      {
-        "id": 108,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Qué artículos mencionan el premio Nobel?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Escritor",
-          "Generación literaria",
-          "Literatura",
-          "Novela en verso",
-          "Poesía taurina",
-          "Revista El Barrilete",
-          "Sijo"
-        ],
-        "num_resultados": 8
-      },
-      {
-        "id": 109,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿En qué artículos aparece mencionado Cervantes?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Arcadia (poesía)",
-          "Catón castellano",
-          "Editorial Papeles de Buenos Aires",
-          "Lidio Mosca Bustamante",
-          "Literatura",
-          "Naturalismo (literatura)",
-          "Perqué (poesía)",
-          "Poesía metafísica",
-          "Realismo literario",
-          "Rubaiyat",
-          "Ultraísmo"
-        ],
-        "num_resultados": 11
-      },
-      {
-        "id": 110,
-        "categoria": "busqueda_por_contenido",
-        "pregunta": "¿Cuáles artículos contienen información sobre el ensayo como género?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Antología",
-          "Arcadia (poesía)",
-          "Autor",
-          "Bizarro (género literario)",
-          "Clasicismo de Weimar",
-          "Criollismo (literatura)",
-          "Encabalgamiento",
-          "Escritor",
-          "Escritura femenina",
-          "Futurismo latino",
-          "Generación literaria",
-          "Jorge Aristides Lira",
-          "Juan Taveras",
-          "La Gruta (revista literaria)",
-          "Lidio Mosca Bustamante",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Maximalismo (arte)",
-          "Micrograma",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Nescio",
-          "Nueva narrativa ecuatoriana",
-          "Poesía lárica",
-          "Poesía moderna",
-          "Poesía taurina",
-          "Polipoesía",
-          "Primera escuela de Silesia",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Traducción literaria",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 38
-      },
-      {
-        "id": 111,
+        "id": 58,
         "categoria": "metadatos",
-        "pregunta": "¿Cuál es la URL del artículo sobre Poesía judía?",
+        "pregunta": "¿Cuál es la URL del artículo sobre Matate, amor?",
         "tipo_respuesta": "texto",
-        "respuesta": "https://es.wikipedia.org/wiki/Poesía_judía"
+        "respuesta": "https://es.wikipedia.org/wiki/Matate,_amor"
       },
       {
-        "id": 112,
+        "id": 59,
         "categoria": "metadatos",
-        "pregunta": "¿Qué identificador de página tiene el artículo de Nueva Ola (ciencia ficción)?",
+        "pregunta": "¿Qué identificador de página tiene el artículo de Lidio Mosca Bustamante?",
         "tipo_respuesta": "numero",
-        "respuesta": 83346
+        "respuesta": 11408367
       },
       {
-        "id": 113,
+        "id": 60,
         "categoria": "metadatos",
-        "pregunta": "¿En qué idioma está el artículo de Poetas brumosos?",
+        "pregunta": "¿En qué idioma está el artículo de A Lion Among Men?",
         "tipo_respuesta": "texto",
         "respuesta": "es"
       },
       {
-        "id": 114,
+        "id": 61,
         "categoria": "metadatos",
-        "pregunta": "¿Cuándo se descargó el artículo sobre Poesía desarraigada?",
+        "pregunta": "¿Cuándo se descargó el artículo sobre Poesía de la experiencia?",
         "tipo_respuesta": "texto",
-        "respuesta": "2026-03-15T22:33:17Z"
+        "respuesta": "2026-04-20T16:10:40Z"
       },
       {
-        "id": 115,
+        "id": 62,
         "categoria": "metadatos",
-        "pregunta": "Dame la URL del artículo El grupo de poetas de Nueva York.",
+        "pregunta": "Dame la URL del artículo Chbab Srey.",
         "tipo_respuesta": "texto",
-        "respuesta": "https://es.wikipedia.org/wiki/El_grupo_de_poetas_de_Nueva_York"
+        "respuesta": "https://es.wikipedia.org/wiki/Chbab_Srey"
       },
       {
-        "id": 116,
+        "id": 63,
         "categoria": "metadatos",
-        "pregunta": "¿Cuál es el page ID del artículo de Naturalismo (literatura)?",
-        "tipo_respuesta": "numero",
-        "respuesta": 4750810
-      },
-      {
-        "id": 117,
-        "categoria": "metadatos",
-        "pregunta": "¿De qué fecha es la descarga del artículo Escansión?",
+        "pregunta": "Indícame el enlace al artículo original de Revistas literarias del exilio español.",
         "tipo_respuesta": "texto",
-        "respuesta": "2026-03-15T22:32:12Z"
+        "respuesta": "https://es.wikipedia.org/wiki/Revistas_literarias_del_exilio_español"
       },
       {
-        "id": 118,
+        "id": 64,
         "categoria": "metadatos",
-        "pregunta": "Indícame el enlace al artículo original de Poesía metafísica.",
-        "tipo_respuesta": "texto",
-        "respuesta": "https://es.wikipedia.org/wiki/Poesía_metafísica"
-      },
-      {
-        "id": 119,
-        "categoria": "metadatos",
-        "pregunta": "¿Cuántas categorías tiene asignadas el artículo Poesía dub?",
+        "pregunta": "¿Cuántas categorías tiene asignadas el artículo Renacimiento vasco?",
         "tipo_respuesta": "numero",
         "respuesta": 4
       },
       {
-        "id": 120,
-        "categoria": "metadatos",
-        "pregunta": "¿Cuántas palabras tiene aproximadamente el artículo de Lidio Mosca Bustamante?",
-        "tipo_respuesta": "numero",
-        "respuesta": 680
-      },
-      {
-        "id": 121,
-        "categoria": "metadatos",
-        "pregunta": "¿Cuántas secciones contiene el artículo sobre Negrismo?",
-        "tipo_respuesta": "numero",
-        "respuesta": 1
-      },
-      {
-        "id": 122,
-        "categoria": "metadatos",
-        "pregunta": "Dame los metadatos del artículo Revista El Barrilete: URL y page ID.",
-        "tipo_respuesta": "objeto",
-        "respuesta": {
-          "url": "https://es.wikipedia.org/wiki/Revista_El_Barrilete",
-          "pageid": 11149467
-        }
-      },
-      {
-        "id": 123,
-        "categoria": "metadatos",
-        "pregunta": "¿Cuál es el título exacto del artículo con page ID 2402866?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Post-Boom"
-      },
-      {
-        "id": 124,
-        "categoria": "metadatos",
-        "pregunta": "Proporciona la fecha de descarga y el idioma del artículo sobre Arcadia (poesía).",
-        "tipo_respuesta": "objeto",
-        "respuesta": {
-          "fecha_descarga": "2026-03-15T22:32:00Z",
-          "idioma": "es"
-        }
-      },
-      {
-        "id": 125,
-        "categoria": "metadatos",
-        "pregunta": "¿Cuántas categorías no internas tiene el artículo de Metapoesía?",
-        "tipo_respuesta": "numero",
-        "respuesta": 1
-      },
-      {
-        "id": 126,
+        "id": 65,
         "categoria": "conteo",
         "pregunta": "¿Cuántos artículos hay en total en la base de datos?",
         "tipo_respuesta": "numero",
-        "respuesta": 182
+        "respuesta": 187
       },
       {
-        "id": 127,
+        "id": 66,
         "categoria": "conteo",
         "pregunta": "¿Cuántas categorías distintas existen entre todos los artículos?",
         "tipo_respuesta": "numero",
-        "respuesta": 340
+        "respuesta": 353
       },
       {
-        "id": 128,
+        "id": 67,
         "categoria": "conteo",
         "pregunta": "¿Cuál es el artículo más largo (más palabras)?",
         "tipo_respuesta": "objeto",
@@ -2290,24 +953,14 @@
         }
       },
       {
-        "id": 129,
-        "categoria": "conteo",
-        "pregunta": "¿Cuál es el artículo más corto (menos palabras)?",
-        "tipo_respuesta": "objeto",
-        "respuesta": {
-          "articulo": "Novísima poesía latinoamericana",
-          "palabras": 88
-        }
-      },
-      {
-        "id": 130,
+        "id": 68,
         "categoria": "conteo",
         "pregunta": "¿Cuál es la media de palabras por artículo?",
         "tipo_respuesta": "numero",
-        "respuesta": 1284.4
+        "respuesta": 1265.7
       },
       {
-        "id": 131,
+        "id": 69,
         "categoria": "conteo",
         "pregunta": "¿Qué artículo tiene más secciones?",
         "tipo_respuesta": "objeto",
@@ -2317,31 +970,7 @@
         }
       },
       {
-        "id": 132,
-        "categoria": "conteo",
-        "pregunta": "¿Cuál es el artículo con más categorías asignadas?",
-        "tipo_respuesta": "objeto",
-        "respuesta": {
-          "articulo": "Enrica von Handel-Mazzetti",
-          "categorias": 15
-        }
-      },
-      {
-        "id": 133,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos tienen más de 1000 palabras?",
-        "tipo_respuesta": "numero",
-        "respuesta": 64
-      },
-      {
-        "id": 134,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos tienen menos de 500 palabras?",
-        "tipo_respuesta": "numero",
-        "respuesta": 72
-      },
-      {
-        "id": 135,
+        "id": 70,
         "categoria": "conteo",
         "pregunta": "¿Cuáles son las 5 categorías con más artículos?",
         "tipo_respuesta": "ranking",
@@ -2356,11 +985,11 @@
           },
           {
             "categoria": "Literatura",
-            "num_articulos": 32
+            "num_articulos": 34
           },
           {
             "categoria": "Novelas",
-            "num_articulos": 19
+            "num_articulos": 22
           },
           {
             "categoria": "Subgéneros líricos",
@@ -2370,77 +999,7 @@
         "num_resultados": 5
       },
       {
-        "id": 136,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos mencionan la palabra 'poesía' en su contenido?",
-        "tipo_respuesta": "numero",
-        "respuesta": 95
-      },
-      {
-        "id": 137,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos mencionan 'novela'?",
-        "tipo_respuesta": "numero",
-        "respuesta": 70
-      },
-      {
-        "id": 138,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos mencionan 'siglo XIX'?",
-        "tipo_respuesta": "numero",
-        "respuesta": 29
-      },
-      {
-        "id": 139,
-        "categoria": "conteo",
-        "pregunta": "¿Cuál es el promedio de secciones por artículo?",
-        "tipo_respuesta": "numero",
-        "respuesta": 6.5
-      },
-      {
-        "id": 140,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos no tienen ninguna sección?",
-        "tipo_respuesta": "numero",
-        "respuesta": 6
-      },
-      {
-        "id": 141,
-        "categoria": "conteo",
-        "pregunta": "¿Cuál es la media de categorías por artículo?",
-        "tipo_respuesta": "numero",
-        "respuesta": 3.6
-      },
-      {
-        "id": 142,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántas palabras hay en total sumando todos los artículos?",
-        "tipo_respuesta": "numero",
-        "respuesta": 233762
-      },
-      {
-        "id": 143,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos mencionan 'vanguardia'?",
-        "tipo_respuesta": "numero",
-        "respuesta": 33
-      },
-      {
-        "id": 144,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos contienen la palabra 'realismo'?",
-        "tipo_respuesta": "numero",
-        "respuesta": 36
-      },
-      {
-        "id": 145,
-        "categoria": "conteo",
-        "pregunta": "¿Cuántos artículos tratan sobre movimientos literarios (mencionan 'movimiento literario')?",
-        "tipo_respuesta": "numero",
-        "respuesta": 16
-      },
-      {
-        "id": 146,
+        "id": 71,
         "categoria": "existencia",
         "pregunta": "¿Hay algún artículo sobre realismo mágico?",
         "tipo_respuesta": "booleano",
@@ -2450,7 +1009,7 @@
         }
       },
       {
-        "id": 147,
+        "id": 72,
         "categoria": "existencia",
         "pregunta": "¿Existe un artículo dedicado al Boom latinoamericano?",
         "tipo_respuesta": "booleano",
@@ -2460,7 +1019,7 @@
         }
       },
       {
-        "id": 148,
+        "id": 73,
         "categoria": "existencia",
         "pregunta": "¿Tenemos un artículo sobre poesía?",
         "tipo_respuesta": "booleano",
@@ -2470,30 +1029,7 @@
         }
       },
       {
-        "id": 149,
-        "categoria": "existencia",
-        "pregunta": "¿Hay algún artículo que trate sobre naturalismo?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Literatura del naturalismo",
-            "Naturalismo (literatura)"
-          ]
-        }
-      },
-      {
-        "id": 150,
-        "categoria": "existencia",
-        "pregunta": "¿Existe un artículo sobre el ultraísmo?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "titulo": "Ultraísmo"
-        }
-      },
-      {
-        "id": 151,
+        "id": 74,
         "categoria": "existencia",
         "pregunta": "¿Se menciona a Shakespeare en alguno de los artículos?",
         "tipo_respuesta": "booleano",
@@ -2514,154 +1050,14 @@
         }
       },
       {
-        "id": 152,
-        "categoria": "existencia",
-        "pregunta": "¿Hay artículos que mencionen a Pablo Neruda?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Boom latinoamericano",
-            "Micrograma",
-            "Movimiento de Vanguardia de Nicaragua",
-            "Piedra y cielo (movimiento)",
-            "Poema",
-            "Poesía lárica",
-            "Revistas literarias del exilio español",
-            "Vanguardismo iberoamericano"
-          ]
-        }
-      },
-      {
-        "id": 153,
-        "categoria": "existencia",
-        "pregunta": "¿Existe algún artículo sobre la poesía visual?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "titulo": "Poesía visual"
-        }
-      },
-      {
-        "id": 154,
-        "categoria": "existencia",
-        "pregunta": "¿Hay artículos que contengan la palabra 'Quijote'?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Catón castellano",
-            "Literatura",
-            "Poesía pastoril",
-            "Realismo literario"
-          ]
-        }
-      },
-      {
-        "id": 155,
-        "categoria": "existencia",
-        "pregunta": "¿Se hace referencia a Freud en algún artículo?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Autor",
-            "Cosmopolitismo en la literatura",
-            "El gran inquisidor",
-            "Escritor",
-            "Literatura modernista",
-            "Literatura",
-            "Revista El Barrilete"
-          ]
-        }
-      },
-      {
-        "id": 156,
-        "categoria": "existencia",
-        "pregunta": "¿Hay algún artículo sobre el creacionismo poético?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Creacionismo (poesía)"
-          ]
-        }
-      },
-      {
-        "id": 157,
-        "categoria": "existencia",
-        "pregunta": "¿Tenemos artículos que mencionen el surrealismo?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Bizarro (género literario)",
-            "Cosmopolitismo en la literatura",
-            "Decadentismo",
-            "El grupo de poetas de Nueva York",
-            "Escritura asémica",
-            "Francisco López Martínez (pintor)",
-            "John Dies at the End (novela)",
-            "Literatura del absurdo",
-            "Literatura modernista",
-            "Micrograma",
-            "Movimiento de Vanguardia de Nicaragua",
-            "Poesía desarraigada",
-            "Poesía taurina",
-            "Poetismo",
-            "Realismo mágico"
-          ]
-        }
-      },
-      {
-        "id": 158,
-        "categoria": "existencia",
-        "pregunta": "¿Hay algún artículo sobre el modernismo literario?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Literatura modernista en portugués",
-            "Literatura modernista"
-          ]
-        }
-      },
-      {
-        "id": 159,
-        "categoria": "existencia",
-        "pregunta": "¿Existe información sobre la generación del 99?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Generación del 99"
-          ]
-        }
-      },
-      {
-        "id": 160,
-        "categoria": "existencia",
-        "pregunta": "¿Se mencionan los haikus en algún artículo de la base de datos?",
-        "tipo_respuesta": "booleano",
-        "respuesta": {
-          "existe": true,
-          "articulos": [
-            "Literatura modernista",
-            "Micrograma",
-            "Poesía infantil",
-            "Poesía",
-            "Ultraísmo"
-          ]
-        }
-      },
-      {
-        "id": 161,
+        "id": 75,
         "categoria": "listado",
         "pregunta": "Dame la lista completa de todos los artículos disponibles.",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "A Lion Among Men",
           "Alborada (música)",
+          "Alchemised",
           "Antología",
           "Arcadia (poesía)",
           "Archivos Husserl",
@@ -2669,6 +1065,7 @@
           "Autor",
           "Avant-propos",
           "Balada romántica (poesía)",
+          "Basel Saneeb",
           "Bizarro (género literario)",
           "Bloqueo del escritor",
           "Bookstagram",
@@ -2773,6 +1170,7 @@
           "Nueva Ola (ciencia ficción)",
           "Nueva narrativa ecuatoriana",
           "Nueva narrativa norteña",
+          "Orlando Loayza Condori",
           "Paraliteratura",
           "Peniarth 51",
           "Perqué (poesía)",
@@ -2821,6 +1219,7 @@
           "Revistas literarias del exilio español",
           "Rima interna",
           "Rima silábica",
+          "Romance oscuro",
           "Rubaiyat",
           "Saliendo de la Estación de Atocha (novela)",
           "Segunda escuela de Silesia",
@@ -2841,18 +1240,20 @@
           "Tzantzismo",
           "Ultraísmo",
           "Vanguardismo iberoamericano",
-          "Verso blanco"
+          "Verso blanco",
+          "Wehrwolf (novela)"
         ],
-        "num_resultados": 182
+        "num_resultados": 187
       },
       {
-        "id": 162,
+        "id": 76,
         "categoria": "listado",
         "pregunta": "¿Cuáles son todos los títulos de artículos de la base de datos?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "A Lion Among Men",
           "Alborada (música)",
+          "Alchemised",
           "Antología",
           "Arcadia (poesía)",
           "Archivos Husserl",
@@ -2860,6 +1261,7 @@
           "Autor",
           "Avant-propos",
           "Balada romántica (poesía)",
+          "Basel Saneeb",
           "Bizarro (género literario)",
           "Bloqueo del escritor",
           "Bookstagram",
@@ -2964,6 +1366,7 @@
           "Nueva Ola (ciencia ficción)",
           "Nueva narrativa ecuatoriana",
           "Nueva narrativa norteña",
+          "Orlando Loayza Condori",
           "Paraliteratura",
           "Peniarth 51",
           "Perqué (poesía)",
@@ -3012,6 +1415,7 @@
           "Revistas literarias del exilio español",
           "Rima interna",
           "Rima silábica",
+          "Romance oscuro",
           "Rubaiyat",
           "Saliendo de la Estación de Atocha (novela)",
           "Segunda escuela de Silesia",
@@ -3032,18 +1436,20 @@
           "Tzantzismo",
           "Ultraísmo",
           "Vanguardismo iberoamericano",
-          "Verso blanco"
+          "Verso blanco",
+          "Wehrwolf (novela)"
         ],
-        "num_resultados": 182
+        "num_resultados": 187
       },
       {
-        "id": 163,
+        "id": 77,
         "categoria": "listado",
         "pregunta": "Enumera todos los artículos que tenemos.",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "A Lion Among Men",
           "Alborada (música)",
+          "Alchemised",
           "Antología",
           "Arcadia (poesía)",
           "Archivos Husserl",
@@ -3051,6 +1457,7 @@
           "Autor",
           "Avant-propos",
           "Balada romántica (poesía)",
+          "Basel Saneeb",
           "Bizarro (género literario)",
           "Bloqueo del escritor",
           "Bookstagram",
@@ -3155,6 +1562,7 @@
           "Nueva Ola (ciencia ficción)",
           "Nueva narrativa ecuatoriana",
           "Nueva narrativa norteña",
+          "Orlando Loayza Condori",
           "Paraliteratura",
           "Peniarth 51",
           "Perqué (poesía)",
@@ -3203,6 +1611,7 @@
           "Revistas literarias del exilio español",
           "Rima interna",
           "Rima silábica",
+          "Romance oscuro",
           "Rubaiyat",
           "Saliendo de la Estación de Atocha (novela)",
           "Segunda escuela de Silesia",
@@ -3223,18 +1632,20 @@
           "Tzantzismo",
           "Ultraísmo",
           "Vanguardismo iberoamericano",
-          "Verso blanco"
+          "Verso blanco",
+          "Wehrwolf (novela)"
         ],
-        "num_resultados": 182
+        "num_resultados": 187
       },
       {
-        "id": 164,
+        "id": 78,
         "categoria": "listado",
         "pregunta": "Necesito ver el catálogo completo de artículos. ¿Cuáles hay?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
           "A Lion Among Men",
           "Alborada (música)",
+          "Alchemised",
           "Antología",
           "Arcadia (poesía)",
           "Archivos Husserl",
@@ -3242,6 +1653,7 @@
           "Autor",
           "Avant-propos",
           "Balada romántica (poesía)",
+          "Basel Saneeb",
           "Bizarro (género literario)",
           "Bloqueo del escritor",
           "Bookstagram",
@@ -3346,6 +1758,7 @@
           "Nueva Ola (ciencia ficción)",
           "Nueva narrativa ecuatoriana",
           "Nueva narrativa norteña",
+          "Orlando Loayza Condori",
           "Paraliteratura",
           "Peniarth 51",
           "Perqué (poesía)",
@@ -3394,6 +1807,7 @@
           "Revistas literarias del exilio español",
           "Rima interna",
           "Rima silábica",
+          "Romance oscuro",
           "Rubaiyat",
           "Saliendo de la Estación de Atocha (novela)",
           "Segunda escuela de Silesia",
@@ -3414,440 +1828,95 @@
           "Tzantzismo",
           "Ultraísmo",
           "Vanguardismo iberoamericano",
-          "Verso blanco"
+          "Verso blanco",
+          "Wehrwolf (novela)"
         ],
-        "num_resultados": 182
+        "num_resultados": 187
       },
       {
-        "id": 165,
-        "categoria": "listado",
-        "pregunta": "Muéstrame una lista de todos los artículos disponibles en español.",
+        "id": 79,
+        "categoria": "relaciones",
+        "pregunta": "¿Qué artículos comparten la categoría 'Novelas históricas'?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
-          "A Lion Among Men",
-          "Alborada (música)",
-          "Antología",
-          "Arcadia (poesía)",
-          "Archivos Husserl",
-          "Asonancia",
-          "Autor",
-          "Avant-propos",
-          "Balada romántica (poesía)",
-          "Bizarro (género literario)",
-          "Bloqueo del escritor",
-          "Bookstagram",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Chbab Srey",
-          "Clasicismo de Weimar",
-          "Colección (edición)",
-          "Conflicto dramático",
-          "Conversaciones entre amigos",
-          "Cosmopolitismo en la literatura",
-          "Creacionismo (poesía)",
-          "Criollismo (literatura)",
-          "Criptopoesia",
-          "Cuento de iniciación",
-          "Culturalismo",
-          "Círculo de Lovecraft",
-          "Decadentismo",
-          "Diccionario de rimas",
-          "Diván (poesía)",
-          "Drama",
-          "Décima (Perú)",
-          "Día Mundial de la Poesía",
-          "Ecopoesía",
-          "Edad de Oro de la ciencia ficción",
-          "Editorial Doble Ese",
-          "Editorial Papeles de Buenos Aires",
-          "El buen salvaje (novela)",
-          "El gran inquisidor",
-          "El grupo de poetas de Nueva York",
-          "Encabalgamiento",
           "Enrica von Handel-Mazzetti",
-          "Enrique Hambleton von Borstel",
-          "Epigrama",
-          "Escansión",
-          "Escolión",
-          "Escritor",
-          "Escritura asémica",
-          "Escritura femenina",
-          "Escuela de las nuevas sensaciones",
+          "Misterio histórico",
+          "The Cadfael Chronicles"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 80,
+        "categoria": "relaciones",
+        "pregunta": "Dame los artículos que tienen en común la categoría Métrica.",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "Encabalgamiento",
           "Esticomitia (métrica)",
-          "Extinción (novela)",
-          "Fix-up",
-          "Francisco López Martínez (pintor)",
-          "Futurismo latino",
-          "Generación Kindle",
-          "Generación de la Sangre",
-          "Generación del 99",
-          "Generación literaria",
-          "Gigi (novela)",
-          "Gnómica",
-          "Grupo de Coppet",
-          "Gustavo Olivo",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "John Dies at the End (novela)",
-          "Jorge Aristides Lira",
-          "Juan Taveras",
+          "Verso blanco"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 81,
+        "categoria": "relaciones",
+        "pregunta": "¿Cuáles artículos están relacionados por pertenecer a Mujeres?",
+        "tipo_respuesta": "lista_articulos",
+        "respuesta": [
+          "Enrica von Handel-Mazzetti",
           "Julie Pfannenschmidt",
-          "Justa poética",
-          "Kavya",
-          "L.A. Confidential (novela)",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "La saga de los ancestros",
-          "Lengua histórica",
-          "Letra (música)",
-          "Letrismo",
-          "Libros de secretos",
-          "Lidio Mosca Bustamante",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura modernista en portugués",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Lírica cancioneril",
-          "Macarronea",
-          "Mark Freeman",
-          "Martina Pierra de Poo",
-          "Matate, amor",
-          "Maximalismo (arte)",
-          "McOndo",
-          "Metapoesía",
-          "Micrograma",
-          "Misterio histórico",
-          "Miñosí",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Método ideográmico",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Negrismo",
-          "Nescio",
-          "Novela en verso",
-          "Novela paralela",
-          "Novísima poesía latinoamericana",
-          "Nuestros clásicos contemporáneos",
-          "Nueva Ola (ciencia ficción)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Paraliteratura",
-          "Peniarth 51",
-          "Perqué (poesía)",
-          "Piedra y cielo (movimiento)",
-          "Piero da Filicaia",
-          "Poema",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía dub",
-          "Poesía en performance",
-          "Poesía escáldica",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía lárica",
-          "Poesía metafísica",
-          "Poesía moderna",
-          "Poesía náhuatl",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Poetismo",
-          "Polipoesía",
-          "Polígrafo (autor)",
-          "Positivismo",
-          "Post-Boom",
-          "Postumismo",
-          "Primera escuela de Silesia",
-          "Prosa poética",
-          "Protréptico",
-          "Rapsoda",
-          "Realismo literario",
-          "Realismo mágico",
-          "Realismo épico",
-          "Redactor publicitario",
-          "Renacimiento vasco",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Rima interna",
-          "Rima silábica",
-          "Rubaiyat",
-          "Saliendo de la Estación de Atocha (novela)",
-          "Segunda escuela de Silesia",
-          "Sherlock Holmes y los Irregulares de Baker Street",
-          "Sijo",
-          "Spoken word",
-          "Subliteratura",
-          "Talleres Populares de Poesía",
-          "Tautograma",
-          "Tema literario",
-          "The Cadfael Chronicles",
-          "The Seafarer (poema)",
-          "The Story of the Trapp Family Singers",
-          "Timing (arte)",
-          "Titanismo",
-          "Tono (literatura)",
-          "Traducción literaria",
-          "Tzantzismo",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano",
-          "Verso blanco"
-        ],
-        "num_resultados": 182
-      },
-      {
-        "id": 166,
-        "categoria": "listado",
-        "pregunta": "¿Qué artículos empiezan por la letra P?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Paraliteratura",
-          "Peniarth 51",
-          "Perqué (poesía)",
-          "Piedra y cielo (movimiento)",
-          "Piero da Filicaia",
-          "Poema",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía dub",
-          "Poesía en performance",
-          "Poesía escáldica",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía lárica",
-          "Poesía metafísica",
-          "Poesía moderna",
-          "Poesía náhuatl",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Poetismo",
-          "Polipoesía",
-          "Polígrafo (autor)",
-          "Positivismo",
-          "Post-Boom",
-          "Postumismo",
-          "Primera escuela de Silesia",
-          "Prosa poética",
-          "Protréptico"
-        ],
-        "num_resultados": 38
-      },
-      {
-        "id": 167,
-        "categoria": "listado",
-        "pregunta": "Lista los artículos cuyo título empieza por L.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "L.A. Confidential (novela)",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "La saga de los ancestros",
-          "Lengua histórica",
-          "Letra (música)",
-          "Letrismo",
-          "Libros de secretos",
-          "Lidio Mosca Bustamante",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura modernista en portugués",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Lírica cancioneril"
-        ],
-        "num_resultados": 19
-      },
-      {
-        "id": 168,
-        "categoria": "listado",
-        "pregunta": "¿Cuáles artículos comienzan con la letra E?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Ecopoesía",
-          "Edad de Oro de la ciencia ficción",
-          "Editorial Doble Ese",
-          "Editorial Papeles de Buenos Aires",
-          "El buen salvaje (novela)",
-          "El gran inquisidor",
-          "El grupo de poetas de Nueva York",
-          "Encabalgamiento",
-          "Enrica von Handel-Mazzetti",
-          "Enrique Hambleton von Borstel",
-          "Epigrama",
-          "Escansión",
-          "Escolión",
-          "Escritor",
-          "Escritura asémica",
-          "Escritura femenina",
-          "Escuela de las nuevas sensaciones",
-          "Esticomitia (métrica)",
-          "Extinción (novela)"
-        ],
-        "num_resultados": 19
-      },
-      {
-        "id": 169,
-        "categoria": "listado",
-        "pregunta": "Busca artículos cuyo nombre empiece por R.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Rapsoda",
-          "Realismo literario",
-          "Realismo mágico",
-          "Realismo épico",
-          "Redactor publicitario",
-          "Renacimiento vasco",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Rima interna",
-          "Rima silábica",
-          "Rubaiyat"
-        ],
-        "num_resultados": 11
-      },
-      {
-        "id": 170,
-        "categoria": "listado",
-        "pregunta": "¿Qué artículos tenemos que empiecen por M?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Macarronea",
-          "Mark Freeman",
-          "Martina Pierra de Poo",
-          "Matate, amor",
-          "Maximalismo (arte)",
-          "McOndo",
-          "Metapoesía",
-          "Micrograma",
-          "Misterio histórico",
-          "Miñosí",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Método ideográmico"
-        ],
-        "num_resultados": 13
-      },
-      {
-        "id": 171,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos comparten la categoría 'Círculos literarios'?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Escuela de las nuevas sensaciones",
-          "Piedra y cielo (movimiento)",
-          "Poetas brumosos"
+          "Martina Pierra de Poo"
         ],
         "num_resultados": 3
       },
       {
-        "id": 172,
+        "id": 82,
         "categoria": "relaciones",
-        "pregunta": "Dame los artículos que tienen en común la categoría Escritores de República Dominicana.",
+        "pregunta": "¿Qué temas están vinculados a través de la categoría Movimientos artísticos del siglo XX?",
         "tipo_respuesta": "lista_articulos",
         "respuesta": [
-          "Gustavo Olivo",
-          "Juan Taveras"
+          "Francisco López Martínez (pintor)",
+          "Ultraísmo"
         ],
         "num_resultados": 2
       },
       {
-        "id": 173,
+        "id": 83,
         "categoria": "relaciones",
-        "pregunta": "¿Cuáles artículos están relacionados por pertenecer a Literatura de América Latina?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Gótico latinoamericano",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 174,
-        "categoria": "relaciones",
-        "pregunta": "Identifica los artículos que coinciden en la categoría Obras literarias.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "El gran inquisidor",
-          "L.A. Confidential (novela)",
-          "Los fantasmas del sombrerero"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 175,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué temas están vinculados a través de la categoría Libros de 1949?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Los fantasmas del sombrerero",
-          "The Story of the Trapp Family Singers"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 176,
-        "categoria": "relaciones",
-        "pregunta": "¿El artículo de Clasicismo de Weimar menciona a Movimiento literario?",
+        "pregunta": "¿El artículo de Literatura taoísta menciona a Escritor?",
         "tipo_respuesta": "booleano_simple",
         "respuesta": true
       },
       {
-        "id": 177,
+        "id": 84,
         "categoria": "relaciones",
-        "pregunta": "¿Se hace referencia a Antología dentro del artículo de Generación de la Sangre?",
+        "pregunta": "¿Se hace referencia a Movimiento literario dentro del artículo de Novísima poesía latinoamericana?",
         "tipo_respuesta": "booleano_simple",
         "respuesta": true
       },
       {
-        "id": 178,
+        "id": 85,
         "categoria": "relaciones",
-        "pregunta": "¿Existe alguna conexión entre los artículos de Traducción literaria y Poesía?",
+        "pregunta": "¿Existe alguna conexión entre los artículos de El grupo de poetas de Nueva York y Escritor?",
         "tipo_respuesta": "booleano_simple",
         "respuesta": true
       },
       {
-        "id": 179,
+        "id": 86,
         "categoria": "relaciones",
-        "pregunta": "¿Aparece mencionado Poesía en el contenido de Generación literaria?",
+        "pregunta": "¿Aparece mencionado Antología en el contenido de Poesía visual?",
         "tipo_respuesta": "booleano_simple",
         "respuesta": true
       },
       {
-        "id": 180,
+        "id": 87,
         "categoria": "relaciones",
-        "pregunta": "¿Hay alguna relación entre El grupo de poetas de Nueva York y Literatura según los artículos?",
+        "pregunta": "¿Hay alguna relación entre Poesía homoerótica hispanohebrea y Poesía árabe según los artículos?",
         "tipo_respuesta": "booleano_simple",
         "respuesta": true
       },
       {
-        "id": 181,
+        "id": 88,
         "categoria": "relaciones",
         "pregunta": "¿Cuáles son los 5 artículos más extensos?",
         "tipo_respuesta": "ranking",
@@ -3876,36 +1945,7 @@
         "num_resultados": 5
       },
       {
-        "id": 182,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles son los 5 artículos más breves?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "articulo": "Novísima poesía latinoamericana",
-            "palabras": 88
-          },
-          {
-            "articulo": "Rima interna",
-            "palabras": 96
-          },
-          {
-            "articulo": "Diván (poesía)",
-            "palabras": 108
-          },
-          {
-            "articulo": "Rima silábica",
-            "palabras": 109
-          },
-          {
-            "articulo": "Escansión",
-            "palabras": 111
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 183,
+        "id": 89,
         "categoria": "relaciones",
         "pregunta": "¿Qué artículos tratan sobre movimientos literarios?",
         "tipo_respuesta": "lista_articulos",
@@ -3930,7 +1970,7 @@
         "num_resultados": 16
       },
       {
-        "id": 184,
+        "id": 90,
         "categoria": "relaciones",
         "pregunta": "¿Qué artículos están clasificados en categorías relacionadas con poesía?",
         "tipo_respuesta": "lista_articulos",
@@ -4009,479 +2049,6 @@
           "Verso blanco"
         ],
         "num_resultados": 72
-      },
-      {
-        "id": 185,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos pertenecen a categorías del siglo XX?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Enrica von Handel-Mazzetti",
-          "Enrique Hambleton von Borstel",
-          "Extinción (novela)",
-          "Francisco López Martínez (pintor)",
-          "Jorge Aristides Lira",
-          "L.A. Confidential (novela)",
-          "Lidio Mosca Bustamante",
-          "Literatura del absurdo",
-          "Los fantasmas del sombrerero",
-          "Poesía arraigada",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Realismo mágico",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 15
-      },
-      {
-        "id": 186,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos hacen referencia a géneros literarios?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Bizarro (género literario)",
-          "Drama",
-          "Epigrama",
-          "Gnómica",
-          "Literatura",
-          "Lírica cancioneril",
-          "Micrograma",
-          "Poesía",
-          "Poesía taurina",
-          "Poeta",
-          "Protréptico",
-          "Realismo mágico",
-          "Spoken word",
-          "Tema literario"
-        ],
-        "num_resultados": 14
-      },
-      {
-        "id": 187,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles son las categorías que agrupan a más artículos?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "categoria": "Poesía",
-            "num_articulos": 67
-          },
-          {
-            "categoria": "Movimientos literarios",
-            "num_articulos": 56
-          },
-          {
-            "categoria": "Literatura",
-            "num_articulos": 32
-          },
-          {
-            "categoria": "Novelas",
-            "num_articulos": 19
-          },
-          {
-            "categoria": "Subgéneros líricos",
-            "num_articulos": 15
-          },
-          {
-            "categoria": "Escritores",
-            "num_articulos": 10
-          },
-          {
-            "categoria": "Poesía moderna",
-            "num_articulos": 9
-          },
-          {
-            "categoria": "Literatura del siglo XIX",
-            "num_articulos": 8
-          },
-          {
-            "categoria": "Literatura del siglo XX",
-            "num_articulos": 8
-          },
-          {
-            "categoria": "Literatura en español",
-            "num_articulos": 6
-          }
-        ],
-        "num_resultados": 10
-      },
-      {
-        "id": 188,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos no tienen secciones internas?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Décima (Perú)",
-          "Literatura del Impresionismo",
-          "Poesía moderna",
-          "Realismo épico",
-          "Segunda escuela de Silesia",
-          "Talleres Populares de Poesía"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 189,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles son los 5 artículos con más secciones?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "articulo": "Escritor",
-            "secciones": 37
-          },
-          {
-            "articulo": "Poesía taurina",
-            "secciones": 32
-          },
-          {
-            "articulo": "Revistas literarias del exilio español",
-            "secciones": 32
-          },
-          {
-            "articulo": "Literatura",
-            "secciones": 21
-          },
-          {
-            "articulo": "Boom latinoamericano",
-            "secciones": 20
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 190,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles artículos abordan la narrativa?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Conflicto dramático",
-          "Edad de Oro de la ciencia ficción",
-          "Escritor",
-          "Futurismo latino",
-          "Generación de la Sangre",
-          "Gótico latinoamericano",
-          "Justa poética",
-          "Kavya",
-          "La Gruta (revista literaria)",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Matate, amor",
-          "McOndo",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Piero da Filicaia",
-          "Poema",
-          "Poesía",
-          "Poesía augusta",
-          "Poesía infantil",
-          "Post-Boom",
-          "Realismo literario",
-          "Realismo mágico",
-          "Subliteratura",
-          "Tzantzismo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 33
-      },
-      {
-        "id": 191,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos mencionan México?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Autor",
-          "Boom latinoamericano",
-          "Cosmopolitismo en la literatura",
-          "Criollismo (literatura)",
-          "Drama",
-          "Encabalgamiento",
-          "Epigrama",
-          "Literatura",
-          "Literatura del naturalismo",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Poesía fonética",
-          "Poesía infantil",
-          "Poesía náhuatl",
-          "Poesía taurina",
-          "Poesía visual",
-          "Polipoesía",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revistas literarias del exilio español",
-          "Sijo",
-          "Traducción literaria",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 25
-      },
-      {
-        "id": 192,
-        "categoria": "relaciones",
-        "pregunta": "¿En qué artículos se menciona Argentina?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Cosmopolitismo en la literatura",
-          "Criollismo (literatura)",
-          "Editorial Doble Ese",
-          "Editorial Papeles de Buenos Aires",
-          "Generación literaria",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "Jorge Aristides Lira",
-          "Lidio Mosca Bustamante",
-          "Literatura",
-          "Matate, amor",
-          "Poesía fonética",
-          "Poesía visual",
-          "Realismo literario",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 19
-      },
-      {
-        "id": 193,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles artículos hacen referencia a Colombia?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Criollismo (literatura)",
-          "Día Mundial de la Poesía",
-          "El buen salvaje (novela)",
-          "Gótico latinoamericano",
-          "Jorge Aristides Lira",
-          "Justa poética",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "Nueva narrativa norteña",
-          "Piedra y cielo (movimiento)",
-          "Poesía visual",
-          "Realismo literario",
-          "Realismo mágico",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 15
-      },
-      {
-        "id": 194,
-        "categoria": "relaciones",
-        "pregunta": "¿En qué artículos se habla de Chile?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Boom latinoamericano",
-          "Cosmopolitismo en la literatura",
-          "Creacionismo (poesía)",
-          "Criollismo (literatura)",
-          "Generación literaria",
-          "Gótico latinoamericano",
-          "Jorge Aristides Lira",
-          "McOndo",
-          "Metapoesía",
-          "Naturalismo (literatura)",
-          "Novísima poesía latinoamericana",
-          "Poesía lárica",
-          "Poesía visual",
-          "Positivismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revistas literarias del exilio español",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 19
-      },
-      {
-        "id": 195,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos mencionan Cuba?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Bloqueo del escritor",
-          "Boom latinoamericano",
-          "Cosmopolitismo en la literatura",
-          "Futurismo latino",
-          "Jitanjáfora",
-          "Martina Pierra de Poo",
-          "McOndo",
-          "Naturalismo (literatura)",
-          "Negrismo",
-          "Poesía taurina",
-          "Realismo mágico",
-          "Revistas literarias del exilio español",
-          "Tzantzismo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 14
-      },
-      {
-        "id": 196,
-        "categoria": "relaciones",
-        "pregunta": "Lista los artículos que hagan referencia a Francia.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Autor",
-          "Boom latinoamericano",
-          "Decadentismo",
-          "Drama",
-          "Epigrama",
-          "Escritura femenina",
-          "Esticomitia (métrica)",
-          "Gnómica",
-          "Grupo de Coppet",
-          "Literatura del Impresionismo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Matate, amor",
-          "Naturalismo (literatura)",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía en performance",
-          "Poesía homoerótica hispanohebrea",
-          "Realismo literario",
-          "Revistas literarias del exilio español",
-          "Tema literario"
-        ],
-        "num_resultados": 21
-      },
-      {
-        "id": 197,
-        "categoria": "relaciones",
-        "pregunta": "¿Cuáles son los 5 artículos con más categorías asignadas?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "articulo": "Enrica von Handel-Mazzetti",
-            "categorias": 15
-          },
-          {
-            "articulo": "Lidio Mosca Bustamante",
-            "categorias": 12
-          },
-          {
-            "articulo": "Arcadia (poesía)",
-            "categorias": 9
-          },
-          {
-            "articulo": "Extinción (novela)",
-            "categorias": 9
-          },
-          {
-            "articulo": "Gigi (novela)",
-            "categorias": 9
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 198,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos hacen referencia al siglo XIX?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Alborada (música)",
-          "Autor",
-          "Balada romántica (poesía)",
-          "Boom latinoamericano",
-          "Clasicismo de Weimar",
-          "Criollismo (literatura)",
-          "Culturalismo",
-          "Decadentismo",
-          "Enrique Hambleton von Borstel",
-          "Francisco López Martínez (pintor)",
-          "Generación literaria",
-          "Grupo de Coppet",
-          "Gótico latinoamericano",
-          "La Mujer (revista colombiana)",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Naturaleza y romanticismo",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía moderna",
-          "Poesía taurina",
-          "Poesía visual",
-          "Positivismo",
-          "Realismo literario",
-          "Renacimiento vasco",
-          "Traducción literaria",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 29
-      },
-      {
-        "id": 199,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos mencionan la literatura española?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Balada romántica (poesía)",
-          "Creacionismo (poesía)",
-          "Generación literaria",
-          "Poesía arraigada",
-          "Poesía desarraigada",
-          "Poesía metafísica",
-          "Poesía taurina",
-          "Realismo literario",
-          "Revistas literarias del exilio español"
-        ],
-        "num_resultados": 9
-      },
-      {
-        "id": 200,
-        "categoria": "relaciones",
-        "pregunta": "¿En cuáles artículos se menciona América?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Bookstagram",
-          "Boom latinoamericano",
-          "Criollismo (literatura)",
-          "Decadentismo",
-          "Edad de Oro de la ciencia ficción",
-          "El gran inquisidor",
-          "Epigrama",
-          "Generación de la Sangre",
-          "Gótico latinoamericano",
-          "Jorge Aristides Lira",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "Lidio Mosca Bustamante",
-          "Lilith's Brood",
-          "McOndo",
-          "Micrograma",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Naturalismo (literatura)",
-          "Nueva narrativa ecuatoriana",
-          "Poesía metafísica",
-          "Poesía taurina",
-          "Poesía visual",
-          "Postumismo",
-          "Realismo literario",
-          "Realismo mágico",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "The Story of the Trapp Family Singers",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano"
-        ],
-        "num_resultados": 30
       }
     ]
   }

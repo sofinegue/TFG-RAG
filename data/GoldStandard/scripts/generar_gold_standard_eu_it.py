@@ -1,6 +1,6 @@
 """
 Script per generare il Gold Standard del caso d'uso dei documenti dell'UE in italiano.
-Genera 200+ domande uniche con risposte estratte direttamente dai documenti.
+Genera 80-100 domande uniche con risposte estratte direttamente dai documenti.
 
 Struttura dei dati: documenti della Gazzetta ufficiale dell'UE (serie L) in formato JSON
   - archivo, idioma, num_paginas, contenido, paginas
@@ -731,6 +731,49 @@ add_q("contenuto_specifico", "Quali documenti fanno riferimento a tonnellate?", 
 docs_cooperacion = buscar_en_contenido("cooperazione")
 add_q("contenuto_specifico", "In quali documenti è menzionata la cooperazione?", docs_cooperacion, "lista_documentos")
 
+
+# ═══════════════════════════════════════════════
+# FILTRO: RIDURRE A 80-100 DOMANDE
+# ═══════════════════════════════════════════════
+from difflib import SequenceMatcher as _SM
+
+def _sim(a, b):
+    return _SM(None, a.lower(), b.lower()).ratio()
+
+def _remove_similar(qs, field, threshold=0.6):
+    kept = []
+    for q in qs:
+        if not any(_sim(q[field], k[field]) > threshold for k in kept):
+            kept.append(q)
+    return kept
+
+_TARGET = 90
+_by_cat = defaultdict(list)
+for q in preguntas:
+    _by_cat[q["categoria"]].append(q)
+
+_filtered = {}
+for cat, qs in _by_cat.items():
+    _filtered[cat] = _remove_similar(qs, "pregunta")
+
+_total_f = sum(len(v) for v in _filtered.values())
+_selected = []
+for cat, qs in sorted(_filtered.items()):
+    n = max(2, round(len(qs) / _total_f * _TARGET))
+    _selected.extend(qs[:n])
+
+if len(_selected) > 100:
+    _selected = _selected[:100]
+elif len(_selected) < 80:
+    _remaining = [q for cat, qs in sorted(_filtered.items()) for q in qs if q not in _selected]
+    _selected.extend(_remaining[:80 - len(_selected)])
+
+_selected.sort(key=lambda q: q["id"])
+for i, q in enumerate(_selected, 1):
+    q["id"] = i
+
+print(f"\n→ Ridotto da {len(preguntas)} a {len(_selected)} domande (obiettivo: 80-100)")
+preguntas = _selected
 
 # ═══════════════════════════════════════════════
 # VERIFICA ED ESPORTAZIONE

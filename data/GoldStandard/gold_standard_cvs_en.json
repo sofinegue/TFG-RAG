@@ -2,22 +2,22 @@
   "gold_standard": {
     "caso_uso": "cvs",
     "idioma": "en",
-    "total_preguntas": 220,
+    "total_preguntas": 90,
     "total_cvs_analizados": 300,
     "fecha_generacion": "2026-04-17",
     "categorias": {
-      "aggregation": 20,
-      "counting": 20,
-      "existence": 15,
-      "experience_query": 15,
-      "individual_query": 25,
-      "multi_criteria": 25,
-      "search_by_education": 20,
-      "search_by_experience": 10,
-      "search_by_language": 15,
-      "search_by_position": 20,
-      "search_by_skill": 25,
-      "search_by_soft_skill": 10
+      "aggregation": 5,
+      "counting": 7,
+      "existence": 5,
+      "experience_query": 7,
+      "individual_query": 12,
+      "multi_criteria": 11,
+      "search_by_education": 7,
+      "search_by_experience": 4,
+      "search_by_language": 7,
+      "search_by_position": 9,
+      "search_by_skill": 11,
+      "search_by_soft_skill": 5
     },
     "descripcion": "Gold standard for evaluating a RAG system on an English CV database. Contains questions about skill search, positions, education, languages, individual queries, counting, multi-criteria filters, existence and ranking. All answers computed directly from source data.",
     "preguntas": [
@@ -150,179 +150,6 @@
       },
       {
         "id": 12,
-        "categoria": "search_by_skill",
-        "pregunta": "Is there anyone in the database who knows DeFi? Who are they?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Kathryn Washington Mensah"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 13,
-        "categoria": "search_by_skill",
-        "pregunta": "Compile a list of people who have Unity XR in their hard skills.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Martha Reyes Wells",
-          "Natalie Sutton Burke"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 14,
-        "categoria": "search_by_skill",
-        "pregunta": "I'm assembling a team that needs Apex. Whom should I consider?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice Flores Adeyemi"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 15,
-        "categoria": "search_by_skill",
-        "pregunta": "Which candidates mention Xamarin among their competencies?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Olga Ruiz Al-Farsi"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 16,
-        "categoria": "search_by_skill",
-        "pregunta": "Tell me every person who appears with the skill DNS.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Elijah Sullivan O'Neill",
-          "Spencer Ivanov Cunningham"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 17,
-        "categoria": "search_by_skill",
-        "pregunta": "What profiles stand out for knowing FHIR?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice MacGregor King",
-          "Billy Allen Rodriguez",
-          "Devon Evans Lane",
-          "Gerald Middleton Flores",
-          "James Roberts Pope"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 18,
-        "categoria": "search_by_skill",
-        "pregunta": "Filter the CVs and return only those containing PrestaShop.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Julian Johnson Henry",
-          "Lauren Hall Choi",
-          "Nancy Morales Cooper",
-          "Spencer Whitfield Ryan",
-          "Terrence Kang Allen"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 19,
-        "categoria": "search_by_skill",
-        "pregunta": "Provide the list of employees who use Cassandra in their work.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Anna Hart Choi",
-          "Evelyn Tran Morgan",
-          "Lisa Woodward Kelley",
-          "Melissa Petrov Ivanov",
-          "Parker Whitfield Davis",
-          "Pradeep Yamamoto Choi",
-          "Randy Stewart Douglas",
-          "Takeshi Chen Sharma"
-        ],
-        "num_resultados": 8
-      },
-      {
-        "id": 20,
-        "categoria": "search_by_skill",
-        "pregunta": "Who among our candidates claims to know Feature Branching?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Andrew Diaz Martin",
-          "Ann Clark Bell",
-          "Charlotte Yang Burke"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 21,
-        "categoria": "search_by_skill",
-        "pregunta": "Gather the names of those with training or experience in Framer.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Anita Parker Zhou",
-          "Charlotte Yang Burke",
-          "Gabriel Reynolds Allen",
-          "Joseph Curtis Soto",
-          "Julie Miller Reed",
-          "Ming Bell Rose",
-          "Parker Davis Jackson"
-        ],
-        "num_resultados": 7
-      },
-      {
-        "id": 22,
-        "categoria": "search_by_skill",
-        "pregunta": "According to available CVs, which people are familiar with Datadog?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Cedric Chavez Thomas",
-          "Chase Edwards Campbell",
-          "Nathan King Palmer"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 23,
-        "categoria": "search_by_skill",
-        "pregunta": "Are there any professionals in our database with Azure Synapse Analytics? List them.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alexis Jenkins Burns",
-          "Elizabeth Mensah Wood",
-          "Lori Woodward Cruz",
-          "Marie Fox Burns",
-          "Ralph Park Mendoza"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 24,
-        "categoria": "search_by_skill",
-        "pregunta": "Extract from the system everyone who has Metasploit as a skill.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Grace Choi Lowe",
-          "Rohan Sanders Ashworth"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 25,
-        "categoria": "search_by_skill",
-        "pregunta": "To whom could we assign Joomla tasks based on their CV?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Andrew Diaz Martin",
-          "Spencer Whitfield Ryan"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 26,
         "categoria": "search_by_position",
         "pregunta": "Who works as a Backend Developer?",
         "tipo_respuesta": "person_list",
@@ -334,7 +161,7 @@
         "num_resultados": 3
       },
       {
-        "id": 27,
+        "id": 13,
         "categoria": "search_by_position",
         "pregunta": "Give me the list of people whose position is Creative Director.",
         "tipo_respuesta": "person_list",
@@ -344,7 +171,7 @@
         "num_resultados": 1
       },
       {
-        "id": 28,
+        "id": 14,
         "categoria": "search_by_position",
         "pregunta": "I need to know which candidates hold the role of Sales Engineer.",
         "tipo_respuesta": "person_list",
@@ -354,7 +181,7 @@
         "num_resultados": 1
       },
       {
-        "id": 29,
+        "id": 15,
         "categoria": "search_by_position",
         "pregunta": "How many and which professionals are listed as CRM Developer in their CVs?",
         "tipo_respuesta": "person_list_with_count",
@@ -365,7 +192,7 @@
         "num_resultados": 2
       },
       {
-        "id": 30,
+        "id": 16,
         "categoria": "search_by_position",
         "pregunta": "State all names of those who serve as Business Analyst.",
         "tipo_respuesta": "person_list",
@@ -375,7 +202,7 @@
         "num_resultados": 1
       },
       {
-        "id": 31,
+        "id": 17,
         "categoria": "search_by_position",
         "pregunta": "Which people currently hold the title of Strategy Consultant?",
         "tipo_respuesta": "person_list",
@@ -385,7 +212,7 @@
         "num_resultados": 1
       },
       {
-        "id": 32,
+        "id": 18,
         "categoria": "search_by_position",
         "pregunta": "Locate in the database every Middleware Developer.",
         "tipo_respuesta": "person_list",
@@ -396,7 +223,7 @@
         "num_resultados": 2
       },
       {
-        "id": 33,
+        "id": 19,
         "categoria": "search_by_position",
         "pregunta": "Could you tell me who the registered Web Developers are?",
         "tipo_respuesta": "person_list",
@@ -408,7 +235,7 @@
         "num_resultados": 3
       },
       {
-        "id": 34,
+        "id": 20,
         "categoria": "search_by_position",
         "pregunta": "Display the complete list of candidates with the position of UI Designer.",
         "tipo_respuesta": "person_list",
@@ -421,122 +248,7 @@
         "num_resultados": 4
       },
       {
-        "id": 35,
-        "categoria": "search_by_position",
-        "pregunta": "Do we have any ML Architects on the team? Tell me their names.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Frances Ramirez Lawrence"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 36,
-        "categoria": "search_by_position",
-        "pregunta": "Select all people who work as Junior Data Analyst.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Shirley Buchanan Norton"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 37,
-        "categoria": "search_by_position",
-        "pregunta": "I'm looking for someone who is a IoT Engineer. Who is available?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Beverly Doyle Ford"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 38,
-        "categoria": "search_by_position",
-        "pregunta": "From the set of CVs, identify those who present themselves as Lead Developer.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice Flores Adeyemi",
-          "William Freeman Allen"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 39,
-        "categoria": "search_by_position",
-        "pregunta": "Who has Business Development Manager as their professional title?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Chase Mensah Fraser"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 40,
-        "categoria": "search_by_position",
-        "pregunta": "Retrieve all professionals categorized under the position Project Manager.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ann Park Glover",
-          "Priya Martin Adams"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 41,
-        "categoria": "search_by_position",
-        "pregunta": "I'm interested in hiring a Program Manager. What options are in the database?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Doris Oliver Bishop",
-          "Yasmin Bell McKenzie"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 42,
-        "categoria": "search_by_position",
-        "pregunta": "For which people is their position indicated as Data Architect?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Julie Miller Reed",
-          "Lucas Middleton James"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 43,
-        "categoria": "search_by_position",
-        "pregunta": "If I filter by position = '.NET Developer', what names appear?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Sanjay Pham Castillo"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 44,
-        "categoria": "search_by_position",
-        "pregunta": "Are there candidates whose current role is Junior Developer? Enumerate them.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Carter Alvarez Nelson",
-          "Olga Moore Mensah"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 45,
-        "categoria": "search_by_position",
-        "pregunta": "Return a list of available VP of Engineerings.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Pradeep Brennan Young"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 46,
+        "id": 21,
         "categoria": "search_by_education",
         "pregunta": "Who has studied Bachelor's Degree in Computer Engineering?",
         "tipo_respuesta": "person_list",
@@ -552,7 +264,7 @@
         "num_resultados": 7
       },
       {
-        "id": 47,
+        "id": 22,
         "categoria": "search_by_education",
         "pregunta": "List all candidates who hold a degree in Master's Degree in DevOps.",
         "tipo_respuesta": "person_list",
@@ -566,7 +278,7 @@
         "num_resultados": 5
       },
       {
-        "id": 48,
+        "id": 23,
         "categoria": "search_by_education",
         "pregunta": "Which people in the database completed Bachelor's Degree in Business Administration and Management?",
         "tipo_respuesta": "person_list",
@@ -579,7 +291,7 @@
         "num_resultados": 4
       },
       {
-        "id": 49,
+        "id": 24,
         "categoria": "search_by_education",
         "pregunta": "Tell me the names of those who have the qualification Bachelor's Degree in Statistics.",
         "tipo_respuesta": "person_list",
@@ -592,7 +304,7 @@
         "num_resultados": 4
       },
       {
-        "id": 50,
+        "id": 25,
         "categoria": "search_by_education",
         "pregunta": "Which candidates include Bachelor's Degree in Data Science and Engineering in their academic background?",
         "tipo_respuesta": "person_list",
@@ -609,7 +321,7 @@
         "num_resultados": 8
       },
       {
-        "id": 51,
+        "id": 26,
         "categoria": "search_by_education",
         "pregunta": "I need to identify everyone with studies in Master's Degree in E-commerce.",
         "tipo_respuesta": "person_list",
@@ -620,7 +332,7 @@
         "num_resultados": 2
       },
       {
-        "id": 52,
+        "id": 27,
         "categoria": "search_by_education",
         "pregunta": "Search the CVs for people whose education includes Master's Degree in Cloud Computing.",
         "tipo_respuesta": "person_list",
@@ -633,205 +345,7 @@
         "num_resultados": 4
       },
       {
-        "id": 53,
-        "categoria": "search_by_education",
-        "pregunta": "Are there professionals with a Bachelor's Degree in Electronic Engineering? Who are they?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ann Park Glover",
-          "Brian Cunningham Gonzalez",
-          "Douglas Griffin Hamilton",
-          "James Roberts Pope",
-          "Raj Nelson Liu",
-          "Tatiana Wang Cox"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 54,
-        "categoria": "search_by_education",
-        "pregunta": "Extract the list of people who graduated in Master's Degree in Natural Language Processing.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alan Lynch Lane",
-          "Ashley Mehta Griffin",
-          "Cynthia Rogers Russell",
-          "Doris Oliver Bishop",
-          "Jordan Walsh Henderson",
-          "Lawrence Rivera Gallagher",
-          "Olivia Mbeki Fernandez",
-          "Shirley Cunningham Yamamoto",
-          "Stephanie Ramos Ortiz",
-          "Susan Choi Evans",
-          "Wei Gutierrez Ross"
-        ],
-        "num_resultados": 11
-      },
-      {
-        "id": 55,
-        "categoria": "search_by_education",
-        "pregunta": "Show me candidates whose education includes PhD in Big Data.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Laura Chapman O'Neill",
-          "Nathan King Palmer"
-        ],
-        "num_resultados": 2
-      },
-      {
-        "id": 56,
-        "categoria": "search_by_education",
-        "pregunta": "Who is recorded as having completed Master's Degree in Business Analytics?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Katherine Myers Desai",
-          "Luke Spencer Perry",
-          "Mary Pierce Tucker",
-          "Sarah Perez Hernandez",
-          "Trevor Jefferson Brooks"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 57,
-        "categoria": "search_by_education",
-        "pregunta": "Which team members have training in Master's Degree in Web Engineering?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Aaron Ortiz Thompson",
-          "Hannah Anderson Brooks",
-          "Jamal Burke White",
-          "Ronald Robinson Roberts",
-          "Susan Choi Evans"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 58,
-        "categoria": "search_by_education",
-        "pregunta": "Enumerate the professionals with a qualification in Bachelor's Degree in Applied Physics.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ashley Mehta Griffin",
-          "Benjamin Oliver Bennett",
-          "Carol Li Coleman",
-          "Julian Johnson Henry",
-          "Kathryn Washington Mensah",
-          "Parker Davis Jackson",
-          "Patrick Maddox Volkov"
-        ],
-        "num_resultados": 7
-      },
-      {
-        "id": 59,
-        "categoria": "search_by_education",
-        "pregunta": "Which of the candidates holds a Bachelor's Degree in Data Engineering?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alexis Jenkins Burns",
-          "Chen Phillips Mensah",
-          "Elijah Howard Castillo",
-          "Joshua Al-Rashid Cross",
-          "Randy Hughes Baker",
-          "Stephanie Ramos Ortiz",
-          "Tyrone Lane Petrov"
-        ],
-        "num_resultados": 7
-      },
-      {
-        "id": 60,
-        "categoria": "search_by_education",
-        "pregunta": "Among all CVs, which ones reflect PhD in Telematics Engineering as a study?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Julian Johnson Henry"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 61,
-        "categoria": "search_by_education",
-        "pregunta": "Filter by education and give me the people with Advanced Vocational Training in IT Security and Vulnerability Analysis.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Bradley Alvarez Calloway",
-          "Chen O'Brien Hernandez",
-          "Devon Cook Fernandez",
-          "Eric Moore Webb",
-          "Jason Cross James",
-          "Jordan Walsh Henderson",
-          "Lori Woodward Cruz",
-          "Matthew Flores Wallace",
-          "Tatiana Hart Gonzalez"
-        ],
-        "num_resultados": 9
-      },
-      {
-        "id": 62,
-        "categoria": "search_by_education",
-        "pregunta": "Can you find out who has a Advanced Vocational Training in Multiplatform Application Development on their resume?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Andrew Lopez Wallace",
-          "Bradley Alvarez Calloway",
-          "Chen O'Brien Hernandez",
-          "Daniel Baker Diaz",
-          "Danielle Rivera Butler",
-          "Ethan Foster Chambers",
-          "Frances Ramirez Lawrence",
-          "Gerald Hughes Hunt",
-          "Gerald Middleton Flores",
-          "Gregory Mensah Clark",
-          "Heather Ramirez Petrov",
-          "Jordan Walsh Henderson",
-          "Nicholas Curtis Hudson",
-          "Olga Moore Mensah",
-          "Sanjay Lane Harrington",
-          "Victoria Snyder Hughes"
-        ],
-        "num_resultados": 16
-      },
-      {
-        "id": 63,
-        "categoria": "search_by_education",
-        "pregunta": "Provide the candidates who hold PhD in Software Architecture.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Douglas Powell Reynolds"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 64,
-        "categoria": "search_by_education",
-        "pregunta": "Which people's profiles show they studied Bachelor's Degree in Computer Science Engineering?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Joseph Curtis Soto",
-          "Logan Hansen Lopez",
-          "Richard Hunt Langston",
-          "Terrence Gomez Watson",
-          "Yasmin Mehta Maxwell"
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 65,
-        "categoria": "search_by_education",
-        "pregunta": "Check the database and tell me who has Bachelor's Degree in Artificial Intelligence as a qualification.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice Owens Lopez",
-          "Denise Kumar Baker",
-          "Mark Diallo Fox",
-          "Sarah Lopez Wilson",
-          "Scott Grant Pham",
-          "Trevor Jefferson Brooks"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 66,
+        "id": 28,
         "categoria": "search_by_language",
         "pregunta": "Which candidates speak French at any level?",
         "tipo_respuesta": "person_list",
@@ -900,7 +414,7 @@
         "num_resultados": 60
       },
       {
-        "id": 67,
+        "id": 29,
         "categoria": "search_by_language",
         "pregunta": "Give me all professionals who have Spanish on their CV.",
         "tipo_respuesta": "person_list",
@@ -931,7 +445,7 @@
         "num_resultados": 22
       },
       {
-        "id": 68,
+        "id": 30,
         "categoria": "search_by_language",
         "pregunta": "Who declares knowledge of German at any level?",
         "tipo_respuesta": "person_list",
@@ -980,7 +494,7 @@
         "num_resultados": 40
       },
       {
-        "id": 69,
+        "id": 31,
         "categoria": "search_by_language",
         "pregunta": "I need people who speak Portuguese. Are there any?",
         "tipo_respuesta": "person_list",
@@ -1002,7 +516,7 @@
         "num_resultados": 13
       },
       {
-        "id": 70,
+        "id": 32,
         "categoria": "search_by_language",
         "pregunta": "Identify candidates with Italian mentioned in their profile.",
         "tipo_respuesta": "person_list",
@@ -1024,7 +538,7 @@
         "num_resultados": 13
       },
       {
-        "id": 71,
+        "id": 33,
         "categoria": "search_by_language",
         "pregunta": "Show me who has Japanese as a language.",
         "tipo_respuesta": "person_list",
@@ -1054,7 +568,7 @@
         "num_resultados": 21
       },
       {
-        "id": 72,
+        "id": 34,
         "categoria": "search_by_language",
         "pregunta": "Which professionals mention Chinese or Mandarin in their profile?",
         "tipo_respuesta": "person_list",
@@ -1115,158 +629,7 @@
         "num_resultados": 52
       },
       {
-        "id": 73,
-        "categoria": "search_by_language",
-        "pregunta": "Find people who identify as self-taught.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alan Lynch Lane",
-          "Cynthia Rogers Russell",
-          "Russell Ashworth Jefferson",
-          "Teresa Diaz Baker"
-        ],
-        "num_resultados": 4
-      },
-      {
-        "id": 74,
-        "categoria": "search_by_language",
-        "pregunta": "Which candidates prefer remote work?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ann Park Glover",
-          "Anthony Simmons Barnes",
-          "Beverly Castro Moseley",
-          "Caleb Rodriguez Armstrong",
-          "Carter Bishop Fernandez",
-          "Charlotte Yang Burke",
-          "Cole Kim Yamamoto",
-          "Evelyn Tran Morgan",
-          "Kathleen Glover Payne",
-          "Kathleen Taylor Edwards",
-          "Keith Chambers Francis",
-          "Ming Volkov Henderson",
-          "Nicole Watanabe Gonzales",
-          "Sandra Lynch Blackwell",
-          "Sarah Lopez Wilson",
-          "Scott Reed Hart",
-          "Shirley Buchanan Norton",
-          "Spencer Ivanov Cunningham",
-          "Susan Barnes Coleman",
-          "Takeshi Chen Sharma",
-          "Victoria Snyder Hughes"
-        ],
-        "num_resultados": 21
-      },
-      {
-        "id": 75,
-        "categoria": "search_by_language",
-        "pregunta": "Who has startup experience according to their CV?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Arjun Foster Gutierrez",
-          "Benjamin Oliver Bennett",
-          "Beverly Castro Moseley",
-          "Beverly Francis James",
-          "Charlotte Lawrence Gallagher",
-          "Danielle Rivera Butler",
-          "Devon Cook Fernandez",
-          "Gerald Hughes Hunt",
-          "Isaiah Taylor Grant",
-          "Jonathan Tran Henry",
-          "Kathleen Taylor Edwards",
-          "Lori Woodward Cruz",
-          "Mark Thompson Turner",
-          "Olivia Mbeki Fernandez",
-          "Olivia Walker Gupta",
-          "Pradeep Yamamoto Choi",
-          "Rachel Payne Harris",
-          "Samantha Ford Nkosi",
-          "Sarah Lopez Wilson"
-        ],
-        "num_resultados": 19
-      },
-      {
-        "id": 76,
-        "categoria": "search_by_language",
-        "pregunta": "List candidates who mention immediate availability.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Carter Bishop Fernandez",
-          "Isabella Stone Jenkins",
-          "Mark Thompson Turner",
-          "Owen Blair Bell",
-          "Pradeep Yamamoto Choi",
-          "Susan Barnes Coleman",
-          "Takeshi Chen Sharma",
-          "Virginia Pope Jefferson"
-        ],
-        "num_resultados": 8
-      },
-      {
-        "id": 77,
-        "categoria": "search_by_language",
-        "pregunta": "Which people indicate they are conference speakers?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Jennifer Peterson Moseley",
-          "Joe Payne Reynolds",
-          "Lauren Hall Choi",
-          "Natalie Sutton Burke",
-          "Raj Howard Nguyen",
-          "Sunita Adams Pope",
-          "Susan Barnes Coleman",
-          "Yasmin Mehta Maxwell"
-        ],
-        "num_resultados": 8
-      },
-      {
-        "id": 78,
-        "categoria": "search_by_language",
-        "pregunta": "Are there candidates with banking sector experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Amina Russell Castillo",
-          "Hunter Allen Perez",
-          "Jacob Petrov Al-Farsi",
-          "Julie Miller Reed",
-          "Owen Blair Bell",
-          "Pradeep Soto Howard",
-          "Scott Grant Pham"
-        ],
-        "num_resultados": 7
-      },
-      {
-        "id": 79,
-        "categoria": "search_by_language",
-        "pregunta": "Who is open to relocation based on their profile?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Amit Morgan Brennan",
-          "Arthur Wells Soto",
-          "James Roberts Pope",
-          "Nicholas Curtis Hudson",
-          "Nicole Watanabe Gonzales",
-          "Priya O'Neill Elliott"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 80,
-        "categoria": "search_by_language",
-        "pregunta": "Find candidates who have Scrum Master certification.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Lawrence Rivera Gallagher",
-          "Natalie Sutton Burke",
-          "Nicholas Curtis Hudson",
-          "Nicole Oliver Booker",
-          "Nour Maxwell Palmer",
-          "Terrence Kang Allen"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 81,
+        "id": 35,
         "categoria": "individual_query",
         "pregunta": "What is Rachel Bishop Pham's position?",
         "tipo_respuesta": "single_value",
@@ -1274,7 +637,7 @@
         "cv_referencia": "cv_154"
       },
       {
-        "id": 82,
+        "id": 36,
         "categoria": "individual_query",
         "pregunta": "Tell me the hard skills that Shirley Cunningham Yamamoto has.",
         "tipo_respuesta": "skill_list",
@@ -1288,7 +651,7 @@
         "cv_referencia": "cv_033"
       },
       {
-        "id": 83,
+        "id": 37,
         "categoria": "individual_query",
         "pregunta": "What academic background appears on Julian Campbell Kang's CV?",
         "tipo_respuesta": "education_list",
@@ -1300,7 +663,7 @@
         "cv_referencia": "cv_086"
       },
       {
-        "id": 84,
+        "id": 38,
         "categoria": "individual_query",
         "pregunta": "What are Ryan Kapoor Adams's soft skills?",
         "tipo_respuesta": "skill_list",
@@ -1316,7 +679,7 @@
         "cv_referencia": "cv_214"
       },
       {
-        "id": 85,
+        "id": 39,
         "categoria": "individual_query",
         "pregunta": "Look up Nicole Oliver Booker's profile and tell me their current position.",
         "tipo_respuesta": "single_value",
@@ -1324,7 +687,7 @@
         "cv_referencia": "cv_126"
       },
       {
-        "id": 86,
+        "id": 40,
         "categoria": "individual_query",
         "pregunta": "What additional information (others) is on Kayla Myers Harris's CV?",
         "tipo_respuesta": "other_list",
@@ -1338,7 +701,7 @@
         "cv_referencia": "cv_155"
       },
       {
-        "id": 87,
+        "id": 41,
         "categoria": "individual_query",
         "pregunta": "I'd like to know what technical abilities Priya Ferguson Lawrence possesses.",
         "tipo_respuesta": "skill_list",
@@ -1351,7 +714,7 @@
         "cv_referencia": "cv_207"
       },
       {
-        "id": 88,
+        "id": 42,
         "categoria": "individual_query",
         "pregunta": "What does Alice Armstrong Baker do for a living?",
         "tipo_respuesta": "single_value",
@@ -1359,7 +722,7 @@
         "cv_referencia": "cv_017"
       },
       {
-        "id": 89,
+        "id": 43,
         "categoria": "individual_query",
         "pregunta": "What education does Donna Cruz Yang have? Give me their studies.",
         "tipo_respuesta": "education_list",
@@ -1371,7 +734,7 @@
         "cv_referencia": "cv_101"
       },
       {
-        "id": 90,
+        "id": 44,
         "categoria": "individual_query",
         "pregunta": "I want to see Lucas Roberts Russell's full profile. What interpersonal skills do they have?",
         "tipo_respuesta": "skill_list",
@@ -1385,7 +748,7 @@
         "cv_referencia": "cv_131"
       },
       {
-        "id": 91,
+        "id": 45,
         "categoria": "individual_query",
         "pregunta": "Describe Kenji Quinn Lee's technical competencies.",
         "tipo_respuesta": "skill_list",
@@ -1402,7 +765,7 @@
         "cv_referencia": "cv_046"
       },
       {
-        "id": 92,
+        "id": 46,
         "categoria": "individual_query",
         "pregunta": "What role does Denise Kumar Baker hold according to their resume?",
         "tipo_respuesta": "single_value",
@@ -1410,173 +773,7 @@
         "cv_referencia": "cv_167"
       },
       {
-        "id": 93,
-        "categoria": "individual_query",
-        "pregunta": "Tell me what degrees Landon Freeman Calloway has obtained.",
-        "tipo_respuesta": "education_list",
-        "respuesta": [
-          "Bachelor's Degree in Web Application Development",
-          "MBA (Master in Business Administration)",
-          "PhD in Machine Learning"
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_161"
-      },
-      {
-        "id": 94,
-        "categoria": "individual_query",
-        "pregunta": "Does Carol Arnold Singh have any certifications, languages, or other relevant info?",
-        "tipo_respuesta": "other_list",
-        "respuesta": [
-          "Based in Barcelona",
-          "Energy and motivation"
-        ],
-        "num_resultados": 2,
-        "cv_referencia": "cv_122"
-      },
-      {
-        "id": 95,
-        "categoria": "individual_query",
-        "pregunta": "I need to know the technologies Wei Gutierrez Ross works with.",
-        "tipo_respuesta": "skill_list",
-        "respuesta": [
-          "Experimental Design",
-          "Facial Recognition",
-          "Feature Engineering",
-          "GitHub Actions",
-          "Google Cloud Storage",
-          "Kibana",
-          "Phoenix (Elixir)",
-          "Sanity"
-        ],
-        "num_resultados": 8,
-        "cv_referencia": "cv_055"
-      },
-      {
-        "id": 96,
-        "categoria": "individual_query",
-        "pregunta": "What is Sharon Singh McCarthy's professional designation?",
-        "tipo_respuesta": "single_value",
-        "respuesta": "Full Stack Developer",
-        "cv_referencia": "cv_085"
-      },
-      {
-        "id": 97,
-        "categoria": "individual_query",
-        "pregunta": "Review Nicholas Curtis Hudson's CV and extract their personal aptitudes.",
-        "tipo_respuesta": "skill_list",
-        "respuesta": [
-          "Abstraction ability",
-          "Collaborative troubleshooting",
-          "Honesty",
-          "Methodology",
-          "Pursuit of excellence",
-          "Systems perspective"
-        ],
-        "num_resultados": 6,
-        "cv_referencia": "cv_001"
-      },
-      {
-        "id": 98,
-        "categoria": "individual_query",
-        "pregunta": "What qualifications are listed on Lamar Gray Bradford's profile?",
-        "tipo_respuesta": "education_list",
-        "respuesta": [
-          "Bachelor's Degree in Computer Engineering",
-          "Master's Degree in Big Data",
-          "PhD in Cybersecurity"
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_206"
-      },
-      {
-        "id": 99,
-        "categoria": "individual_query",
-        "pregunta": "Provide me with the technical skills shown on Ashley Buckley Mitchell's CV.",
-        "tipo_respuesta": "skill_list",
-        "respuesta": [
-          "FastAPI",
-          "Google Pub/Sub",
-          "Julia"
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_152"
-      },
-      {
-        "id": 100,
-        "categoria": "individual_query",
-        "pregunta": "What role does Sarah Perez Hernandez perform?",
-        "tipo_respuesta": "single_value",
-        "respuesta": "iOS Developer",
-        "cv_referencia": "cv_090"
-      },
-      {
-        "id": 101,
-        "categoria": "individual_query",
-        "pregunta": "What supplementary data is on Carter Bishop Fernandez's profile?",
-        "tipo_respuesta": "other_list",
-        "respuesta": [
-          "Immediate start",
-          "Own vehicle",
-          "Remote work experience"
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_134"
-      },
-      {
-        "id": 102,
-        "categoria": "individual_query",
-        "pregunta": "Indicate the tools and languages Deepa MacGregor Bennett masters.",
-        "tipo_respuesta": "skill_list",
-        "respuesta": [
-          "Airbyte",
-          "Cucumber",
-          "New Relic",
-          "Requests"
-        ],
-        "num_resultados": 4,
-        "cv_referencia": "cv_257"
-      },
-      {
-        "id": 103,
-        "categoria": "individual_query",
-        "pregunta": "What interpersonal qualities are attributed to Emily Ward Harrison?",
-        "tipo_respuesta": "skill_list",
-        "respuesta": [
-          "Effective communication",
-          "Information synthesis",
-          "Organization",
-          "Team leadership",
-          "Thoroughness",
-          "Written communication"
-        ],
-        "num_resultados": 6,
-        "cv_referencia": "cv_058"
-      },
-      {
-        "id": 104,
-        "categoria": "individual_query",
-        "pregunta": "I would like to know Beverly Doyle Ford's educational background. Can you help?",
-        "tipo_respuesta": "education_list",
-        "respuesta": [
-          "Advanced Vocational Training in IT Senior Technician",
-          "Advanced Vocational Training in Network Infrastructure",
-          "Advanced Vocational Training in Telecommunications",
-          "Bachelor's Degree in Statistics"
-        ],
-        "num_resultados": 4,
-        "cv_referencia": "cv_068"
-      },
-      {
-        "id": 105,
-        "categoria": "individual_query",
-        "pregunta": "What job title does Ronald Robinson Roberts hold according to the available data?",
-        "tipo_respuesta": "single_value",
-        "respuesta": "Security Consultant",
-        "cv_referencia": "cv_153"
-      },
-      {
-        "id": 106,
+        "id": 47,
         "categoria": "experience_query",
         "pregunta": "What has Daniel Bell Arnold worked on?",
         "tipo_respuesta": "experience_list",
@@ -1587,7 +784,7 @@
         "cv_referencia": "cv_300"
       },
       {
-        "id": 107,
+        "id": 48,
         "categoria": "experience_query",
         "pregunta": "Describe Susan Barnes Coleman's professional experience.",
         "tipo_respuesta": "experience_list",
@@ -1599,7 +796,7 @@
         "cv_referencia": "cv_189"
       },
       {
-        "id": 108,
+        "id": 49,
         "categoria": "experience_query",
         "pregunta": "What work experience does Parker Davis Jackson have on record?",
         "tipo_respuesta": "experience_list",
@@ -1614,7 +811,7 @@
         "cv_referencia": "cv_084"
       },
       {
-        "id": 109,
+        "id": 50,
         "categoria": "experience_query",
         "pregunta": "Give me a summary of Tatiana Pope Ward's career path.",
         "tipo_respuesta": "experience_list",
@@ -1626,7 +823,7 @@
         "cv_referencia": "cv_037"
       },
       {
-        "id": 110,
+        "id": 51,
         "categoria": "experience_query",
         "pregunta": "What functions has Chase Butler Hart performed according to their CV?",
         "tipo_respuesta": "experience_list",
@@ -1640,7 +837,7 @@
         "cv_referencia": "cv_245"
       },
       {
-        "id": 111,
+        "id": 52,
         "categoria": "experience_query",
         "pregunta": "I'm interested in Charlotte Lawrence Gallagher's professional background.",
         "tipo_respuesta": "experience_list",
@@ -1651,7 +848,7 @@
         "cv_referencia": "cv_140"
       },
       {
-        "id": 112,
+        "id": 53,
         "categoria": "experience_query",
         "pregunta": "What tasks and roles has Meera Doyle Wu had throughout their career?",
         "tipo_respuesta": "experience_list",
@@ -1664,251 +861,56 @@
         "cv_referencia": "cv_191"
       },
       {
-        "id": 113,
-        "categoria": "experience_query",
-        "pregunta": "Walk me through the experience detailed in Jeremy Griffin Bailey's profile.",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Active collaboration on R&D and budget management projects.",
-          "Experience in {sector}, focused on solving industry-specific challenges.",
-          "Presentation of results and demos to executive stakeholders.",
-          "Successful migration from monolithic infrastructure to microservices architecture."
-        ],
-        "num_resultados": 4,
-        "cv_referencia": "cv_048"
-      },
-      {
-        "id": 114,
-        "categoria": "experience_query",
-        "pregunta": "What projects or areas has Cynthia Rogers Russell been involved in?",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Coordination with product, design and business teams on {area} initiatives.",
-          "Development and maintenance of solutions oriented to reduce processing times.",
-          "Generation of dashboards and executive reports on {area}."
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_269"
-      },
-      {
-        "id": 115,
-        "categoria": "experience_query",
-        "pregunta": "Check Andrew Diaz Martin's experience section and tell me what it says.",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Experience in {sector}, focused on solving industry-specific challenges.",
-          "Improvement of user experience in products related to {area}."
-        ],
-        "num_resultados": 2,
-        "cv_referencia": "cv_283"
-      },
-      {
-        "id": 116,
-        "categoria": "experience_query",
-        "pregunta": "What professional background does Lucas Middleton James have?",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Leadership in digital transformation projects in {sector}."
-        ],
-        "num_resultados": 1,
-        "cv_referencia": "cv_156"
-      },
-      {
-        "id": 117,
-        "categoria": "experience_query",
-        "pregunta": "Tell me about Randy Hughes Baker's professional track record.",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Competitive analysis and benchmarking in {sector} to identify opportunities.",
-          "Continuous monitoring of {area} systems to ensure availability.",
-          "Development of technical documentation for {area} projects.",
-          "Migration of on-premise systems to cloud for {objetivo}.",
-          "Responsible for coordinating technical teams in user testing tasks."
-        ],
-        "num_resultados": 5,
-        "cv_referencia": "cv_006"
-      },
-      {
-        "id": 118,
-        "categoria": "experience_query",
-        "pregunta": "Can you detail what Alice Flores Adeyemi has been involved in?",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Close collaboration with business teams to translate requirements into natural language processing solutions.",
-          "Competitive analysis and benchmarking in {sector} to identify opportunities.",
-          "Participation in controlling projects, collaborating with multidisciplinary teams."
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_215"
-      },
-      {
-        "id": 119,
-        "categoria": "experience_query",
-        "pregunta": "I'd like to review Virginia Pope Jefferson's accumulated experience.",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Audit and improvement of security practices in {tarea}.",
-          "Design and implementation of architectures for improve strategic decision making.",
-          "Transformation of manual processes to automated in {area}."
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_093"
-      },
-      {
-        "id": 120,
-        "categoria": "experience_query",
-        "pregunta": "Share the previous responsibilities listed on Scott Volkov Ward's CV.",
-        "tipo_respuesta": "experience_list",
-        "respuesta": [
-          "Experience as Software Tester for 0 years in construction sector companies.",
-          "Implementation of innovative solutions using emerging technologies in {area}.",
-          "Rapid prototyping of ideas to validate hypotheses in {area}."
-        ],
-        "num_resultados": 3,
-        "cv_referencia": "cv_169"
-      },
-      {
-        "id": 121,
+        "id": 54,
         "categoria": "counting",
         "pregunta": "How many people know Routing?",
         "tipo_respuesta": "number",
         "respuesta": 5
       },
       {
-        "id": 122,
+        "id": 55,
         "categoria": "counting",
         "pregunta": "What is the total number of candidates proficient in Microsoft Project?",
         "tipo_respuesta": "number",
         "respuesta": 3
       },
       {
-        "id": 123,
+        "id": 56,
         "categoria": "counting",
         "pregunta": "How many Performance Testers are registered in the database?",
         "tipo_respuesta": "number",
         "respuesta": 1
       },
       {
-        "id": 124,
-        "categoria": "counting",
-        "pregunta": "How many people studied Executive MBA?",
-        "tipo_respuesta": "number",
-        "respuesta": 8
-      },
-      {
-        "id": 125,
+        "id": 57,
         "categoria": "counting",
         "pregunta": "How many CVs are there in total in the system?",
         "tipo_respuesta": "number",
         "respuesta": 300
       },
       {
-        "id": 126,
+        "id": 58,
         "categoria": "counting",
         "pregunta": "How many distinct positions exist among all candidates?",
         "tipo_respuesta": "number",
         "respuesta": 169
       },
       {
-        "id": 127,
+        "id": 59,
         "categoria": "counting",
         "pregunta": "Count the professionals who include FastAPI in their competencies.",
         "tipo_respuesta": "number",
         "respuesta": 6
       },
       {
-        "id": 128,
+        "id": 60,
         "categoria": "counting",
         "pregunta": "Tell me how many people work as Management Consultant.",
         "tipo_respuesta": "number",
         "respuesta": 2
       },
       {
-        "id": 129,
-        "categoria": "counting",
-        "pregunta": "How many different hard skills are mentioned across all CVs?",
-        "tipo_respuesta": "number",
-        "respuesta": 639
-      },
-      {
-        "id": 130,
-        "categoria": "counting",
-        "pregunta": "How many distinct qualifications appear in the database?",
-        "tipo_respuesta": "number",
-        "respuesta": 138
-      },
-      {
-        "id": 131,
-        "categoria": "counting",
-        "pregunta": "How many candidates can be attributed knowledge of Legacy Systems?",
-        "tipo_respuesta": "number",
-        "respuesta": 4
-      },
-      {
-        "id": 132,
-        "categoria": "counting",
-        "pregunta": "How many distinct soft skills are collected across all CVs?",
-        "tipo_respuesta": "number",
-        "respuesta": 154
-      },
-      {
-        "id": 133,
-        "categoria": "counting",
-        "pregunta": "Of all candidates, how many have at least one work experience entry?",
-        "tipo_respuesta": "number",
-        "respuesta": 246
-      },
-      {
-        "id": 134,
-        "categoria": "counting",
-        "pregunta": "How many people have no experience reflected on their CV?",
-        "tipo_respuesta": "number",
-        "respuesta": 54
-      },
-      {
-        "id": 135,
-        "categoria": "counting",
-        "pregunta": "How many candidates speak at least one language besides English?",
-        "tipo_respuesta": "number",
-        "respuesta": 155
-      },
-      {
-        "id": 136,
-        "categoria": "counting",
-        "pregunta": "How many professionals have Bachelor's Degree in Big Data in their education?",
-        "tipo_respuesta": "number",
-        "respuesta": 5
-      },
-      {
-        "id": 137,
-        "categoria": "counting",
-        "pregunta": "How many candidates have more than 5 hard skills on their profile?",
-        "tipo_respuesta": "number",
-        "respuesta": 192
-      },
-      {
-        "id": 138,
-        "categoria": "counting",
-        "pregunta": "How many candidates have more than one academic qualification?",
-        "tipo_respuesta": "number",
-        "respuesta": 230
-      },
-      {
-        "id": 139,
-        "categoria": "counting",
-        "pregunta": "How many people have at least 4 soft skills on their CV?",
-        "tipo_respuesta": "number",
-        "respuesta": 191
-      },
-      {
-        "id": 140,
-        "categoria": "counting",
-        "pregunta": "How many candidates are open to relocation?",
-        "tipo_respuesta": "number",
-        "respuesta": 6
-      },
-      {
-        "id": 141,
+        "id": 61,
         "categoria": "multi_criteria",
         "pregunta": "Which people know both Price Optimization and Storytelling with Data?",
         "tipo_respuesta": "person_list",
@@ -1916,7 +918,7 @@
         "num_resultados": 0
       },
       {
-        "id": 142,
+        "id": 62,
         "categoria": "multi_criteria",
         "pregunta": "Find candidates who master both Optuna and Parcel.",
         "tipo_respuesta": "person_list",
@@ -1926,7 +928,7 @@
         "num_resultados": 1
       },
       {
-        "id": 143,
+        "id": 63,
         "categoria": "multi_criteria",
         "pregunta": "Who combines Cross-validation and Sisense in their profile?",
         "tipo_respuesta": "person_list",
@@ -1934,7 +936,7 @@
         "num_resultados": 0
       },
       {
-        "id": 144,
+        "id": 64,
         "categoria": "multi_criteria",
         "pregunta": "Is there any RPA Developer who also knows Odoo?",
         "tipo_respuesta": "person_list",
@@ -1942,7 +944,7 @@
         "num_resultados": 0
       },
       {
-        "id": 145,
+        "id": 65,
         "categoria": "multi_criteria",
         "pregunta": "I'm looking for a Help Desk Technician with knowledge of Google Workspace. Do they exist?",
         "tipo_respuesta": "person_list",
@@ -1950,7 +952,7 @@
         "num_resultados": 0
       },
       {
-        "id": 146,
+        "id": 66,
         "categoria": "multi_criteria",
         "pregunta": "Among the Node.js Developers, which ones also have Swagger as a competency?",
         "tipo_respuesta": "person_list",
@@ -1958,7 +960,7 @@
         "num_resultados": 0
       },
       {
-        "id": 147,
+        "id": 67,
         "categoria": "multi_criteria",
         "pregunta": "Filter by position Angular Developer and skill Debian. Who meets both criteria?",
         "tipo_respuesta": "person_list",
@@ -1966,7 +968,7 @@
         "num_resultados": 0
       },
       {
-        "id": 148,
+        "id": 68,
         "categoria": "multi_criteria",
         "pregunta": "Who has studied PhD in Industrial Engineering and also knows EMR?",
         "tipo_respuesta": "person_list",
@@ -1974,7 +976,7 @@
         "num_resultados": 0
       },
       {
-        "id": 149,
+        "id": 69,
         "categoria": "multi_criteria",
         "pregunta": "Find people with education in Advanced Vocational Training in Networks and Data Processing who work with Memory Management.",
         "tipo_respuesta": "person_list",
@@ -1982,7 +984,7 @@
         "num_resultados": 0
       },
       {
-        "id": 150,
+        "id": 70,
         "categoria": "multi_criteria",
         "pregunta": "Which Python Developers speak French?",
         "tipo_respuesta": "person_list",
@@ -1990,7 +992,7 @@
         "num_resultados": 0
       },
       {
-        "id": 151,
+        "id": 71,
         "categoria": "multi_criteria",
         "pregunta": "I need a Manual Tester who knows German. Is there one?",
         "tipo_respuesta": "person_list",
@@ -1998,129 +1000,7 @@
         "num_resultados": 0
       },
       {
-        "id": 152,
-        "categoria": "multi_criteria",
-        "pregunta": "Who knows Apache Superset and has experience in machine learning?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 153,
-        "categoria": "multi_criteria",
-        "pregunta": "Find candidates with the skill AWS RDS who have also worked with cloud.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 154,
-        "categoria": "multi_criteria",
-        "pregunta": "Is there any Information Security Analyst who holds a Master's Degree in Networks and Communications?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 155,
-        "categoria": "multi_criteria",
-        "pregunta": "Which people combine the technical skill Flutter with the soft skill Stress management?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 156,
-        "categoria": "multi_criteria",
-        "pregunta": "Find candidates with Transformers (Hugging Face) who also have Self-discipline as a soft skill.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 157,
-        "categoria": "multi_criteria",
-        "pregunta": "Who knows Smartsheet and has startup experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 158,
-        "categoria": "multi_criteria",
-        "pregunta": "Among the Operations Analysts, which ones consider themselves self-taught?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 159,
-        "categoria": "multi_criteria",
-        "pregunta": "Is there any candidate who masters SEO, Linear and MVC simultaneously?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 160,
-        "categoria": "multi_criteria",
-        "pregunta": "Who has a Bachelor's Degree in Information Systems Engineering and also speaks French?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Diane Evans Al-Farsi"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 161,
-        "categoria": "multi_criteria",
-        "pregunta": "Find people with RPA who have at least 3 experience entries.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Virginia Pope Jefferson"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 162,
-        "categoria": "multi_criteria",
-        "pregunta": "Which Tableau Developers have 8 or more hard skills?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Dennis Edwards Chapman"
-        ],
-        "num_resultados": 1
-      },
-      {
-        "id": 163,
-        "categoria": "multi_criteria",
-        "pregunta": "Are there candidates with CircleCI who prefer remote work?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 164,
-        "categoria": "multi_criteria",
-        "pregunta": "Find people who know Google Data Studio and have two or more qualifications.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Carol Arnold Singh",
-          "Nicholas Curtis Hudson",
-          "Ralph Park Mendoza"
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 165,
-        "categoria": "multi_criteria",
-        "pregunta": "Any Azure Cloud Engineer with banking sector experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [],
-        "num_resultados": 0
-      },
-      {
-        "id": 166,
+        "id": 72,
         "categoria": "existence",
         "pregunta": "Is there anyone who is a Mobile Developer and knows Hypothesis Testing?",
         "tipo_respuesta": "boolean_with_detail",
@@ -2129,7 +1009,7 @@
         }
       },
       {
-        "id": 167,
+        "id": 73,
         "categoria": "existence",
         "pregunta": "Does any candidate have Azure Service Bus and a degree in Bachelor's Degree in Economics?",
         "tipo_respuesta": "boolean_with_detail",
@@ -2138,7 +1018,7 @@
         }
       },
       {
-        "id": 168,
+        "id": 74,
         "categoria": "existence",
         "pregunta": "Do we have anyone in the database who masters Rust?",
         "tipo_respuesta": "boolean_with_detail",
@@ -2151,7 +1031,7 @@
         }
       },
       {
-        "id": 169,
+        "id": 75,
         "categoria": "existence",
         "pregunta": "Does any candidate mention COBOL on their CV?",
         "tipo_respuesta": "boolean_with_detail",
@@ -2169,24 +1049,7 @@
         }
       },
       {
-        "id": 170,
-        "categoria": "existence",
-        "pregunta": "Do we have any professional who speaks Russian?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Gabriel Watson Anderson",
-            "Jonathan Tran Henry",
-            "Kathleen Kapoor Wood",
-            "Melissa Petrov Ivanov",
-            "Olivia Mbeki Fernandez",
-            "Patrick Miller King"
-          ]
-        }
-      },
-      {
-        "id": 171,
+        "id": 76,
         "categoria": "existence",
         "pregunta": "Are there candidates who know Arabic?",
         "tipo_respuesta": "boolean_with_detail",
@@ -2203,306 +1066,7 @@
         }
       },
       {
-        "id": 172,
-        "categoria": "existence",
-        "pregunta": "Is there any self-taught person who knows Smart Contracts?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": false
-        }
-      },
-      {
-        "id": 173,
-        "categoria": "existence",
-        "pregunta": "Is there any candidate with 10 or more hard skills?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Ahmed Sanders Cooper",
-            "Ann Clark Bell",
-            "Ann Park Glover",
-            "Anthony Simmons Barnes",
-            "Beverly Doyle Ford",
-            "Billy Allen Rodriguez",
-            "Chase Edwards Campbell",
-            "DeShawn Gray Brennan",
-            "Denise Kumar Baker",
-            "Elizabeth Mensah Wood",
-            "Emma Li Patel",
-            "Eric Moore Webb",
-            "Frank King Long",
-            "Hannah Watanabe Gutierrez",
-            "Henry Jimenez Cook",
-            "Ibrahim Adams Nkosi",
-            "Isabella Stone Jenkins",
-            "Jamal Burke White",
-            "Jerry Jenkins Harris",
-            "Joe Payne Reynolds",
-            "Julian Campbell Kang",
-            "Kelly Wood Mitchell",
-            "Lauren Hall Choi",
-            "Layla Anderson Smith",
-            "Linda Black Phillips",
-            "Lisa Woodward Kelley",
-            "Logan Hansen Lopez",
-            "Louis Morris Ford",
-            "Marie Fox Burns",
-            "Martha Reyes Wells",
-            "Natalie Sutton Burke",
-            "Nicole Oliver Booker",
-            "Olga Blackwell Elliott",
-            "Pradeep Yamamoto Choi",
-            "Ralph Park Mendoza",
-            "Scott Grant Pham",
-            "Scott Volkov Ward",
-            "Stephanie Ramos Ortiz",
-            "Susan Barnes Coleman",
-            "Takeshi Chen Sharma",
-            "Virginia Pope Jefferson",
-            "William Freeman Allen"
-          ]
-        }
-      },
-      {
-        "id": 174,
-        "categoria": "existence",
-        "pregunta": "Is there anyone with 4 or more academic qualifications?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Ahmed Sanders Cooper",
-            "Alice Armstrong Baker",
-            "Alice MacGregor King",
-            "Amber Hamilton Martin",
-            "Amina Russell Castillo",
-            "Andrew Diaz Martin",
-            "Andrew Lopez Wallace",
-            "Angela Owens Middleton",
-            "Arthur Wells Soto",
-            "Ashley Buckley Mitchell",
-            "Benjamin Oliver Bennett",
-            "Beverly Doyle Ford",
-            "Billy Allen Rodriguez",
-            "Brittany Elliott Yang",
-            "Cameron Palmer Brennan",
-            "Carter Alvarez Nelson",
-            "Charlotte Lawrence Gallagher",
-            "Chase Butler Hart",
-            "Cynthia Rogers Russell",
-            "Danielle Rivera Butler",
-            "Donna Wright Edwards",
-            "Douglas Powell Reynolds",
-            "Emily Ward Harrison",
-            "Eric Moore Webb",
-            "Ethan Buchanan Evans",
-            "Gabriel Reynolds Allen",
-            "Gerald Hughes Hunt",
-            "Gregory Torres Lee",
-            "Hannah Anderson Brooks",
-            "Hannah Jones Mendoza",
-            "Hannah Watanabe Gutierrez",
-            "Hassan Jones Kim",
-            "Isaiah Taylor Grant",
-            "Jason Cross James",
-            "Jennifer Peterson Moseley",
-            "Jerry Jenkins Harris",
-            "Jordan Sanders Kelly",
-            "Jordan Walsh Henderson",
-            "Joseph Curtis Soto",
-            "Judith Cox Arnold",
-            "Julie Miller Reed",
-            "Kathleen Kapoor Wood",
-            "Kathryn Washington Mensah",
-            "Kelly Wood Mitchell",
-            "Lauren Hall Choi",
-            "Layla Anderson Smith",
-            "Logan Hansen Lopez",
-            "Lucas Roberts Russell",
-            "Margaret Payne White",
-            "Maria Jenkins Rose",
-            "Martha Reyes Wells",
-            "Meera Doyle Wu",
-            "Melissa Petrov Ivanov",
-            "Michael Cruz Gonzales",
-            "Ming Volkov Henderson",
-            "Nathan King Palmer",
-            "Nour Martinez Suzuki",
-            "Nour Maxwell Palmer",
-            "Olivia Mbeki Fernandez",
-            "Patrick Maddox Volkov",
-            "Ralph Park Mendoza",
-            "Raymond Liu Morgan",
-            "Richard Hunt Langston",
-            "Ronald Robinson Roberts",
-            "Russell Ashworth Jefferson",
-            "Samantha Reddy Kennedy",
-            "Sarah Perez Hernandez",
-            "Scott Reed Hart",
-            "Susan Brennan MacGregor",
-            "Susan Choi Evans",
-            "Tatiana Myers Watts",
-            "Tatiana Wang Cox",
-            "Terrence Gomez Watson",
-            "Trevor Jefferson Brooks",
-            "Wei Gutierrez Ross",
-            "Yasmin Bell McKenzie"
-          ]
-        }
-      },
-      {
-        "id": 175,
-        "categoria": "existence",
-        "pregunta": "Is there someone who combines GDPR and Redis in their skills?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": false
-        }
-      },
-      {
-        "id": 176,
-        "categoria": "existence",
-        "pregunta": "Do we have candidates with immediate availability who speak French?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Isabella Stone Jenkins"
-          ]
-        }
-      },
-      {
-        "id": 177,
-        "categoria": "existence",
-        "pregunta": "Is there any candidate with 5 or more experience entries?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Ahmed Sanders Cooper",
-            "Alice MacGregor King",
-            "Alice Owens Lopez",
-            "Amber Hamilton Martin",
-            "Andrei Walsh Whitfield",
-            "Arjun Foster Gutierrez",
-            "Brittany Elliott Yang",
-            "Bruce O'Connor O'Brien",
-            "Caleb Fisher Woodward",
-            "Cameron Palmer Brennan",
-            "Chen Phillips Mensah",
-            "Daniel Zhou Armstrong",
-            "DeShawn Gray Brennan",
-            "Deepa MacGregor Bennett",
-            "Diane Evans Al-Farsi",
-            "Donna Wright Edwards",
-            "Doris Oliver Bishop",
-            "Elijah Sullivan O'Neill",
-            "Ethan Buchanan Evans",
-            "Frank King Long",
-            "Gloria Collins Woodward",
-            "Gregory Torres Lee",
-            "Hannah Watanabe Gutierrez",
-            "Hiroshi Woodward Howard",
-            "Jacob Petrov Al-Farsi",
-            "Joshua Hill Woods",
-            "Kathleen Kapoor Wood",
-            "Lawrence Rivera Gallagher",
-            "Logan Hansen Lopez",
-            "Martha Reyes Wells",
-            "Melissa Francis Black",
-            "Nicole Watanabe Gonzales",
-            "Olivia Mbeki Fernandez",
-            "Parker Davis Jackson",
-            "Patrick Miller King",
-            "Pradeep Brennan Young",
-            "Priya Bishop Buchanan",
-            "Priya Ferguson Lawrence",
-            "Priya Martin Adams",
-            "Randy Hughes Baker",
-            "Richard Hunt Langston",
-            "Samuel Cunningham Coleman",
-            "Sarah Woods Kelley",
-            "Scott Torres Martin",
-            "Shirley Buchanan Norton",
-            "Sunita Adams Pope",
-            "Susan Brennan MacGregor",
-            "Theresa Ortiz Watts",
-            "Vincent Kim Wallace",
-            "William Freeman Allen",
-            "Yasmin Bell McKenzie"
-          ]
-        }
-      },
-      {
-        "id": 178,
-        "categoria": "existence",
-        "pregunta": "Is there anyone who speaks both German and French?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Ashley Mehta Griffin",
-            "Brenda Roberts Morris",
-            "Cedric Chavez Thomas",
-            "Chen Phillips Mensah",
-            "Fatima Scott Hughes",
-            "Gerald Hughes Hunt",
-            "Raj Nelson Liu",
-            "Sarah Perez Hernandez",
-            "Tyrone Lane Petrov",
-            "William Freeman Allen"
-          ]
-        }
-      },
-      {
-        "id": 179,
-        "categoria": "existence",
-        "pregunta": "Does any candidate mention open source contributions?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Aaron Ortiz Thompson",
-            "Ann Clark Bell",
-            "Brenda Roberts Morris",
-            "Devon Evans Lane",
-            "Fatima Scott Hughes",
-            "Hassan Jones Kim",
-            "Jaxon Grant Choi",
-            "Landon Freeman Calloway",
-            "Parker Whitfield Davis",
-            "Shirley Cunningham Yamamoto",
-            "Theresa Ortiz Watts",
-            "William Freeman Allen"
-          ]
-        }
-      },
-      {
-        "id": 180,
-        "categoria": "existence",
-        "pregunta": "Are there professionals who indicate mentoring experience?",
-        "tipo_respuesta": "boolean_with_detail",
-        "respuesta": {
-          "exists": true,
-          "people": [
-            "Andrea Davis Diaz",
-            "Devon Evans Lane",
-            "Ethan Buchanan Evans",
-            "Gerald Middleton Flores",
-            "Gregory Torres Lee",
-            "Judith Adams Smith",
-            "Mark Thompson Turner",
-            "Michael Cruz Gonzales",
-            "Philip Jenkins Griffin",
-            "Samuel Cunningham Coleman",
-            "Sarah Perez Hernandez",
-            "Stephanie Ramos Ortiz"
-          ]
-        }
-      },
-      {
-        "id": 181,
+        "id": 77,
         "categoria": "aggregation",
         "pregunta": "What are the 5 most frequent hard skills among all candidates?",
         "tipo_respuesta": "ranking",
@@ -2531,7 +1095,7 @@
         "num_resultados": 5
       },
       {
-        "id": 182,
+        "id": 78,
         "categoria": "aggregation",
         "pregunta": "Give me a ranking of the 10 most repeated technical skills in the CVs.",
         "tipo_respuesta": "ranking",
@@ -2580,36 +1144,7 @@
         "num_resultados": 10
       },
       {
-        "id": 183,
-        "categoria": "aggregation",
-        "pregunta": "What are the 5 most common soft skills among professionals?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "skill": "Pursuit of excellence",
-            "frequency": 16
-          },
-          {
-            "skill": "Problem solving",
-            "frequency": 16
-          },
-          {
-            "skill": "Proactivity",
-            "frequency": 16
-          },
-          {
-            "skill": "Self-management",
-            "frequency": 15
-          },
-          {
-            "skill": "Responsibility",
-            "frequency": 15
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 184,
+        "id": 79,
         "categoria": "aggregation",
         "pregunta": "What are the 5 most common job positions in the database?",
         "tipo_respuesta": "ranking",
@@ -2638,7 +1173,7 @@
         "num_resultados": 5
       },
       {
-        "id": 185,
+        "id": 80,
         "categoria": "aggregation",
         "pregunta": "Tell me the 3 professional roles with the highest representation.",
         "tipo_respuesta": "ranking",
@@ -2659,36 +1194,7 @@
         "num_resultados": 3
       },
       {
-        "id": 186,
-        "categoria": "aggregation",
-        "pregunta": "Which 5 qualifications are the most frequent among candidates?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "education": "Advanced Vocational Training in Multiplatform Application Development",
-            "frequency": 16
-          },
-          {
-            "education": "Master's Degree in Project Management",
-            "frequency": 15
-          },
-          {
-            "education": "Master's Degree in Data Science",
-            "frequency": 14
-          },
-          {
-            "education": "Advanced Vocational Training in IT Senior Technician",
-            "frequency": 13
-          },
-          {
-            "education": "Advanced Vocational Training in Telecommunications",
-            "frequency": 13
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 187,
+        "id": 81,
         "categoria": "aggregation",
         "pregunta": "Who is the person with the most hard skills? How many do they have?",
         "tipo_respuesta": "value_with_detail",
@@ -2698,196 +1204,7 @@
         }
       },
       {
-        "id": 188,
-        "categoria": "aggregation",
-        "pregunta": "Which candidate has the highest number of soft skills?",
-        "tipo_respuesta": "value_with_detail",
-        "respuesta": {
-          "person": "Scott Grant Pham",
-          "count": 7
-        }
-      },
-      {
-        "id": 189,
-        "categoria": "aggregation",
-        "pregunta": "Who has the most academic qualifications on their CV?",
-        "tipo_respuesta": "value_with_detail",
-        "respuesta": {
-          "person": "Billy Allen Rodriguez",
-          "count": 7
-        }
-      },
-      {
-        "id": 190,
-        "categoria": "aggregation",
-        "pregunta": "Which person has the most work experience entries?",
-        "tipo_respuesta": "value_with_detail",
-        "respuesta": {
-          "person": "Alice MacGregor King",
-          "count": 5
-        }
-      },
-      {
-        "id": 191,
-        "categoria": "aggregation",
-        "pregunta": "What is the average number of hard skills per candidate?",
-        "tipo_respuesta": "number",
-        "respuesta": 6.59
-      },
-      {
-        "id": 192,
-        "categoria": "aggregation",
-        "pregunta": "What is the average number of soft skills per person?",
-        "tipo_respuesta": "number",
-        "respuesta": 4.46
-      },
-      {
-        "id": 193,
-        "categoria": "aggregation",
-        "pregunta": "What are the 5 least frequent hard skills in the entire database?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "skill": "CSS3",
-            "frequency": 1
-          },
-          {
-            "skill": "Web3.js",
-            "frequency": 1
-          },
-          {
-            "skill": "Event Sourcing",
-            "frequency": 1
-          },
-          {
-            "skill": "Unit Testing",
-            "frequency": 1
-          },
-          {
-            "skill": "MongoDB",
-            "frequency": 1
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 194,
-        "categoria": "aggregation",
-        "pregunta": "Which 3 job positions are the least common?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "position": "User Researcher",
-            "frequency": 1
-          },
-          {
-            "position": "Computational Biologist",
-            "frequency": 1
-          },
-          {
-            "position": "Performance Tester",
-            "frequency": 1
-          }
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 195,
-        "categoria": "aggregation",
-        "pregunta": "How are candidates distributed by their number of hard skills?",
-        "tipo_respuesta": "distribution",
-        "respuesta": {
-          "3": 37,
-          "4": 43,
-          "5": 28,
-          "6": 39,
-          "7": 32,
-          "8": 36,
-          "9": 43,
-          "10": 42
-        }
-      },
-      {
-        "id": 196,
-        "categoria": "aggregation",
-        "pregunta": "What are the 5 most mentioned languages by candidates?",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "language": "French",
-            "frequency": 60
-          },
-          {
-            "language": "German",
-            "frequency": 40
-          },
-          {
-            "language": "Chinese",
-            "frequency": 26
-          },
-          {
-            "language": "Spanish",
-            "frequency": 22
-          },
-          {
-            "language": "Japanese",
-            "frequency": 21
-          }
-        ],
-        "num_resultados": 5
-      },
-      {
-        "id": 197,
-        "categoria": "aggregation",
-        "pregunta": "Who has the most additional information (others) on their profile?",
-        "tipo_respuesta": "value_with_detail",
-        "respuesta": {
-          "person": "Ann Park Glover",
-          "count": 8
-        }
-      },
-      {
-        "id": 198,
-        "categoria": "aggregation",
-        "pregunta": "How many unique competencies (hard + soft) are collected across the entire database?",
-        "tipo_respuesta": "number",
-        "respuesta": 793
-      },
-      {
-        "id": 199,
-        "categoria": "aggregation",
-        "pregunta": "Which candidate has the highest total number of competencies (hard + soft)?",
-        "tipo_respuesta": "value_with_detail",
-        "respuesta": {
-          "person": "Scott Grant Pham",
-          "hard_skills": 10,
-          "soft_skills": 7,
-          "total": 17
-        }
-      },
-      {
-        "id": 200,
-        "categoria": "aggregation",
-        "pregunta": "Rank the top 3 most popular academic qualifications and how many people have them.",
-        "tipo_respuesta": "ranking",
-        "respuesta": [
-          {
-            "education": "Advanced Vocational Training in Multiplatform Application Development",
-            "frequency": 16
-          },
-          {
-            "education": "Master's Degree in Project Management",
-            "frequency": 15
-          },
-          {
-            "education": "Master's Degree in Data Science",
-            "frequency": 14
-          }
-        ],
-        "num_resultados": 3
-      },
-      {
-        "id": 201,
+        "id": 82,
         "categoria": "search_by_soft_skill",
         "pregunta": "Which people have Mentoring as a soft skill?",
         "tipo_respuesta": "person_list",
@@ -2901,7 +1218,7 @@
         "num_resultados": 5
       },
       {
-        "id": 202,
+        "id": 83,
         "categoria": "search_by_soft_skill",
         "pregunta": "List the candidates who mention Conflict management among their interpersonal skills.",
         "tipo_respuesta": "person_list",
@@ -2916,7 +1233,7 @@
         "num_resultados": 6
       },
       {
-        "id": 203,
+        "id": 84,
         "categoria": "search_by_soft_skill",
         "pregunta": "Who stands out for their Planning according to the CVs?",
         "tipo_respuesta": "person_list",
@@ -2936,7 +1253,7 @@
         "num_resultados": 11
       },
       {
-        "id": 204,
+        "id": 85,
         "categoria": "search_by_soft_skill",
         "pregunta": "Give me all professionals whose soft skills include Mental agility.",
         "tipo_respuesta": "person_list",
@@ -2948,7 +1265,7 @@
         "num_resultados": 3
       },
       {
-        "id": 205,
+        "id": 86,
         "categoria": "search_by_soft_skill",
         "pregunta": "Identify those who possess the competency of Technical documentation.",
         "tipo_respuesta": "person_list",
@@ -2967,94 +1284,7 @@
         "num_resultados": 10
       },
       {
-        "id": 206,
-        "categoria": "search_by_soft_skill",
-        "pregunta": "Which candidates reflect Disruptive thinking as an interpersonal ability?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alan Lynch Lane",
-          "Daniel Baker Diaz",
-          "Fatima Burns Cunningham",
-          "Gregory Mensah Clark",
-          "Jack Adeyemi Gonzalez",
-          "Jack Morales Hicks",
-          "Meera Doyle Wu"
-        ],
-        "num_resultados": 7
-      },
-      {
-        "id": 207,
-        "categoria": "search_by_soft_skill",
-        "pregunta": "Search for profiles that include Coaching among their personal aptitudes.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Daniel Baker Diaz",
-          "Gabriel Watson Anderson",
-          "Gloria Collins Woodward",
-          "Gregory Torres Lee",
-          "Hannah Anderson Brooks",
-          "Marilyn Al-Farsi Martinez",
-          "Mark Diallo Fox",
-          "Sanjay Pham Castillo",
-          "Shirley Cunningham Yamamoto",
-          "William Mbeki Pierce"
-        ],
-        "num_resultados": 10
-      },
-      {
-        "id": 208,
-        "categoria": "search_by_soft_skill",
-        "pregunta": "Are there people characterized by their Strategic vision?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice Armstrong Baker",
-          "Deepa MacGregor Bennett",
-          "Eugene Patel Taylor",
-          "Henry Jimenez Cook",
-          "Lamar Gray Bradford",
-          "Lisa Woodward Kelley",
-          "Randy MacGregor Murray",
-          "Tatiana Hart Gonzalez",
-          "Teresa Diaz Baker",
-          "Terrence Kang Allen"
-        ],
-        "num_resultados": 10
-      },
-      {
-        "id": 209,
-        "categoria": "search_by_soft_skill",
-        "pregunta": "Find the candidates who have Deductive reasoning on their resume.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Andrea Davis Diaz",
-          "Billy Allen Rodriguez",
-          "Caleb Rodriguez Armstrong",
-          "Carol Li Coleman",
-          "Elijah Walsh Roberts",
-          "Owen Blair Bell"
-        ],
-        "num_resultados": 6
-      },
-      {
-        "id": 210,
-        "categoria": "search_by_soft_skill",
-        "pregunta": "Which team members possess ROI mindset as a soft competency?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Gloria Collins Woodward",
-          "Jamal Burke White",
-          "Jean Jimenez Mbeki",
-          "Julian Johnson Henry",
-          "Maria Jimenez Diallo",
-          "Mark Diallo Fox",
-          "Olga Blackwell Elliott",
-          "Russell Ashworth Jefferson",
-          "Susan Brennan MacGregor"
-        ],
-        "num_resultados": 9
-      },
-      {
-        "id": 211,
+        "id": 87,
         "categoria": "search_by_experience",
         "pregunta": "Which people have experience in machine learning?",
         "tipo_respuesta": "person_list",
@@ -3062,7 +1292,7 @@
         "num_resultados": 0
       },
       {
-        "id": 212,
+        "id": 88,
         "categoria": "search_by_experience",
         "pregunta": "Give me candidates whose experience mentions cloud projects.",
         "tipo_respuesta": "person_list",
@@ -3096,7 +1326,7 @@
         "num_resultados": 25
       },
       {
-        "id": 213,
+        "id": 89,
         "categoria": "search_by_experience",
         "pregunta": "Who has worked with microservices according to their CV?",
         "tipo_respuesta": "person_list",
@@ -3136,7 +1366,7 @@
         "num_resultados": 31
       },
       {
-        "id": 214,
+        "id": 90,
         "categoria": "search_by_experience",
         "pregunta": "Find professionals with DevOps experience.",
         "tipo_respuesta": "person_list",
@@ -3155,242 +1385,6 @@
           "William Mbeki Pierce"
         ],
         "num_resultados": 12
-      },
-      {
-        "id": 215,
-        "categoria": "search_by_experience",
-        "pregunta": "Which candidates mention agile methodologies in their experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ashley Buckley Mitchell",
-          "Austin Morales Singh",
-          "Caleb Rodriguez Armstrong",
-          "Carol Arnold Singh",
-          "DeShawn Gray Brennan",
-          "Deepa MacGregor Bennett",
-          "Gregory Torres Lee",
-          "Hannah Watanabe Gutierrez",
-          "Isabella Stone Jenkins",
-          "Jacob Petrov Al-Farsi",
-          "Jean Jimenez Mbeki",
-          "Jordan Walsh Henderson",
-          "Joshua Al-Rashid Cross",
-          "Linda Black Phillips",
-          "Maria Jenkins Rose",
-          "Marilyn Al-Farsi Martinez",
-          "Mark Thompson Turner",
-          "Mason Kumar Thompson",
-          "Parker Davis Jackson",
-          "Priya Ferguson Lawrence",
-          "Richard Hunt Langston",
-          "Sara Simmons Grant",
-          "Susan Brennan MacGregor",
-          "Teresa Diaz Baker",
-          "Vincent Kim Wallace",
-          "Wei MacDonald Al-Rashid",
-          "Yasmin Bell McKenzie"
-        ],
-        "num_resultados": 27
-      },
-      {
-        "id": 216,
-        "categoria": "search_by_experience",
-        "pregunta": "Identify those who have experience developing APIs.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alice Armstrong Baker",
-          "Amber Hamilton Martin",
-          "Daniel Zhou Armstrong",
-          "Emily Ward Harrison",
-          "Ethan Buchanan Evans",
-          "Hiroshi Woodward Howard",
-          "Isabella Stone Jenkins",
-          "Joyce Walker Elliott",
-          "Kayla Myers Harris",
-          "Mary Pierce Tucker",
-          "Mason Harrison Wang",
-          "Olga Blackwell Elliott",
-          "Owen Blair Bell",
-          "Sanjay Gutierrez Hawkins",
-          "Scott Volkov Ward",
-          "Sharon Singh McCarthy",
-          "Teresa Graham Lopez"
-        ],
-        "num_resultados": 17
-      },
-      {
-        "id": 217,
-        "categoria": "search_by_experience",
-        "pregunta": "Who reflects data or data analysis work in their experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Alan Lynch Lane",
-          "Alexis Jenkins Burns",
-          "Alice Armstrong Baker",
-          "Angela Roberts Griffin",
-          "Anna Hart Choi",
-          "Austin Morales Singh",
-          "Caleb Fisher Woodward",
-          "Carol Arnold Singh",
-          "Charles Buckley Green",
-          "Christopher Miller Watson",
-          "Daniel Zhou Armstrong",
-          "Deepa MacGregor Bennett",
-          "Donna Wright Edwards",
-          "Edward Long Whitfield",
-          "Emily Ward Harrison",
-          "Ethan Buchanan Evans",
-          "George Knight McKenzie",
-          "Grant McCarthy Kim",
-          "James Roberts Pope",
-          "Joe Payne Reynolds",
-          "Jordan Walsh Henderson",
-          "Kathleen Glover Payne",
-          "Keith Chambers Francis",
-          "Kelly Wood Mitchell",
-          "Lawrence Rivera Gallagher",
-          "Luke Spencer Perry",
-          "Maria Jimenez Diallo",
-          "Martha Reyes Wells",
-          "Mary Pierce Tucker",
-          "Melissa Petrov Ivanov",
-          "Nancy Morales Cooper",
-          "Olga Blackwell Elliott",
-          "Olivia Mbeki Fernandez",
-          "Owen Blair Bell",
-          "Patrick Maddox Volkov",
-          "Patrick Miller King",
-          "Pradeep Soto Howard",
-          "Richard Hunt Langston",
-          "Scott Torres Martin",
-          "Shirley Buchanan Norton",
-          "Susan Brennan MacGregor",
-          "Vincent Kim Wallace"
-        ],
-        "num_resultados": 42
-      },
-      {
-        "id": 218,
-        "categoria": "search_by_experience",
-        "pregunta": "Locate candidates with experience in security or cybersecurity.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Anthony Simmons Barnes",
-          "Chase Butler Hart",
-          "Daniel Bell Arnold",
-          "DeShawn Gray Brennan",
-          "Evelyn Tran Morgan",
-          "Gabriel Watson Anderson",
-          "Hiroshi Woodward Howard",
-          "Jack Morales Hicks",
-          "Landon Freeman Calloway",
-          "Lauren Hall Choi",
-          "Lawrence Rivera Gallagher",
-          "Louis Morris Ford",
-          "Maria Jenkins Rose",
-          "Mark Thompson Turner",
-          "Nathan King Palmer",
-          "Olivia Mbeki Fernandez",
-          "Olivia Walker Gupta",
-          "Priya Bishop Buchanan",
-          "Ronald Robinson Roberts",
-          "Sanjay Lane Harrington",
-          "Sunita Adams Pope",
-          "Trevor Jefferson Brooks",
-          "Virginia Pope Jefferson"
-        ],
-        "num_resultados": 23
-      },
-      {
-        "id": 219,
-        "categoria": "search_by_experience",
-        "pregunta": "Which people have had leadership roles according to their experience?",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Andrei Walsh Whitfield",
-          "Dennis Edwards Chapman",
-          "Diane Evans Al-Farsi",
-          "Gloria Collins Woodward",
-          "Joseph Curtis Soto",
-          "Julie Miller Reed",
-          "Kathleen Kapoor Wood",
-          "Lucas Middleton James",
-          "Melissa Francis Black",
-          "Nicole Watanabe Gonzales",
-          "Olga Ruiz Al-Farsi",
-          "Olivia Mbeki Fernandez",
-          "Parker Whitfield Davis",
-          "Randy Stewart Douglas",
-          "Susan Brennan MacGregor",
-          "Susan Choi Evans",
-          "Theresa Ortiz Watts"
-        ],
-        "num_resultados": 17
-      },
-      {
-        "id": 220,
-        "categoria": "search_by_experience",
-        "pregunta": "Find professionals whose experience includes process automation.",
-        "tipo_respuesta": "person_list",
-        "respuesta": [
-          "Ahmed Sanders Cooper",
-          "Andrei Walsh Whitfield",
-          "Ann Park Glover",
-          "Anna Hart Choi",
-          "Brittany Elliott Yang",
-          "Cameron Palmer Brennan",
-          "Charlotte Lawrence Gallagher",
-          "Chen Phillips Mensah",
-          "Christopher Miller Watson",
-          "Colton Sanchez Armstrong",
-          "Donna Wright Edwards",
-          "Edward Long Whitfield",
-          "Elijah Howard Castillo",
-          "Elijah Sullivan O'Neill",
-          "Elijah Walsh Roberts",
-          "Emma Wells Russell",
-          "Ethan Foster Chambers",
-          "Gabriel Watson Anderson",
-          "Gavin Cox Diaz",
-          "George Knight McKenzie",
-          "Gerald Middleton Flores",
-          "Gloria Collins Woodward",
-          "Heather Ramirez Petrov",
-          "Jack Adeyemi Gonzalez",
-          "Jean Jimenez Mbeki",
-          "Jennifer Lee Nkosi",
-          "Jordan Walsh Henderson",
-          "Joyce Walker Elliott",
-          "Kathleen Glover Payne",
-          "Kelly Wood Mitchell",
-          "Lawrence Rivera Gallagher",
-          "Linda Moseley Hudson",
-          "Maria Ashworth Roberts",
-          "Mason Harrison Wang",
-          "Meera Doyle Wu",
-          "Michael Cruz Gonzales",
-          "Olga Blackwell Elliott",
-          "Olga Moore Mensah",
-          "Olivia Mbeki Fernandez",
-          "Parker Davis Jackson",
-          "Patrick Miller King",
-          "Pradeep Brennan Young",
-          "Priya Ferguson Lawrence",
-          "Rachel Bishop Pham",
-          "Richard Hunt Langston",
-          "Samuel Cunningham Coleman",
-          "Sanjay Castillo Tran",
-          "Scott Grant Pham",
-          "Scott Torres Martin",
-          "Sharon Singh McCarthy",
-          "Sunita Adams Pope",
-          "Sunita Singh Castillo",
-          "Tatiana Myers Watts",
-          "Virginia Pope Jefferson",
-          "William Evans Ferguson",
-          "William Freeman Allen"
-        ],
-        "num_resultados": 56
       }
     ]
   }

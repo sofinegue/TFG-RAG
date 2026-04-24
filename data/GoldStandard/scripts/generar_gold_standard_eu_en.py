@@ -1,6 +1,6 @@
 """
 Script to generate the Gold Standard for the EU documents use case in English.
-Generates 200+ unique questions with answers extracted directly from the documents.
+Generates 80-100 unique questions with answers extracted directly from the documents.
 
 Data structure: Official Journal of the EU (L series) documents in JSON format
   - archivo, idioma, num_paginas, contenido, paginas
@@ -730,6 +730,49 @@ add_q("specific_content", "Which documents refer to tonnes?", docs_toneladas, "l
 docs_cooperacion = buscar_en_contenido("cooperation")
 add_q("specific_content", "In which documents is cooperation mentioned?", docs_cooperacion, "lista_documentos")
 
+
+# ═══════════════════════════════════════════════
+# FILTER: REDUCE TO 80-100 QUESTIONS
+# ═══════════════════════════════════════════════
+from difflib import SequenceMatcher as _SM
+
+def _sim(a, b):
+    return _SM(None, a.lower(), b.lower()).ratio()
+
+def _remove_similar(qs, field, threshold=0.6):
+    kept = []
+    for q in qs:
+        if not any(_sim(q[field], k[field]) > threshold for k in kept):
+            kept.append(q)
+    return kept
+
+_TARGET = 90
+_by_cat = defaultdict(list)
+for q in preguntas:
+    _by_cat[q["categoria"]].append(q)
+
+_filtered = {}
+for cat, qs in _by_cat.items():
+    _filtered[cat] = _remove_similar(qs, "pregunta")
+
+_total_f = sum(len(v) for v in _filtered.values())
+_selected = []
+for cat, qs in sorted(_filtered.items()):
+    n = max(2, round(len(qs) / _total_f * _TARGET))
+    _selected.extend(qs[:n])
+
+if len(_selected) > 100:
+    _selected = _selected[:100]
+elif len(_selected) < 80:
+    _remaining = [q for cat, qs in sorted(_filtered.items()) for q in qs if q not in _selected]
+    _selected.extend(_remaining[:80 - len(_selected)])
+
+_selected.sort(key=lambda q: q["id"])
+for i, q in enumerate(_selected, 1):
+    q["id"] = i
+
+print(f"\n→ Reduced from {len(preguntas)} to {len(_selected)} questions (target: 80-100)")
+preguntas = _selected
 
 # ═══════════════════════════════════════════════
 # VERIFICATION AND EXPORT

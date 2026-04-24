@@ -1,6 +1,6 @@
 """
 Script to generate the Gold Standard for Wikipedia in English.
-Generates 200 unique questions with answers extracted directly from the articles.
+Generates 80-100 unique questions with answers extracted directly from the articles.
 
 Author: Auto-generated for TFG
 Date: 2026-04-17
@@ -623,6 +623,49 @@ add_q("relationships", "Which articles reference Latin?", arts_latin, "article_l
 arts_philosophy = search_content("philosophy")
 add_q("relationships", "What articles mention philosophy?", arts_philosophy, "article_list")
 
+
+# ═══════════════════════════════════════════════
+# FILTER: REDUCE TO 80-100 QUESTIONS
+# ═══════════════════════════════════════════════
+from difflib import SequenceMatcher as _SM
+
+def _sim(a, b):
+    return _SM(None, a.lower(), b.lower()).ratio()
+
+def _remove_similar(qs, field, threshold=0.6):
+    kept = []
+    for q in qs:
+        if not any(_sim(q[field], k[field]) > threshold for k in kept):
+            kept.append(q)
+    return kept
+
+_TARGET = 90
+_by_cat = defaultdict(list)
+for q in questions:
+    _by_cat[q["category"]].append(q)
+
+_filtered = {}
+for cat, qs in _by_cat.items():
+    _filtered[cat] = _remove_similar(qs, "question")
+
+_total_f = sum(len(v) for v in _filtered.values())
+_selected = []
+for cat, qs in sorted(_filtered.items()):
+    n = max(2, round(len(qs) / _total_f * _TARGET))
+    _selected.extend(qs[:n])
+
+if len(_selected) > 100:
+    _selected = _selected[:100]
+elif len(_selected) < 80:
+    _remaining = [q for cat, qs in sorted(_filtered.items()) for q in qs if q not in _selected]
+    _selected.extend(_remaining[:80 - len(_selected)])
+
+_selected.sort(key=lambda q: q["id"])
+for i, q in enumerate(_selected, 1):
+    q["id"] = i
+
+print(f"\n→ Reduced from {len(questions)} to {len(_selected)} questions (target: 80-100)")
+questions = _selected
 
 # ═══════════════════════════════════════════════
 # VERIFICATION AND EXPORT
