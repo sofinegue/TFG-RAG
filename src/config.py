@@ -160,10 +160,23 @@ class RAGConfig:
     )
     
     # === NEO4J (Graphiti Knowledge Graph) ===
+    # Variables genéricas (legacy / retrocompatibilidad)
     neo4j_uri: str = os.getenv("NEO4J_URI", "bolt://localhost:7687")
     neo4j_user: str = os.getenv("NEO4J_USER", "neo4j")
     neo4j_password: str = os.getenv("NEO4J_PASSWORD", "password")
     neo4j_database: str = os.getenv("NEO4J_DATABASE", "neo4j")
+
+    # --- Neo4j Wiki (Knowledge Graph Wikipedia) ---
+    neo4j_wiki_uri: str = os.getenv("NEO4J_WIKI_URI", os.getenv("NEO4J_URI", "bolt://localhost:7687"))
+    neo4j_wiki_user: str = os.getenv("NEO4J_WIKI_USER", os.getenv("NEO4J_USER", "neo4j"))
+    neo4j_wiki_password: str = os.getenv("NEO4J_WIKI_PASSWORD", os.getenv("NEO4J_PASSWORD", "password"))
+    neo4j_wiki_database: str = os.getenv("NEO4J_WIKI_DATABASE", os.getenv("NEO4J_DATABASE", "neo4j"))
+
+    # --- Neo4j EU (Knowledge Graph EUR-Lex) ---
+    neo4j_eu_uri: str = os.getenv("NEO4J_EU_URI", os.getenv("NEO4J_URI", "bolt://localhost:7687"))
+    neo4j_eu_user: str = os.getenv("NEO4J_EU_USER", os.getenv("NEO4J_USER", "neo4j"))
+    neo4j_eu_password: str = os.getenv("NEO4J_EU_PASSWORD", os.getenv("NEO4J_PASSWORD", "password"))
+    neo4j_eu_database: str = os.getenv("NEO4J_EU_DATABASE", os.getenv("NEO4J_DATABASE", "neo4j"))
 
     # === LOGGING ===
     log_level: str = os.getenv("LOG_LEVEL", "INFO")

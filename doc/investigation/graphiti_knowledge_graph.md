@@ -1,5 +1,77 @@
 # Graphiti Knowledge Graph — Documentación Técnica
 
+## 0. Quickstart: `graphiti_quickstart_neo4j.py`
+
+Script independiente de prueba que conecta directamente a Neo4j + Azure OpenAI y ejecuta las operaciones básicas de Graphiti (ingestión, búsqueda híbrida, reranking, node search) **sin depender de Cosmos DB**.
+
+### 0.1 ¿Qué hace el script?
+
+Paso a paso:
+
+1. **Carga de configuración** — Lee las credenciales de Neo4j y Azure OpenAI desde `src/config.py` (que a su vez lee el `.env`). No usa `OPENAI_API_KEY` ni clientes por defecto de OpenAI.
+
+2. **Creación del cliente Azure OpenAI** — Un único `AsyncOpenAI` apuntando al endpoint de compatibilidad v1 de Azure (`<azure_url>/openai/v1/`). Este cliente se reutiliza para LLM, embeddings y reranker.
+
+3. **Inicialización de los 3 clientes de Graphiti**:
+   - **`AzureOpenAILLMClient`**: Chat/extracción. Usa el deployment `AZURE_OPENAI_GPT4_1_NAME` (e.g. `gpt-4.1`). Se configura `small_model` al mismo deployment para evitar que Graphiti intente usar `gpt-4.1-nano` (que no existe en Azure).
+   - **`AzureOpenAIEmbedderClient`**: Embeddings vectoriales. Usa `AZURE_OPENAI_EMB_NAME` (e.g. `text-embedding-ada-002`).
+   - **`OpenAIRerankerClient`**: Cross-encoder para reranking por logprobs. Reutiliza el mismo cliente y config LLM.
+
+4. **Conexión a Neo4j** — `Graphiti(uri, user, password, llm_client=..., embedder=..., cross_encoder=...)`. En la primera ejecución crea ~30 índices automáticamente.
+
+5. **FASE 1: Ingestión de episodios** — 4 episodios de ejemplo (2 de texto, 2 JSON) se procesan secuencialmente. Cada uno pasa por extracción de entidades, resolución de duplicados y extracción de relaciones via LLM.
+
+6. **FASE 2: Búsqueda híbrida** — Combina similitud semántica (embeddings) con BM25 (fulltext) para recuperar relaciones relevantes.
+
+7. **FASE 3: Reranking con center node** — Usa el resultado top de la fase 2 como nodo central para reordenar por distancia en el grafo.
+
+8. **FASE 4: Node search (NODE_HYBRID_SEARCH_RRF)** — Busca nodos (entidades) directamente usando una receta de búsqueda predefinida.
+
+9. **Cierre** — Cierra la conexión a Neo4j.
+
+### 0.2 Configuración necesaria (.env)
+
+```bash
+# Neo4j Aura
+NEO4J_URI=neo4j+s://XXXXXXXX.databases.neo4j.io
+NEO4J_USER=XXXXXXXX
+NEO4J_PASSWORD=<password>
+
+# Azure OpenAI
+AZURE_OPENAI_URL=https://<resource>.cognitiveservices.azure.com
+AZURE_OPENAI_KEY=<api-key>
+AZURE_OPENAI_GPT4_1_NAME=gpt-4.1            # Nombre del deployment LLM
+AZURE_OPENAI_EMB_NAME=text-embedding-ada-002  # Nombre del deployment de embeddings
+
+# Desactivar telemetría (evita errores SSL detrás de proxy)
+GRAPHITI_TELEMETRY_ENABLED=false
+```
+
+> **Importante**: `AZURE_OPENAI_EMB_NAME` debe coincidir con el nombre exacto del deployment en Azure Portal (no el nombre del modelo). Verificar en Azure Portal → Azure OpenAI → Deployments.
+
+### 0.3 Ejecución
+
+```bash
+python doc/investigation/graphiti_quickstart_neo4j.py
+# o bien:
+python -m doc.investigation.graphiti_quickstart_neo4j
+```
+
+### 0.4 Adaptación desde el quickstart original de Graphiti
+
+El script original (`examples/quickstart.py` de graphiti-core) asume acceso directo a la API de OpenAI. Para nuestro entorno Azure se hicieron los siguientes cambios:
+
+| Aspecto | Original | Adaptado |
+|---------|----------|----------|
+| **Config** | `os.environ.get('OPENAI_API_KEY')` | `src.config.config` (centralizado) |
+| **LLM** | `OpenAIClient()` (requiere `OPENAI_API_KEY`) | `AzureOpenAILLMClient` con `AsyncOpenAI` apuntando a endpoint v1 de Azure |
+| **Embeddings** | `OpenAIEmbedder()` (requiere `OPENAI_API_KEY`) | `AzureOpenAIEmbedderClient` con el mismo `AsyncOpenAI` |
+| **Reranker** | `OpenAIRerankerClient()` (requiere `OPENAI_API_KEY`) | `OpenAIRerankerClient(config=..., client=azure_client)` |
+| **Logging** | `print()` | `logger.info()` con timing por fase |
+| **`small_model`** | Default (`gpt-4.1-nano`) | Forzado al mismo deployment que el modelo principal |
+
+---
+
 ## 1. Visión General
 
 El módulo `graphiti_wiki` construye un **grafo de conocimiento temporal** (Knowledge Graph) a partir de los chunks de Wikipedia almacenados en Cosmos DB, utilizando la librería [Graphiti](https://github.com/getzep/graphiti) y una base de datos de grafos **Neo4j**.
