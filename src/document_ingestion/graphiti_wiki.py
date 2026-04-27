@@ -20,8 +20,7 @@ import time
 from datetime import datetime, timezone
 
 # Limitar coroutines paralelas ANTES de importar graphiti_core.
-# Aura Free soporta ~5 conexiones concurrentes; valores altos agotan el pool.
-os.environ.setdefault('SEMAPHORE_LIMIT', '3')
+os.environ.setdefault('SEMAPHORE_LIMIT', '10')
 
 from openai import AsyncOpenAI
 from neo4j import AsyncGraphDatabase
@@ -52,10 +51,10 @@ logger = logging.getLogger(__name__)
 # Silenciar notificaciones verbosas de Neo4j (índices que ya existen)
 logging.getLogger('neo4j.notifications').setLevel(logging.WARNING)
 
-# ─── Neo4j (Wiki-specific) ─────────────────────────────────────────────
-neo4j_uri = config.neo4j_wiki_uri
-neo4j_user = config.neo4j_wiki_user
-neo4j_password = config.neo4j_wiki_password
+# ─── Neo4j (shared instance, Wiki database) ───────────────────────────
+neo4j_uri = config.neo4j_uri
+neo4j_user = config.neo4j_user
+neo4j_password = config.neo4j_password
 
 # ─── Azure OpenAI ──────────────────────────────────────────────────────
 azure_base_url = config.azure_openai_url
@@ -122,9 +121,22 @@ async def wipe_neo4j(driver):
 
 
 # ─── Main ──────────────────────────────────────────────────────────────
-async def main(max_chunks: int | None = None):
+async def fetch_existing_episodes(driver) -> set[str]:
+    """Devuelve los nombres de episodios ya ingestados en la database."""
+    names = set()
+    async with driver.client.session(database=config.neo4j_wiki_database) as session:
+        result = await session.run("MATCH (e:Episodic) RETURN e.name AS name")
+        async for record in result:
+            if record["name"]:
+                names.add(record["name"])
+    logger.info(f"  Episodios existentes en Neo4j: {len(names)}")
+    return names
+
+
+async def main(max_chunks: int | None = None, no_wipe: bool = False):
     logger.info("=" * 60)
     logger.info("  GRAPHITI WIKI INGESTION PIPELINE")
+    logger.info(f"  Modo: {'RETRY (sin wipe)' if no_wipe else 'COMPLETO (con wipe)'}")
     logger.info("=" * 60)
 
     t0 = time.perf_counter()
@@ -171,11 +183,11 @@ async def main(max_chunks: int | None = None):
     neo4j_driver.client = AsyncGraphDatabase.driver(
         uri=neo4j_uri,
         auth=(neo4j_user, neo4j_password),
-        max_connection_pool_size=5,
+        max_connection_pool_size=50,
         connection_acquisition_timeout=120,
     )
     await old_driver.close()
-    logger.info("  Neo4j pool limitado a 5 conexiones (Aura Free)")
+    logger.info("  Neo4j pool: 50 conexiones (local)")
     logger.info("  Driver original cerrado (evita orphaned connections)")
 
     # Esperar a que se creen los índices en el NUEVO driver antes de operar
@@ -184,7 +196,10 @@ async def main(max_chunks: int | None = None):
     logger.info("  Índices creados correctamente")
 
     # ── 3. Wipe Neo4j ─────────────────────────────────────────────────
-    await wipe_neo4j(neo4j_driver)
+    if no_wipe:
+        logger.info("  --no-wipe activo: conservando datos existentes (modo retry)")
+    else:
+        await wipe_neo4j(neo4j_driver)
 
     # ── 4. Inicializar Graphiti ────────────────────────────────────────
     graphiti = Graphiti(
@@ -212,72 +227,91 @@ async def main(max_chunks: int | None = None):
             chunks = chunks[:max_chunks]
             logger.info(f"Límite aplicado: usando solo {max_chunks} chunks")
 
+        # Filtrar chunks ya ingestados (modo retry)
+        if no_wipe:
+            existing = await fetch_existing_episodes(neo4j_driver)
+            total_before = len(chunks)
+            chunks = [
+                c for c in chunks
+                if f"{c.get('docTitle', 'Unknown')} - chunk {c.get('nChunk', 0)} ({c.get('chunkId', c.get('id', ''))})" not in existing
+            ]
+            logger.info(f"  Filtrados: {total_before - len(chunks)} ya ingestados, {len(chunks)} pendientes")
+
         logger.info(f"Total de chunks a ingestar: {len(chunks)}")
         titles = {c.get('docTitle', 'Unknown') for c in chunks}
         logger.info(f"Artículos únicos: {len(titles)} — {titles}")
 
-        # ── 6. Ingestar chunks como episodios ──────────────────────────
-        logger.info("=== FASE 2: Ingestando chunks en Neo4j via Graphiti ===")
+        # ── 6. Ingestar chunks como episodios (concurrente) ─────────
+        CONCURRENCY = 5  # chunks procesados en paralelo
+        logger.info(f"=== FASE 2: Ingestando chunks en Neo4j via Graphiti (concurrencia={CONCURRENCY}) ===")
 
-        for i, chunk in enumerate(chunks):
-            doc_title = chunk.get('docTitle', 'Unknown')
-            content = chunk.get('content', '')
-            language = chunk.get('sourceLanguage', 'en')
-            n_chunk = chunk.get('nChunk', i)
-            sections = chunk.get('Sections', [])
-            chunk_id = chunk.get('chunkId', chunk.get('id', f'chunk_{i}'))
+        sem = asyncio.Semaphore(CONCURRENCY)
+        ok_count = 0
+        fail_count = 0
 
-            # Construir descripción rica para que Graphiti extraiga mejor
-            section_str = ' > '.join(sections) if sections else 'General'
-            description = (
-                f"Wikipedia article '{doc_title}' ({language}), "
-                f"section: {section_str}, chunk {n_chunk}"
-            )
+        async def ingest_chunk(i: int, chunk: dict):
+            nonlocal ok_count, fail_count
+            async with sem:
+                doc_title = chunk.get('docTitle', 'Unknown')
+                content = chunk.get('content', '')
+                language = chunk.get('sourceLanguage', 'en')
+                n_chunk = chunk.get('nChunk', i)
+                sections = chunk.get('Sections', [])
+                chunk_id = chunk.get('chunkId', chunk.get('id', f'chunk_{i}'))
 
-            episode_name = f"{doc_title} - chunk {n_chunk} ({chunk_id})"
+                section_str = ' > '.join(sections) if sections else 'General'
+                description = (
+                    f"Wikipedia article '{doc_title}' ({language}), "
+                    f"section: {section_str}, chunk {n_chunk}"
+                )
+                episode_name = f"{doc_title} - chunk {n_chunk} ({chunk_id})"
 
-            logger.info(
-                f"  [{i+1}/{len(chunks)}] Ingesting '{episode_name}' "
-                f"(lang={language}, sections={section_str}, "
-                f"content_len={len(content)} chars)"
-            )
+                logger.info(
+                    f"  [{i+1}/{len(chunks)}] Ingesting '{episode_name}' "
+                    f"(lang={language}, content_len={len(content)} chars)"
+                )
 
-            t_ep = time.perf_counter()
-            # Retry con backoff exponencial para pool timeouts de Aura Free
-            max_retries = 3
-            for attempt in range(1, max_retries + 1):
-                try:
-                    await graphiti.add_episode(
-                        name=episode_name,
-                        episode_body=content,
-                        source=EpisodeType.text,
-                        source_description=description,
-                        reference_time=datetime.now(timezone.utc),
-                    )
-                    break  # éxito
-                except ConnectionAcquisitionTimeoutError:
-                    if attempt == max_retries:
-                        logger.error(f"  [{i+1}/{len(chunks)}] Fallido tras {max_retries} intentos")
-                        raise
-                    wait = 30 * attempt  # 30s, 60s, 90s
-                    logger.warning(
-                        f"  [{i+1}/{len(chunks)}] Pool timeout (intento {attempt}/{max_retries}), "
-                        f"esperando {wait}s antes de reintentar..."
-                    )
-                    await asyncio.sleep(wait)
+                t_ep = time.perf_counter()
+                max_retries = 5
+                for attempt in range(1, max_retries + 1):
+                    try:
+                        await graphiti.add_episode(
+                            name=episode_name,
+                            episode_body=content,
+                            source=EpisodeType.text,
+                            source_description=description,
+                            reference_time=datetime.now(timezone.utc),
+                        )
+                        ok_count += 1
+                        break
+                    except (ConnectionAcquisitionTimeoutError, Exception) as exc:
+                        is_pool = isinstance(exc, ConnectionAcquisitionTimeoutError)
+                        label = "Pool timeout" if is_pool else f"{type(exc).__name__}: {exc}"
+                        if attempt == max_retries:
+                            logger.error(
+                                f"  [{i+1}/{len(chunks)}] Fallido tras {max_retries} intentos — {label}"
+                            )
+                            fail_count += 1
+                            return
+                        wait = 10 * (2 ** (attempt - 1))  # 10, 20, 40, 80s
+                        logger.warning(
+                            f"  [{i+1}/{len(chunks)}] {label} (intento {attempt}/{max_retries}), "
+                            f"esperando {wait}s..."
+                        )
+                        await asyncio.sleep(wait)
 
-            elapsed_ep = time.perf_counter() - t_ep
-            logger.info(
-                f"  [{i+1}/{len(chunks)}] Episodio añadido OK en {elapsed_ep:.1f}s"
-            )
+                elapsed_ep = time.perf_counter() - t_ep
+                logger.info(
+                    f"  [{i+1}/{len(chunks)}] OK en {elapsed_ep:.1f}s  "
+                    f"(progreso: {ok_count}/{len(chunks)})"
+                )
 
-            # Pausa entre chunks para dejar que Aura Free libere conexiones
-            if i < len(chunks) - 1:
-                await asyncio.sleep(5)
+        tasks = [ingest_chunk(i, chunk) for i, chunk in enumerate(chunks)]
+        await asyncio.gather(*tasks)
 
         total_time = time.perf_counter() - t0
         logger.info("=" * 60)
-        logger.info(f"  PIPELINE COMPLETADO — {len(chunks)} chunks ingestados")
+        logger.info(f"  PIPELINE COMPLETADO — {ok_count} OK, {fail_count} fallidos de {len(chunks)}")
         logger.info(f"  Tiempo total: {total_time:.1f}s ({total_time/60:.1f} min)")
         logger.info("=" * 60)
 
@@ -297,5 +331,9 @@ if __name__ == '__main__':
         '--max', type=int, default=None,
         help='Máximo número de chunks a ingestar (por defecto: todos)',
     )
+    parser.add_argument(
+        '--no-wipe', action='store_true',
+        help='No borrar datos existentes: solo ingesta chunks que faltan (modo retry)',
+    )
     args = parser.parse_args()
-    asyncio.run(main(max_chunks=args.max))
+    asyncio.run(main(max_chunks=args.max, no_wipe=args.no_wipe))
