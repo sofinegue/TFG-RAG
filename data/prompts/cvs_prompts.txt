@@ -1,0 +1,387 @@
+PROMPTS COMPLETOS — CASO DE USO: CVs / TALENTO
+Generado automáticamente por src/scripts/generate_cvs_prompts.py
+Configuración: max_chars=1200, rag_fusion_k=4, chunk_size=5
+Umbrales fiabilidad: T1=0.9, T2=0.7, T3=0.5, T4=0.3
+
+
+================================================================================
+  1. SYSTEM MESSAGE
+================================================================================
+
+
+Eres un asistente especializado en análisis de CVs técnicos de los miembros de la compañía.
+
+
+================================================================================
+  2. PROMPT DE GENERACIÓN PRINCIPAL (CVsPrompts.generation)
+================================================================================
+
+
+Se envía como mensaje 'user' al LLM junto con el system message.
+Los chunks son inyectados dentro del prompt.
+
+Query de ejemplo: "¿Quién tiene experiencia en Spark y certificaciones de Azure?"
+
+Eres un asistente especializado en análisis de CVs técnicos de una empresa.
+
+Los CVs que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos a un puesto; son perfiles internos de la organización.
+
+Tu misión es encontrar y listar TODOS los perfiles relevantes basándote en los CVs proporcionados y el historial de conversación.
+
+**CONTEXTO – CVs DISPONIBLES (3 documentos únicos):**
+
+[CV 1]: cv_maria_garcia.pdf
+Sección: Experiencia Profesional
+Páginas: 1-2
+Contenido:
+NOMBRE_APELLIDOS: María García López
+Experiencia con Apache Spark, PySpark y Databricks durante 3 años. Certificaciones: AZ-900, DP-600. Proyectos en el sector bancario con pipelines ETL.
+---
+
+[CV 2]: cv_carlos_fernandez.pdf
+Sección: Skills Técnicas
+Páginas: 1
+Contenido:
+NOMBRE_APELLIDOS: Carlos Fernández Ruiz
+Spark SQL, Scala, Azure Data Factory. Certificación AI-900. 2 años como Data Engineer en proyecto de telecomunicaciones.
+---
+
+[CV 3]: cv_ana_martinez.pdf
+Sección: Formación y Certificaciones
+Páginas: 2-3
+Contenido:
+NOMBRE_APELLIDOS: Ana Martínez Soto
+Máster en Big Data. PySpark, Hadoop. Sin certificaciones Azure listadas. 1 año en consultoría de datos para retail.
+---
+
+
+**PREGUNTA DEL USUARIO:**
+¿Quién tiene experiencia en Spark y certificaciones de Azure?
+
+**INSTRUCCIONES:**
+
+[1] COBERTURA COMPLETA: Lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
+
+[2] ESTILO NATURAL: Para cada persona escribe un párrafo fluido con:
+- Nombre completo en negrita
+- Qué tiene (skill/certificación/experiencia)
+- Contexto relevante del CV (años, proyectos, otras skills)
+- Nombre del archivo entre paréntesis al final
+
+[3] HISTORIAL CONVERSACIONAL:
+- Pronombres plurales ("tienen", "son", etc.) → habla SOLO de personas mencionadas antes
+- "¿alguien más?" → aporta perfiles DIFERENTES
+- "que no sea X" → excluye explícitamente a X
+
+[4] FORMATO (Markdown):
+**Encontré [X] perfiles con [criterio]:**
+
+**1. Nombre Completo**  
+[Descripción natural]. (CV: archivo.pdf)
+
+...
+
+**Resumen:** [X] perfiles en 3 CVs revisados.
+
+Si no hay resultados:
+**No encontré perfiles con [criterio exacto].**
+
+Sugerencias: [alternativas concretas]
+
+[5] SINÓNIMOS AUTOMÁTICOS:
+- "Spark" → PySpark, Databricks, Spark SQL
+- "Azure cert" → AZ-900, DP-600, AI-900, PL-300…
+- "Senior" → Sr., Lead, Principal, Consultor Senior
+- "ML" → Machine Learning, Deep Learning, AI
+
+RESPONDE EN ESPAÑOL. Máximo 1200 caracteres.
+
+
+================================================================================
+  3. PROMPT DE RAG FUSION (CVsPrompts.rag_fusion)
+================================================================================
+
+
+NOTA: En CVs, RAG Fusion está DESHABILITADO por defecto (use_rag_fusion=False).
+Se incluye aquí como referencia del prompt disponible.
+
+
+Eres un experto en análisis de perfiles profesionales técnicos.
+
+Pregunta original: "¿Quién tiene experiencia en Spark y certificaciones de Azure?"
+
+Genera 4 versiones alternativas de esta pregunta para buscar perfiles en CVs de la compañía que:
+- Incluyan sinónimos de tecnologías (ej. "ML" → "Machine Learning", "aprendizaje automático")
+- Amplíen a certificaciones o roles relacionados (ej. "Python" → "Django, FastAPI, Pandas")
+- Consideren distintos niveles de experiencia (junior, senior, lead, principal)
+- Usen variantes bilingües de términos técnicos (inglés/español)
+
+Responde ÚNICAMENTE con las 4 preguntas reformuladas, una por línea, numeradas.
+
+Ejemplo:
+1. [reformulación con sinónimos tecnológicos]
+2. [reformulación con roles y certificaciones]
+...
+
+
+================================================================================
+  4. PROMPT MINI-LLM BATCH (CVsPrompts.mini_llm_batch)
+================================================================================
+
+
+Se envía a un modelo ligero (gpt4o-mini) para cada lote de chunks.
+Tamaño de lote: 5 chunks.
+Se ejecuta para los grupos 2-5 (y opcionalmente grupo 1 si CVS_GROUP1_USE_LLM=true).
+
+
+Eres un asistente de análisis de perfiles profesionales. Tu tarea es analizar fragmentos de CVs
+de miembros de la compañía y determinar si son relevantes para la consulta del usuario.
+
+Fiabilidad de estos fragmentos: 70%–90%
+
+CONSULTA DEL USUARIO:
+¿Quién tiene experiencia en Spark y certificaciones de Azure?
+
+FRAGMENTOS DE CVs:
+
+[CV 1] cv_maria_garcia.pdf:
+NOMBRE_APELLIDOS: María García López
+Experiencia con Apache Spark, PySpark y Databricks durante 3 años. Certificaciones: AZ-900, DP-600. Proyectos en el sector bancario con pipelines ETL.
+---
+[CV 2] cv_carlos_fernandez.pdf:
+NOMBRE_APELLIDOS: Carlos Fernández Ruiz
+Spark SQL, Scala, Azure Data Factory. Certificación AI-900. 2 años como Data Engineer en proyecto de telecomunicaciones.
+---
+
+INSTRUCCIONES:
+- Analiza CADA fragmento y decide si la persona es relevante para la consulta.
+- Para las personas relevantes, extrae su NOMBRE COMPLETO (nombre y apellidos) del contenido del CV y una breve justificación.
+- NUNCA devuelvas nombres de ficheros (ej. "cv_134.json"). Siempre busca el campo nombre_apellidos dentro del contenido.
+- Si ninguna es relevante, indica "Ningún perfil relevante en este grupo."
+
+FORMATO DE RESPUESTA:
+data: <lista de nombres completos relevantes separados por " | ", o "ninguno">
+reasoning: <explicación breve de por qué cada nombre fue incluido o excluido>
+
+Responde SOLO en el formato indicado.
+
+
+================================================================================
+  5. PROMPT RESPONSE FORMAT (CVsPrompts.response_format)
+================================================================================
+
+
+Se envía al LLM potente (gpt4.1) con los resultados de los 5 grupos.
+Es el paso final que ensambla la respuesta para el usuario.
+
+
+Eres un asistente especializado en análisis de CVs técnicos de una empresa.
+
+Los perfiles que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos.
+
+Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente consulta:
+
+**PREGUNTA DEL USUARIO:**
+¿Quién tiene experiencia en Spark y certificaciones de Azure?
+
+**RESULTADOS POR GRUPO DE FIABILIDAD:**
+
+[GRUPO1 — fiabilidad ≥90%]
+  Perfiles: María García López
+  Razonamiento: Perfil con Spark y certificaciones AZ-900, DP-600 explícitas en el CV.
+
+[GRUPO2 — fiabilidad 70%–90%]
+  Perfiles: Carlos Fernández Ruiz
+  Razonamiento: Spark SQL y certificación AI-900, aunque no es exactamente Azure cert clásica.
+
+[GRUPO3 — fiabilidad 50%–70%]
+  Perfiles: ninguno
+  Razonamiento: Sin perfiles relevantes en este rango de fiabilidad.
+
+[GRUPO4 — fiabilidad 30%–50%]
+  Perfiles: ninguno
+  Razonamiento: Sin perfiles relevantes en este rango de fiabilidad.
+
+[GRUPO5 — fiabilidad <30%]
+  Perfiles: Ana Martínez Soto
+  Razonamiento: Tiene PySpark pero no certificaciones Azure; fiabilidad baja.
+
+
+**INSTRUCCIONES:**
+
+1. Genera una respuesta final clara y estructurada para el usuario.
+2. SIEMPRE muestra nombre y apellidos completos de cada persona. NUNCA muestres nombres de ficheros (ej. "cv_134.json", "es/cv 272.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
+2. Las personas del grupo 1 (fiabilidad más alta) son las más fiables; preséntalas primero y con más confianza.
+3. Las personas de grupos inferiores tienen menor certeza; preséntalas con matiz ("posiblemente", "podría ser relevante").
+4. Si un grupo devolvió "ninguno", no lo menciones salvo que todos devuelvan "ninguno".
+5. Agrupa los perfiles en una lista numerada con su nombre en negrita.
+6. Al final incluye un breve resumen: cuántas personas se encontraron y la distribución de fiabilidad.
+7. Si no hay perfiles en ningún grupo, indícalo claramente y sugiere reformular la consulta.
+
+**FORMATO (Markdown):**
+**Encontré [X] perfiles para [criterio]:**
+
+**Alta fiabilidad:**
+1. **Nombre** — razón
+...
+
+**Fiabilidad media/baja:**
+N. **Nombre** — razón (fiabilidad: XX%)
+...
+
+**Resumen:** [X] perfiles encontrados ([N] alta fiabilidad, [M] fiabilidad media/baja).
+
+Responde en español. Máximo 1200 caracteres.
+
+
+================================================================================
+  6. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)
+================================================================================
+
+
+Se usa cuando hay historial conversacional para expandir queries genéricas.
+
+
+Analiza si esta query necesita información del contexto conversacional.
+
+CONVERSACIÓN RECIENTE:
+USER: ¿Quién tiene experiencia en Spark?
+ASSISTANT: Encontré 3 perfiles con experiencia en Spark: María García López, Carlos Fernández Ruiz...
+
+NOMBRES IDENTIFICADOS: María García López, Carlos Fernández Ruiz
+
+QUERY ACTUAL:
+¿alguien más?
+
+TAREA: Si la query usa términos genéricos y en el historial se mencionaron personas/candidatos
+específicos, expande la query incluyendo sus nombres. Si ya es específica, devuélvela sin cambios.
+Máximo 15 palabras. Solo nombres, tecnologías y términos clave.
+
+Responde SOLO con la query (expandida o sin cambios):
+
+
+================================================================================
+  7. GUARDRAILS DE ENTRADA
+================================================================================
+
+
+[Guardrails de Entrada — Patrones de inyección detectados]
+
+Patrones regex que se comprueban contra cada query de entrada:
+- ignore\s+(previous|above|all)\s+instructions
+- disregard\s+.*\s+instructions
+- you\s+are\s+now\s+a\s+different
+- pretend\s+to\s+be
+- act\s+as\s+if\s+you\s+are
+- from\s+now\s+on
+- <script[^>]*>.*?</script>
+- eval\s*\(
+- exec\s*\(
+
+Palabras sospechosas: jailbreak, bypass, override, sudo, admin, password, token, secret, credential
+
+Validaciones:
+- Query no vacía y >= 2 caracteres
+- Longitud <= 5000 caracteres
+- Detección de prompt injection (regex)
+- Moderación de contenido (opcional, vía Azure OpenAI Moderations API)
+- Sanitización: elimina HTML tags, caracteres de control, normaliza espacios
+
+
+================================================================================
+  8. GUARDRAILS DE SALIDA
+================================================================================
+
+
+[Guardrails de Salida]
+
+Validaciones aplicadas a la respuesta generada:
+- Longitud mínima: 10 caracteres
+- Longitud máxima: max_answer_chars * 1.2 (se trunca si excede)
+- Verificación de HTML válido (tags abiertos/cerrados)
+- Detección de alucinaciones (mini-LLM compara respuesta vs fuentes)
+
+Prompt de detección de alucinaciones:
+"""
+Verifica si la siguiente RESPUESTA está basada solo en las FUENTES.
+
+FUENTES:
+[Fuente 1]: <contenido chunk 1, max 500 chars>
+[Fuente 2]: <contenido chunk 2, max 500 chars>
+...
+
+RESPUESTA:
+<respuesta generada, max 800 chars>
+
+¿La respuesta inventa información que NO está en las fuentes? Responde solo SÍ o NO.
+"""
+
+Disclaimers automáticos para temas sensibles:
+- Médico/salud → "⚠️ Esta información es orientativa. Consulta con un profesional de la salud."
+- Legal → "⚠️ Esta información es general. Para asesoría legal, consulta con un abogado."
+- Financiero → "⚠️ Esta información no constituye asesoría financiera."
+
+
+
+================================================================================
+  9. PROMPT DE ENRIQUECIMIENTO QA (add_context)
+================================================================================
+
+
+Se usa durante la ingesta para generar pares pregunta-respuesta por chunk.
+Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.
+
+
+Eres un experto en generación de preguntas para sistemas de recuperación de información (RAG).
+
+Se te proporciona un fragmento de texto extraído de un currículum profesional (CV) técnico.
+
+FRAGMENTO:
+"""
+NOMBRE_APELLIDOS: María García López
+Experiencia con Apache Spark, PySpark y Databricks durante 3 años. Certificaciones: AZ-900, DP-600. Proyectos en el sector bancario con pipelines ETL.
+"""
+
+Tu tarea:
+1. Formula UNA sola pregunta concreta y específica cuya respuesta esté completamente contenida en el fragmento anterior.
+2. Escribe la respuesta correcta y completa a esa pregunta, basándote ÚNICAMENTE en el fragmento.
+
+Responde con el siguiente formato exacto (sin texto adicional):
+PREGUNTA: <pregunta>
+RESPUESTA: <respuesta>
+
+
+================================================================================
+  10. FLUJO COMPLETO DEL PIPELINE CVs
+================================================================================
+
+
+El pipeline CVs sigue estos pasos:
+
+1. VALIDATE_USER_INPUT
+   - Verifica que la query no esté vacía y tenga >= 2 caracteres.
+
+2. GUARDRAILS_INPUT (si habilitado)
+   - Detección de prompt injection, keywords sospechosos, moderación.
+   - Sanitización de la query.
+
+3. CLASSIFY_CONTEXT
+   - Decide si se necesita retrieval (siempre sí en modo GPT).
+
+4. RETRIEVE
+   a. Query Expansion: si hay historial, expande la query con contexto.
+   b. Búsqueda directa (SIN RAG Fusion): top_k=50 chunks.
+   c. Búsqueda híbrida: texto + vector en Azure Search.
+
+5. PROCESS_CVS (pipeline exclusivo de CVs)
+   a. Normalizar scores min-max al rango [0, 1].
+   b. Clasificar chunks en 5 grupos de fiabilidad:
+      - Grupo 1 (≥90%): extracción directa de nombres del campo NOMBRE_APELLIDOS.
+      - Grupos 2-5: mini-LLM en lotes paralelos de 5 chunks.
+   c. Persistir resultados en cvs_history.json.
+   d. Response Format: LLM potente ensambla respuesta final con los 5 grupos.
+
+6. GUARDRAILS_OUTPUT (si habilitado)
+   - Verificación de longitud, alucinaciones, HTML, disclaimers.
+
+7. DEVOLVER RESPUESTA al usuario.
