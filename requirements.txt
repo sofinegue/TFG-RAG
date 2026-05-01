@@ -1,3 +1,47 @@
-requests==2.32.5
-beautifulsoup4==4.14.3
-selenium==4.40.0
+# --- Web / API -------------------------------------------------------
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.4
+python-multipart>=0.0.9        # FastAPI Form() support
+
+# --- Azure SDKs ------------------------------------------------------
+azure-cosmos>=4.7.0
+azure-search-documents>=11.6.0
+azure-core>=1.30.0
+azure-storage-blob>=12.20.0
+azure-data-tables>=12.5.0
+azure-ai-documentintelligence>=1.0.0
+
+# --- OpenAI / LLM ----------------------------------------------------
+openai>=1.30.0
+openai-agents>=0.0.3           # Agent Builder workflow (opcional)
+tiktoken>=0.7.0
+
+# --- LangGraph -------------------------------------------------------
+langgraph>=0.2.0
+langchain-core>=0.2.0          # dependencia de langgraph
+langchain-text-splitters>=0.3.0
+
+# --- Utilidades generales --------------------------------------------
+python-dotenv>=1.0.0
+pytz>=2024.1
+aiohttp>=3.9.0
+
+# --- Procesamiento de documentos (ingestion pipeline) ----------------
+requests>=2.32.0
+beautifulsoup4>=4.14.0
+jsonlines>=4.0.0
+jsonschema>=4.26.0
+PyMuPDF>=1.24.0
+pdfplumber
+
+# --- Otros (scraping / tests) ----------------------------------------
+selenium>=4.40.0
+
+# --- Graphiti (Knowledge Graph) ---------------------------------------
+./libs/graphiti_core-0.28.0
+neo4j>=5.26.0
+diskcache>=5.6.3
+tenacity>=9.0.0
+numpy>=1.0.0
+

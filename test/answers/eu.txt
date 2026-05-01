@@ -1,0 +1,743 @@
+✅ 1. Naturaleza del Reglamento y su función principal
+El Reglamento de Ejecución (UE) 2025/2621 es un acto adoptado por la Comisión Europea con el objetivo de desarrollar y precisar las normas prácticas necesarias para aplicar el Reglamento (UE) 2023/956, que establece el Mecanismo de Ajuste en Frontera por Carbono (MAFC).
+ [OJ_L_202502621_ES | PDF]
+El MAFC es el nuevo sistema de la Unión Europea para evitar la fuga de carbono, es decir, la deslocalización de industrias a países con normas climáticas más laxas o la entrada en la UE de productos cuya fabricación emite más CO₂ que si se produjeran en Europa.
+ [OJ_L_202502621_ES | PDF]
+El Reglamento de Ejecución 2025/2621 no redefine el MAFC, sino que establece:
+
+cómo deben calcularse los valores por defecto de emisiones de bienes importados
+cómo deben aplicarse estos valores por defecto en distintos casos
+cómo deben complementarse con información real, cuando exista
+cómo deben actuar importadores, verificadores y autoridades aduaneras
+
+Todo ello para garantizar que el MAFC se aplique de forma coherente, fiable y verificable en toda la Unión Europea.
+
+✅ 2. ¿Por qué son necesarios “valores por defecto”?
+El artículo 7 del Reglamento base 2023/956 exige que, cuando los importadores no puedan aportar datos verificados sobre las emisiones reales asociadas a un producto, se utilicen valores por defecto.
+ [OJ_L_202502621_ES | PDF]
+Estos valores por defecto representan estimaciones conservadoras de las emisiones implícitas directas e indirectas, y sirven para:
+
+Evitar que los importadores declaren emisiones artificialmente bajas.
+Garantizar que los productos importados compitan en igualdad de condiciones con los producidos en la UE.
+Asegurar la integridad medioambiental del sistema, evitando la subestimación de emisiones.
+ [OJ_L_202502621_ES | PDF]
+
+El Reglamento 2025/2621 define el método exacto para calcular esos valores por defecto y las condiciones para usarlos.
+
+✅ 3. Objetivos ambientales y económicos
+El Reglamento persigue dos grandes objetivos:
+3.1. Objetivo ambiental
+Asegurar que las emisiones asociadas a los bienes importados están correctamente valoradas para evitar:
+
+Fuga de carbono,
+Competencia injusta,
+Desplazamiento de emisiones desde la UE a terceros países con menor regulación.
+
+Este principio está explícitamente citado en varias partes del propio Reglamento.
+ [OJ_L_202502621_ES | PDF]
+3.2. Objetivo económico
+Asegurar que la aplicación del mecanismo:
+
+No distorsiona el comercio internacional,
+No penaliza injustamente a importadores,
+Facilita una implementación progresiva (incluyendo recargos escalonados entre 2026 y 2028).
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 4. ¿Qué regula exactamente este Reglamento de Ejecución?
+El texto establece disposiciones sobre:
+4.1. Cálculo y uso de valores por defecto
+Incluye normas para:
+
+mercancías con emisiones directas,
+mercancías con emisiones indirectas (por ejemplo, electricidad),
+mercancías complejas,
+precursores utilizados en su fabricación.
+ [OJ_L_202502621_ES | PDF]
+
+4.2. Datos utilizados para calcular cada valor por defecto
+Los valores deben basarse en:
+
+Información de países productores,
+Información de los 10 países con mayores emisiones cuando los datos no sean fiables,
+La media de 5 años de factores de emisión eléctricos para evitar volatilidad.
+ [OJ_L_202502621_ES | PDF]
+
+4.3. Introducción gradual de recargos (2026–2028)
+Los valores por defecto incorporan un recargo para reflejar diferencias entre instalaciones.
+Este recargo se aplica progresivamente:
+
+2026: incremento inicial,
+2027: incremento mayor,
+2028: aplicación completa.
+ [OJ_L_202502621_ES | PDF]
+
+4.4. Reglas para electricidad importada
+Se aplican valores por defecto específicos basados en factores de emisión medios de las redes eléctricas de terceros países.
+ [OJ_L_202502621_ES | PDF]
+4.5. Transparencia y revisión futura
+La Comisión debe:
+
+realizar revisiones antes de 2027,
+abrir consultas públicas,
+actualizar valores si cambian datos o condiciones.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 5. ¿A quién se aplica?
+El Reglamento afecta directamente a:
+
+Importadores de mercancías cubiertas por el MAFC (cemento, fertilizantes, hierro y acero, aluminio, hidrógeno, electricidad…).
+Verificadores acreditados, que deben comprobar la información sobre emisiones.
+Autoridades aduaneras y la Comisión Europea, que deben supervisar la aplicación del mecanismo.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 6. En resumen: ¿qué es y para qué sirve este Reglamento?
+El Reglamento de Ejecución (UE) 2025/2621:
+
+Define cómo calcular los valores por defecto para las emisiones implícitas de los productos importados.
+Permite aplicar el MAFC de forma uniforme en toda la Unión.
+Garantiza que el sistema sea ambientalmente íntegro y que no se subestimen las emisiones.
+Introduce un sistema progresivo de recargos para evitar manipulación de datos o competencia desleal.
+Asegura que la UE disponga de un marco estable, transparente y basado en datos fiables para asignar un coste al carbono equivalente al de la producción interna.
+✅ 1. Qué son las emisiones implícitas y por qué importa distinguirlas
+El Reglamento define tres tipos de emisiones que pueden estar presentes en un producto importado:
+1.1. Emisiones implícitas directas
+Son las emisiones que se producen en la instalación donde el producto es fabricado.
+Ejemplos:
+
+CO₂ emitido en un horno de clínker o alto horno.
+Emisiones procedentes de procesos químicos.
+
+El Reglamento indica que, si se usan valores por defecto para estas emisiones, deben aplicarse los valores establecidos en el Anexo I.
+ [OJ_L_202502621_ES | PDF]
+
+1.2. Emisiones implícitas indirectas
+Son las que provienen de la electricidad consumida en la instalación del país productor.
+El Reglamento dispone que, cuando estas emisiones se calculen mediante valores por defecto, deben aplicarse los del Anexo II.
+ [OJ_L_202502621_ES | PDF]
+Además, especifica que estos valores indirectos se calculan usando la media del factor de emisión eléctrico del país de origen durante 5 años, para evitar volatilidad provocada por condiciones climáticas o eventos excepcionales.
+ [OJ_L_202502621_ES | PDF]
+
+1.3. Emisiones implícitas de electricidad importada en sí misma
+Es un caso aparte: cuando lo que se importa es electricidad, se usan valores por defecto del Anexo III, también calculados mediante factores de emisión anuales medios.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 2. Cuándo usar valores reales y cuándo valores por defecto
+El Reglamento establece un orden de preferencia:
+2.1. La prioridad es usar emisiones reales
+Los declarantes deben usar emisiones verificadas siempre que:
+
+La instalación extranjera proporcione datos auditados, y
+La información sea fiable y verificable.
+
+Sin embargo, si falta información fiable o los verificadores no pueden validarla, se aplica valor por defecto obligatorio.
+ [OJ_L_202502621_ES | PDF]
+
+2.2. Cuándo se usan valores por defecto obligatoriamente
+Los valores por defecto se deben usar si:
+
+El importador no puede demostrar emisiones reales.
+Los datos no son suficientemente fiables según el método del artículo 7 del Reglamento 2023/956.
+En los primeros años de aplicación del MAFC (2026–2027) para ciertos productos, debido a que el número de verificadores aún será limitado.
+ [OJ_L_202502621_ES | PDF]
+
+Además, cuando se trate de productos complejos, las emisiones de los precursores deben calcularse mediante valores por defecto si no existen datos reales verificados para esos precursores.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 3. Cómo se calculan los valores por defecto: reglas generales
+Aunque los detalles del cálculo profundo se explican en el Bloque 3, este bloque cubre las reglas marco:
+3.1. Los valores por defecto se basan en el método del Anexo IV del Reglamento 2023/956
+Esto implica:
+
+Uso de datos del Centro Común de Investigación (JRC) cuando sean fiables.
+En ausencia de datos fiables, se usa la media de los 10 países con mayores emisiones para ese tipo de mercancía.
+ [OJ_L_202502621_ES | PDF]
+
+
+3.2. Los valores deben ser conservadores
+El Reglamento deja claro que los valores por defecto no deben subestimar las emisiones reales, porque eso incentivaría el fraude y socavaría la finalidad del MAFC.
+Por eso incluye recargos, que aumentan los valores por defecto para capturar desviaciones por encima de la media.
+ [OJ_L_202502621_ES | PDF]
+
+3.3. Valores por defecto para precursores con país desconocido
+Si el país de producción del precursor no puede determinarse, el valor por defecto usado será el del país con las mayores intensidades de emisión entre los existentes para ese tipo de precursor.
+ [OJ_L_202502621_ES | PDF]
+Esto evita que los operadores se aprovechen del vacío declarando “país desconocido” para escapar de valores altos.
+
+✅ 4. Interacción entre valores directos, indirectos y complejos
+4.1. Mercancías simples
+Tienen un único valor por defecto directo y otro indirecto; se aplican los del Anexo I y II.
+4.2. Mercancías complejas
+Son productos que utilizan precursores. Por ejemplo:
+
+Aceros aleados
+Fertilizantes compuestos
+Catalizadores
+Productos que combinan procesos térmicos y eléctricos
+
+En estos casos, el Reglamento indica:
+
+Las emisiones del producto final pueden ser reales,
+Pero las de los precursores pueden ser por defecto, siguiendo el Anexo I.
+ [OJ_L_202502621_ES | PDF]
+
+
+4.3. Electricidad como insumo
+La electricidad importada no se considera un precursor, sino una mercancía con su propio régimen.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 5. Garantía de uniformidad: uso obligatorio de los anexos I–IV
+El Reglamento establece que todos los valores por defecto deben extraerse exclusivamente de:
+
+Anexo I → mercancías importadas
+Anexo II → emisiones indirectas
+Anexo III → electricidad importada
+Anexo IV → valores por defecto cuando el país no está identificado
+ [OJ_L_202502621_ES | PDF]
+
+Esto garantiza que los valores sean aplicados de forma idéntica por los importadores de toda la UE.
+✅ 1. Fundamento legal del método de cálculo
+El Reglamento de Ejecución (UE) 2025/2621 establece que los valores por defecto deben calcularse siguiendo el método del Anexo IV del Reglamento (UE) 2023/956.
+Esto incluye:
+
+Uso de la información más fiable y actualizada disponible.
+Preferencia por datos del Centro Común de Investigación (JRC).
+Si no hay datos fiables, obligación de usar una media de los 10 países exportadores con mayor intensidad de emisión para cada tipo de mercancía.
+ [OJ_L_202502621_ES | PDF]
+
+Este enfoque busca garantizar consistencia, conservadurismo y comparabilidad entre Estados miembros y operadores.
+
+✅ 2. Estructura general del método
+Para cada mercancía cubierta por el MAFC, los valores por defecto se calculan siguiendo estos pasos fundamentales:
+
+2.1. Paso 1 — Determinación de la mercancía y su categoría
+El producto debe clasificarse según:
+
+código NC,
+tipo de material (cemento, aluminio, acero, fertilizantes, hidrógeno…),
+ruta de producción (ej. acero BF/BOF, Scrap/EAF, etc.).
+
+La clasificación determina qué tabla del Anexo I se aplica.
+ [OJ_L_202502621_ES | PDF]
+
+2.2. Paso 2 — Recopilación de datos de emisiones
+El Reglamento especifica que deben utilizarse los datos más fiables disponibles:
+
+Datos del JRC (cuando existan).
+Datos recopilados durante el período transitorio del MAFC.
+Estadísticas internacionales sobre intensidad de emisiones.
+
+Solo si estos datos no son suficientemente fiables, se pasa al siguiente nivel del método.
+ [OJ_L_202502621_ES | PDF]
+
+2.3. Paso 3 — Cálculo basado en datos de países productores
+Si los datos son adecuados, el valor por defecto se basa en:
+
+las emisiones medias del país productor para ese tipo de mercancía,
+distinguiendo emisiones directas e indirectas,
+aplicando el método del Anexo IV del Reglamento 2023/956.
+ [OJ_L_202502621_ES | PDF]
+
+
+2.4. Paso 4 — Uso de la media de los 10 países más emisores
+Si los datos del país productor no pueden usarse:
+
+El valor por defecto se calcula como la media de las intensidades de emisión de los 10 países exportadores con los valores más altos para ese producto y para los cuales existan datos fiables.
+ [OJ_L_202502621_ES | PDF]
+
+Esta cláusula evita vacíos de datos y asegura que el valor por defecto no sea inferior a un nivel razonablemente representativo.
+
+2.5. Paso 5 — Aplicación del enfoque conservador (“no subestimación”)
+El Reglamento exige explícitamente que los valores por defecto:
+
+no deben subestimar las emisiones reales,
+deben incluir un margen (recargo) que refleje desviaciones entre instalaciones individuales y la media del país.
+ [OJ_L_202502621_ES | PDF]
+
+Esto es esencial para la integridad ambiental del MAFC.
+
+✅ 3. El recargo obligatorio y su función
+El recargo es uno de los elementos clave del cálculo:
+3.1. ¿Por qué existe un recargo?
+Porque es difícil verificar la calidad y representatividad de los datos de instalaciones concretas fuera de la UE, y sin recargo algunos importadores podrían beneficiarse de medias demasiado bajas.
+ [OJ_L_202502621_ES | PDF]
+
+3.2. ¿Cómo se determina el recargo?
+El recargo está basado en:
+
+desviaciones observadas entre instalaciones de la UE y la media de emisiones en su sector correspondiente,
+extrapolando esas desviaciones a terceros países cuando no hay datos suficientemente fiables.
+ [OJ_L_202502621_ES | PDF]
+
+
+3.3. Aplicación progresiva (2026–2028)
+El recargo se introduce gradualmente:
+
+2026: recargo parcial
+2027: recargo mayor
+2028+: recargo completo
+
+Esto evita perturbaciones abruptas en el comercio.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 4. Método para las emisiones indirectas: electricidad consumida
+Las emisiones indirectas asociadas a electricidad se calculan mediante el factor de emisión eléctrico medio del país productor:
+
+Basado en la media simple de los últimos 5 años con datos disponibles.
+Este enfoque evita distorsiones por años anómalos (meteorología extrema, crisis energéticas...).
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 5. Método específico para electricidad importada (producto final)
+Cuando lo que se importa es electricidad, el Reglamento exige:
+
+usar valores por defecto del Anexo III,
+basados igualmente en la media de factores de emisión de los 5 años más recientes.
+ [OJ_L_202502621_ES | PDF]
+
+Este método refleja mejor los niveles reales de descarbonización del país exportador.
+
+✅ 6. Método para precursores con país desconocido
+Si no se puede determinar el país de producción del precursor:
+
+se aplica el valor por defecto del país con las intensidades de emisión más elevadas entre los disponibles para ese precursor.
+ [OJ_L_202502621_ES | PDF]
+
+Esto elimina incentivos para ocultar deliberadamente el país de origen.
+
+✅ 7. Integración final de los valores: cómo se combina todo
+Para cada mercancía final, el valor total por defecto es la suma de:
+
+Emisiones directas por defecto, según Anexo I.
+Emisiones indirectas por defecto, según Anexo II.
+Recargo correspondiente (dependiente del año).
+Para productos complejos:
+
+Emisiones por defecto de precursores, usando Anexo I o Anexo IV.
+
+
+
+Los valores resultantes se muestran ya en el formato final dentro de los anexos del Reglamento.
+✅ 1. ¿Qué son los recargos?
+Los recargos son incrementos porcentuales obligatorios que se añaden a los valores por defecto de las emisiones implícitas (directas e indirectas) de los bienes importados. Su finalidad es garantizar que los valores por defecto:
+
+No subestimen las emisiones reales,
+Reflejen la variabilidad entre instalaciones,
+Proporcionen un margen de seguridad ambiental,
+Mantengan la integridad del MAFC (Mecanismo de Ajuste en Frontera por Carbono).
+ [OJ_L_202502621_ES | PDF]
+
+Los recargos aparecen ya integrados en las tablas de los Anexos I–IV del Reglamento, con columnas explícitas para 2026, 2027 y 2028+.
+
+✅ 2. ¿Por qué existen los recargos? (Justificación técnica)
+El Reglamento explica que:
+2.1. Los datos de instalaciones de terceros países no siempre son fiables
+Dado que durante los primeros años del MAFC:
+
+muchos datos vendrán de instalaciones externas a la UE,
+puede haber diferencias significativas entre instalaciones dentro del mismo país,
+y puede resultar difícil verificar la calidad de esos datos,
+
+la Comisión introduce recargos como margen de precaución.
+ [OJ_L_202502621_ES | PDF]
+
+2.2. Los recargos se basan en desviaciones observadas dentro de la UE
+El texto indica que las desviaciones entre instalaciones de la Unión respecto a sus medias sectoriales sirven como estimación estadística para inferir desviaciones probables en instalaciones fuera de la UE.
+ [OJ_L_202502621_ES | PDF]
+Esto significa que:
+
+Si en la UE las instalaciones presentan diferencias de X %,
+Se asume que instalaciones fuera de la UE podrían desviarse igual o más,
+Así el recargo garantiza que el valor por defecto cubre la distribución más probable sin subestimar.
+
+
+2.3. Evitar la fuga de carbono
+Sin un recargo:
+
+Los valores por defecto podrían quedar por debajo de emisiones reales,
+Lo cual daría a los productores de terceros países una ventaja competitiva injusta,
+Y se socavaría el objetivo principal del MAFC.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 3. Cómo se calculan los recargos (visión general)
+El Reglamento no expone una fórmula matemática abierta, pero sí define los principios:
+3.1. Basados en la dispersión de emisiones en instalaciones de la UE
+Se calcula la diferencia entre:
+
+La media de emisiones de la UE para cada sector,
+Y las instalaciones que emiten por encima de esa media.
+
+Ese diferencial es el que se traslada a los valores por defecto para terceros países.
+ [OJ_L_202502621_ES | PDF]
+
+3.2. Recargos distintos según sector
+Los recargos varían por industria:
+
+Cemento: 10% → 20% → 30% según el año.
+Abonos (fertilizantes): recargos pequeños (1%).
+Hidrógeno: recargos muy altos (10%, 20%, 30%).
+Aluminio: recargos del 10%+, según ruta de producción.
+Acero: recargos aplicados sistemáticamente dado su carácter intensivo en carbono.
+
+Estos valores están integrados en las columnas correspondientes del Anexo I.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 4. Aplicación progresiva: 2026 → 2027 → 2028 en adelante
+El Reglamento detalla que los recargos no entran al 100 % inmediatamente, sino que se aplican de forma gradual.
+Motivos mencionados:
+
+Evitar un impacto repentino sobre los importadores.
+Dar tiempo a que los verificadores aumenten su capacidad operativa.
+Permitir que los operadores económicos se adapten al nuevo sistema.
+ [OJ_L_202502621_ES | PDF]
+
+
+4.1. Año 2026 — Recargo inicial (fase 1)
+
+Es la primera aplicación de valores por defecto con recargo.
+Los recargos son reducidos:
+
+Cemento: +10%
+Hidrógeno: +10%
+Otras categorías: incrementos iniciales específicos
+
+
+Objetivo: permitir la entrada efectiva del mecanismo.
+ [OJ_L_202502621_ES | PDF]
+
+
+4.2. Año 2027 — Recargo intermedio (fase 2)
+
+El recargo aumenta sensiblemente.
+Cemento pasa a +20%.
+Hidrógeno a +20%.
+Acero, aluminio y otros sectores también incrementan.
+Los valores por defecto se hacen más representativos de la realidad del sector global.
+ [OJ_L_202502621_ES | PDF]
+
+
+4.3. Año 2028 y siguientes — Recargo completo (fase 3)
+
+Aplicación total del recargo.
+Cemento: +30%
+Hidrógeno: +30%
+Otros sectores alcanzan sus niveles completos.
+A partir de aquí, los valores por defecto quedan estabilizados salvo nuevas revisiones.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 5. ¿Dónde aparecen los recargos en la práctica?
+Los recargos están explícitamente integrados en las tablas del:
+
+Anexo I (valores directos e indirectos para mercancías),
+Anexo II (valores por defecto para emisiones indirectas específicas),
+Anexo III (electricidad),
+Anexo IV (precursores cuando no hay país de origen).
+ [OJ_L_202502621_ES | PDF]
+
+Cada tabla presenta columnas:
+
+“Valor por defecto (incluido el recargo) 2026”
+“Valor por defecto (incluido el recargo) 2027”
+“Valor por defecto (incluido el recargo) 2028 y años posteriores”
+
+Ejemplo (del anexo de Albania):
+
+Cemento gris 2026: 0,957 (recargo incluido)
+Cemento gris 2027: 1,044
+Cemento gris 2028+: 1,131
+ [OJ_L_202502621_ES | PDF]
+
+Estos valores muestran cómo el recargo incrementa progresivamente el total.
+
+✅ 6. Función general del recargo en el sistema MAFC
+En resumen, el recargo:
+
+Actúa como margen de seguridad ambiental,
+Corrige la incertidumbre estadística y la heterogeneidad entre instalaciones,
+Evita la competencia desleal,
+Se aplica progresivamente para minimizar impactos de mercado,
+Garantiza que los valores por defecto no incentiven la subdeclaración de emisiones.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 1. La electricidad importada tiene un régimen especial dentro del MAFC
+El Reglamento establece explícitamente que las emisiones asociadas a la electricidad importada deben calcularse mediante valores por defecto específicos, que aparecen en el Anexo III del Reglamento.
+ [OJ_L_202502621_ES | PDF]
+Esto implica varias diferencias clave respecto a las mercancías físicas (cemento, acero, aluminio, etc.):
+
+La electricidad no utiliza valores por defecto del Anexo I, sino su propio conjunto.
+Las emisiones asociadas son exclusivamente indirectas (CO₂ emitido para producir esa electricidad en el país exportador).
+El método de cálculo para estos valores por defecto es diferente y más dinámico que el de los bienes materiales.
+
+
+✅ 2. Cómo se calculan los valores por defecto de electricidad importada
+El Reglamento precisa que el valor por defecto de electricidad debe basarse en el factor de emisión medio de la red eléctrica del país exportador.
+ [OJ_L_202502621_ES | PDF]
+Este factor de emisión:
+
+Refleja la combinación real de generación eléctrica (carbón, gas, renovables…).
+Varía entre países según su política energética.
+Debe ser representativo y estable en el tiempo.
+
+
+2.1. La media se calcula sobre los últimos 5 años con datos fiables
+Para evitar que un año anómalo (sequías, crisis de gas, años excepcionalmente renovables, etc.) genere valores erráticos, el Reglamento requiere:
+
+Usar la media aritmética simple de los factores de emisión de los últimos 5 años con datos disponibles.
+ [OJ_L_202502621_ES | PDF]
+
+Ejemplo de interpretación:
+Si un país exportador tiene estos factores de emisión:
+
+Año A → 450 g CO₂/kWh
+Año B → 520 g
+Año C → 410 g
+Año D → 600 g
+Año E → 480 g
+
+El valor por defecto se obtiene de la media simple de los cinco.
+
+2.2. Razones para usar una media de 5 años
+El Reglamento justifica esta metodología porque:
+
+Reduce la volatilidad causada por condiciones climáticas extremas.
+Captura tendencias de descarbonización del país exportador.
+Evita manipulación o datos atípicos.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 3. Qué emisiones se contabilizan en la electricidad importada
+Para la electricidad que se importa como producto (no como insumo de otra mercancía), el Reglamento considera:
+
+Emisiones implícitas directas → No aplican, porque la electricidad en sí no tiene un proceso térmico en la instalación importada.
+Emisiones implícitas indirectas → Sí aplican, porque toda la huella de carbono procede de la generación eléctrica en terceros países.
+ [OJ_L_202502621_ES | PDF]
+
+Por ello, la electricidad solo se evalúa con valores por defecto del Anexo III.
+
+✅ 4. Aplicación de los valores por defecto: cuándo deben usarse
+Los valores por defecto del Anexo III se aplican cuando:
+4.1. El importador no puede proporcionar datos reales verificados
+La prioridad normativa es siempre usar datos reales de generación si son fiables y verificables, pero en la práctica es raro que instalaciones de generación extranjeras proporcionen información verificable a nivel MAFC.
+ [OJ_L_202502621_ES | PDF]
+4.2. Sea necesario garantizar la integridad del MAFC
+El Reglamento indica que la electricidad importada tiene un riesgo particular de:
+
+subdeclaración,
+falta de verificación,
+movilidad comercial elevada,
+
+por lo que los valores por defecto actúan como barrera preventiva.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 5. Relación entre electricidad importada y emisiones indirectas de productos
+El Reglamento distingue dos contextos diferentes:
+5.1. Contexto A — Electricidad importada como mercancía final
+Se evalúa con Anexo III.
+ [OJ_L_202502621_ES | PDF]
+5.2. Contexto B — Electricidad usada para producir otra mercancía en el país exportador
+Aquí no se usa el Anexo III.
+En este caso:
+
+Las emisiones indirectas del producto final usan los valores por defecto del Anexo II,
+Basados también en factores de emisión del país exportador,
+Calculados igualmente con media de 5 años.
+ [OJ_L_202502621_ES | PDF]
+
+Esta diferenciación es crítica:
+Anexo II = electricidad como insumo
+Anexo III = electricidad como producto final
+
+✅ 6. Revisión y actualización de factores de emisión
+El Reglamento exige que:
+
+Los valores por defecto se revisen como parte de la revisión general prevista para 2027.
+La Comisión debe “hacer todos los esfuerzos necesarios” para adelantar la revisión ya en 2026, si es posible.
+ [OJ_L_202502621_ES | PDF]
+
+El objetivo es que los factores de emisión eléctricos se mantengan actualizados y reflejen:
+
+Aumento de renovables,
+Cambios en la matriz energética,
+Impacto de políticas climáticas de terceros países.
+✅ 1. Qué es un precursor según el Reglamento
+Dentro del MAFC, un precursor es un bien intermedio utilizado para fabricar una mercancía compleja.
+Ejemplos típicos mencionados en el Reglamento:
+
+Urea → precursor para fertilizantes nitrogenados.
+Hierro de reducción directa → precursor para acero DRI/EAF.
+Aluminio primario → precursor para perfiles, barras o láminas de aluminio.
+ [OJ_L_202502621_ES | PDF]
+
+El Reglamento distingue claramente que:
+
+Las emisiones del producto final pueden calcularse con datos reales.
+Las emisiones de precursores pueden necesitar valores por defecto si la información no está disponible o no es verificable.
+ [OJ_L_202502621_ES | PDF]
+
+
+✅ 2. El problema regulatorio: país de origen no identificable
+El Reglamento contempla expresamente el caso en el que:
+
+El importador no puede determinar en qué país se fabricó un precursor que forma parte de una mercancía compleja.
+
+Puede ocurrir cuando:
+
+El precursor se compra en mercados globales mezclados.
+El proveedor no da información verificable.
+El producto proviene de almacenes multinacionales o hubs de distribución.
+Hay cadenas de suministro opacas o fragmentadas.
+
+Este escenario no puede dejarse sin regulación, porque permitiría a los importadores evadir valores por defecto altos simplemente declarando “origen desconocido”.
+
+✅ 3. La solución del Reglamento: la regla del peor caso disponible
+El Reglamento de Ejecución (UE) 2025/2621 establece una regla muy estricta y clara:
+👉 Si no se identifica el país de origen del precursor, se utilizará el valor por defecto del país con las intensidades de emisión más elevadas entre los disponibles para ese precursor.
+ [OJ_L_202502621_ES | PDF]
+El espíritu es inequívoco:
+debe aplicarse siempre el valor por defecto más alto disponible, para garantizar integridad ambiental y evitar incentivos perversos.
+
+✅ 4. Finalidad ambiental y económica de esta regla
+La regla del país de mayores emisiones tiene tres objetivos:
+4.1. Prevenir la fuga de carbono por ocultación de datos
+El importador NO se beneficia de no declarar el país de origen.
+4.2. Incentivar la transparencia en la cadena de suministro
+Quien quiera evitar valores por defecto altos deberá:
+
+Identificar su precursor,
+Obtener datos reales verificables, o
+Aportar documentación del país productor.
+
+4.3. Garantizar la integridad del sistema MAFC
+El Reglamento insiste en que los valores por defecto deben ser conservadores, y esta regla es una aplicación directa de dicho principio.
+ [OJ_L_202502621_ES | PDF]
+
+✅ 5. Cómo se aplica la regla en la práctica
+Paso 1 — Identificar el tipo de precursor
+Se consulta el Anexo I para ubicar la categoría y el código NC.
+Paso 2 — Revisar los valores disponibles para ese precursor en distintos países
+Los valores por defecto del Anexo I están organizados por país.
+Paso 3 — Seleccionar el país con mayor intensidad de emisiones
+Se elige el valor máximo entre todas las opciones disponibles.
+Paso 4 — Aplicar ese valor al cálculo del producto final
+Ese valor sustituye a los valores reales o al país no identificado.
+Esto se aplica igual a:
+
+Emisiones directas,
+Emisiones indirectas,
+Valores por defecto con recargo (2026–2027–2028).
+
+ [OJ_L_202502621_ES | PDF]
+
+✅ 6. Relación con mercancías complejas
+El Reglamento recuerda que, para mercancías complejas:
+
+La mercancía final puede usar emisiones reales,
+Pero los precursores deben siempre tener valores por defecto si no existe verificación,
+Y si no se identifica país → regla del valor más alto disponible.
+ [OJ_L_202502621_ES | PDF]
+
+Ejemplo práctico:
+Si un fertilizante NPK contiene urea como precursor y el país de origen no está identificado:
+
+Se toma la tabla de urea del Anexo I,
+Se identifican los valores por defecto por país,
+Se selecciona el país con valores más altos,
+Ese será el “valor por defecto obligatorio” del precursor.
+✅ 1. Revisión obligatoria del Reglamento antes de 2027
+El Reglamento establece de forma explícita que:
+👉 Los valores por defecto y los recargos deben revisarse a más tardar en diciembre de 2027.
+ [OJ_L_202502621_ES | PDF]
+La Comisión tiene la obligación de realizar una revisión integral, lo que implica:
+
+Reexaminar los valores por defecto de todos los productos.
+Actualizar los recargos si las desviaciones del sector han cambiado.
+Incorporar nuevos datos científicos, técnicos y estadísticos.
+Verificar si los factores de emisión eléctricos han variado significativamente.
+
+Esta revisión garantiza que el MAFC no se quede obsoleto y siga reflejando la realidad energética y productiva mundial.
+
+✅ 2. Posibilidad (e intención) de adelantar la revisión a 2026
+Además, el Reglamento añade un matiz importante:
+👉 La Comisión “hará todos los esfuerzos necesarios” para llevar a cabo una revisión ya en 2026, si las condiciones lo permiten.
+ [OJ_L_202502621_ES | PDF]
+Razones:
+
+Los valores por defecto iniciales se basan en datos previos a 2026.
+El número de verificadores aumentará significativamente después de la fase transitoria.
+Las condiciones energéticas globales (especialmente electricidad) pueden cambiar año a año.
+
+Así, el sistema tiene una flexibilidad incorporada para reaccionar rápidamente a datos nuevos.
+
+✅ 3. Obligación de realizar una consulta pública en la revisión
+El Reglamento indica que toda revisión del acto de ejecución debe ir acompañada de:
+👉 Una consulta pública obligatoria.
+ [OJ_L_202502621_ES | PDF]
+Esta consulta debe ser:
+
+Abierta a todas las partes interesadas (industria, ONGs, Estados miembros, consumidores, expertos técnicos).
+Accesible y transparente.
+Con criterios claros para la aportación de comentarios.
+Coherente con las directrices para la mejora de la legislación de la Comisión Europea.
+
+Esto permite que el sistema sea construido con participación democrática y técnica, no sólo por la Comisión.
+
+✅ 4. Finalidad de las consultas públicas
+La consulta pública se usa para recabar información sobre:
+
+La adecuación de los valores por defecto actuales.
+Si los recargos siguen siendo proporcionales.
+Si ciertos sectores tienen nuevos métodos de producción más descarbonizados.
+La disponibilidad real de datos verificados de instalaciones fuera de la UE.
+La evolución de las cadenas de suministro.
+
+El objetivo es obtener información directamente de quienes operan en el mercado.
+
+✅ 5. Principio de transparencia (obligación explícita del Reglamento)
+El Reglamento subraya la importancia de la transparencia, especialmente porque el MAFC interactúa con:
+
+Datos industriales sensibles,
+Países no pertenecientes a la UE,
+Factores energéticos complejos,
+Análisis de emisiones difíciles de verificar.
+
+El acto de ejecución establece que la revisión del sistema debe:
+👉 Mantener un nivel elevado de transparencia
+para asegurar una participación significativa y un escrutinio adecuado.
+ [OJ_L_202502621_ES | PDF]
+Esto incluye:
+
+Publicación de metodologías,
+Acceso público a documentos relevantes,
+Justificación de cambios en los valores por defecto,
+Documentación de las fuentes de datos utilizadas.
+
+
+✅ 6. Cómo contribuye la transparencia a la integridad del MAFC
+La transparencia es considerada un mecanismo de control indirecto del fraude o la mala declaración.
+Si los operadores saben que:
+
+Los datos serán revisados,
+Los métodos están abiertos al escrutinio público,
+Las listas de valores serán actualizadas regularmente,
+
+entonces hay menos incentivos para manipular información o declarar valores falsos.
+
+✅ 7. Relación entre transparencia y competitividad
+El MAFC puede afectar a:
+
+exportadores de terceros países,
+industrias europeas que compiten con importaciones intensivas en carbono,
+empresas que fabrican productos con precursores importados.
+
+Por ello, la transparencia:
+
+Reduce incertidumbre para los operadores,
+Garantiza igualdad de trato,
+Evita litigios jurídicos derivados de falta de información,
+Facilita la planificación empresarial a medio plazo.
+
+El Reglamento lo reconoce implícitamente al exigir procedimientos de revisión públicos y documentados.

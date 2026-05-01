@@ -1,112 +1,154 @@
-import { useState, useEffect, useContext } from 'react';
-import { AuthProvider, AuthContext } from './components/Context';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import ChatInterface from './components/ChatInterface';
-// import LoginScreen from './components/LoginScreen';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
-import { API_BASE_URL } from './config';
+import Sidebar from './components/Sidebar';
+import ChatPanel from './components/ChatPanel';
+import UseCaseSelector from './components/UseCaseSelector';
+import LanguageSelector from './components/LanguageSelector';
 
-function AppContent() {
-  const {
-    // authenticated, setAuthenticated,
-    // setLoggedUser,
-    setAssistantsConfig,
-    showAssistantManager,
-  } = useContext(AuthContext);
+const LANGUAGES_BY_USE_CASE = {
+  cvs:  [{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }],
+  wiki: [{ code: 'es', label: 'Español' }, { code: 'en', label: 'English' }],
+  eu:   [
+    { code: 'es', label: 'Español' },
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'Français' },
+    { code: 'it', label: 'Italiano' },
+    { code: 'pt', label: 'Português' },
+  ],
+};
 
-  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
+const USE_CASE_DEFAULTS = [
+  { id: 'cvs',  label: 'CVs / Talento',  description: 'Búsqueda en currículums', icon: '👤' },
+  { id: 'eu',   label: 'Legislación UE', description: 'Documentos de la Unión Europea', icon: '🇪🇺' },
+  { id: 'wiki', label: 'Wikipedia',       description: 'Conocimiento general enciclopédico', icon: '📖' },
+];
 
-  // Load assistants config on mount
+function generateUserId() {
+  const stored = localStorage.getItem('rag_user_id');
+  if (stored) return stored;
+  const id = 'user_' + Math.random().toString(36).slice(2, 11);
+  localStorage.setItem('rag_user_id', id);
+  return id;
+}
+
+export default function App() {
+  const [useCases, setUseCases]         = useState(USE_CASE_DEFAULTS);
+  const [activeCase, setActiveCase]     = useState('cvs');
+  const [language, setLanguage]         = useState('es');
+  const [userId]                        = useState(generateUserId);
+  const [conversations, setConversations] = useState([]);
+  const [activeConvId, setActiveConvId]   = useState(null);
+  const [sidebarOpen, setSidebarOpen]     = useState(true);
+
+  const availableLanguages = useMemo(
+    () => LANGUAGES_BY_USE_CASE[activeCase] || LANGUAGES_BY_USE_CASE.cvs,
+    [activeCase],
+  );
+
+  // Resetear idioma si no está disponible en el nuevo caso de uso
   useEffect(() => {
-    // const auth = sessionStorage.getItem('authenticated') === 'true';
-    // const timestamp = parseInt(sessionStorage.getItem('session_timestamp'), 10);
-    // const storedUserId = sessionStorage.getItem('userId');
-    // const now = Date.now();
+    if (!availableLanguages.find(l => l.code === language)) {
+      setLanguage(availableLanguages[0].code);
+    }
+  }, [availableLanguages, language]);
 
-    // if (auth && timestamp && now - timestamp > 30 * 60 * 1000) {
-    //   sessionStorage.removeItem('authenticated');
-    //   sessionStorage.removeItem('session_timestamp');
-    //   sessionStorage.removeItem('userId');
-    //   setAuthenticated(false);
-    //   setLoggedUser('');
-    // } else {
-    //   setAuthenticated(auth);
-    //   if (auth && storedUserId) {
-    //     setLoggedUser(storedUserId);
-    //   }
-    // }
-
-    const loadAssistantsConfig = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/assistants/config`);
-        const data = await response.json();
-        setAssistantsConfig(data.assistants || {});
-      } catch (error) {
-        console.error('Error loading assistants config:', error);
-      }
-    };
-    loadAssistantsConfig();
+  // Cargar casos de uso del backend
+  useEffect(() => {
+    fetch('/api/use-cases')
+      .then(r => r.json())
+      .then(data => {
+        if (data.use_cases?.length) setUseCases(data.use_cases);
+      })
+      .catch(() => {/* usa defaults */});
   }, []);
 
-  // Responsive sidebar
+  // Cargar historial de conversaciones
   useEffect(() => {
-    const handleResize = () => setSidebarOpen(window.innerWidth >= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    fetch(`/api/conversations?user_id=${userId}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.conversations) setConversations(data.conversations);
+      })
+      .catch(() => {});
+  }, [userId]);
 
-  const toggleSidebar = () => setSidebarOpen(prev => !prev);
+  function handleNewConversation() {
+    setActiveConvId(null);
+  }
 
-  // const handleLoginSuccess = (user) => {
-  //   setAuthenticated(true);
-  //   sessionStorage.setItem('authenticated', 'true');
-  //   sessionStorage.setItem('session_timestamp', Date.now().toString());
-  //   setLoggedUser(user);
-  //   sessionStorage.setItem('userId', user);
-  // };
+  function handleSelectConversation(convId) {
+    setActiveConvId(convId);
+  }
+
+  function handleConversationCreated(conv) {
+    setActiveConvId(conv.id);
+    setConversations(prev => [conv, ...prev.filter(c => c.id !== conv.id)]);
+  }
+
+  function handleConversationUpdated(conv) {
+    setConversations(prev =>
+      prev.map(c => (c.id === conv.id ? conv : c))
+    );
+  }
+
+  function handleDeleteConversation(convId) {
+    fetch(`/api/conversations/${convId}`, { method: 'DELETE' })
+      .then(() => {
+        setConversations(prev => prev.filter(c => c.id !== convId));
+        if (activeConvId === convId) setActiveConvId(null);
+      })
+      .catch(() => {});
+  }
+
+  const activeUseCase = useCases.find(uc => uc.id === activeCase) || useCases[0];
 
   return (
-    <div className="app-container">
-      {/* Login disabled — always show main UI */}
-      {/* {authenticated ? ( */}
-      <Header />
-      <div className="app-layout">
-        {!showAssistantManager && (
-          <button
-            className={`sidebar-toggle ${sidebarOpen ? 'open' : ''}`}
-            onClick={toggleSidebar}
-            aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-          >
-            {sidebarOpen ? '✕' : '☰'}
-          </button>
-        )}
+    <div className={`app ${sidebarOpen ? 'app--sidebar-open' : ''}`}>
+      {/* Cabecera */}
+      <header className="app-header">
+        <button
+          className="app-header__menu-btn"
+          onClick={() => setSidebarOpen(o => !o)}
+          aria-label="Alternar panel lateral"
+        >
+          ☰
+        </button>
+        <h1 className="app-header__title">RAG Assistant</h1>
+        <UseCaseSelector
+          useCases={useCases}
+          activeCase={activeCase}
+          onChange={(id) => { setActiveCase(id); setActiveConvId(null); }}
+        />
+        <LanguageSelector
+          languages={availableLanguages}
+          activeLanguage={language}
+          onChange={setLanguage}
+        />
+      </header>
 
-        <aside className={`sidebar ${sidebarOpen ? '' : 'collapsed'}`}>
-          <Sidebar />
-        </aside>
+      <div className="app-body">
+        {/* Sidebar con historial */}
+        <Sidebar
+          open={sidebarOpen}
+          conversations={conversations.filter(c => c.use_case === activeCase)}
+          activeConvId={activeConvId}
+          onNew={handleNewConversation}
+          onSelect={handleSelectConversation}
+          onDelete={handleDeleteConversation}
+          useCase={activeUseCase}
+        />
 
-        {sidebarOpen && window.innerWidth < 768 && (
-          <div className="sidebar-overlay" onClick={toggleSidebar} />
-        )}
-
-        <main className="main-content">
-          <ChatInterface />
-        </main>
+        {/* Panel de chat */}
+        <ChatPanel
+          key={`${activeCase}-${activeConvId}`}
+          useCase={activeUseCase}
+          userId={userId}
+          language={language}
+          conversationId={activeConvId}
+          onConversationCreated={handleConversationCreated}
+          onConversationUpdated={handleConversationUpdated}
+        />
       </div>
     </div>
-    // ) : (
-    //   <LoginScreen onLoginSuccess={handleLoginSuccess} />
-    // )}
   );
 }
-
-function App() {
-  return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
-  );
-}
-
-export default App;

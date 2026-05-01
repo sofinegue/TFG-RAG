@@ -1,0 +1,1395 @@
+{
+  "gold_standard": {
+    "caso_uso": "cvs",
+    "idioma": "es",
+    "total_preguntas": 89,
+    "total_cvs_analizados": 300,
+    "fecha_generacion": "2026-04-17",
+    "categorias": {
+      "agregacion": 6,
+      "busqueda_por_experiencia": 4,
+      "busqueda_por_formacion": 8,
+      "busqueda_por_idioma": 7,
+      "busqueda_por_puesto": 9,
+      "busqueda_por_skill": 11,
+      "busqueda_por_soft_skill": 4,
+      "consulta_experiencia": 7,
+      "consulta_individual": 11,
+      "conteo": 6,
+      "existencia": 5,
+      "multi_criterio": 11
+    },
+    "descripcion": "Gold standard para evaluar un sistema RAG sobre una base de datos de CVs en español. Contiene preguntas de búsqueda por skills, puestos, formación, idiomas, consultas individuales, conteo, filtros multi-criterio, existencia y agregación/ranking. Todas las respuestas han sido computadas directamente de los datos fuente.",
+    "preguntas": [
+      {
+        "id": 1,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "¿Qué personas dominan UML?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Damián Ribas Márquez",
+          "José Ángel Castelao Ferrer",
+          "Luna Flores Mendoza",
+          "Macarena Camacho Puig",
+          "Paloma Rojas Santa Cruz",
+          "Samir Santa María Hidalgo",
+          "Silvia Palomo Souto",
+          "Óscar Sancho Pereira"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 2,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Necesito un listado completo de candidatos que sepan Axure.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Lorenzo Garrido Barrios",
+          "María Pilar Zapata Puig",
+          "Rodrigo Hermida Rodríguez",
+          "Sonia Del Valle Marín"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 3,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Dame los nombres de todos los profesionales con conocimientos en End-to-End Testing.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ana María Font Masip",
+          "Eduardo Marín Moya",
+          "Rodrigo Subirana Gil"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 4,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "¿Quiénes tienen AWS CloudFormation entre sus habilidades técnicas?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Joel Calvo Cordero",
+          "Julio Cano Carballeira",
+          "Pablo Giménez Pardo"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 5,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Busco perfiles que incluyan Zoho CRM en su currículum. ¿Cuáles son?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Helena Ramos Sanz",
+          "Rosa Pascual Montero"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 6,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Enumera a todas las personas cuyo CV refleje experiencia con Time Series Forecasting.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Fatima Salinas Mendoza",
+          "Germán Sarasola Rojas",
+          "Ismael Ferreiro Macias",
+          "Li San Miguel Rivero"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 7,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "¿De qué candidatos consta que manejan Amazon RDS?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Cecilia Palomo Vergara",
+          "Rafael López Estévez",
+          "Víctor Villanueva Peña"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 8,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Identifica a los profesionales que tienen WebSockets como competencia técnica.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Alex Santa Cruz Miranda",
+          "Eric Marín Soler",
+          "Fabián Gómez Valverde",
+          "Mateo Navarro Matas",
+          "Mercè Espinosa González",
+          "Nieves Giménez Cardenas",
+          "Raúl Calvo Del Río",
+          "Rosa María Villar Delgado",
+          "Sonia Del Valle Marín"
+        ],
+        "num_resultados": 9
+      },
+      {
+        "id": 9,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "¿Podrías indicarme quiénes cuentan con la habilidad de Google Compute Engine?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Adriana Bravo Orozco",
+          "Jesús Dávila Bravo"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 10,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Para un proyecto que requiere Keras, ¿qué personas están disponibles?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Juan Quintana Aguilar",
+          "Raúl Calvo Del Río",
+          "Yolanda Aguirre Ibáñez",
+          "Zineb Esteve Crespo"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 11,
+        "categoria": "busqueda_por_skill",
+        "pregunta": "Muéstrame todos los candidatos con ZeroMQ en su perfil.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Azucena Sanz Olabarri",
+          "Enrique Herrero Castro",
+          "Margarita Andrade Valdés",
+          "Sofía Cortés Santa Cruz"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 12,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "¿Quiénes trabajan como UX Designer?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Victoria Salvatierra Delgado",
+          "Youssef Carballeira Aguilar"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 13,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "Dame la lista de personas cuyo puesto sea Security Engineer.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ruth Domínguez San Miguel"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 14,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "Necesito saber qué candidatos ocupan el rol de Technical Lead.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Sofía Pérez Morales"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 15,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "¿Cuántos y cuáles profesionales figuran como Senior ML Engineer en sus CVs?",
+        "tipo_respuesta": "lista_personas_con_conteo",
+        "respuesta": [
+          "Macarena Muñoz Sánchez",
+          "María Pilar Zapata Puig"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 16,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "Indica todos los nombres de quienes se desempeñan como Graphic Designer.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Francisca Rivas Santiago",
+          "Guillermo Del Ángel Quintero",
+          "Joaquín Méndez Vilar"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 17,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "¿Qué personas tienen el cargo de Design Lead actualmente?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Hassan Contreras Corona"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 18,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "Localiza en la base de datos a todos los Solutions Architect.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Nieves San Miguel Rivas"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 19,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "¿Podrías decirme quiénes son los Senior Software Engineer registrados?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Baltasar Farré Vicente"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 20,
+        "categoria": "busqueda_por_puesto",
+        "pregunta": "Muestra el listado completo de candidatos con puesto de Technology Consultant.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Arturo Olabarri Caballero",
+          "Ismael Ferreiro Macias",
+          "Marina Santamaría Quevedo"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 21,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "¿Quiénes han estudiado Grado en Matemática Computacional?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Marc Domínguez Outeiro",
+          "Víctor Rincón Santos",
+          "Xavier Cano Palomo",
+          "Ángeles Rego Villanueva"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 22,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "Lista a todos los candidatos que tengan la titulación de Grado en Ingeniería del Software.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Fabián Delgado Delgado",
+          "Juan Ibáñez Vera",
+          "María Teresa Pujol Maldonado",
+          "Mateo Salas Portillo",
+          "Valeria Roca Pedraza"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 23,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "¿Qué personas de la base de datos cursaron Grado en Economía y Finanzas?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ana María Font Masip",
+          "Ayoub Aramburu Ortiz",
+          "Azucena Sanz Olabarri",
+          "Baltasar Farré Vicente",
+          "Mateo Navarro Matas"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 24,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "Dime los nombres de quienes poseen el título de Grado en Ingeniería de Tecnologías de Telecomunicación.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ainhoa Pujol Samper",
+          "Emma Delgado Serrano",
+          "Gabriela Rivera Santana",
+          "Joaquín Ortega Andrade",
+          "Sofía Linares Urbano"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 25,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "¿Cuáles candidatos incluyen FP Grado Superior en Administración de Sistemas Informáticos en Red en su formación académica?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Agustín Berasategi Outeiro",
+          "Agustín Mendizabal Álvarez",
+          "Alex Santa Cruz Miranda",
+          "Constantino Iglesias Sarasola",
+          "Cristina Guijarro Garrido",
+          "Eugenio Santiago Franco",
+          "Francisco Esteban San Martín",
+          "Gustavo Montes Garitano",
+          "Isabel Santiago Masip",
+          "Manuel Samper Mendoza",
+          "María Teresa Matas De la Vega",
+          "Rafael De León Márquez",
+          "Rafael López Estévez",
+          "Sofía Cortés Santa Cruz"
+        ],
+        "num_resultados": 14
+      },
+      {
+        "id": 26,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "Necesito identificar a todas las personas con estudios en Grado en Ingeniería Telemática.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Alejandro Varela Medina",
+          "Consuelo Quintero Reyes",
+          "Li San Miguel Rivero",
+          "María Luz Galán Ortega",
+          "Nieves Giménez Cardenas",
+          "Noah De los Santos Herrera",
+          "Octavio Cervantes Zabala",
+          "Omar Molina Zabala",
+          "Rafael De León Márquez",
+          "Ricardo Molina Prieto"
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 27,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "¿Hay profesionales con la carrera de FP Grado Superior en Electrónica Industrial? ¿Quiénes son?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ainhoa Pujol Samper",
+          "Alejandro Varela Medina",
+          "Begoña Cardenas Camacho",
+          "Emma Yáñez Segovia",
+          "Joel Calvo Cordero",
+          "José Luis Figueroa García-López",
+          "Margarita Andrade Valdés",
+          "María Dolores Morales Santiago",
+          "María Pilar Llopis Salazar",
+          "Rocío Jiménez Varela",
+          "Zineb Esteve Crespo",
+          "Óscar Sancho Pereira"
+        ],
+        "num_resultados": 12
+      },
+      {
+        "id": 28,
+        "categoria": "busqueda_por_formacion",
+        "pregunta": "Extrae la lista de personas que se graduaron en Doble Grado en Matemáticas y Estadística.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Begoña Gómez Sancho",
+          "José Ángel Bosch Quevedo",
+          "Mercè Barrios Tejada",
+          "Mohamed Sandoval Valls",
+          "Natalia Aramburu Del Castillo"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 29,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "¿Qué candidatos hablan inglés a nivel C1 o superior?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Abril Santana Murillo",
+          "Alberto Valls Montoya",
+          "Ayoub Granados Ibáñez",
+          "Begoña Cardenas Camacho",
+          "Damián Caballero San José",
+          "Dmitri Arias Outeiro",
+          "Eduardo Marín Moya",
+          "Emma Delgado Serrano",
+          "Enrique Cruz Rivero",
+          "Federico Murillo Rivera",
+          "Helena Ramos Sanz",
+          "Inmaculada Elorriaga Esteve",
+          "Inés Soto Velázquez",
+          "Joaquín Méndez Vilar",
+          "José Ramón Camps Toledano",
+          "Juan Antonio Samper Plaza",
+          "Juan Ibáñez Vera",
+          "Leo Masip Lara",
+          "Marina Santamaría Quevedo",
+          "Mario Pons Camps",
+          "María Dolores Fernández Tapia",
+          "Tatiana Camps Castelao",
+          "Xavier Cano Palomo"
+        ],
+        "num_resultados": 23
+      },
+      {
+        "id": 30,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "Dame todos los profesionales que tengan francés en su CV.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Abril Santillana Segovia",
+          "Ainhoa Nuñez Varela",
+          "Alex Cervantes Sarasola",
+          "Amine Villareal Vila",
+          "Begoña Gómez Sancho",
+          "Carlos Camps Pujol",
+          "Cristina Guijarro Garrido",
+          "Daniel Muñoz Carmona",
+          "Edgar Font Garrido",
+          "Emilio Matas Durán",
+          "Eric Montero Pardo",
+          "Eva Santiago Crespo",
+          "Guillermo Del Ángel Quintero",
+          "Gustavo Montes Garitano",
+          "Ismael Medina López",
+          "Joaquín Vilar Hidalgo",
+          "José Luis Serrano Cisneros",
+          "José Ramón Castro Hidalgo",
+          "José Ángel Vila Pascual",
+          "Juan José Montero Luna",
+          "Leo Masip Lara",
+          "Marc Domínguez Outeiro",
+          "Marina Granados Vera",
+          "Mario Morales Miranda",
+          "María Varela Urkiola",
+          "María Victoria González Herrero",
+          "Mateo Camacho Pereira",
+          "Miguel Ángel Llopis Fernández",
+          "Mohamed Sandoval Valls",
+          "Natalia Aramburu Del Castillo",
+          "Olivia Reyes Portillo",
+          "Omar Solano Guijarro",
+          "Pablo Puig Cordero",
+          "Pedro Zamorano Quintana",
+          "Rodrigo Hermida Rodríguez",
+          "Salvador Castillo Martínez",
+          "Sofía Palacios López",
+          "Sonia Del Valle Marín",
+          "Verónica Sarasola Mir",
+          "Youssef Llopis Vicente",
+          "Youssef Marín Estévez",
+          "Ángeles Rego Villanueva",
+          "Óscar Sancho Pereira"
+        ],
+        "num_resultados": 43
+      },
+      {
+        "id": 31,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "¿Quiénes declaran saber alemán en cualquier nivel?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Abril Montes Quintana",
+          "Amine Villareal Vila",
+          "Antonia Montoya Ramos",
+          "Antonio Linares Roca",
+          "Ariana Cabrera Palacios",
+          "Azucena Sanz Olabarri",
+          "Baltasar Yáñez Cisneros",
+          "Carlos Camps Pujol",
+          "Consuelo Quintero Reyes",
+          "Damián Caballero San José",
+          "Daniel Leyva Galán",
+          "David Ochoa Pozuelo",
+          "Eduardo Marín Moya",
+          "Enrique Cruz Rivero",
+          "Eugenio Santiago Franco",
+          "Fatima Méndez De la Cruz",
+          "Francisco Esteban San Martín",
+          "Fátima Escobar Ferreiro",
+          "Germán Sarasola Rojas",
+          "Guillermo Del Ángel Quintero",
+          "Héctor Ibáñez Castro",
+          "Héctor Vázquez Irigoyen",
+          "Inmaculada Elorriaga Esteve",
+          "Inés Soto Velázquez",
+          "Isabel Santiago Masip",
+          "Ismael Medina López",
+          "Izan Lozano Recio",
+          "Joel Calvo Cordero",
+          "Jorge Durán Barrios",
+          "José Urbano Gil",
+          "Juan Antonio Samper Plaza",
+          "Juan Ibáñez Vera",
+          "Juan José Montero Luna",
+          "Juan Quintana Aguilar",
+          "Juan Solano Cardenas",
+          "Luna Segura León",
+          "Marcos Palomo Elizondo",
+          "Mario Pons Camps",
+          "María Pilar Llopis Salazar",
+          "María Teresa Pujol Maldonado",
+          "María Toledano De la Torre",
+          "Natalia Segura López",
+          "Nieves Giménez Cardenas",
+          "Nieves San Miguel Rivas",
+          "Octavio Porras Nuñez",
+          "Olga Farré Naranjo",
+          "Olivia Reyes Portillo",
+          "Pablo Naranjo Santamaría",
+          "Ramón Téllez Rivero",
+          "Ricardo Molina Prieto",
+          "Rodrigo Hermida Rodríguez",
+          "Rosa María Villar Delgado",
+          "Silvia Palomo Souto",
+          "Sofía Cortés Santa Cruz",
+          "Valeria Rivera Pascual",
+          "Verónica Sarasola Mir",
+          "Victoria Salvatierra Delgado",
+          "Youssef Llopis Vicente"
+        ],
+        "num_resultados": 58
+      },
+      {
+        "id": 32,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "Necesito personas que hablen portugués. ¿Hay alguna?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Alberto Valls Montoya",
+          "Begoña Gómez Sancho",
+          "Chen Salvatierra Vila",
+          "Eric Montero Pardo",
+          "Marina Santamaría Quevedo",
+          "Marta Herrera Pozuelo",
+          "Nicolás Campos Tejada",
+          "Octavio Porras Nuñez",
+          "Rosa María Villar Delgado",
+          "Salvador Castillo Martínez",
+          "Ángeles Rego Villanueva"
+        ],
+        "num_resultados": 11
+      },
+      {
+        "id": 33,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "Identifica a los candidatos con nivel de inglés B2.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Blanca De la Fuente De la Fuente",
+          "Elena Pardo Valverde",
+          "Encarnación Leyva Garrido",
+          "José Ángel Vila Pascual",
+          "Margarita Hermida Hernández",
+          "Miriam Ortega Téllez",
+          "Remedios Soriano Toledano"
+        ],
+        "num_resultados": 7
+      },
+      {
+        "id": 34,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "¿Cuáles profesionales mencionan italiano en su perfil?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Abril Santana Murillo",
+          "Ainhoa Vilar Costas",
+          "Alex Cervantes Sarasola",
+          "Dmitri Arias Outeiro",
+          "Elena Palacios Ferrer",
+          "Emilio Matas Durán",
+          "Gustavo Montes Garitano",
+          "Inés Farias Velázquez",
+          "Joel Hermida Mir",
+          "Jorge Durán Barrios",
+          "José Javier Otxoa Galán",
+          "José Urbano Gil",
+          "Lucía Santillana De la Vega",
+          "María José Santamaría Souto",
+          "María Teresa Pujol Maldonado",
+          "Natalia Molina Palomo",
+          "Octavio Matas Urkiola",
+          "Rocío Pascual Murillo",
+          "Sonia Del Valle Marín",
+          "Wang Alonso Urkiola"
+        ],
+        "num_resultados": 20
+      },
+      {
+        "id": 35,
+        "categoria": "busqueda_por_idioma",
+        "pregunta": "Muéstrame quiénes tienen japonés como idioma.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ana María Font Masip",
+          "Elena Palacios Ferrer",
+          "Felipe Estévez Iglesias",
+          "Francisca Herrero Samper",
+          "José Javier Otxoa Galán",
+          "José Ángel Bosch Quevedo",
+          "Juan Antonio Samper Plaza",
+          "Liam Elizondo Martínez",
+          "Lidia Núñez Peña",
+          "María Dolores Fernández Tapia",
+          "María José Oliva Vila",
+          "Natalia Segura López",
+          "Pablo Giménez Pardo",
+          "Rodrigo Hermida Rodríguez",
+          "Sonia Del Valle Marín",
+          "Sonia Estévez Outeiro",
+          "Vanesa Vergara Cervantes"
+        ],
+        "num_resultados": 17
+      },
+      {
+        "id": 36,
+        "categoria": "consulta_individual",
+        "pregunta": "¿Cuál es el puesto de José Luis Serrano Cisneros?",
+        "tipo_respuesta": "valor_unico",
+        "respuesta": "Systems Analyst",
+        "cv_referencia": "cv_158"
+      },
+      {
+        "id": 37,
+        "categoria": "consulta_individual",
+        "pregunta": "Dime las hard skills que tiene Manuela Cabrera De la Rosa.",
+        "tipo_respuesta": "lista_skills",
+        "respuesta": [
+          "AWS Lambda",
+          "Algolia",
+          "Computer Vision",
+          "Google Kubernetes Engine",
+          "Helm",
+          "Objective-C",
+          "Wireshark",
+          "dbt"
+        ],
+        "num_resultados": 8,
+        "cv_referencia": "cv_174"
+      },
+      {
+        "id": 38,
+        "categoria": "consulta_individual",
+        "pregunta": "¿Qué formación académica aparece en el CV de Margarita Andrade Valdés?",
+        "tipo_respuesta": "lista_estudios",
+        "respuesta": [
+          "FP Grado Superior en Administración de Bases de Datos",
+          "FP Grado Superior en Electrónica Industrial",
+          "FP Grado Superior en Programación de Aplicaciones Multiplataforma"
+        ],
+        "num_resultados": 3,
+        "cv_referencia": "cv_124"
+      },
+      {
+        "id": 39,
+        "categoria": "consulta_individual",
+        "pregunta": "¿Cuáles son las soft skills de Rosa Pascual Montero?",
+        "tipo_respuesta": "lista_skills",
+        "respuesta": [
+          "Desarrollo de talento",
+          "Gestión emocional",
+          "Inteligencia emocional",
+          "Orientación a métricas",
+          "Pensamiento creativo",
+          "Pensamiento disruptivo"
+        ],
+        "num_resultados": 6,
+        "cv_referencia": "cv_056"
+      },
+      {
+        "id": 40,
+        "categoria": "consulta_individual",
+        "pregunta": "Consulta el perfil de Felipe Garitano Cruz y dime su puesto actual.",
+        "tipo_respuesta": "valor_unico",
+        "respuesta": "Head of Data",
+        "cv_referencia": "cv_272"
+      },
+      {
+        "id": 41,
+        "categoria": "consulta_individual",
+        "pregunta": "¿Qué información adicional (otros) consta en el CV de Begoña Gómez Sancho?",
+        "tipo_respuesta": "lista_otros",
+        "respuesta": [
+          "Actualmente estudiando [tecnología]",
+          "Dispuesto a viajar",
+          "Experiencia en transformación digital",
+          "Francés B1",
+          "IELTS 7.5+",
+          "Inglés conversacional",
+          "Portugués B2",
+          "Prácticas universitarias completadas"
+        ],
+        "num_resultados": 8,
+        "cv_referencia": "cv_048"
+      },
+      {
+        "id": 42,
+        "categoria": "consulta_individual",
+        "pregunta": "Me gustaría saber qué habilidades técnicas posee Octavio Porras Nuñez.",
+        "tipo_respuesta": "lista_skills",
+        "respuesta": [
+          "Event Sourcing",
+          "Link Building",
+          "OpenID Connect",
+          "Time Series Analysis"
+        ],
+        "num_resultados": 4,
+        "cv_referencia": "cv_144"
+      },
+      {
+        "id": 43,
+        "categoria": "consulta_individual",
+        "pregunta": "¿De qué trabaja Héctor Ibáñez Castro?",
+        "tipo_respuesta": "valor_unico",
+        "respuesta": "PostgreSQL DBA",
+        "cv_referencia": "cv_186"
+      },
+      {
+        "id": 44,
+        "categoria": "consulta_individual",
+        "pregunta": "¿En qué se ha formado Eric Marín Soler? Dame sus estudios.",
+        "tipo_respuesta": "lista_estudios",
+        "respuesta": [
+          "Doble Grado en Ingeniería Informática y Administración de Empresas"
+        ],
+        "num_resultados": 1,
+        "cv_referencia": "cv_067"
+      },
+      {
+        "id": 45,
+        "categoria": "consulta_individual",
+        "pregunta": "Quiero ver el perfil completo de Leo Masip Lara. ¿Qué competencias blandas tiene?",
+        "tipo_respuesta": "lista_skills",
+        "respuesta": [
+          "Enfoque en valor",
+          "Pensamiento estratégico"
+        ],
+        "num_resultados": 2,
+        "cv_referencia": "cv_040"
+      },
+      {
+        "id": 46,
+        "categoria": "consulta_individual",
+        "pregunta": "Describe las competencias técnicas de Emma Elizondo Pozuelo.",
+        "tipo_respuesta": "lista_skills",
+        "respuesta": [
+          "CentOS",
+          "Chai",
+          "Data Pipelines",
+          "Google Cloud Dataflow",
+          "Google Cloud Storage",
+          "JSDoc",
+          "MQTT",
+          "MicroStrategy",
+          "Microsoft Project",
+          "Slack"
+        ],
+        "num_resultados": 10,
+        "cv_referencia": "cv_200"
+      },
+      {
+        "id": 47,
+        "categoria": "consulta_experiencia",
+        "pregunta": "¿En qué ha trabajado Emilio Matas Durán?",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Aplicación de principios de DevOps en procesos de containerización de aplicaciones."
+        ],
+        "num_resultados": 1,
+        "cv_referencia": "cv_296"
+      },
+      {
+        "id": 48,
+        "categoria": "consulta_experiencia",
+        "pregunta": "Descríbeme la experiencia profesional de José Ramón Bernal Vergara.",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Creación de pipelines automatizados para revisión de código de seguridad.",
+          "Estudio de tendencias del mercado lujo para orientar roadmap de producto.",
+          "Gestión de expectativas y comunicación continua con clientes en proyectos de ingeniería de datos."
+        ],
+        "num_resultados": 3,
+        "cv_referencia": "cv_218"
+      },
+      {
+        "id": 49,
+        "categoria": "consulta_experiencia",
+        "pregunta": "¿Qué experiencia laboral tiene registrada Mateo Camacho Pereira?",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Gestión de expectativas y comunicación continua con clientes en proyectos de data quality.",
+          "Gestión de expectativas y comunicación continua con clientes en proyectos de pre-sales.",
+          "Transformación de procesos manuales a automatizados en transformación digital."
+        ],
+        "num_resultados": 3,
+        "cv_referencia": "cv_249"
+      },
+      {
+        "id": 50,
+        "categoria": "consulta_experiencia",
+        "pregunta": "Dame un resumen de la trayectoria de Mohamed Sandoval Valls.",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Análisis de grandes volúmenes de datos para identificar oportunidades en big data.",
+          "Diseño e implementación de arquitecturas para proteger datos sensibles.",
+          "Gestión de expectativas y comunicación continua con clientes en proyectos de testing funcional.",
+          "Liderazgo en proyectos de transformación digital en aviación."
+        ],
+        "num_resultados": 4,
+        "cv_referencia": "cv_116"
+      },
+      {
+        "id": 51,
+        "categoria": "consulta_experiencia",
+        "pregunta": "¿Cuáles son las funciones que ha desempeñado Dmitri Arias Outeiro según su CV?",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Colaboración internacional en proyectos de CI/CD con equipos en 3 continentes.",
+          "Implementación de soluciones basadas en cloud (AWS/Azure/GCP) para fomentar la experimentación.",
+          "Incremento de la eficiencia en internacionalización a través de metodologías ágiles."
+        ],
+        "num_resultados": 3,
+        "cv_referencia": "cv_139"
+      },
+      {
+        "id": 52,
+        "categoria": "consulta_experiencia",
+        "pregunta": "Me interesa saber el recorrido profesional de María Jesús Vázquez Guijarro.",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Auditoría y mejora de prácticas de seguridad en data wrangling.",
+          "Responsable de tareas de design systems y optimización de procesos internos."
+        ],
+        "num_resultados": 2,
+        "cv_referencia": "cv_079"
+      },
+      {
+        "id": 53,
+        "categoria": "consulta_experiencia",
+        "pregunta": "¿Qué tareas y roles ha tenido Gustavo Montes Garitano a lo largo de su carrera?",
+        "tipo_respuesta": "lista_experiencia",
+        "respuesta": [
+          "Desarrollo de APIs RESTful para automatizar procesos manuales.",
+          "Encargado de la implementación de sistemas de supply chain.",
+          "Experiencia en textil, enfocado en resolver desafíos específicos de la industria.",
+          "Formación a usuarios finales en herramientas de edge computing.",
+          "Prototipado rápido de ideas para validar hipótesis en customer success."
+        ],
+        "num_resultados": 5,
+        "cv_referencia": "cv_229"
+      },
+      {
+        "id": 54,
+        "categoria": "conteo",
+        "pregunta": "¿Cuántas personas saben PyTest?",
+        "tipo_respuesta": "numero",
+        "respuesta": 3
+      },
+      {
+        "id": 55,
+        "categoria": "conteo",
+        "pregunta": "¿Cuál es el número total de candidatos que dominan Airtable?",
+        "tipo_respuesta": "numero",
+        "respuesta": 6
+      },
+      {
+        "id": 56,
+        "categoria": "conteo",
+        "pregunta": "¿Cuántos User Researcher hay registrados en la base de datos?",
+        "tipo_respuesta": "numero",
+        "respuesta": 1
+      },
+      {
+        "id": 57,
+        "categoria": "conteo",
+        "pregunta": "¿Cuántas personas han estudiado FP Grado Superior en Análisis y Desarrollo de Aplicaciones?",
+        "tipo_respuesta": "numero",
+        "respuesta": 15
+      },
+      {
+        "id": 58,
+        "categoria": "conteo",
+        "pregunta": "¿Cuántos CVs hay en total en el sistema?",
+        "tipo_respuesta": "numero",
+        "respuesta": 300
+      },
+      {
+        "id": 59,
+        "categoria": "conteo",
+        "pregunta": "¿Cuántos puestos distintos existen entre todos los candidatos?",
+        "tipo_respuesta": "numero",
+        "respuesta": 167
+      },
+      {
+        "id": 60,
+        "categoria": "multi_criterio",
+        "pregunta": "¿Qué personas saben tanto Optuna como Sisense?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 61,
+        "categoria": "multi_criterio",
+        "pregunta": "Encuentra candidatos que dominen Confluence y también On-Page SEO.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 62,
+        "categoria": "multi_criterio",
+        "pregunta": "¿Quiénes combinan en su perfil PowerShell junto con Data Pipelines?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 63,
+        "categoria": "multi_criterio",
+        "pregunta": "¿Hay algún Creative Director que además sepa ReadTheDocs?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 64,
+        "categoria": "multi_criterio",
+        "pregunta": "Busco un Management Consultant con conocimientos en Go. ¿Existe?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 65,
+        "categoria": "multi_criterio",
+        "pregunta": "De los Research Scientist, ¿cuáles tienen también NetSuite como competencia?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 66,
+        "categoria": "multi_criterio",
+        "pregunta": "Filtra por puesto AI Consultant y skill Bash. ¿Quiénes cumplen ambos criterios?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 67,
+        "categoria": "multi_criterio",
+        "pregunta": "¿Quiénes han estudiado Grado en Big Data y además saben Ant Design?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 68,
+        "categoria": "multi_criterio",
+        "pregunta": "Localiza personas con formación en Doble Grado en Física e Ingeniería Informática que manejen NFT.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Pablo Naranjo Santamaría"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 69,
+        "categoria": "multi_criterio",
+        "pregunta": "¿Qué Business Consultant hablan inglés?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 70,
+        "categoria": "multi_criterio",
+        "pregunta": "Necesito un Chief Data Officer que sepa francés. ¿Hay alguno?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 71,
+        "categoria": "existencia",
+        "pregunta": "¿Hay alguien que sea PostgreSQL DBA y sepa PCI DSS?",
+        "tipo_respuesta": "booleano_con_detalle",
+        "respuesta": {
+          "existe": false
+        }
+      },
+      {
+        "id": 72,
+        "categoria": "existencia",
+        "pregunta": "¿Existe algún candidato con Travis CI y titulación en Grado en Ingeniería Multimedia?",
+        "tipo_respuesta": "booleano_con_detalle",
+        "respuesta": {
+          "existe": false
+        }
+      },
+      {
+        "id": 73,
+        "categoria": "existencia",
+        "pregunta": "¿Tenemos a alguien en la base de datos que domine Rust?",
+        "tipo_respuesta": "booleano_con_detalle",
+        "respuesta": {
+          "existe": false,
+          "personas": []
+        }
+      },
+      {
+        "id": 74,
+        "categoria": "existencia",
+        "pregunta": "¿Alguno de los candidatos menciona COBOL en su CV?",
+        "tipo_respuesta": "booleano_con_detalle",
+        "respuesta": {
+          "existe": true,
+          "personas": [
+            "César Nogueira Arce",
+            "Juan Ibáñez Vera",
+            "Marta Herrera Pozuelo"
+          ]
+        }
+      },
+      {
+        "id": 75,
+        "categoria": "existencia",
+        "pregunta": "¿Contamos con algún profesional que hable ruso?",
+        "tipo_respuesta": "booleano_con_detalle",
+        "respuesta": {
+          "existe": true,
+          "personas": [
+            "Ana María Rivas Ferrer",
+            "Baltasar Yáñez Cisneros",
+            "José Urbano Gil",
+            "José Ángel Vila Pascual",
+            "Mario Pons Camps",
+            "Olivia Recio Pujol",
+            "Valeria Lorenzo Santillana"
+          ]
+        }
+      },
+      {
+        "id": 76,
+        "categoria": "agregacion",
+        "pregunta": "¿Cuáles son las 5 hard skills más frecuentes entre todos los candidatos?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "skill": "Elasticsearch",
+            "frecuencia": 9
+          },
+          {
+            "skill": "Microservices",
+            "frecuencia": 9
+          },
+          {
+            "skill": "WebSockets",
+            "frecuencia": 9
+          },
+          {
+            "skill": "UML",
+            "frecuencia": 8
+          },
+          {
+            "skill": "Apache Kafka",
+            "frecuencia": 8
+          }
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 77,
+        "categoria": "agregacion",
+        "pregunta": "Dame un ranking de las 10 habilidades técnicas más repetidas en los CVs.",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "skill": "Elasticsearch",
+            "frecuencia": 9
+          },
+          {
+            "skill": "Microservices",
+            "frecuencia": 9
+          },
+          {
+            "skill": "WebSockets",
+            "frecuencia": 9
+          },
+          {
+            "skill": "UML",
+            "frecuencia": 8
+          },
+          {
+            "skill": "Apache Kafka",
+            "frecuencia": 8
+          },
+          {
+            "skill": "Authentication",
+            "frecuencia": 8
+          },
+          {
+            "skill": "DaVinci Resolve",
+            "frecuencia": 8
+          },
+          {
+            "skill": "Pull Requests",
+            "frecuencia": 7
+          },
+          {
+            "skill": "Google Analytics 4",
+            "frecuencia": 7
+          },
+          {
+            "skill": "Redis Caching",
+            "frecuencia": 7
+          }
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 78,
+        "categoria": "agregacion",
+        "pregunta": "¿Cuáles son los 5 puestos de trabajo más comunes en la base de datos?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "puesto": "Release Engineer",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Signal Processing Engineer",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Digital Marketing Specialist",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Product Marketing Manager",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Chief Data Officer",
+            "frecuencia": 4
+          }
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 79,
+        "categoria": "agregacion",
+        "pregunta": "Dime los 3 roles profesionales con mayor representación.",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "puesto": "Release Engineer",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Signal Processing Engineer",
+            "frecuencia": 4
+          },
+          {
+            "puesto": "Digital Marketing Specialist",
+            "frecuencia": 4
+          }
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 80,
+        "categoria": "agregacion",
+        "pregunta": "¿Quién es la persona con más hard skills? ¿Cuántas tiene?",
+        "tipo_respuesta": "valor_con_detalle",
+        "respuesta": {
+          "persona": "María Pilar Zapata Puig",
+          "cantidad": 10
+        }
+      },
+      {
+        "id": 81,
+        "categoria": "agregacion",
+        "pregunta": "¿Qué candidato tiene el mayor número de soft skills?",
+        "tipo_respuesta": "valor_con_detalle",
+        "respuesta": {
+          "persona": "Arnau De la Fuente Outeiro",
+          "cantidad": 7
+        }
+      },
+      {
+        "id": 82,
+        "categoria": "busqueda_por_soft_skill",
+        "pregunta": "¿Qué personas tienen Gestión del cambio como soft skill?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ana María Font Masip",
+          "Eric Marín Soler",
+          "Fatima Méndez De la Cruz",
+          "José Luis Serrano Cisneros",
+          "Mateo Murillo Zamorano",
+          "Noah Prieto Pardo",
+          "Remedios Hurtado Álvarez",
+          "Vanesa Vergara Cervantes"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 83,
+        "categoria": "busqueda_por_soft_skill",
+        "pregunta": "Lista a los candidatos que mencionan Visión global entre sus competencias blandas.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Alex Santa Cruz Miranda",
+          "David Ochoa Pozuelo",
+          "Dmitri Arias Outeiro",
+          "Liam Elizondo Martínez",
+          "Mario Pons Camps",
+          "Marta Herrera Pozuelo",
+          "María Pilar Aguilar Sala",
+          "Olivia Recio Pujol"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 84,
+        "categoria": "busqueda_por_soft_skill",
+        "pregunta": "¿Quiénes destacan por su Orientación a resultados según los CVs?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Ainhoa Nuñez Varela",
+          "Aitana Quintana Beltrán",
+          "Alberto Valls Montoya",
+          "Consuelo Quintero Reyes",
+          "Gustavo Montes Garitano",
+          "Jesús Dávila Bravo",
+          "Khadija Esteve Galindo",
+          "Marcos Palomo Elizondo",
+          "Mariano Gutiérrez Vidal",
+          "María Dolores Morales Santiago",
+          "María José Santamaría Souto",
+          "Olivia Recio Pujol",
+          "Valeria Pujol Domínguez",
+          "Vanesa Vergara Cervantes"
+        ],
+        "num_resultados": 14
+      },
+      {
+        "id": 85,
+        "categoria": "busqueda_por_soft_skill",
+        "pregunta": "Dame todos los profesionales cuya soft skill incluya Flexibilidad.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Adriana Bravo Orozco",
+          "Alberto Hernández Plaza",
+          "Dmitri Galán Farré",
+          "Encarnación Leyva Garrido",
+          "Gustavo Montes Garitano",
+          "Joel Hermida Mir",
+          "José Ángel Castelao Ferrer",
+          "Lucía Irigoyen Iglesias",
+          "María Luz Galán Ortega",
+          "Miguel Ángel Llopis Fernández",
+          "Noah Prieto Pardo",
+          "Raúl Calvo Del Río",
+          "Tomás Leyva Arias",
+          "Verónica Sarasola Mir",
+          "Óscar Sancho Pereira"
+        ],
+        "num_resultados": 15
+      },
+      {
+        "id": 86,
+        "categoria": "busqueda_por_experiencia",
+        "pregunta": "¿Qué personas tienen experiencia en machine learning?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Agustín Berasategi Outeiro",
+          "Alejandra Cortés Lara",
+          "Amparo Toledano Ferreiro",
+          "Azucena Sanz Olabarri",
+          "Felipe Estévez Iglesias",
+          "Natalia Segura López",
+          "Sofía Cortés Santa Cruz",
+          "Tatiana Camps Castelao"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 87,
+        "categoria": "busqueda_por_experiencia",
+        "pregunta": "Dame los candidatos cuya experiencia mencione proyectos cloud.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Abril Santillana Segovia",
+          "Ana María Font Masip",
+          "Andrei Casas Zapata",
+          "Dmitri Arias Outeiro",
+          "Emma Delgado Serrano",
+          "Enrique Cruz Rivero",
+          "Fernando Cabrera Aguirre",
+          "Fátima Escobar Ferreiro",
+          "Marina García Villar",
+          "Mario Morales Miranda",
+          "María Dolores Morales Santiago",
+          "María Varela Urkiola",
+          "Mercè Varela Luna",
+          "Rocío Jiménez Varela",
+          "Simón Masip Sandoval",
+          "Verónica Sarasola Mir",
+          "Víctor Rincón Santos"
+        ],
+        "num_resultados": 17
+      },
+      {
+        "id": 88,
+        "categoria": "busqueda_por_experiencia",
+        "pregunta": "¿Quiénes han trabajado con microservicios según su CV?",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Aitana Quintana Beltrán",
+          "Alejandra Cortés Lara",
+          "Alex Santa Cruz Miranda",
+          "Ana Villareal Soler",
+          "Blanca De la Fuente De la Fuente",
+          "Emma Yáñez Segovia",
+          "José Luis Serrano Cisneros",
+          "José Miguel Estévez Del Ángel",
+          "José Ramón Camps Toledano",
+          "Macarena Camacho Puig",
+          "María Toledano De la Torre",
+          "María Victoria González Herrero",
+          "Montserrat Murillo Vidal",
+          "Nuria Ferrer Souto",
+          "Pablo Naranjo Santamaría",
+          "Rodrigo Hermida Rodríguez",
+          "Ruth Domínguez San Miguel",
+          "Salvador Castillo Martínez",
+          "Wang Alonso Urkiola"
+        ],
+        "num_resultados": 19
+      },
+      {
+        "id": 89,
+        "categoria": "busqueda_por_experiencia",
+        "pregunta": "Encuentra a los profesionales con experiencia en DevOps.",
+        "tipo_respuesta": "lista_personas",
+        "respuesta": [
+          "Alicia San Martín Pons",
+          "Amparo Toledano Ferreiro",
+          "Begoña Cardenas Camacho",
+          "Daniel Leyva Galán",
+          "Emilio Matas Durán",
+          "Eric Marín Soler",
+          "Eugenio Santiago Franco",
+          "Francisco Esteban San Martín",
+          "José Ramón Camps Toledano",
+          "José Ángel Castelao Ferrer",
+          "María Dolores Goikoetxea Quintero",
+          "Noah De los Santos Herrera",
+          "Pablo Giménez Pardo",
+          "Rodrigo Hermida Rodríguez",
+          "Tomás Pedraza Larrauri",
+          "Verónica Sarasola Mir"
+        ],
+        "num_resultados": 16
+      }
+    ]
+  }
+}
