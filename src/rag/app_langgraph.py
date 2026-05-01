@@ -12,8 +12,8 @@ from langgraph.checkpoint.memory import MemorySaver
 
 from src.config import config
 from src.rag.models.generator import Generator
-from src.rag.models.retriever import Retriever
 from src.rag.handler import get_handler
+from src.rag.strategies import get_strategy
 from src.rag.guardrails import guardrails_manager, GuardRailsViolation
 
 
@@ -52,12 +52,14 @@ class RAGState(TypedDict):
     assistant_id: Optional[str]
     gpt_config: Dict
 
+    # ── Strategy ───────────────────────────────────────────────────────
+    strategy_name: str      # "basic_fusion" | "cvs_parallel" | "graph_rag"
+
 
 class RAGGraph:
     def __init__(self):
         print("🔧 Inicializando RAGGraph multi-caso-de-uso...")
         self.generator = Generator()
-        self.retriever = Retriever()
         self.graph = self._build_graph()
         print("✅ RAGGraph listo")
 
@@ -68,9 +70,10 @@ class RAGGraph:
         wf = StateGraph(RAGState)
 
         wf.add_node("validate_user_input", self.validate_user_input)
+        wf.add_node("select_strategy",     self.select_strategy)
         wf.add_node("classify_context",    self.classify_context)
         wf.add_node("retrieve",            self.retrieve_chunks)
-        wf.add_node("process_cvs",         self.process_cvs)
+        wf.add_node("strategy_pipeline",   self.run_strategy_pipeline)
         wf.add_node("generate",            self.generate_answer_async)
         wf.add_node("handle_error",        self.handle_error)
 
@@ -81,7 +84,7 @@ class RAGGraph:
 
         wf.set_entry_point("validate_user_input")
 
-        after_validate = "guardrails_input" if config.enable_input_guardrails else "classify_context"
+        after_validate = "guardrails_input" if config.enable_input_guardrails else "select_strategy"
         wf.add_conditional_edges(
             "validate_user_input",
             self.should_continue_after_validation,
@@ -92,8 +95,10 @@ class RAGGraph:
             wf.add_conditional_edges(
                 "guardrails_input",
                 self.should_continue_after_input_guardrails,
-                {"continue": "classify_context", "error": "handle_error"},
+                {"continue": "select_strategy", "error": "handle_error"},
             )
+
+        wf.add_edge("select_strategy", "classify_context")
 
         wf.add_conditional_edges(
             "classify_context",
@@ -103,14 +108,14 @@ class RAGGraph:
 
         wf.add_conditional_edges(
             "retrieve",
-            self.should_use_cvs_pipeline,
-            {"process_cvs": "process_cvs", "generate": "generate"},
+            self.should_use_strategy_pipeline,
+            {"strategy_pipeline": "strategy_pipeline", "generate": "generate"},
         )
 
         if config.enable_output_guardrails:
-            wf.add_edge("process_cvs", "guardrails_output")
+            wf.add_edge("strategy_pipeline", "guardrails_output")
         else:
-            wf.add_edge("process_cvs", END)
+            wf.add_edge("strategy_pipeline", END)
 
         if config.enable_output_guardrails:
             wf.add_edge("generate", "guardrails_output")
@@ -160,8 +165,18 @@ class RAGGraph:
             state["use_retrieval"]  = True
         return state
 
+    def select_strategy(self, state: RAGState) -> RAGState:
+        """Selecciona la estrategia RAG en función de (use_case, language)."""
+        use_case = state.get("use_case", "cvs")
+        language = state.get("language", "es")
+        strategy = get_strategy(use_case, language)
+        state["strategy_name"] = strategy.name
+        print(f"   🧭 Strategy seleccionada: {strategy.name} (use_case={use_case}, lang={language})")
+        return state
+
     def retrieve_chunks(self, state: RAGState) -> RAGState:
         try:
+            strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
             retriever_state = {
                 "query":                state["query"],
                 "use_case":             state.get("use_case", "cvs"),
@@ -173,66 +188,20 @@ class RAGGraph:
                 "timestamps":           {},
                 "rag_mode":             state.get("rag_mode", "gpt"),
             }
-            updated = self.retriever.retrieve(retriever_state)
-            state["synthetic_queries"] = updated["synthetic_queries"]
-            state["chunks_retrieved"]  = updated["chunks_retrieved"]
+            updated = strategy.retrieve(retriever_state)
+            state["synthetic_queries"] = updated.get("synthetic_queries", [])
+            state["chunks_retrieved"]  = updated.get("chunks_retrieved", [])
         except Exception as e:
             print(f"   ❌ Error en retrieval: {e}")
+            import traceback; traceback.print_exc()
             state["chunks_retrieved"]  = []
             state["synthetic_queries"] = []
         return state
 
-    def process_cvs(self, state: RAGState) -> RAGState:
-        """
-        Pipeline CVS completo:
-          1. classify_chunks_by_reliability  → 5 grupos
-          2. grupo1: extracción directa / mini-LLM
-          3. grupos 2-5: mini-LLM en lotes paralelos
-          4. Persistir en historial JSON
-          5. Response Format: LLM potente ensambla respuesta final
-        """
-        query  = state["query"]
-        chunks = state.get("chunks_retrieved", [])
-        handler = get_handler("cvs")
-
-        print(f"   📊 Pipeline CVS: {len(chunks)} chunks → clasificar por fiabilidad")
-
-        try:
-            # Pasos 1-4: classify + mini-LLMs + historial
-            result = handler.process_query(query, chunks, language=state.get("language", "es"))
-            groups = result["groups"]
-            state["cvs_groups"] = groups
-
-            # Log grupos
-            for gname, g in groups.items():
-                data = g.get("data", "ninguno")
-                count = len(data) if isinstance(data, list) else (0 if data == "ninguno" else data.count("|") + 1)
-                print(f"      {gname} ({g.get('reliability','')}): {count} perfiles")
-
-            # Paso 5: Response Format con LLM potente
-            print(f"   🎯 Response Format: ensamblando respuesta final...")
-            answer, usage_info = handler.format_final_response(query, groups, language=state.get("language", "es"))
-
-            state["answer"]      = answer
-            state["chunks_used"] = chunks
-            state["metadata"]    = {
-                "usage":       usage_info,
-                "model":       usage_info.get("model", "unknown"),
-                "use_case":    "cvs",
-                "rag_mode":    state.get("rag_mode", "gpt"),
-                "cvs_pipeline": True,
-                "history_id":  result.get("history_id"),
-            }
-            print(f"      ✅ Respuesta CVS generada ({len(answer)} chars, {usage_info.get('total_tokens', 0)} tokens)")
-
-        except Exception as e:
-            print(f"   ❌ Error en pipeline CVS: {e}")
-            import traceback; traceback.print_exc()
-            state["error"]  = str(e)
-            state["answer"] = f"<p>❌ Error procesando CVs: {e}</p>"
-            state["metadata"] = {"usage": {}, "error": str(e)}
-
-        return state
+    def run_strategy_pipeline(self, state: RAGState) -> RAGState:
+        """Ejecuta el pipeline propio de la estrategia (solo cvs_parallel hoy)."""
+        strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
+        return strategy.run_pipeline(state)
 
     def generate_answer_async(self, state: RAGState) -> RAGState:
         """Wrapper síncrono que corre la generación async en un thread dedicado."""
@@ -321,9 +290,10 @@ class RAGGraph:
     def should_retrieve(self, state: RAGState) -> str:
         return "retrieve" if state.get("use_retrieval", True) else "generate"
 
-    def should_use_cvs_pipeline(self, state: RAGState) -> str:
-        """Tras retrieve, si use_case es cvs se redirige al pipeline CVS."""
-        return "process_cvs" if state.get("use_case") == "cvs" else "generate"
+    def should_use_strategy_pipeline(self, state: RAGState) -> str:
+        """Tras retrieve, si la strategy tiene pipeline propio, lo ejecuta; si no, va a generate."""
+        strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
+        return "strategy_pipeline" if strategy.has_custom_pipeline() else "generate"
 
     # ------------------------------------------------------------------
     # Helpers
@@ -381,6 +351,7 @@ class RAGGraph:
             rag_mode=rag_mode,
             assistant_id=assistant_id,
             gpt_config=gpt_config or {},
+            strategy_name="",
         )
 
         try:

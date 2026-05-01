@@ -102,11 +102,19 @@ class RAGConfig:
     enable_content_moderation: bool = os.getenv("ENABLE_CONTENT_MODERATION", "false").lower() == "true"
     enable_hallucination_check: bool = os.getenv("ENABLE_HALLUCINATION_CHECK", "true").lower() == "true"
 
-    # === RETRIEVAL ===
+    # === RETRIEVAL — RAG ORIGINAL (basic_fusion) ===
+    # Para los tres casos de uso cuando el idioma es "es".
     use_rag_fusion: bool = os.getenv("USE_RAG_FUSION", "true").lower() == "true"
     rag_fusion_queries: int = int(os.getenv("RAG_FUSION_QUERIES", "5"))
     max_chunks_used: int = int(os.getenv("MAX_CHUNKS_USED", "20"))
     min_relevance_score: float = float(os.getenv("MIN_RELEVANCE_SCORE", "0.7"))
+
+    # === RETRIEVAL — GRAPH RAG (Neo4j Graphiti) ===
+    # Aplica a EU y Wiki cuando el idioma NO es "es".
+    graph_rag_top_k: int = int(os.getenv("GRAPH_RAG_TOP_K", "20"))
+    graph_rag_max_chunks: int = int(os.getenv("GRAPH_RAG_MAX_CHUNKS", "30"))
+    graph_rag_min_score: float = float(os.getenv("GRAPH_RAG_MIN_SCORE", "0.0"))
+    graph_rag_mode: str = os.getenv("GRAPH_RAG_MODE", "combined")
 
     # === CVs – RETRIEVAL MASIVO ===
     # Número de chunks a recuperar en la búsqueda directa (sin RAG Fusion)

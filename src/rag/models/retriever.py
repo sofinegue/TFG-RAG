@@ -231,7 +231,7 @@ Responde SOLO con la query (expandida o sin cambios):"""
     # ------------------------------------------------------------------
     # Interfaz pública para LangGraph
     # ------------------------------------------------------------------
-    def retrieve(self, state: RetrieverState) -> RetrieverState:
+    def retrieve(self, state: RetrieverState, retrieval_override: Dict = None) -> RetrieverState:
         rag_mode = state.get("rag_mode", "gpt")
         use_case = state.get("use_case", "cvs")
 
@@ -247,7 +247,9 @@ Responde SOLO con la query (expandida o sin cambios):"""
         language = state.get("language", "es")
 
         handler       = get_handler(use_case)
-        retrieval_cfg = handler.get_retrieval_config()
+        retrieval_cfg = dict(handler.get_retrieval_config())
+        if retrieval_override:
+            retrieval_cfg.update(retrieval_override)
 
         print(f"   🔍 Retrieval [{use_case}] [lang={language}] – query: {query[:60]}")
         expanded          = self._expand_query_with_context(query, history)
