@@ -12,7 +12,7 @@ from typing import List, Dict, TypedDict, Optional, AsyncGenerator
 
 from openai import AzureOpenAI
 
-from src.config import config
+from src.config import config, safe_create_kwargs
 from src.rag.handler import get_handler
 
 # Importación opcional del Agent Builder workflow
@@ -185,13 +185,15 @@ class Generator:
         messages.append({"role": "user", "content": rag_prompt})
 
         response = client.chat.completions.create(
-            model=chat_cfg.deployment,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty,
+            **safe_create_kwargs(
+                model=chat_cfg.deployment,
+                messages=messages,
+                temperature=temperature,
+                max_completion_tokens=max_tokens,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty,
+            )
         )
 
         raw_answer = response.choices[0].message.content

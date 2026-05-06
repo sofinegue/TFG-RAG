@@ -34,7 +34,7 @@ from azure.cosmos import CosmosClient
 from azure.search.documents import SearchClient
 from openai import AzureOpenAI
 
-from src.config import config
+from src.config import config, safe_create_kwargs
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -171,10 +171,12 @@ def _generate_qa(
     prompt = _build_qa_prompt(content, use_case)
     try:
         response = llm_client.chat.completions.create(
-            model=deployment,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=config.temperature,
-            max_tokens=400,
+            **safe_create_kwargs(
+                model=deployment,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=config.temperature,
+                max_completion_tokens=400,
+            )
         )
         qa_text = response.choices[0].message.content.strip()
         # Validación mínima: debe contener las dos etiquetas

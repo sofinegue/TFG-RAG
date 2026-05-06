@@ -54,22 +54,30 @@ Genera `test/results/results_<gold_standard>.json` por cada entrada.
 
 ## Fase 2 — Evaluación
 
-`test/scripts/evaluation.py` lee los `results_*.json` y, por cada pregunta,
-pide a un LLM barato (por defecto `gpt-5-mini`, configurable con `--model`)
-que devuelva un JSON con:
+`test/scripts/evaluation.py` lee los `results_*.json` y evalúa cada pregunta
+mediante **dos métricas automáticas**:
 
-* `coincidencia_pct` (0-100)
-* `calidad_pct`      (0-100)
-* `veredicto`        (`OK` | `KO`)
-* `justificacion`    (texto breve)
+| Métrica | Método | Coste |
+|---------|--------|-------|
+| `coincidencia_%` | LLM (`gpt-5-mini`) en lotes de 10 preguntas/llamada | ~$0.00009/q |
+| `relevancia_%`   | Cosine similarity con embeddings `ada-002` (sin LLM) | ~$0.0001/q |
+
+`veredicto_umbral` = `OK` si **ambas métricas ≥ umbral** (por defecto 80 %).
+
+Columnas del Excel:
+
+| Campo | Descripción |
+|-------|-------------|
+| `coincidencia_%` | Similitud semántica respuesta real vs. esperada (LLM, 0-100) |
+| `relevancia_%`   | Similitud por embeddings coseno (ada-002, 0-100) |
+| `veredicto_umbral` | `OK` / `KO` según ambas métricas ≥ umbral |
+| `justificacion`  | Explicación breve del LLM evaluador |
+| `coste_rag_usd`  | Coste Fase 1 (tokens generación RAG) |
+| `coste_eval_usd` | Coste Fase 2 (LLM evaluación + embeddings) |
+| `coste_total_usd`| Suma de ambas fases |
 
 Después construye **un Excel por caso de uso** con **una hoja por idioma** en
-`test/evaluation/<use_case>.xlsx`. Cada fila contiene la pregunta, ambas
-respuestas, métricas de coste/tiempo y dos veredictos:
-
-* `veredicto_llm`     — el que decide directamente el LLM evaluador.
-* `veredicto_umbral`  — `OK` si **`coincidencia_% ≥ 80` y `calidad_% ≥ 80`**,
-  `KO` si alguna baja del umbral. El umbral se ajusta con `--threshold`.
+`test/evaluation/<use_case>.xlsx`. El umbral se ajusta con `--threshold`.
 
 ### Ejemplos
 
@@ -86,6 +94,55 @@ python -m test.scripts.evaluation --file results_gold_standard_cvs_en.json
 ```
 
 Requiere `openpyxl` (`pip install openpyxl`).
+
+## Estimación de costes (gpt-5-mini: $0.25 in / $2.00 out por 1M · ada-002: $0.10 por 1M)
+
+### Fase 1 — por gold standard
+
+| Gold standard | n | Estrategia RAG | Coste/q estimado | **Total est.** |
+|---|---:|---|---:|---:|
+| `cvs_en`   |  86 | `cvs_parallel` | $0.00625 | **~$0.54** |
+| `cvs_es`   |  86 | `basic_fusion` | $0.00233 | **~$0.20** |
+| `eu_en`    |  98 | `graph_rag`    | $0.00123 | **~$0.12** |
+| `eu_es`    |  91 | `basic_fusion` | $0.00233 | **~$0.21** |
+| `eu_fr`    |  98 | `graph_rag`    | $0.00123 | **~$0.12** |
+| `eu_it`    |  99 | `graph_rag`    | $0.00123 | **~$0.12** |
+| `eu_pt`    |  91 | `graph_rag`    | $0.00123 | **~$0.11** |
+| `wiki_en`  | 100 | `graph_rag`    | $0.00123 | **~$0.12** |
+| `wiki_es`  | 100 | `basic_fusion` | $0.00233 | **~$0.23** |
+
+> `cvs_parallel` es la estrategia más cara porque procesa todos los CVs en paralelo;
+> el coste real depende del tamaño del corpus. Ejecutar `--limit 3` para calibrar.
+
+### Fase 1 — por caso de uso / idioma
+
+| `--use-case` | Gold standards incluidos | **Fase 1 est.** |
+|---|---|---:|
+| `cvs`  | cvs_en + cvs_es          | **~$0.74** |
+| `eu`   | eu_en/es/fr/it/pt        | **~$0.68** |
+| `wiki` | wiki_en + wiki_es        | **~$0.36** |
+| *(todo)* | los 9 gold standards  | **~$1.78** |
+
+| `--language` | Estrategia(s) involucradas | n total | **Fase 1 est.** |
+|---|---|---:|---:|
+| `en` | cvs_parallel + graph_rag×2 | 284 | **~$0.78** |
+| `es` | basic_fusion×3             | 277 | **~$0.64** |
+| `fr` | graph_rag                  |  98 | **~$0.12** |
+| `it` | graph_rag                  |  99 | **~$0.12** |
+| `pt` | graph_rag                  |  91 | **~$0.11** |
+
+### Coste total (Fase 1 + Fase 2)
+
+| Escenario | Fase 1 | Fase 2 (eval) | **Total est.** |
+|---|---:|---:|---:|
+| Solo `cvs`    | $0.74 | $0.03 | **~$0.77** |
+| Solo `eu`     | $0.68 | $0.08 | **~$0.76** |
+| Solo `wiki`   | $0.36 | $0.03 | **~$0.39** |
+| **Run completo** | **$1.78** | **$0.16** | **~$1.94** |
+
+Fase 2 = ~849 preguntas × ($0.00009 LLM coincidencia + $0.0001 embeddings relevancia).
+
+---
 
 ## Convenciones de nombres
 

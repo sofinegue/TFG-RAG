@@ -87,22 +87,22 @@ def next_art():
 # ─────────────────────────────────────────────
 # 3. GENERATE QUESTIONS
 # ─────────────────────────────────────────────
-questions = []
+preguntas = []
 q_id = 0
 
 def add_q(cat, question, answer, tipo="text"):
     global q_id
     q_id += 1
-    entry = {"id": q_id, "category": cat, "question": question, "answer_type": tipo}
+    entry = {"id": q_id, "categoria": cat, "pregunta": question, "tipo_respuesta": tipo}
     if isinstance(answer, list):
         try:
-            entry["answer"] = sorted(answer)
+            entry["respuesta"] = sorted(answer)
         except TypeError:
-            entry["answer"] = answer
-        entry["num_results"] = len(answer)
+            entry["respuesta"] = answer
+        entry["num_resultados"] = len(answer)
     else:
-        entry["answer"] = answer
-    questions.append(entry)
+        entry["respuesta"] = answer
+    preguntas.append(entry)
 
 
 # ═══════════════════════════════════════════════
@@ -782,8 +782,8 @@ def _remove_similar(qs, field, threshold=0.6):
 
 _TARGET = 90
 _by_cat = defaultdict(list)
-for q in questions:
-    _by_cat[q["category"]].append(q)
+for q in preguntas:
+    _by_cat[q["categoria"]].append(q)
 
 _filtered = {}
 for cat, qs in _by_cat.items():
@@ -791,7 +791,7 @@ for cat, qs in _by_cat.items():
         # Always keep ALL cross-document questions: this is the KG-evaluation set.
         _filtered[cat] = qs
     else:
-        _filtered[cat] = _remove_similar(qs, "question")
+        _filtered[cat] = _remove_similar(qs, "pregunta")
 
 _total_f = sum(len(v) for k, v in _filtered.items() if k != "cross_document") or 1
 _selected = []
@@ -812,13 +812,13 @@ _selected.sort(key=lambda q: q["id"])
 for i, q in enumerate(_selected, 1):
     q["id"] = i
 
-print(f"\n→ Reduced from {len(questions)} to {len(_selected)} questions (target: 80-100)")
-questions = _selected
+print(f"\n→ Reduced from {len(preguntas)} to {len(_selected)} questions (target: 80-100)")
+preguntas = _selected
 
 # ═══════════════════════════════════════════════
 # VERIFICATION AND EXPORT
 # ═══════════════════════════════════════════════
-texts = [q["question"] for q in questions]
+texts = [q["pregunta"] for q in preguntas]
 if len(texts) != len(set(texts)):
     dupes = set([t for t in texts if texts.count(t) > 1])
     print(f"WARNING: {len(dupes)} duplicate questions:")
@@ -827,19 +827,19 @@ if len(texts) != len(set(texts)):
 else:
     print("✓ All questions are unique")
 
-print(f"Total questions generated: {len(questions)}")
+print(f"Total questions generated: {len(preguntas)}")
 
-cat_counts = Counter(q["category"] for q in questions)
+cat_counts = Counter(q["categoria"] for q in preguntas)
 print("\nDistribution by category:")
 for cat, cnt in sorted(cat_counts.items()):
     print(f"  {cat}: {cnt}")
 
 gold_standard = {
     "gold_standard": {
-        "use_case": "wikipedia",
-        "language": "en",
-        "total_questions": len(questions),
-        "total_articles_analyzed": len(articles),
+        "caso_uso": "wikipedia",
+        "idioma": "en",
+        "total_preguntas": len(preguntas),
+        "total_articulos_analizados": len(articles),
         "generation_date": "2026-04-17",
         "categories": dict(sorted(cat_counts.items())),
         "description": "Gold standard for evaluating a RAG system on English Wikipedia articles "
@@ -849,7 +849,7 @@ gold_standard = {
                        "category with multi-hop questions (shared entities, bidirectional and chain "
                        "references) designed to expose the limits of basic vector RAG and to be "
                        "answerable by a knowledge graph. All answers computed from data.",
-        "questions": questions
+        "preguntas": preguntas
     }
 }
 

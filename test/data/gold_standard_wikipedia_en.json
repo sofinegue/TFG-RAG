@@ -1,9 +1,9 @@
 {
   "gold_standard": {
-    "use_case": "wikipedia",
-    "language": "en",
-    "total_questions": 100,
-    "total_articles_analyzed": 135,
+    "caso_uso": "wikipedia",
+    "idioma": "en",
+    "total_preguntas": 100,
+    "total_articulos_analizados": 135,
     "generation_date": "2026-04-17",
     "categories": {
       "article_categories": 9,
@@ -19,172 +19,172 @@
       "sections": 8
     },
     "description": "Gold standard for evaluating a RAG system on English Wikipedia articles (topic: literature and literary movements). Contains definition questions, sections, categories, content search, metadata, counting, existence, listings, and relationships between articles. Includes a 'cross_document' category with multi-hop questions (shared entities, bidirectional and chain references) designed to expose the limits of basic vector RAG and to be answerable by a knowledge graph. All answers computed from data.",
-    "questions": [
+    "preguntas": [
       {
         "id": 1,
-        "category": "definition",
-        "question": "What is Créolité?",
-        "answer_type": "text",
-        "answer": "Créolité (French pronunciation: [kʁeɔlite]) is a literary movement first developed in the 1980s by the Martinican writers Patrick Chamoiseau, Jean Bernabé and Raphaël Confiant."
+        "categoria": "definition",
+        "pregunta": "What is Créolité?",
+        "tipo_respuesta": "text",
+        "respuesta": "Créolité (French pronunciation: [kʁeɔlite]) is a literary movement first developed in the 1980s by the Martinican writers Patrick Chamoiseau, Jean Bernabé and Raphaël Confiant."
       },
       {
         "id": 2,
-        "category": "definition",
-        "question": "Define the concept of Literature.",
-        "answer_type": "text",
-        "answer": "Literature is any collection of written work."
+        "categoria": "definition",
+        "pregunta": "Define the concept of Literature.",
+        "tipo_respuesta": "text",
+        "respuesta": "Literature is any collection of written work."
       },
       {
         "id": 3,
-        "category": "definition",
-        "question": "What is the article about Young Vienna about?",
-        "answer_type": "text",
-        "answer": "Young Vienna (Jung-Wien), also referred to as Young Austria, was a society of fin de siècle writers who met in Vienna's Café Griensteidl and other nearby coffeehouses in the late nineteenth century."
+        "categoria": "definition",
+        "pregunta": "What is the article about Young Vienna about?",
+        "tipo_respuesta": "text",
+        "respuesta": "Young Vienna (Jung-Wien), also referred to as Young Austria, was a society of fin de siècle writers who met in Vienna's Café Griensteidl and other nearby coffeehouses in the late nineteenth century."
       },
       {
         "id": 4,
-        "category": "definition",
-        "question": "Briefly explain what Bizarro fiction is.",
-        "answer_type": "text",
-        "answer": "Bizarro fiction is a contemporary literary genre which often uses elements of absurdism, satire, and the grotesque, along with pop-surrealism and genre fiction staples, in order to create subversive, weird, and entertaining works."
+        "categoria": "definition",
+        "pregunta": "Briefly explain what Bizarro fiction is.",
+        "tipo_respuesta": "text",
+        "respuesta": "Bizarro fiction is a contemporary literary genre which often uses elements of absurdism, satire, and the grotesque, along with pop-surrealism and genre fiction staples, in order to create subversive, weird, and entertaining works."
       },
       {
         "id": 5,
-        "category": "definition",
-        "question": "Give me a description of Western canon.",
-        "answer_type": "text",
-        "answer": "The Western canon is the embodiment of high-culture literature, music, philosophy, and art that are highly cherished across the Western world, such works having achieved the status of classics."
+        "categoria": "definition",
+        "pregunta": "Give me a description of Western canon.",
+        "tipo_respuesta": "text",
+        "respuesta": "The Western canon is the embodiment of high-culture literature, music, philosophy, and art that are highly cherished across the Western world, such works having achieved the status of classics."
       },
       {
         "id": 6,
-        "category": "definition",
-        "question": "How is Colon (rhetoric) defined according to available information?",
-        "answer_type": "text",
-        "answer": "A colon (from Greek: κῶλον, pl."
+        "categoria": "definition",
+        "pregunta": "How is Colon (rhetoric) defined according to available information?",
+        "tipo_respuesta": "text",
+        "respuesta": "A colon (from Greek: κῶλον, pl."
       },
       {
         "id": 7,
-        "category": "definition",
-        "question": "I need to know what Natural school is. Can you explain?",
-        "answer_type": "text",
-        "answer": "The natural school (Russian: Натуральная школа, romanized: Naturalnaya shkola) was a literary movement that arose under the influence of Nikolai Gogol in the 1840s up to the 1850s in Russia, and included such diverse authors as Nikolai Nekrasov, Ivan Goncharov, Ivan Turgenev, Mikhail Saltykov-Shchedrin, Ivan Panayev, Dmitry Grigorovich, Alexander Hertzen, Aleksey Pisemsky, Vladimir Dal, Fyodor Dostoyevsky and Evgeny Grebyonka, among others."
+        "categoria": "definition",
+        "pregunta": "I need to know what Natural school is. Can you explain?",
+        "tipo_respuesta": "text",
+        "respuesta": "The natural school (Russian: Натуральная школа, romanized: Naturalnaya shkola) was a literary movement that arose under the influence of Nikolai Gogol in the 1840s up to the 1850s in Russia, and included such diverse authors as Nikolai Nekrasov, Ivan Goncharov, Ivan Turgenev, Mikhail Saltykov-Shchedrin, Ivan Panayev, Dmitry Grigorovich, Alexander Hertzen, Aleksey Pisemsky, Vladimir Dal, Fyodor Dostoyevsky and Evgeny Grebyonka, among others."
       },
       {
         "id": 8,
-        "category": "definition",
-        "question": "Summarize the topic of Poetry in one sentence.",
-        "answer_type": "text",
-        "answer": "Poetry (from the Greek word poiesis, \"making\") is a form of literary art that uses aesthetic and often rhythmic qualities of language to evoke meanings in addition to, or in place of, literal or surface-level meanings."
+        "categoria": "definition",
+        "pregunta": "Summarize the topic of Poetry in one sentence.",
+        "tipo_respuesta": "text",
+        "respuesta": "Poetry (from the Greek word poiesis, \"making\") is a form of literary art that uses aesthetic and often rhythmic qualities of language to evoke meanings in addition to, or in place of, literal or surface-level meanings."
       },
       {
         "id": 9,
-        "category": "definition",
-        "question": "What concept does the term Onirism designate?",
-        "answer_type": "text",
-        "answer": "Onirism was a surrealist Romanian literary school most popular during the 1960s, in the wake of popular uprisings in Eastern Europe."
+        "categoria": "definition",
+        "pregunta": "What concept does the term Onirism designate?",
+        "tipo_respuesta": "text",
+        "respuesta": "Onirism was a surrealist Romanian literary school most popular during the 1960s, in the wake of popular uprisings in Eastern Europe."
       },
       {
         "id": 10,
-        "category": "definition",
-        "question": "What does Rhyming Chroniclers consist of?",
-        "answer_type": "text",
-        "answer": "Rhyming Chroniclers, a series of writers who flourished in England in the 13th century, and related histories of the country in rhyme, in which the fabulous occupies a conspicuous place, among which Layamon's Brut (1205) takes the lead."
+        "categoria": "definition",
+        "pregunta": "What does Rhyming Chroniclers consist of?",
+        "tipo_respuesta": "text",
+        "respuesta": "Rhyming Chroniclers, a series of writers who flourished in England in the 13th century, and related histories of the country in rhyme, in which the fabulous occupies a conspicuous place, among which Layamon's Brut (1205) takes the lead."
       },
       {
         "id": 11,
-        "category": "definition",
-        "question": "Provide the definition of Acmeist poetry.",
-        "answer_type": "text",
-        "answer": "Acmeism, or the Guild of Poets, was a modernist transient poetic school, which emerged c."
+        "categoria": "definition",
+        "pregunta": "Provide the definition of Acmeist poetry.",
+        "tipo_respuesta": "text",
+        "respuesta": "Acmeism, or the Guild of Poets, was a modernist transient poetic school, which emerged c."
       },
       {
         "id": 12,
-        "category": "definition",
-        "question": "What does the concept of Xungen movement refer to?",
-        "answer_type": "text",
-        "answer": "The Xúngēn movement (simplified Chinese: 寻根文学; traditional Chinese: 尋根文學; lit."
+        "categoria": "definition",
+        "pregunta": "What does the concept of Xungen movement refer to?",
+        "tipo_respuesta": "text",
+        "respuesta": "The Xúngēn movement (simplified Chinese: 寻根文学; traditional Chinese: 尋根文學; lit."
       },
       {
         "id": 13,
-        "category": "definition",
-        "question": "Tell me about Romantic literature. What is it exactly?",
-        "answer_type": "text",
-        "answer": "In literature, Romanticism found recurrent themes in the evocation or criticism of the past, the cult of \"sensibility\" with its emphasis on women and children, the isolation of the artist or narrator, and respect for nature."
+        "categoria": "definition",
+        "pregunta": "Tell me about Romantic literature. What is it exactly?",
+        "tipo_respuesta": "text",
+        "respuesta": "In literature, Romanticism found recurrent themes in the evocation or criticism of the past, the cult of \"sensibility\" with its emphasis on women and children, the isolation of the artist or narrator, and respect for nature."
       },
       {
         "id": 14,
-        "category": "definition",
-        "question": "What is the meaning of Progressive Writers' Movement?",
-        "answer_type": "text",
-        "answer": "The Progressive Writers' Association or the Progressive Writers' Movement of India or Anjuman Tarraqi Pasand Mussanafin-e-Hind (Urdu:  انجمن ترقی پسند مصنفینِ ہند) or Akhil Bhartiya Pragatishil Lekhak Sangh (Hindi: अखिल भारतीय प्रगतिशील लेखक संघ) was a progressive literary movement in pre-partition British India."
+        "categoria": "definition",
+        "pregunta": "What is the meaning of Progressive Writers' Movement?",
+        "tipo_respuesta": "text",
+        "respuesta": "The Progressive Writers' Association or the Progressive Writers' Movement of India or Anjuman Tarraqi Pasand Mussanafin-e-Hind (Urdu:  انجمن ترقی پسند مصنفینِ ہند) or Akhil Bhartiya Pragatishil Lekhak Sangh (Hindi: अखिल भारतीय प्रगतिशील लेखक संघ) was a progressive literary movement in pre-partition British India."
       },
       {
         "id": 15,
-        "category": "definition",
-        "question": "If I look up Magnetic Poetry, what information do I find?",
-        "answer_type": "text",
-        "answer": "Magnetic Poetry is a toy and creative writing aid consisting of individual words—often related to a particular theme or topic—printed on small magnets which can be creatively arranged into poetry on a refrigerator or other metal surface."
+        "categoria": "definition",
+        "pregunta": "If I look up Magnetic Poetry, what information do I find?",
+        "tipo_respuesta": "text",
+        "respuesta": "Magnetic Poetry is a toy and creative writing aid consisting of individual words—often related to a particular theme or topic—printed on small magnets which can be creatively arranged into poetry on a refrigerator or other metal surface."
       },
       {
         "id": 16,
-        "category": "definition",
-        "question": "Could you tell me what Poetics is in a concise manner?",
-        "answer_type": "text",
-        "answer": "Poetics is the study or theory of poetry, specifically the study or theory of device, structure, form, type, and effect with regards to poetry, though usage of the term can also refer to literature broadly."
+        "categoria": "definition",
+        "pregunta": "Could you tell me what Poetics is in a concise manner?",
+        "tipo_respuesta": "text",
+        "respuesta": "Poetics is the study or theory of poetry, specifically the study or theory of device, structure, form, type, and effect with regards to poetry, though usage of the term can also refer to literature broadly."
       },
       {
         "id": 17,
-        "category": "definition",
-        "question": "Describe the concept covered under the name Second Sophistic.",
-        "answer_type": "text",
-        "answer": "The Second Sophistic is a literary-historical term referring to the Greek writers who flourished from the reign of Nero until c."
+        "categoria": "definition",
+        "pregunta": "Describe the concept covered under the name Second Sophistic.",
+        "tipo_respuesta": "text",
+        "respuesta": "The Second Sophistic is a literary-historical term referring to the Greek writers who flourished from the reign of Nero until c."
       },
       {
         "id": 18,
-        "category": "definition",
-        "question": "I want to understand what Film adaptation is. Summarize it.",
-        "answer_type": "text",
-        "answer": "A film adaptation transfers the details or story of an existing source text, such as a novel, into a feature film."
+        "categoria": "definition",
+        "pregunta": "I want to understand what Film adaptation is. Summarize it.",
+        "tipo_respuesta": "text",
+        "respuesta": "A film adaptation transfers the details or story of an existing source text, such as a novel, into a feature film."
       },
       {
         "id": 19,
-        "category": "definition",
-        "question": "What information is available about Committed literature?",
-        "answer_type": "text",
-        "answer": "Committed literature (French: littérature engagée) can be defined as an approach of an author, poet, novelist, playwright or composer who commits their work to defend or assert an ethical, political, social, ideological or religious view, most often through their works but also can loosely be defined as being through their direct intervention as an \"intellectual\", in public affairs (Crowly, 2018)."
+        "categoria": "definition",
+        "pregunta": "What information is available about Committed literature?",
+        "tipo_respuesta": "text",
+        "respuesta": "Committed literature (French: littérature engagée) can be defined as an approach of an author, poet, novelist, playwright or composer who commits their work to defend or assert an ethical, political, social, ideological or religious view, most often through their works but also can loosely be defined as being through their direct intervention as an \"intellectual\", in public affairs (Crowly, 2018)."
       },
       {
         "id": 20,
-        "category": "definition",
-        "question": "Explain the topic of Interlingue literature in a few words.",
-        "answer_type": "text",
-        "answer": "Interlingue literature broadly encompasses the body of fiction and nonfiction work created or translated into Interlingue, a constructed language created by Edgar de Wahl."
+        "categoria": "definition",
+        "pregunta": "Explain the topic of Interlingue literature in a few words.",
+        "tipo_respuesta": "text",
+        "respuesta": "Interlingue literature broadly encompasses the body of fiction and nonfiction work created or translated into Interlingue, a constructed language created by Edgar de Wahl."
       },
       {
         "id": 21,
-        "category": "definition",
-        "question": "What do we understand by Costumbrismo?",
-        "answer_type": "text",
-        "answer": "Costumbrismo (in Catalan: costumisme; sometimes anglicized as costumbrism, with the adjectival form costumbrist)  is the literary or pictorial interpretation of local everyday life, mannerisms, and customs, primarily in the Hispanic scene, and particularly in the 19th century, i.e."
+        "categoria": "definition",
+        "pregunta": "What do we understand by Costumbrismo?",
+        "tipo_respuesta": "text",
+        "respuesta": "Costumbrismo (in Catalan: costumisme; sometimes anglicized as costumbrism, with the adjectival form costumbrist)  is the literary or pictorial interpretation of local everyday life, mannerisms, and customs, primarily in the Hispanic scene, and particularly in the 19th century, i.e."
       },
       {
         "id": 22,
-        "category": "sections",
-        "question": "What sections does the article about Domestic realism have?",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "What sections does the article about Domestic realism have?",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "Examples",
           "Generic conventions",
           "References"
         ],
-        "num_results": 3
+        "num_resultados": 3
       },
       {
         "id": 23,
-        "category": "sections",
-        "question": "List the sections of the article on New Wave (science fiction).",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "List the sections of the article on New Wave (science fiction).",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "Authors and works",
           "Beginnings",
           "Criticisms",
@@ -205,14 +205,14 @@
           "Subsequent usage",
           "Topics"
         ],
-        "num_results": 19
+        "num_resultados": 19
       },
       {
         "id": 24,
-        "category": "sections",
-        "question": "What topics are covered in the article about Jindyworobak Movement?",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "What topics are covered in the article about Jindyworobak Movement?",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "External links",
           "Further reading",
           "Influence and aftermath",
@@ -222,14 +222,14 @@
           "Origins and aims",
           "References"
         ],
-        "num_results": 8
+        "num_resultados": 8
       },
       {
         "id": 25,
-        "category": "sections",
-        "question": "Into what parts is the content of Committed literature divided?",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "Into what parts is the content of Committed literature divided?",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "Committed Literature Magazine in Iran",
           "Different Political Concerns of Committed Literature",
           "Feminism",
@@ -239,14 +239,14 @@
           "Sartre and Committed Literature",
           "Scholarly contributions"
         ],
-        "num_results": 8
+        "num_resultados": 8
       },
       {
         "id": 26,
-        "category": "sections",
-        "question": "Give me the structure of the article about Pyreneanism.",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "Give me the structure of the article about Pyreneanism.",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "20th century: the Pyrenees after the Pyreneist",
           "A concise definition",
           "A romantic vision and elitist practice of the mountains",
@@ -264,14 +264,14 @@
           "The first Pyreneists (1780s–1840s)",
           "Works cited"
         ],
-        "num_results": 16
+        "num_resultados": 16
       },
       {
         "id": 27,
-        "category": "sections",
-        "question": "What subtopics does the article on Latin American poetry address?",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "What subtopics does the article on Latin American poetry address?",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "19th century",
           "20th century",
           "Colonial era",
@@ -284,14 +284,14 @@
           "References",
           "See also"
         ],
-        "num_results": 11
+        "num_resultados": 11
       },
       {
         "id": 28,
-        "category": "sections",
-        "question": "What does each part of the article on Bizarro fiction discuss?",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "What does each part of the article on Bizarro fiction discuss?",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "Authors",
           "Best Novel/Novella",
           "Best Short Story Collection",
@@ -303,14 +303,14 @@
           "See also",
           "Wonderland Book Award"
         ],
-        "num_results": 10
+        "num_resultados": 10
       },
       {
         "id": 29,
-        "category": "sections",
-        "question": "Show me the table of contents of the article about Asemic writing.",
-        "answer_type": "section_list",
-        "answer": [
+        "categoria": "sections",
+        "pregunta": "Show me the table of contents of the article about Asemic writing.",
+        "tipo_respuesta": "section_list",
+        "respuesta": [
           "False writing systems",
           "Gallery",
           "History",
@@ -319,39 +319,39 @@
           "See also",
           "Styles"
         ],
-        "num_results": 7
+        "num_resultados": 7
       },
       {
         "id": 30,
-        "category": "article_categories",
-        "question": "What categories does the article on Film-poem belong to?",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "What categories does the article on Film-poem belong to?",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Experimental film",
           "Film styles",
           "Poetry"
         ],
-        "num_results": 3
+        "num_resultados": 3
       },
       {
         "id": 31,
-        "category": "article_categories",
-        "question": "Tell me the categories of the article about Outline of literature.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Tell me the categories of the article about Outline of literature.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Literature",
           "Outlines",
           "Outlines of culture and arts",
           "Wikipedia missing topics"
         ],
-        "num_results": 4
+        "num_resultados": 4
       },
       {
         "id": 32,
-        "category": "article_categories",
-        "question": "Under what thematic classification is Mystical anarchism filed?",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Under what thematic classification is Mystical anarchism filed?",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Anarchism stubs",
           "Anarchist culture",
           "Anarchist schools of thought",
@@ -360,14 +360,14 @@
           "Russian art movements",
           "Symbolism (arts)"
         ],
-        "num_results": 7
+        "num_resultados": 7
       },
       {
         "id": 33,
-        "category": "article_categories",
-        "question": "List the classification tags for article Latin American Boom.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "List the classification tags for article Latin American Boom.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "20th-century Spanish literature",
           "20th-century literature",
           "CS1: long volume value",
@@ -375,51 +375,51 @@
           "Latin American literature",
           "Literary movements"
         ],
-        "num_results": 6
+        "num_resultados": 6
       },
       {
         "id": 34,
-        "category": "article_categories",
-        "question": "Look up the categories assigned to Sociology of literature.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Look up the categories assigned to Sociology of literature.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Literature",
           "Sociology of art",
           "Sociology of culture"
         ],
-        "num_results": 3
+        "num_resultados": 3
       },
       {
         "id": 35,
-        "category": "article_categories",
-        "question": "How is the article about Latin American poetry classified?",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "How is the article about Latin American poetry classified?",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Latin American literature",
           "Poetry",
           "Spanish-language literature"
         ],
-        "num_results": 3
+        "num_resultados": 3
       },
       {
         "id": 36,
-        "category": "article_categories",
-        "question": "Indicate the thematic categories of Allusion.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Indicate the thematic categories of Allusion.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Figures of speech",
           "Literature",
           "Narrative techniques",
           "Semantics"
         ],
-        "num_results": 4
+        "num_resultados": 4
       },
       {
         "id": 37,
-        "category": "article_categories",
-        "question": "Within what areas is List of people who achieved posthumous recognition classified?",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Within what areas is List of people who achieved posthumous recognition classified?",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Death-related lists",
           "Glory (honor)",
           "History-related lists",
@@ -434,39 +434,39 @@
           "Posthumous recognitions",
           "Science-related lists"
         ],
-        "num_results": 13
+        "num_resultados": 13
       },
       {
         "id": 38,
-        "category": "article_categories",
-        "question": "Extract the categories from article Stylistics.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "article_categories",
+        "pregunta": "Extract the categories from article Stylistics.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Applied linguistics",
           "Language varieties and styles",
           "Literature",
           "Stylistics"
         ],
-        "num_results": 4
+        "num_resultados": 4
       },
       {
         "id": 39,
-        "category": "search_by_category",
-        "question": "What articles belong to the category Harv and Sfn no-target errors?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "What articles belong to the category Harv and Sfn no-target errors?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Neo-romanticism",
           "Poetics",
           "Pyreneanism"
         ],
-        "num_results": 3
+        "num_resultados": 3
       },
       {
         "id": 40,
-        "category": "search_by_category",
-        "question": "List all articles classified under 19th-century literature.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "List all articles classified under 19th-century literature.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Catholic literary revival",
           "Coppet group",
           "Decadent movement",
@@ -474,93 +474,93 @@
           "Romantic literature",
           "Romanticism"
         ],
-        "num_results": 6
+        "num_resultados": 6
       },
       {
         "id": 41,
-        "category": "search_by_category",
-        "question": "Give me the articles that are in the category Rhetoric.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "Give me the articles that are in the category Rhetoric.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Asiatic style",
           "Atticism",
           "Colon (rhetoric)",
           "Topothesia"
         ],
-        "num_results": 4
+        "num_resultados": 4
       },
       {
         "id": 42,
-        "category": "search_by_category",
-        "question": "What topics fall under the classification of Literary realism?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "What topics fall under the classification of Literary realism?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Domestic realism",
           "Verismo (literature)"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 43,
-        "category": "search_by_category",
-        "question": "How many and which articles are under Religious literature?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "How many and which articles are under Religious literature?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Dream vision",
           "Mennonite literature"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 44,
-        "category": "search_by_category",
-        "question": "What content is categorized as Austria stubs?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "What content is categorized as Austria stubs?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Wiener Gruppe",
           "Young Vienna"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 45,
-        "category": "search_by_category",
-        "question": "Find the articles belonging to Fiction by genre.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "Find the articles belonging to Fiction by genre.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Bizarro fiction",
           "Neo-Decadence"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 46,
-        "category": "search_by_category",
-        "question": "Filter articles by the category English history stubs.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "Filter articles by the category English history stubs.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Birmingham Group (authors)",
           "Rhyming Chroniclers"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 47,
-        "category": "search_by_category",
-        "question": "Within Science fiction, what articles do we have available?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_category",
+        "pregunta": "Within Science fiction, what articles do we have available?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Chicanafuturism",
           "Latino Futurism"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 48,
-        "category": "search_by_content",
-        "question": "Which articles mention poetry?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "Which articles mention poetry?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Allusion",
           "Alternative literature",
@@ -654,14 +654,14 @@
           "Writer",
           "Zenitism"
         ],
-        "num_results": 92
+        "num_resultados": 92
       },
       {
         "id": 49,
-        "category": "search_by_content",
-        "question": "In which articles does the word novel appear?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "In which articles does the word novel appear?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Alternative literature",
           "Anticipatory plagiarism",
@@ -732,14 +732,14 @@
           "Yiddishist movement",
           "Young Vienna"
         ],
-        "num_results": 69
+        "num_resultados": 69
       },
       {
         "id": 50,
-        "category": "search_by_content",
-        "question": "What articles discuss or mention surrealism?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "What articles discuss or mention surrealism?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Asemic writing",
           "Bizarro fiction",
           "Latin American poetry",
@@ -751,14 +751,14 @@
           "Symbolism (movement)",
           "Wiener Gruppe"
         ],
-        "num_results": 10
+        "num_resultados": 10
       },
       {
         "id": 51,
-        "category": "search_by_content",
-        "question": "Which articles make reference to romanticism?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "Which articles make reference to romanticism?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Condorism",
           "Coppet group",
           "Costumbrismo",
@@ -782,14 +782,14 @@
           "Symbolism (movement)",
           "Ultra-Romanticism"
         ],
-        "num_results": 22
+        "num_resultados": 22
       },
       {
         "id": 52,
-        "category": "search_by_content",
-        "question": "Identify articles that contain information about verse.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "Identify articles that contain information about verse.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Acmeist poetry",
           "British Poetry Revival",
@@ -848,14 +848,14 @@
           "Writer",
           "Yiddishist movement"
         ],
-        "num_results": 57
+        "num_resultados": 57
       },
       {
         "id": 53,
-        "category": "search_by_content",
-        "question": "Give me articles that deal with realism.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "Give me articles that deal with realism.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Asemic writing",
           "Bizarro fiction",
           "Condorism",
@@ -892,14 +892,14 @@
           "Western canon",
           "Wiener Gruppe"
         ],
-        "num_results": 35
+        "num_resultados": 35
       },
       {
         "id": 54,
-        "category": "search_by_content",
-        "question": "What articles contain the word feminism?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "What articles contain the word feminism?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Chicanafuturism",
           "Committed literature",
           "New Wave (science fiction)",
@@ -907,14 +907,14 @@
           "Western canon",
           "Writer"
         ],
-        "num_results": 6
+        "num_resultados": 6
       },
       {
         "id": 55,
-        "category": "search_by_content",
-        "question": "What articles address the concept of rhyme?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "search_by_content",
+        "pregunta": "What articles address the concept of rhyme?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Dream vision",
           "Epigram",
           "Glossary of poetry terms",
@@ -930,141 +930,141 @@
           "The Papelipolas",
           "Writer"
         ],
-        "num_results": 14
+        "num_resultados": 14
       },
       {
         "id": 56,
-        "category": "metadata",
-        "question": "What is the URL of the article about List of literary movements?",
-        "answer_type": "text",
-        "answer": "https://en.wikipedia.org/wiki/List_of_literary_movements"
+        "categoria": "metadata",
+        "pregunta": "What is the URL of the article about List of literary movements?",
+        "tipo_respuesta": "text",
+        "respuesta": "https://en.wikipedia.org/wiki/List_of_literary_movements"
       },
       {
         "id": 57,
-        "category": "metadata",
-        "question": "What page ID does the article on Naturalism (theatre) have?",
-        "answer_type": "number",
-        "answer": 20295168
+        "categoria": "metadata",
+        "pregunta": "What page ID does the article on Naturalism (theatre) have?",
+        "tipo_respuesta": "number",
+        "respuesta": 20295168
       },
       {
         "id": 58,
-        "category": "metadata",
-        "question": "When was the article about Jadid downloaded?",
-        "answer_type": "text",
-        "answer": "2026-04-20T16:09:35Z"
+        "categoria": "metadata",
+        "pregunta": "When was the article about Jadid downloaded?",
+        "tipo_respuesta": "text",
+        "respuesta": "2026-04-20T16:09:35Z"
       },
       {
         "id": 59,
-        "category": "metadata",
-        "question": "Give me the URL of article Shinkankakuha.",
-        "answer_type": "text",
-        "answer": "https://en.wikipedia.org/wiki/Shinkankakuha"
+        "categoria": "metadata",
+        "pregunta": "Give me the URL of article Shinkankakuha.",
+        "tipo_respuesta": "text",
+        "respuesta": "https://en.wikipedia.org/wiki/Shinkankakuha"
       },
       {
         "id": 60,
-        "category": "metadata",
-        "question": "Point me to the original link for Stone and Sky (movement).",
-        "answer_type": "text",
-        "answer": "https://en.wikipedia.org/wiki/Stone_and_Sky_(movement)"
+        "categoria": "metadata",
+        "pregunta": "Point me to the original link for Stone and Sky (movement).",
+        "tipo_respuesta": "text",
+        "respuesta": "https://en.wikipedia.org/wiki/Stone_and_Sky_(movement)"
       },
       {
         "id": 61,
-        "category": "metadata",
-        "question": "How many categories does the article Generation of '38 have assigned?",
-        "answer_type": "number",
-        "answer": 5
+        "categoria": "metadata",
+        "pregunta": "How many categories does the article Generation of '38 have assigned?",
+        "tipo_respuesta": "number",
+        "respuesta": 5
       },
       {
         "id": 62,
-        "category": "metadata",
-        "question": "How many sections does the article about Ultra-Romanticism contain?",
-        "answer_type": "number",
-        "answer": 7
+        "categoria": "metadata",
+        "pregunta": "How many sections does the article about Ultra-Romanticism contain?",
+        "tipo_respuesta": "number",
+        "respuesta": 7
       },
       {
         "id": 63,
-        "category": "counting",
-        "question": "How many articles are there in total in the database?",
-        "answer_type": "number",
-        "answer": 135
+        "categoria": "counting",
+        "pregunta": "How many articles are there in total in the database?",
+        "tipo_respuesta": "number",
+        "respuesta": 135
       },
       {
         "id": 64,
-        "category": "counting",
-        "question": "How many distinct categories exist across all articles?",
-        "answer_type": "number",
-        "answer": 425
+        "categoria": "counting",
+        "pregunta": "How many distinct categories exist across all articles?",
+        "tipo_respuesta": "number",
+        "respuesta": 425
       },
       {
         "id": 65,
-        "category": "counting",
-        "question": "Which is the longest article (most words)?",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "counting",
+        "pregunta": "Which is the longest article (most words)?",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "article": "Romanticism",
           "words": 13003
         }
       },
       {
         "id": 66,
-        "category": "counting",
-        "question": "What is the average number of words per article?",
-        "answer_type": "number",
-        "answer": 1639.1
+        "categoria": "counting",
+        "pregunta": "What is the average number of words per article?",
+        "tipo_respuesta": "number",
+        "respuesta": 1639.1
       },
       {
         "id": 67,
-        "category": "counting",
-        "question": "Which article has the most sections?",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "counting",
+        "pregunta": "Which article has the most sections?",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "article": "Writer",
           "sections": 61
         }
       },
       {
         "id": 68,
-        "category": "counting",
-        "question": "How many articles have fewer than 500 words?",
-        "answer_type": "number",
-        "answer": 43
+        "categoria": "counting",
+        "pregunta": "How many articles have fewer than 500 words?",
+        "tipo_respuesta": "number",
+        "respuesta": 43
       },
       {
         "id": 69,
-        "category": "existence",
-        "question": "Is there an article about magical realism?",
-        "answer_type": "boolean",
-        "answer": {
+        "categoria": "existence",
+        "pregunta": "Is there an article about magical realism?",
+        "tipo_respuesta": "boolean",
+        "respuesta": {
           "exists": false,
           "title": null
         }
       },
       {
         "id": 70,
-        "category": "existence",
-        "question": "Is there an article dedicated to the Beat Generation?",
-        "answer_type": "boolean",
-        "answer": {
+        "categoria": "existence",
+        "pregunta": "Is there an article dedicated to the Beat Generation?",
+        "tipo_respuesta": "boolean",
+        "respuesta": {
           "exists": false,
           "title": null
         }
       },
       {
         "id": 71,
-        "category": "existence",
-        "question": "Do we have an article about poetry?",
-        "answer_type": "boolean",
-        "answer": {
+        "categoria": "existence",
+        "pregunta": "Do we have an article about poetry?",
+        "tipo_respuesta": "boolean",
+        "respuesta": {
           "exists": true,
           "title": "Poetry"
         }
       },
       {
         "id": 72,
-        "category": "existence",
-        "question": "Is Shakespeare mentioned in any of the articles?",
-        "answer_type": "boolean",
-        "answer": {
+        "categoria": "existence",
+        "pregunta": "Is Shakespeare mentioned in any of the articles?",
+        "tipo_respuesta": "boolean",
+        "respuesta": {
           "exists": true,
           "articles": [
             "Allusion",
@@ -1086,10 +1086,10 @@
       },
       {
         "id": 73,
-        "category": "existence",
-        "question": "Are there articles that mention Pablo Neruda?",
-        "answer_type": "boolean",
-        "answer": {
+        "categoria": "existence",
+        "pregunta": "Are there articles that mention Pablo Neruda?",
+        "tipo_respuesta": "boolean",
+        "respuesta": {
           "exists": true,
           "articles": [
             "Latin American poetry",
@@ -1100,10 +1100,10 @@
       },
       {
         "id": 74,
-        "category": "listing",
-        "question": "Give me the complete list of all available articles.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "listing",
+        "pregunta": "Give me the complete list of all available articles.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Acmeist poetry",
           "Allusion",
@@ -1240,14 +1240,14 @@
           "Young Vienna",
           "Zenitism"
         ],
-        "num_results": 135
+        "num_resultados": 135
       },
       {
         "id": 75,
-        "category": "listing",
-        "question": "What are all the article titles in the database?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "listing",
+        "pregunta": "What are all the article titles in the database?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Acmeist poetry",
           "Allusion",
@@ -1384,14 +1384,14 @@
           "Young Vienna",
           "Zenitism"
         ],
-        "num_results": 135
+        "num_resultados": 135
       },
       {
         "id": 76,
-        "category": "listing",
-        "question": "I need to see the full catalogue of articles. Which ones are there?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "listing",
+        "pregunta": "I need to see the full catalogue of articles. Which ones are there?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Abbaye de Créteil",
           "Acmeist poetry",
           "Allusion",
@@ -1528,14 +1528,14 @@
           "Young Vienna",
           "Zenitism"
         ],
-        "num_results": 135
+        "num_resultados": 135
       },
       {
         "id": 77,
-        "category": "listing",
-        "question": "Which articles start with the letter P?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "listing",
+        "pregunta": "Which articles start with the letter P?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Parnassianism",
           "Persona poetry",
           "Pink Decade",
@@ -1550,82 +1550,82 @@
           "Progressive Writers' Movement",
           "Pyreneanism"
         ],
-        "num_results": 13
+        "num_resultados": 13
       },
       {
         "id": 78,
-        "category": "relationships",
-        "question": "Which articles share the category 'Naturalism (literature)'?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "Which articles share the category 'Naturalism (literature)'?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Naturalism (literature)",
           "Verismo (literature)"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 79,
-        "category": "relationships",
-        "question": "Give me the articles that have the category History of European literature in common.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "Give me the articles that have the category History of European literature in common.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Romantic literature",
           "Ultra-Romanticism"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 80,
-        "category": "relationships",
-        "question": "Identify the articles that coincide in category English history stubs.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "Identify the articles that coincide in category English history stubs.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Birmingham Group (authors)",
           "Rhyming Chroniclers"
         ],
-        "num_results": 2
+        "num_resultados": 2
       },
       {
         "id": 81,
-        "category": "relationships",
-        "question": "Does the article on Decadent movement mention Poetry?",
-        "answer_type": "boolean_simple",
-        "answer": true
+        "categoria": "relationships",
+        "pregunta": "Does the article on Decadent movement mention Poetry?",
+        "tipo_respuesta": "boolean_simple",
+        "respuesta": true
       },
       {
         "id": 82,
-        "category": "relationships",
-        "question": "Is there a reference to Decadent movement within the article on Neo-Decadence?",
-        "answer_type": "boolean_simple",
-        "answer": true
+        "categoria": "relationships",
+        "pregunta": "Is there a reference to Decadent movement within the article on Neo-Decadence?",
+        "tipo_respuesta": "boolean_simple",
+        "respuesta": true
       },
       {
         "id": 83,
-        "category": "relationships",
-        "question": "Is there any connection between the articles on Poetry and Western canon?",
-        "answer_type": "boolean_simple",
-        "answer": true
+        "categoria": "relationships",
+        "pregunta": "Is there any connection between the articles on Poetry and Western canon?",
+        "tipo_respuesta": "boolean_simple",
+        "respuesta": true
       },
       {
         "id": 84,
-        "category": "relationships",
-        "question": "Is Poetry mentioned in the content of Thơ mới?",
-        "answer_type": "boolean_simple",
-        "answer": true
+        "categoria": "relationships",
+        "pregunta": "Is Poetry mentioned in the content of Thơ mới?",
+        "tipo_respuesta": "boolean_simple",
+        "respuesta": true
       },
       {
         "id": 85,
-        "category": "relationships",
-        "question": "Is there any relationship between Jadid and Writer according to the articles?",
-        "answer_type": "boolean_simple",
-        "answer": true
+        "categoria": "relationships",
+        "pregunta": "Is there any relationship between Jadid and Writer according to the articles?",
+        "tipo_respuesta": "boolean_simple",
+        "respuesta": true
       },
       {
         "id": 86,
-        "category": "relationships",
-        "question": "Which are the 5 most extensive articles?",
-        "answer_type": "ranking",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "Which are the 5 most extensive articles?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
           {
             "article": "Romanticism",
             "words": 13003
@@ -1647,14 +1647,14 @@
             "words": 6556
           }
         ],
-        "num_results": 5
+        "num_resultados": 5
       },
       {
         "id": 87,
-        "category": "relationships",
-        "question": "What articles discuss literary movements?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "What articles discuss literary movements?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Alternative literature",
           "Condorism",
           "Créolie",
@@ -1695,14 +1695,14 @@
           "Verismo (literature)",
           "Xungen movement"
         ],
-        "num_results": 39
+        "num_resultados": 39
       },
       {
         "id": 88,
-        "category": "relationships",
-        "question": "What articles are classified in categories related to poetry?",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "relationships",
+        "pregunta": "What articles are classified in categories related to poetry?",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Acmeist poetry",
           "Anticipatory plagiarism",
           "Asemic writing",
@@ -1743,14 +1743,14 @@
           "Wellington Group",
           "Wiener Gruppe"
         ],
-        "num_results": 39
+        "num_resultados": 39
       },
       {
         "id": 89,
-        "category": "cross_document",
-        "question": "List every article in our corpus that mentions Oxford University Press.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "cross_document",
+        "pregunta": "List every article in our corpus that mentions Oxford University Press.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "British Poetry Revival",
           "Colon (rhetoric)",
           "List of literary movements",
@@ -1767,14 +1767,14 @@
           "Symbolism (movement)",
           "Verismo (literature)"
         ],
-        "num_results": 15
+        "num_resultados": 15
       },
       {
         "id": 90,
-        "category": "cross_document",
-        "question": "Which articles reference Edgar Allan Poe? Provide the complete list, not just one example.",
-        "answer_type": "article_list",
-        "answer": [
+        "categoria": "cross_document",
+        "pregunta": "Which articles reference Edgar Allan Poe? Provide the complete list, not just one example.",
+        "tipo_respuesta": "article_list",
+        "respuesta": [
           "Decadent movement",
           "Glossary of poetry terms",
           "Interlingue literature",
@@ -1787,14 +1787,14 @@
           "Symbolism (movement)",
           "Topothesia"
         ],
-        "num_results": 11
+        "num_resultados": 11
       },
       {
         "id": 91,
-        "category": "cross_document",
-        "question": "How many distinct articles mention James Joyce, and which are they?",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "cross_document",
+        "pregunta": "How many distinct articles mention James Joyce, and which are they?",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "count": 9,
           "articles": [
             "Dream vision",
@@ -1811,17 +1811,17 @@
       },
       {
         "id": 92,
-        "category": "cross_document",
-        "question": "How many articles in total mention Cambridge University Press?",
-        "answer_type": "number",
-        "answer": 8
+        "categoria": "cross_document",
+        "pregunta": "How many articles in total mention Cambridge University Press?",
+        "tipo_respuesta": "number",
+        "respuesta": 8
       },
       {
         "id": 93,
-        "category": "cross_document",
-        "question": "Describe the mutual relationship between the articles on Abbaye de Créteil and Unanimism: explain how each one references the other.",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "cross_document",
+        "pregunta": "Describe the mutual relationship between the articles on Abbaye de Créteil and Unanimism: explain how each one references the other.",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "mutual_reference": true,
           "articles": [
             "Abbaye de Créteil",
@@ -1831,10 +1831,10 @@
       },
       {
         "id": 94,
-        "category": "cross_document",
-        "question": "Are the articles on Allusion and Poetry bidirectionally connected? If so, justify by indicating that each one cites the other.",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "cross_document",
+        "pregunta": "Are the articles on Allusion and Poetry bidirectionally connected? If so, justify by indicating that each one cites the other.",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "mutual_reference": true,
           "articles": [
             "Allusion",
@@ -1844,17 +1844,17 @@
       },
       {
         "id": 95,
-        "category": "cross_document",
-        "question": "How many pairs of articles in the corpus reference each other (mutual references)?",
-        "answer_type": "number",
-        "answer": 27
+        "categoria": "cross_document",
+        "pregunta": "How many pairs of articles in the corpus reference each other (mutual references)?",
+        "tipo_respuesta": "number",
+        "respuesta": 27
       },
       {
         "id": 96,
-        "category": "cross_document",
-        "question": "Find an article that bridges Abbaye de Créteil to Allusion: identify an intermediate article mentioned by Abbaye de Créteil that itself references Allusion.",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "cross_document",
+        "pregunta": "Find an article that bridges Abbaye de Créteil to Allusion: identify an intermediate article mentioned by Abbaye de Créteil that itself references Allusion.",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "intermediate": "Poetry",
           "chain": [
             "Abbaye de Créteil",
@@ -1865,10 +1865,10 @@
       },
       {
         "id": 97,
-        "category": "cross_document",
-        "question": "Through which intermediate article is Abbaye de Créteil indirectly connected to Asemic writing?",
-        "answer_type": "object",
-        "answer": {
+        "categoria": "cross_document",
+        "pregunta": "Through which intermediate article is Abbaye de Créteil indirectly connected to Asemic writing?",
+        "tipo_respuesta": "object",
+        "respuesta": {
           "intermediate": "Poetry",
           "chain": [
             "Abbaye de Créteil",
@@ -1880,10 +1880,10 @@
       },
       {
         "id": 98,
-        "category": "cross_document",
-        "question": "List ALL categories that the articles Chicanafuturism and Latino Futurism have in common.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "cross_document",
+        "pregunta": "List ALL categories that the articles Chicanafuturism and Latino Futurism have in common.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "Chicano literature",
           "Decolonization",
           "Futurism",
@@ -1892,27 +1892,27 @@
           "Science fiction",
           "Speculative fiction"
         ],
-        "num_results": 7
+        "num_resultados": 7
       },
       {
         "id": 99,
-        "category": "cross_document",
-        "question": "What classification labels are shared between the articles Indianism (arts) and Ultra-Romanticism? Provide every common category.",
-        "answer_type": "category_list",
-        "answer": [
+        "categoria": "cross_document",
+        "pregunta": "What classification labels are shared between the articles Indianism (arts) and Ultra-Romanticism? Provide every common category.",
+        "tipo_respuesta": "category_list",
+        "respuesta": [
           "19th-century Brazilian literature",
           "Brazilian literature",
           "Latin American literature",
           "Submovements of Romanticism"
         ],
-        "num_results": 4
+        "num_resultados": 4
       },
       {
         "id": 100,
-        "category": "cross_document",
-        "question": "What proper-noun entity is referenced in BOTH the article 'Romantic literature' and the article 'Romanticism'?",
-        "answer_type": "text",
-        "answer": "Achim von Arnim"
+        "categoria": "cross_document",
+        "pregunta": "What proper-noun entity is referenced in BOTH the article 'Romantic literature' and the article 'Romanticism'?",
+        "tipo_respuesta": "text",
+        "respuesta": "Achim von Arnim"
       }
     ]
   }

@@ -67,7 +67,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from openai import AzureOpenAI  # noqa: E402
 
-from src.config import config  # noqa: E402  (carga el .env)
+from src.config import config, safe_create_kwargs  # noqa: E402  (carga el .env)
 from test.scripts.pricing import token_cost_usd  # noqa: E402
 
 # ---------------------------------------------------------------------------
@@ -308,13 +308,15 @@ def evaluate_batch_coincidencia(
     for attempt in range(1, max_retries + 1):
         try:
             response = client.chat.completions.create(
-                model=deployment,
-                messages=[
-                    {"role": "system", "content": EVAL_SYSTEM_PROMPT},
-                    {"role": "user",   "content": user_prompt},
-                ],
-                temperature=TEMPERATURE,
-                max_tokens=MAX_TOKENS_BATCH,
+                **safe_create_kwargs(
+                    model=deployment,
+                    messages=[
+                        {"role": "system", "content": EVAL_SYSTEM_PROMPT},
+                        {"role": "user",   "content": user_prompt},
+                    ],
+                    temperature=TEMPERATURE,
+                    max_completion_tokens=MAX_TOKENS_BATCH,
+                )
             )
             if response.usage:
                 last_tokens_in  = response.usage.prompt_tokens or 0

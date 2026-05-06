@@ -18,7 +18,7 @@ from typing import Dict, List, Tuple
 
 from openai import AzureOpenAI
 
-from src.config import config
+from src.config import config, safe_create_kwargs
 from src.rag.handler.base import BaseUseCaseHandler
 from src.rag.handler.cvs_history import CvsHistory
 from src.rag.prompts.cvs_prompts import CVsPrompts
@@ -190,10 +190,12 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         prompt = self.prompts.mini_llm_batch(query, chunks, reliability_label)
         try:
             response = mini_client.chat.completions.create(
-                model=mini_deployment,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-                max_tokens=400,
+                **safe_create_kwargs(
+                    model=mini_deployment,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.1,
+                    max_completion_tokens=400,
+                )
             )
             text = response.choices[0].message.content.strip()
             # Parsear data: y reasoning:
@@ -399,13 +401,15 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         max_tokens_response = max(config.max_tokens, 4096)
 
         response = client.chat.completions.create(
-            model=chat_cfg.deployment,
-            messages=[
-                {"role": "system", "content": system_message},
-                {"role": "user",   "content": prompt},
-            ],
-            temperature=0.3,
-            max_tokens=max_tokens_response,
+            **safe_create_kwargs(
+                model=chat_cfg.deployment,
+                messages=[
+                    {"role": "system", "content": system_message},
+                    {"role": "user",   "content": prompt},
+                ],
+                temperature=0.3,
+                max_completion_tokens=max_tokens_response,
+            )
         )
 
         answer = response.choices[0].message.content

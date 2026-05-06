@@ -253,3 +253,38 @@ class RAGConfig:
 
 # Instancia global
 config = RAGConfig()
+
+
+# ---------------------------------------------------------------------------
+# Compatibilidad con modelos de razonamiento (o-series, gpt-5-*)
+# ---------------------------------------------------------------------------
+# Estos modelos solo admiten los valores por defecto de temperature/top_p/etc.
+# Cualquier otro valor provoca BadRequestError 400.
+_REASONING_PREFIXES = ("o1", "o2", "o3", "o4", "gpt-5")
+
+
+def is_reasoning_model(model_name: str) -> bool:
+    """True si el nombre de modelo corresponde a un modelo de razonamiento."""
+    if not model_name:
+        return False
+    n = model_name.lower().strip()
+    return any(
+        n == p or n.startswith(p + "-") or n.startswith(p + ".")
+        for p in _REASONING_PREFIXES
+    )
+
+
+def safe_create_kwargs(**kwargs) -> dict:
+    """Elimina parámetros no soportados por modelos de razonamiento.
+
+    Uso:
+        response = client.chat.completions.create(
+            **safe_create_kwargs(model=..., temperature=0.3, ...)
+        )
+    """
+    # Resolver el deployment al nombre de modelo si está disponible
+    model = kwargs.get("model", "")
+    if is_reasoning_model(model):
+        for param in ("temperature", "top_p", "frequency_penalty", "presence_penalty"):
+            kwargs.pop(param, None)
+    return kwargs

@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
 from openai import AzureOpenAI
-from src.config import config
+from src.config import config, safe_create_kwargs
 
 logger = logging.getLogger("guardrails")
 logger.setLevel(logging.INFO)
@@ -202,10 +202,12 @@ RESPUESTA:
 ¿La respuesta inventa información que NO está en las fuentes? Responde solo SÍ o NO."""
 
             res = self.openai_client.chat.completions.create(
-                model=config.get_chat_model_config().deployment,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.0,
-                max_tokens=10,
+                **safe_create_kwargs(
+                    model=config.get_chat_model_config().deployment,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.0,
+                    max_completion_tokens=10,
+                )
             )
             text = res.choices[0].message.content.strip().upper()
             return 0.85 if ("SÍ" in text or "SI" in text) else 0.15

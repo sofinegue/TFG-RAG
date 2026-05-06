@@ -3,7 +3,7 @@ Servicio de OpenAI para embeddings y completions
 """
 import tiktoken
 from openai import AzureOpenAI
-from src.config import config
+from src.config import config, safe_create_kwargs
 from datetime import datetime
 from typing import Optional
 
@@ -87,11 +87,13 @@ def get_response_from_gpt(
         )
         
         response = client.chat.completions.create(
-            model=chat_config.deployment,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            messages=[{"role": "user", "content": prompt}],
-            logit_bias=logit_bias
+            **safe_create_kwargs(
+                model=chat_config.deployment,
+                temperature=temperature,
+                max_completion_tokens=max_tokens,
+                messages=[{"role": "user", "content": prompt}],
+                logit_bias=logit_bias,
+            )
         )
         
         output = response.choices[0].message.content

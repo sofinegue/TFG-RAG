@@ -13,7 +13,7 @@ from azure.core.credentials import AzureKeyCredential
 from azure.search.documents.models import VectorizedQuery
 from openai import AzureOpenAI
 
-from src.config import config
+from src.config import config, safe_create_kwargs
 from src.rag.handler import get_handler
 
 
@@ -109,10 +109,12 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         try:
             response = self.chat_client.chat.completions.create(
-                model=self.chat_deployment,
-                messages=[{"role": "user", "content": expansion_prompt}],
-                temperature=0.1,
-                max_tokens=70,
+                **safe_create_kwargs(
+                    model=self.chat_deployment,
+                    messages=[{"role": "user", "content": expansion_prompt}],
+                    temperature=0.1,
+                    max_completion_tokens=70,
+                )
             )
             expanded = response.choices[0].message.content.strip().strip('"').strip("'")
             if len(expanded.split()) > 20 or not expanded or "\n" in expanded:
@@ -135,10 +137,12 @@ Responde SOLO con la query (expandida o sin cambios):"""
 
         try:
             response = self.chat_client.chat.completions.create(
-                model=self.chat_deployment,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
-                max_tokens=500,
+                **safe_create_kwargs(
+                    model=self.chat_deployment,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.7,
+                    max_completion_tokens=500,
+                )
             )
             text = response.choices[0].message.content
             queries = re.sub(r"\d+\.\s*", "", text).strip().split("\n")
