@@ -18,7 +18,7 @@ const LANGUAGES_BY_USE_CASE = {
 };
 
 const USE_CASE_DEFAULTS = [
-  { id: 'cvs',  label: 'CVs / Talento',  description: 'Búsqueda en currículums', icon: '👤' },
+  { id: 'cvs',  label: 'CVs',  description: 'Búsqueda en currículums', icon: '👤' },
   { id: 'eu',   label: 'Legislación UE', description: 'Documentos de la Unión Europea', icon: '🇪🇺' },
   { id: 'wiki', label: 'Wikipedia',       description: 'Conocimiento general enciclopédico', icon: '📖' },
 ];

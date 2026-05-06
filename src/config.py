@@ -70,8 +70,7 @@ class RAGConfig:
     azure_openai_api_version: str = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
     azure_openai_emb_deployment: str = os.getenv("AZURE_OPENAI_EMB_DEPLOYMENT")
     azure_openai_emb_name: str = os.getenv("AZURE_OPENAI_EMB_NAME", "text-embedding-ada-002")
-    azure_openai_gpt4_1_name: str = os.getenv("AZURE_OPENAI_GPT4_1_NAME")
-    azure_openai_mini_gpt4o_name: str = os.getenv("AZURE_OPENAI_Mini_GPT4o_NAME")
+    azure_openai_mini_name: str = os.getenv("AZURE_OPENAI_MINI_NAME")
     
     # === DOCUMENT INTELLIGENCE ===
     doc_intel_url: str = os.getenv("DOC_INTEL_URL")

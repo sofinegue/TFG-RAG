@@ -12,7 +12,7 @@ La funcionalidad multiidioma permite al usuario seleccionar el idioma en el que 
 
 | Caso de uso        | Idiomas disponibles                                  |
 |--------------------|------------------------------------------------------|
-| **CVs / Talento**  | Español (`es`), Inglés (`en`)                        |
+| **CVs**  | Español (`es`), Inglés (`en`)                        |
 | **Wikipedia**      | Español (`es`), Inglés (`en`)                        |
 | **Legislación UE** | Español (`es`), Inglés (`en`), Francés (`fr`), Italiano (`it`), Portugués (`pt`) |
 

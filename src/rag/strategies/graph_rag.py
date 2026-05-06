@@ -22,7 +22,6 @@ un loop dedicado (similar al patrón usado en `app_langgraph.generate_answer_asy
 from __future__ import annotations
 
 import asyncio
-import concurrent.futures
 import os
 from typing import Dict, List, Optional
 
@@ -83,8 +82,8 @@ async def _get_or_create_graphiti(database: str):
     llm_config = LLMConfig(
         api_key=config.azure_openai_key,
         base_url=azure_base_url,
-        model=config.azure_openai_gpt4_1_name,
-        small_model=config.azure_openai_gpt4_1_name,
+        model=config.azure_openai_mini_name,
+        small_model=config.azure_openai_mini_name,
     )
     llm_client = AzureOpenAILLMClient(azure_client=azure_client, config=llm_config)
 
@@ -214,17 +213,63 @@ async def _search_async(use_case: str, query: str) -> List[Dict]:
 
 
 def _run_async(coro):
-    """Ejecuta una coroutine en un loop dedicado (compatible con LangGraph sync)."""
-    def runner():
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        try:
-            return loop.run_until_complete(coro)
-        finally:
-            loop.close()
+    """Ejecuta una coroutine en un loop dedicado **persistente**.
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        return executor.submit(runner).result()
+    El driver async de Neo4j (y el cliente AsyncOpenAI) atan los sockets al
+    event loop en el que se crearon. Si abrimos un loop nuevo por cada query
+    y lo cerramos, los siguientes intentos de usar las conexiones cacheadas
+    en ``_GRAPHITI_INSTANCES`` revientan con::
+
+        AttributeError: 'NoneType' object has no attribute 'send'
+        (asyncio.proactor_events on Windows)
+
+    La solución: un **único** loop vivo en un thread dedicado, reutilizado
+    para todas las corrutinas mientras dure el proceso.
+    """
+    loop, _thread = _get_persistent_loop()
+    fut = asyncio.run_coroutine_threadsafe(coro, loop)
+    return fut.result()
+
+
+_PERSISTENT_LOOP: Optional[asyncio.AbstractEventLoop] = None
+_PERSISTENT_THREAD = None
+_PERSISTENT_LOCK = None  # threading.Lock perezoso para evitar import en top-level
+
+
+def _get_persistent_loop():
+    global _PERSISTENT_LOOP, _PERSISTENT_THREAD, _PERSISTENT_LOCK
+    import threading
+
+    if _PERSISTENT_LOCK is None:
+        _PERSISTENT_LOCK = threading.Lock()
+
+    with _PERSISTENT_LOCK:
+        if _PERSISTENT_LOOP is not None and _PERSISTENT_LOOP.is_running():
+            return _PERSISTENT_LOOP, _PERSISTENT_THREAD
+
+        ready = threading.Event()
+
+        def _runner():
+            global _PERSISTENT_LOOP
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            _PERSISTENT_LOOP = loop
+            ready.set()
+            try:
+                loop.run_forever()
+            finally:
+                try:
+                    loop.run_until_complete(loop.shutdown_asyncgens())
+                except Exception:
+                    pass
+                loop.close()
+
+        _PERSISTENT_THREAD = threading.Thread(
+            target=_runner, name="graph-rag-loop", daemon=True,
+        )
+        _PERSISTENT_THREAD.start()
+        ready.wait()
+        return _PERSISTENT_LOOP, _PERSISTENT_THREAD
 
 
 class GraphRagStrategy(BaseStrategy):

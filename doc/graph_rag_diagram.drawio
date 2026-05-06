@@ -1,0 +1,164 @@
+<mxfile host="app.diagrams.net" modified="2026-05-01T00:00:00.000Z" agent="copilot" version="24.0.0" type="device">
+  <diagram name="GraphRAG" id="graphrag-diagram">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITLE -->
+        <mxCell id="title" value="Knowledge Graph RAG (Graphiti + Neo4j)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="700" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ====================== LEFT COLUMN: INGESTA ====================== -->
+        <mxCell id="col-ingesta" value="INGESTA (offline)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="620" height="700" as="geometry" />
+        </mxCell>
+
+        <!-- Cosmos DB -->
+        <mxCell id="cosmos" value="Cosmos DB&#xa;(Chunks-EU / Chunks-Wiki)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="120" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- add_episode -->
+        <mxCell id="addep" value="graphiti.add_episode(...)&#xa;&#xa;LLM extrae entidades y relaciones&#xa;Embedder genera vectores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="270" width="300" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Neo4j container -->
+        <mxCell id="neo4j-box" value="Neo4j&#xa;(database por caso de uso)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="410" width="540" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- Episodic node -->
+        <mxCell id="episodic" value="Episodic&#xa;&#xa;Texto original del chunk&#xa;name, content, reference_time" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="110" y="490" width="160" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Entity node A -->
+        <mxCell id="entityA" value="Entity&#xa;&#xa;name + summary&#xa;+ embedding" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="320" y="450" width="140" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Entity node B -->
+        <mxCell id="entityB" value="Entity&#xa;&#xa;name + summary&#xa;+ embedding" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="610" width="140" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- MENTIONS edge (Episodic -> Entity) -->
+        <mxCell id="mentions" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c8ebf;fontSize=10;" edge="1" parent="1" source="episodic" target="entityA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mentions-lbl" value="MENTIONS" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="mentions">
+          <mxGeometry x="-0.1" relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- RELATES_TO edge (Entity A -> Entity B) -->
+        <mxCell id="relates" style="endArrow=classic;html=1;rounded=0;strokeColor=#b85450;strokeWidth=2;fontSize=10;" edge="1" parent="1" source="entityA" target="entityB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="relates-lbl" value="RELATES_TO&#xa;fact + embedding" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;fontColor=#b85450;" vertex="1" connectable="0" parent="relates">
+          <mxGeometry x="0.1" relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows ingesta flow -->
+        <mxCell id="arr1" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="cosmos" target="addep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr2" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="addep" target="neo4j-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ====================== RIGHT COLUMN: RETRIEVAL ====================== -->
+        <mxCell id="col-retrieval" value="RETRIEVAL (online)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=16;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="720" y="70" width="640" height="700" as="geometry" />
+        </mxCell>
+
+        <!-- Pregunta -->
+        <mxCell id="query" value="Pregunta del usuario" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="120" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Hybrid search box -->
+        <mxCell id="hybrid" value="Búsqueda híbrida sobre el grafo&#xa;(graphiti.search_)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="780" y="200" width="520" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vector" value="Vector search&#xa;(embeddings de nodos y aristas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="240" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bm25" value="BM25&#xa;(búsqueda léxica)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="240" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rrf" value="RRF (Reciprocal Rank Fusion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="320" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrV" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="vector" target="rrf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrB" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="bm25" target="rrf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Reranker -->
+        <mxCell id="reranker" value="Reranker&#xa;(filtra por GRAPH_RAG_MIN_SCORE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="410" width="280" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Chunks output -->
+        <mxCell id="chunks" value="Chunks recuperados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="780" y="500" width="520" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ch-ep" value="episode&#xa;texto original" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="540" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ch-fact" value="fact&#xa;FACT: relación entre&#xa;entidades" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="965" y="540" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ch-ent" value="entity&#xa;ENTITY name: summary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="540" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Generator -->
+        <mxCell id="generator" value="Generator (LLM)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="670" width="280" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Answer -->
+        <mxCell id="answer" value="Respuesta" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="735" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Retrieval flow arrows -->
+        <mxCell id="arr-q" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="query" target="hybrid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-rr" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="rrf" target="reranker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-ch" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="reranker" target="chunks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-gen" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="chunks" target="generator">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-ans" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="generator" target="answer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Bridge: Neo4j feeds hybrid search -->
+        <mxCell id="arr-bridge" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;dashed=1;strokeColor=#666666;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="neo4j-box" target="hybrid">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arr-bridge-lbl" value="consulta el grafo" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;fontColor=#666666;" vertex="1" connectable="0" parent="arr-bridge">
+          <mxGeometry x="0" relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

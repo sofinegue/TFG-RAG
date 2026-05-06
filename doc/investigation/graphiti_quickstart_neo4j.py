@@ -78,7 +78,7 @@ logger.info("Configuración cargada desde src.config")
 logger.info(f"  Neo4j URI:       {neo4j_uri}")
 logger.info(f"  Neo4j User:      {neo4j_user}")
 logger.info(f"  Azure Base URL:  {azure_base_url}")
-logger.info(f"  LLM Model:       {config.azure_openai_gpt4_1_name}")
+logger.info(f"  LLM Model:       {config.azure_openai_mini_name}")
 logger.info(f"  Emb Deployment:  {config.azure_openai_emb_deployment}")
 logger.info(f"  Emb Model Name:  {config.azure_openai_emb_name}")
 logger.info(f"  Log Level:       {config.log_level}")
@@ -110,11 +110,11 @@ async def main():
     llm_config = LLMConfig(
         api_key=azure_api_key,
         base_url=azure_base_url,
-        model=config.azure_openai_gpt4_1_name,
-        small_model=config.azure_openai_gpt4_1_name,
+        model=config.azure_openai_mini_name,
+        small_model=config.azure_openai_mini_name,
     )
     llm_client = AzureOpenAILLMClient(azure_client=azure_client, config=llm_config)
-    logger.info(f"  LLM client configurado (model={config.azure_openai_gpt4_1_name})")
+    logger.info(f"  LLM client configurado (model={config.azure_openai_mini_name})")
 
     # Embedder client
     # La API v1 de Azure necesita el nombre del DEPLOYMENT (e.g. "ada-002"),

@@ -73,7 +73,7 @@ logger.info(f"  Neo4j URI:       {neo4j_uri}")
 logger.info(f"  Neo4j User:      {neo4j_user}")
 logger.info(f"  Neo4j Database:  {config.neo4j_wiki_database}")
 logger.info(f"  Azure Base URL:  {azure_base_url}")
-logger.info(f"  LLM Model:       {config.azure_openai_gpt4_1_name}")
+logger.info(f"  LLM Model:       {config.azure_openai_mini_name}")
 logger.info(f"  Emb Deployment:  {config.azure_openai_emb_deployment}")
 logger.info(f"  Cosmos DB:       {config.cosmosdb_database}")
 logger.info(f"  Cosmos Wiki:     {config.cosmosdb_container_wiki}")
@@ -149,11 +149,11 @@ async def main(max_chunks: int | None = None, no_wipe: bool = False):
     llm_config = LLMConfig(
         api_key=azure_api_key,
         base_url=azure_base_url,
-        model=config.azure_openai_gpt4_1_name,
-        small_model=config.azure_openai_gpt4_1_name,
+        model=config.azure_openai_mini_name,
+        small_model=config.azure_openai_mini_name,
     )
     llm_client = AzureOpenAILLMClient(azure_client=azure_client, config=llm_config)
-    logger.info(f"  LLM client configurado (model={config.azure_openai_gpt4_1_name})")
+    logger.info(f"  LLM client configurado (model={config.azure_openai_mini_name})")
 
     emb_config = config.get_embedding_model_config()
     embedder = AzureOpenAIEmbedderClient(

@@ -73,7 +73,7 @@ executor = ThreadPoolExecutor(max_workers=4)
 USE_CASES = {
     "cvs": {
         "id":          "cvs",
-        "label":       "CVs / Talento",
+        "label":       "CVs",
         "description": "Búsqueda en currículums del equipo EY",
         "icon":        "👤",
         "index":       config.azure_search_index_cvs,

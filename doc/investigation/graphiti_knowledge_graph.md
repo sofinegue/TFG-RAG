@@ -13,7 +13,7 @@ Paso a paso:
 2. **Creación del cliente Azure OpenAI** — Un único `AsyncOpenAI` apuntando al endpoint de compatibilidad v1 de Azure (`<azure_url>/openai/v1/`). Este cliente se reutiliza para LLM, embeddings y reranker.
 
 3. **Inicialización de los 3 clientes de Graphiti**:
-   - **`AzureOpenAILLMClient`**: Chat/extracción. Usa el deployment `AZURE_OPENAI_GPT4_1_NAME` (e.g. `gpt-4.1`). Se configura `small_model` al mismo deployment para evitar que Graphiti intente usar `gpt-4.1-nano` (que no existe en Azure).
+   - **`AzureOpenAILLMClient`**: Chat/extracción. Usa el deployment `AZURE_OPENAI_MINI_NAME` (e.g. `gpt-5-mini`). Se configura `small_model` al mismo deployment para evitar que Graphiti intente usar un modelo por defecto que no existe en Azure.
    - **`AzureOpenAIEmbedderClient`**: Embeddings vectoriales. Usa `AZURE_OPENAI_EMB_NAME` (e.g. `text-embedding-ada-002`).
    - **`OpenAIRerankerClient`**: Cross-encoder para reranking por logprobs. Reutiliza el mismo cliente y config LLM.
 
@@ -40,7 +40,7 @@ NEO4J_PASSWORD=<password>
 # Azure OpenAI
 AZURE_OPENAI_URL=https://<resource>.cognitiveservices.azure.com
 AZURE_OPENAI_KEY=<api-key>
-AZURE_OPENAI_GPT4_1_NAME=gpt-4.1            # Nombre del deployment LLM
+AZURE_OPENAI_MINI_NAME=gpt-5-mini           # Nombre del deployment LLM
 AZURE_OPENAI_EMB_NAME=text-embedding-ada-002  # Nombre del deployment de embeddings
 
 # Desactivar telemetría (evita errores SSL detrás de proxy)

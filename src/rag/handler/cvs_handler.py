@@ -1,5 +1,5 @@
 """
-Handler del caso de uso CVs / Talento.
+Handler del caso de uso CVs.
 
 Flujo (ver diagrama):
   1. Retrieve  — búsqueda directa sin RAG Fusion, CVS_TOP_K chunks
@@ -275,7 +275,7 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
           }
         """
         # Cliente mini-LLM
-        mini_model = config.azure_openai_mini_gpt4o_name or config.chat_model
+        mini_model = config.azure_openai_mini_name or config.chat_model
         try:
             mini_cfg = config.get_model_config(mini_model)
         except ValueError:

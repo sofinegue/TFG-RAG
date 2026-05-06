@@ -88,9 +88,9 @@ def _build_llm_client() -> tuple[AzureOpenAI, str]:
 
     Prioridad de configuración:
       1. Entrada "gpt4o-mini" en MODELS_CONFIG  → usa sus credenciales.
-      2. Fallback a azure_openai_url / azure_openai_key / azure_openai_mini_gpt4o_name.
+      2. Fallback a azure_openai_url / azure_openai_key / azure_openai_mini_name.
     """
-    mini_model_name = "gpt4o-mini"
+    mini_model_name = "gpt-5-mini"
     try:
         cfg = config.get_model_config(mini_model_name)
         client = AzureOpenAI(
@@ -107,11 +107,11 @@ def _build_llm_client() -> tuple[AzureOpenAI, str]:
         )
 
     # Fallback directo
-    deployment = config.azure_openai_mini_gpt4o_name
+    deployment = config.azure_openai_mini_name
     if not deployment:
         raise RuntimeError(
             "No se encontró configuración para el modelo mini. "
-            "Añade 'gpt4o-mini' a MODELS_CONFIG o define AZURE_OPENAI_Mini_GPT4o_NAME."
+            "Añade 'gpt-5-mini' a MODELS_CONFIG o define AZURE_OPENAI_MINI_NAME."
         )
     client = AzureOpenAI(
         azure_endpoint=config.azure_openai_url,

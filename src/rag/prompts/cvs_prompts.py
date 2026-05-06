@@ -1,5 +1,5 @@
 """
-Prompts específicos para el caso de uso CVs / Talento.
+Prompts específicos para el caso de uso CVs.
 
 Centralizados aquí para que el handler cvs/handler.py los importe y
 los tests de prompts puedan validarlos de forma aislada.
@@ -147,7 +147,14 @@ Responde SOLO en el formato indicado."""
         """
         Recibe los resultados de los 5 grupos de fiabilidad y pide
         al LLM potente que genere la respuesta final para el usuario.
+
+        Importante: el usuario final NUNCA debe ver el concepto de
+        "fiabilidad". El primer grupo se presenta como "principales
+        resultados" y el resto en una sola sección de "otros perfiles
+        que coinciden", manteniendo el orden interno por fiabilidad.
+        Toda la respuesta debe ser una lista numerada continua.
         """
+        # Construir secciones internas (solo el LLM las ve, no el usuario).
         groups_text = ""
         for gname in ("grupo1", "grupo2", "grupo3", "grupo4", "grupo5"):
             g = groups.get(gname)
@@ -157,53 +164,71 @@ Responde SOLO en el formato indicado."""
             if isinstance(data, list):
                 data = ", ".join(data) if data else "ninguno"
             reasoning = g.get("reasoning", "")
-            reliability = g.get("reliability", gname)
+            section = "PRINCIPAL" if gname == "grupo1" else "SECUNDARIO"
             groups_text += (
-                f"\n[{gname.upper()} — fiabilidad {reliability}]\n"
+                f"\n[{gname.upper()} — sección interna: {section}]\n"
                 f"  Perfiles: {data}\n"
                 f"  Razonamiento: {reasoning}\n"
             )
 
-        return f"""Los perfiles que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos.
+        lang_name = config.get_lang_name(language)
+        is_es = language.lower().startswith("es")
+        h_main      = "Principales resultados" if is_es else "Main results"
+        h_others    = "Otros perfiles que coinciden" if is_es else "Other matching profiles"
+        intro_tmpl  = ("Encontré {n} perfiles para «{q}»:" if is_es
+                       else 'Found {n} profiles for "{q}":')
+        none_msg    = ("No encontré perfiles que coincidan con la consulta. "
+                       "Prueba a reformularla o a ampliar los criterios."
+                       if is_es else
+                       "No matching profiles were found. Try rephrasing the "
+                       "query or broadening the criteria.")
 
-Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente consulta:
+        return f"""Se ha realizado una búsqueda exhaustiva en el corpus de CVs (perfiles internos de la compañía) para la siguiente consulta.
 
 **PREGUNTA DEL USUARIO:**
 {query}
 
-**RESULTADOS POR GRUPO DE FIABILIDAD:**
+**RESULTADOS POR GRUPO (uso interno – NO expongas estos nombres ni el concepto de fiabilidad al usuario):**
 {groups_text}
 
-**INSTRUCCIONES:**
+**INSTRUCCIONES DE CONTENIDO:**
 
-1. SIEMPRE muestra nombre y apellidos completos de cada persona. NUNCA muestres nombres de ficheros (ej. "cv_134.json", "es/cv 272.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
-2. Las personas del grupo 1 (fiabilidad más alta) son las más fiables; preséntalas primero.
-3. Las personas de grupos inferiores tienen menor certeza; preséntalas con matiz ("posiblemente", "podría ser relevante").
-4. Si un grupo devolvió "ninguno", no lo menciones salvo que todos devuelvan "ninguno".
-5. Si no hay perfiles en ningún grupo, indícalo claramente y sugiere reformular la consulta.
+1. SIEMPRE muestra el nombre y apellidos completos. NUNCA muestres nombres de ficheros (p. ej. "cv_134.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
+2. Los perfiles del GRUPO1 son los principales resultados; preséntalos primero.
+3. Los perfiles de GRUPO2 a GRUPO5 son "otros perfiles que coinciden"; mantén su orden relativo (grupo2 antes que grupo3, etc.) pero NO los separes en sub-secciones ni los etiquetes con grupos.
+4. PROHIBIDO mencionar al usuario las palabras "fiabilidad", "reliability", "alta", "media", "baja", porcentajes de confianza, ni los nombres internos de los grupos.
+5. Si el GRUPO1 está vacío y hay perfiles en otros grupos, presenta esos otros directamente bajo "{h_main}" (no inventes una distinción entre principales y secundarios cuando no la hay).
+6. Si no hay perfiles en ningún grupo, responde EXACTAMENTE con: "{none_msg}"
+7. La justificación de cada perfil debe ser una frase BREVE (máx. 12 palabras) y NO debe incluir porcentajes ni términos de fiabilidad.
+8. NUNCA repitas el mismo nombre dos veces en toda la respuesta. Si una persona aparece en varios grupos, inclúyela UNA sola vez en la sección de mayor prioridad (GRUPO1 > GRUPO2 > … > GRUPO5).
+9. La justificación debe ser CONCRETA y verificable a partir del CV (p. ej. "French C2 listado", "Goethe-Zertifikat B2", "Microservices en hard skills"). NUNCA escribas justificaciones tautológicas tipo "Habla francés o alemán" o "Cumple el criterio".
 
-**FORMATO OBLIGATORIO (Markdown) — CADA persona en su PROPIA LÍNEA, nunca varias personas en un mismo párrafo:**
+**FORMATO OBLIGATORIO (Markdown):**
 
-**Encontré [X] perfiles para [criterio]:**
+La respuesta debe ser ENTERAMENTE una lista numerada continua. NO escribas párrafos en prosa. Sigue EXACTAMENTE esta plantilla, respetando los saltos de línea en blanco entre líneas:
 
-**Alta fiabilidad:**
+**{intro_tmpl.format(n="[X]", q=query)}**
+
+**{h_main}:**
+
 1. **Nombre Completo** — razón breve
+
 2. **Nombre Completo** — razón breve
 
-**Fiabilidad media:**
-3. **Nombre Completo** — razón breve (fiabilidad: XX%)
-4. **Nombre Completo** — razón breve (fiabilidad: XX%)
+**{h_others}:**
 
-**Fiabilidad baja:**
-N. **Nombre Completo** — razón breve (fiabilidad: XX%)
+3. **Nombre Completo** — razón breve
 
-**Resumen:** [X] perfiles encontrados ([N] alta, [M] media, [K] baja fiabilidad).
+4. **Nombre Completo** — razón breve
 
 REGLAS DE FORMATO ESTRICTAS:
-- CADA perfil debe ocupar EXACTAMENTE una línea: "N. **Nombre** — razón"
-- NUNCA agrupes varios nombres en una misma línea o párrafo.
-- Usa numeración continua (1, 2, 3...) sin reiniciar entre secciones.
-- Mantén las razones breves (máximo 10-15 palabras por perfil).
-- NO uses texto en prosa entre los perfiles.
+- CADA perfil ocupa EXACTAMENTE una línea con el formato `N. **Nombre Completo** — razón`.
+- Inserta una línea en blanco DESPUÉS de cada perfil (cada uno es un párrafo de una sola línea).
+- NUNCA juntes varios perfiles en la misma línea ni en el mismo párrafo.
+- Numeración continua a lo largo de toda la respuesta (1, 2, 3, …); no la reinicies en "{h_others}".
+- Si una sección no tiene perfiles, OMÍTELA por completo (no escribas el encabezado vacío).
+- NO añadas un "Resumen" final ni metadatos de búsqueda.
+- NO uses HTML; solo Markdown.
 
-Responde en {config.get_lang_name(language)}."""
+Responde en {lang_name}."""
+
