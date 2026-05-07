@@ -28,12 +28,13 @@ class CvsParallelStrategy(BaseStrategy):
         self._retriever = Retriever()
 
     def retrieve(self, state: Dict) -> Dict:
-        # Forzamos siempre cvs_top_k y desactivamos fusion (aunque el use_case
-        # ya lo haga, dejamos override explícito para claridad)
+        # cvs_parallel usa top_k alto (300) para cobertura total del corpus;
+        # el resto de flujos CVs sigue usando cvs_top_k (40-50).
+        parallel_top_k = config.cvs_parallel_top_k
         override = {
-            "top_k":               config.cvs_top_k,
+            "top_k":               parallel_top_k,
             "min_relevance_score": 0.0,
-            "max_chunks_used":     config.cvs_top_k,
+            "max_chunks_used":     parallel_top_k,
             "use_rag_fusion":      False,
             "rag_fusion_queries":  1,
         }
@@ -68,15 +69,29 @@ class CvsParallelStrategy(BaseStrategy):
             state["cvs_groups"] = groups
 
             for gname, g in groups.items():
-                data  = g.get("data", "ninguno")
-                count = (
+                data        = g.get("data", "ninguno")
+                n_profiles  = (
                     len(data) if isinstance(data, list)
-                    else (0 if data == "ninguno" else data.count("|") + 1)
+                    else (0 if data in ("ninguno", "") else data.count("|") + 1)
                 )
-                print(f"      {gname} ({g.get('reliability','')}): {count} perfiles")
+                n_chunks    = g.get("input_chunks", len(g.get("data", [])) if isinstance(g.get("data"), list) else 0)
+                kw_info     = f", {g['kw_matches']} kw" if g.get("kw_matches") else ""
+                calls_info  = f", {g['mini_calls']} batch(es)" if g.get("mini_calls") else ""
+                print(f"      {gname} ({g.get('reliability','')}): {n_chunks} chunks → {n_profiles} perfiles{kw_info}{calls_info}")
 
             print("   🎯 Response Format: ensamblando respuesta final...")
             answer, usage_info = handler.format_final_response(query, groups, language=language)
+
+            # Incorporar uso del mini-LLM al metadata
+            mini_usage = result.get("mini_llm_usage", {})
+            if mini_usage.get("num_calls", 0) > 0:
+                usage_info["mini_prompt_tokens"]     = mini_usage["prompt_tokens"]
+                usage_info["mini_completion_tokens"] = mini_usage["completion_tokens"]
+                usage_info["mini_num_calls"]          = mini_usage["num_calls"]
+                # Tokens totales = final + mini
+                usage_info["prompt_tokens"]     = usage_info.get("prompt_tokens", 0)     + mini_usage["prompt_tokens"]
+                usage_info["completion_tokens"] = usage_info.get("completion_tokens", 0) + mini_usage["completion_tokens"]
+                usage_info["total_tokens"]      = usage_info.get("total_tokens", 0)       + mini_usage["prompt_tokens"] + mini_usage["completion_tokens"]
 
             state["answer"]       = answer
             state["chunks_used"]  = chunks

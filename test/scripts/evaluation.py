@@ -618,6 +618,7 @@ def evaluate_results_file(
 
 
 def main() -> None:
+    _import_openpyxl()  # Verificar que openpyxl está instalado antes de nada
     parser = argparse.ArgumentParser(
         description="Evalúa los resultados del RAG (coincidencia LLM por lotes + relevancia embeddings).",
     )

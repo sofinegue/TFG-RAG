@@ -1,0 +1,3185 @@
+{
+  "caso_uso": "documentos_ue",
+  "use_case_rag": "eu",
+  "idioma": "pt",
+  "total_preguntas": 91,
+  "errores": 0,
+  "tiempo_total_ejecucion_s": 937.36,
+  "fecha_ejecucion": "2026-05-07T01:51:36",
+  "rag_version": "graph_rag",
+  "descripcion": "Gold standard para avaliar um sistema RAG sobre documentos do Jornal Oficial da UE em português (regulamentos, decisões, retificações). Contém perguntas de identificação, pesquisa por tipo, pesquisa por conteúdo, contagem, referências cruzadas, estrutura, existência, listagem, relações e conteúdo específico. Inclui uma categoria 'documentos_cruzados' com perguntas multi-hop (referências partilhadas, cadeias de citação, agregações multi-documento) desenhadas para expor as limitações do RAG vetorial básico. Todas as respostas calculadas a partir dos dados.",
+  "preguntas": [
+    {
+      "id": 1,
+      "categoria": "identificacao",
+      "pregunta": "Que tipo de documento é 2026/246?",
+      "respuesta_esperada": "REGULAMENTO",
+      "respuesta": "**Respuesta:** Não é possível determinar que tipo de documento é \"2026/246\" com base nos documentos fornecidos, uma vez que não foi disponibilizado nenhum fragmento ou referência normativa.\n\n**Base normativa:**\n- CONTEXTO – DOCUMENTOS UE (0 documentos únicos) – Nenhum documento fornecido; não há artigos, títulos ou excertos disponíveis para citação.\n\n**Contexto adicional:**  \n- Não posso inventar ou assumir a natureza do documento (regulamento, diretiva, decisão, parecer, etc.) sem uma referência concreta.  \n- Para identificar o tipo de documento \"2026/246\" recomendo consultar diretamente as fontes oficiais da UE, por exemplo: pesquisar o número no portal EUR-Lex (https://eur-lex.europa.eu) ou verificar o Jornal Oficial da União Europeia (indicar séries OJ L, OJ C, etc.).  \n- Se fornecer o fragmento do documento ou a referência completa (ex.: \"Regulation (EU) 2026/246\", \"Directive (EU) 2026/246\" ou o link EUR-Lex), poderei indicar com precisão o tipo de instrumento e citar os artigos relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.395,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 955,
+      "coste_rag_usd": 0.00197425,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 955,
+          "tiempo_s": 10.395
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 2,
+      "categoria": "identificacao",
+      "pregunta": "Dê-me o título completo do documento OJ_L_202600197_PT.",
+      "respuesta_esperada": "DECISÃO DE EXECUÇÃO(UE) 2026/197 DA COMISSÃO de 28 de janeiro de 2026 que altera a Decisão de Execução (UE) 2021/1195 no que diz respeito às normas harmonizadas relativas à esterilização de produtos de saúde e à informação fornecida pelo fabricante (rotulagem)",
+      "respuesta": "**Respuesta:** Não posso fornecer o título completo do documento OJ_L_202600197_PT porque nenhum dos documentos ou excertos solicitados foi fornecido para consulta.\n\nBase normativa:\n- Nenhum documento fornecido – não há extratos disponíveis para citar.\n\nContexto adicional:\n- A referência OJ_L_202600197_PT indica, por convenção, o Journal Oficial da UE, série L (Legislação), n.º 197, ano 2026, edição em português, mas essa indicação por si só não contém o título do ato (regulamento, diretiva, decisão, aviso, etc.).\n- Para obter o título completo, consulte o sítio EUR-Lex (https://eur-lex.europa.eu). Procedimento recomendado:\n  1. Aceda a EUR-Lex e utilize a pesquisa avançada.\n  2. Em “Official Journal”, selecione série L, ano 2026, número 197 e idioma Português (PT).\n  3. Abra a tabela de conteúdos (TOC) da edição L 197/2026 para ver os títulos completos dos atos publicados nessa edição.\n- Alternativamente, contacte o Publications Office da União Europeia para assistência na obtenção da edição específica do Jornal Oficial.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.529,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 1033,
+      "coste_rag_usd": 0.00213175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 1033,
+          "tiempo_s": 12.529
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 3,
+      "categoria": "identificacao",
+      "pregunta": "Qual instituição europeia é responsável pelo documento 2026/220?",
+      "respuesta_esperada": [
+        "Comissão Europeia"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar qual instituição europeia é responsável pelo documento \"2026/220\" com base nos documentos fornecidos, pois nenhum documento foi incluído no contexto.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, excertos ou referência normativa disponíveis para identificar a origem do documento \"2026/220\".\n\n**Contexto adicional:**\n- Para identificar a instituição responsável por um documento da UE, normalmente é útil procurar pelo prefixo ou pela designação completa do acto (por exemplo: \"COM(2026) 220\" = proposta da Comissão; \"Regulation (EU) 2026/220\" = regulamento adotado pela UE, cujo acto adotante concreta deve ser verificado). Contudo, sem o fragmento ou a designação completa não se pode afirmar qual órgão (Comissão, Parlamento Europeu, Conselho da UE, Conselho Europeu ou outro) é responsável.\n- A forma prática de obter esta informação é pesquisar a referência \"2026/220\" em fontes oficiais como EUR-Lex (https://eur-lex.europa.eu) ou nos sítios das instituições (Comissão Europeia, Parlamento, Conselho) para localizar o documento e verificar a instituição autora e a referência completa.\n- Se puder fornecer o fragmento do documento ou a designação completa (por exemplo, prefixo COM/, C/, JOIN/, Reg. (EU), Dir. (EU), Dec. (EU) etc.), poderei identificar com precisão a instituição responsável citando os artigos e números aplicáveis.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 17.805,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 1219,
+      "coste_rag_usd": 0.002503,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 1219,
+          "tiempo_s": 17.805
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 4,
+      "categoria": "identificacao",
+      "pregunta": "Qual é o conteúdo do documento com o código 2025/2660?",
+      "respuesta_esperada": "DECISÃO DE EXECUÇÃO(UE) 2025/2660 DA COMISSÃO de 23 de dezembro de 2025 que altera o anexo da Decisão de Execução (UE) 2023/2447 relativa a medidas de emergência contra focos de gripe aviária de alta patogenicidade em determinados Estados-Membros [notificada com o número C(2025) 9242]",
+      "respuesta": "**Respuesta:** Não é possível determinar o conteúdo do documento com o código 2025/2660 porque não foram fornecidos, nos fragmentos de documentos que recebi, quaisquer textos ou referências relativas a esse código.\n\n**Base normativa:**\n- Nenhum documento disponibilizado – não há extratos, artigos nem secções fornecidos que mencionem ou contenham o documento 2025/2660.\n\n**Contexto adicional:** Se pretende que eu informe o teor do documento 2025/2660, por favor forneça o fragmento ou cópia do texto relevante. Alternativamente, pode localizar o documento através dos canais oficiais (por exemplo, pesquisa no sítio EUR-Lex ou nos registos das instituições da UE) e colar aqui o excerto; então poderei citar artigos, números e parágrafos conforme solicitado. Observação: sem o texto fornecido, não posso inventar nem inferir conteúdos nem citar artigos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.593,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 585,
+      "coste_rag_usd": 0.0012355,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 585,
+          "tiempo_s": 7.593
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 5,
+      "categoria": "identificacao",
+      "pregunta": "Preciso de saber do que trata OJ_L_202600271_PT. Qual é o seu tema principal?",
+      "respuesta_esperada": "REGULAMENTO (UE) 2026/271 DO CONSELHO de 29 de janeiro de 2026 que altera o Regulamento (UE) 2023/1529 que impõe medidas restritivas tendo em conta o apoio militar do Irão à guerra de agressão da Rússia contra a Ucrânia e a grupos armados e outras entidades no Médio Oriente e na região do Mar Vermel",
+      "respuesta": "**Respuesta:** Não é possível determinar o tema principal do documento OJ_L_202600271_PT porque não foram fornecidos fragmentos nem o texto desse documento.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há conteúdo acessível de OJ_L_202600271_PT que permita citar artigos ou secções.\n\n**Contexto adicional:**\n- Sem o texto ou excertos do Jornal Oficial (L) n.º 271/2026 em português, não posso citar artigos, números ou fazer uma síntese temática específica.\n- Se pretende localizar o documento por si, consulte a base de dados EUR-Lex (https://eur-lex.europa.eu) e procure pela referência do Jornal Oficial: por exemplo introduza \"OJ L 271 2026 PT\" ou procure por data/numero do L 271 de 2026 para aceder ao PDF/HTML e aos atos aí publicados.\n- Nota: a série L do Jornal Oficial publica, em geral, legislação da UE (regulamentos, diretivas, decisões), bem como atos e avisos; contudo, isto é apenas informação geral sobre a série L e não identifica o tema do número concreto 271/2026.\n- Se me fornecer o excerto ou o texto de OJ_L_202600271_PT, responderei citando artigos e parágrafos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.581,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 269,
+      "tokens_out": 927,
+      "coste_rag_usd": 0.00192125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 269,
+          "tokens_out": 927,
+          "tiempo_s": 11.581
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 6,
+      "categoria": "identificacao",
+      "pregunta": "Descreva brevemente o objeto do documento 2025/2621.",
+      "respuesta_esperada": "REGULAMENTO DE EXECUÇÃO(UE) 2025/2621 DA COMISSÃO de 16 de dezembro de 2025 que estabelece as regras de execução do Regulamento (UE) 2023/956 do Parlamento Europeu e do Conselho no que diz respeito ao estabelecimento de valores predefinidos",
+      "respuesta": "**Respuesta:** Não é possível descrever o objeto do documento 2025/2621 porque nenhum documento ou fragmento foi fornecido para consulta.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há excertos nem referências normativas disponíveis para citar artigos, considerandos ou números específicos.\n\n**Contexto adicional:**  \n- Para fornecer uma resposta precisa e citar artigos e parágrafos conforme solicitado, preciso do texto do ato (ou de um excerto relevante) ou, pelo menos, do tipo e publicação: ex. \"Regulamento (UE) n.º 2025/2621 do Parlamento/da Comissão\", data e Diário Oficial (L ou C) ou link EUR-Lex.  \n- Se preferir, indique o conteúdo ou cole o trecho do documento 2025/2621; então poderei descrever o objeto e citar artigos e números concretos.  \n- Alternativamente, pode localizar o ato em EUR-Lex (https://eur-lex.europa.eu) pesquisando por \"2025/2621\" e fornecer o texto resultante para análise.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.775,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 617,
+      "coste_rag_usd": 0.0012995,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 617,
+          "tiempo_s": 7.775
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 7,
+      "categoria": "identificacao",
+      "pregunta": "O documento OJ_L_202502621_PT é um regulamento ou uma decisão?",
+      "respuesta_esperada": "REGULAMENTO",
+      "respuesta": "**Respuesta:** Não é possível determinar — com os documentos fornecidos (nenhum) não há informação para afirmar se OJ_L_202502621_PT é um regulamento ou uma decisão.\n\nBase normativa:\n- Nenhum documento fornecido – não foi disponibilizado o texto ou excerto de OJ_L_202502621_PT para consulta.\n\nContexto adicional:\n- Para identificar o tipo de ato numa publicação do Jornal Oficial (OJ) verifique a primeira página do texto: o cabeçalho costuma indicar expressamente o tipo de ato (por exemplo, \"Regulation (EU) No ...\" ou \"Decision (EU) ...\").\n- O código do jornal (p.ex. OJ L, data e número) por si só não indica se o ato é regulamento ou decisão; é necessário ler o título/primeiras linhas do documento ou consultar a metadata na base EUR-Lex.\n- Se puder fornecer o excerto do OJ_L_202502621_PT (ou o URL/EUR-Lex), confirmo com precisão se se trata de um regulamento ou de uma decisão.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 18.292,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 264,
+      "tokens_out": 1128,
+      "coste_rag_usd": 0.002322,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 264,
+          "tokens_out": 1128,
+          "tiempo_s": 18.292
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 8,
+      "categoria": "identificacao",
+      "pregunta": "Quantas páginas tem o ficheiro OJ_L_202502649_PT?",
+      "respuesta_esperada": 38,
+      "respuesta": "**Respuesta:** Não é possível determinar o número de páginas do ficheiro OJ_L_202502649_PT com base nos documentos que me foram fornecidos; não há nenhum documento relativo a esse ficheiro entre os fragmentos disponibilizados.\n\nBase normativa:\n- Nenhum documento fornecido – não existe na informação recebida qualquer extrato, anexo ou metadados relativos ao ficheiro OJ_L_202502649_PT que permitam indicar o número de páginas.\n\nContexto adicional:\n- Não inventei nem consultei referências externas. Para obter o número de páginas, consulte diretamente a versão PDF do Diário Oficial em causa (por exemplo através do sítio EUR-Lex ou da página do Jornal Oficial da União Europeia) e verifique o contador de páginas do ficheiro PDF identificado como OJ_L_202502649_PT.\n- Nota prática: ao aceder ao ficheiro PDF, o número de páginas aparece normalmente no visualizador ou nas propriedades do PDF; assegure-se de abrir a versão na língua portuguesa (sufixo _PT) caso existam versões em outras línguas.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.608,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 872,
+      "coste_rag_usd": 0.0018095,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 872,
+          "tiempo_s": 10.608
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 9,
+      "categoria": "identificacao",
+      "pregunta": "Indique a data de adoção de OJ_L_202502660_PT.",
+      "respuesta_esperada": "23 de dezembro de 2025",
+      "respuesta": "**Respuesta:** Não é possível indicar a data de adoção do documento OJ_L_202502660_PT com base nos documentos fornecidos, porque não foi disponibilizado nenhum fragmento ou documento relevante. Não posso inventar a informação.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos, artigos ou números de regulamento disponíveis para citar.\n\n**Contexto adicional:** Para obter a data de adoção de um ato publicado no Jornal Oficial (série L), consulte o próprio Jornal Oficial ou a base de dados EUR-Lex. A data de adoção geralmente consta no cabeçalho ou na parte final do texto do ato (p. ex. data de assinatura pelos órgãos competentes) e a data de publicação aparece na página de rosto do Jornal Oficial. Se facultar o fragmento ou o documento OJ_L_202502660_PT, poderei indicar a data concreta citando o local exacto do texto.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.553,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 1033,
+      "coste_rag_usd": 0.00213175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 1033,
+          "tiempo_s": 12.553
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 10,
+      "categoria": "identificacao",
+      "pregunta": "Que instituições participaram na elaboração de OJ_L_202502664_PT?",
+      "respuesta_esperada": [
+        "Conselho"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar quais instituições participaram na elaboração do documento identificado como OJ_L_202502664_PT porque não foram fornecidos os fragmentos ou o texto desse documento entre os materiais de referência.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há conteúdos disponíveis que permitam citar artigos, recitais ou rubricas do OJ_L_202502664_PT.\n\n**Contexto adicional:**  \n- Para identificar as instituições envolvidas na elaboração e adoção de um ato publicado no Jornal Oficial (série L), consulte a página inicial do texto no EUR-Lex ou o PDF/HTML do próprio Jornal Oficial: o cabeçalho e os primeiros parágrafos (a rubrica e o preâmbulo) normalmente indicam a instituição proponente/autor (por exemplo, Comissão Europeia) e a instituição(s) que o adotou (por exemplo, Conselho ou Parlamento Europeu), bem como a base jurídica.  \n- Também pode contactar o Publications Office da UE ou pesquisar pelo número do Jornal Oficial (L 2025/2664/PT) no sítio EUR-Lex para obter o documento original e a identificação explícita das instituições responsáveis.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 14.751,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 1209,
+      "coste_rag_usd": 0.00248325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 1209,
+          "tiempo_s": 14.751
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 11,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Quantos regulamentos existem na base de dados?",
+      "respuesta_esperada": 10,
+      "respuesta": "**Respuesta:** Não é possível determinar quantos regulamentos existem na base de dados porque não foram fornecidos documentos nem acesso à base de dados nas informações recebidas.\n\n**Base normativa:**\n- (Nenhum documento fornecido) – não há textos ou artigos disponíveis nos documentos enviados que permitam contabilizar regulamentos.\n\n**Contexto adicional:** Para responder com precisão juridicamente relevante, preciso de uma das seguintes informações:\n- a lista completa dos documentos da base de dados (ou um extracto com a contagem), ou\n- acesso à própria base de dados para executar uma pesquisa/filtragem por atos do tipo \"regulamento\".\n\nAlternativamente, se a base de dados for pública (por exemplo EUR-Lex), pode obter o número consultando directamente essa plataforma e aplicando o filtro por \"Regulation\" / \"Regulamento\" — em seguida, comunique o resultado ou forneça os documentos e eu confirmarei e citarei as referências legais.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.362,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 782,
+      "coste_rag_usd": 0.001628,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 782,
+          "tiempo_s": 8.362
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 12,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Quantas decisões contém a coleção?",
+      "respuesta_esperada": 8,
+      "respuesta": "**Respuesta:** Não é possível determinar quantas decisões contém a coleção porque não foram fornecidos quaisquer documentos para consulta.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há fragmentos ou referências normativas disponíveis para citar artigos, artigos ou números de regulamentação.\n\n**Contexto adicional:** Para responder com precisão, forneça o documento ou a coleção em questão (por exemplo, título da coleção, link ou ficheiro com o índice ou texto das decisões). Sem esse material não posso citar artigos, parágrafos ou números regulamentares nem indicar um total.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 17.553,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 828,
+      "coste_rag_usd": 0.00171925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 828,
+          "tiempo_s": 17.553
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 13,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Liste todos os regulamentos disponíveis.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível listar quaisquer regulamentos porque não foram fornecidos documentos na solicitação. Sem os fragmentos de documentos da UE indicados, não posso citar artigos, números ou extratos normativos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos ou referências disponíveis para extrair regulamentos, artigos ou números.\n\n**Contexto adicional:**  \n- Se deseja que eu liste regulamentos específicos, por favor forneça os documentos ou indique critérios precisos (por exemplo: área temática — ambiente, comércio, proteção de dados; período — anos; situação — em vigor, revogado; ou um conjunto institucional concreto).  \n- Alternativamente, para obter uma lista completa de regulamentos da UE por si próprio, consulte a base de dados EUR-Lex (https://eur-lex.europa.eu) e utilize os filtros: Tipo de ato = \"Regulation\", período desejado, estado jurídico (em vigor/derrogado) e áreas temáticas. Os regulamentos da UE são normalmente citados no formato \"Regulation (EU) No [número]/[ano]\" e publicados no Jornal Oficial da União Europeia (Série L).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.194,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 760,
+      "coste_rag_usd": 0.00158325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 760,
+          "tiempo_s": 10.194
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 14,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Dê-me todas as decisões da base de dados.",
+      "respuesta_esperada": [
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível fornecer \"todas as decisões da base de dados\" porque não foram fornecidos documentos nem fragmentos da base de dados. Solicito que envie os documentos ou especifique a que base de dados e que tipo de decisões se refere (ex.: decisões da Comissão, decisões do Conselho, acórdãos do Tribunal de Justiça), para que eu possa extrair e citar as decisões solicitadas.\n\nBase normativa:\n- Nenhum documento fornecido – não há textos legais, regulamentos, diretivas ou decisões na informação que me foi dada, pelo que não posso citar artigos, números ou trechos normativos.\n\nContexto adicional:\n- Sem os documentos ou o acesso à base de dados indicada, não posso listar decisões nem fornecer citações legais.  \n- Para prosseguir, por favor forneça pelo menos uma das seguintes informações:\n  - os ficheiros ou extratos da base de dados contendo as decisões; ou\n  - o nome preciso da base de dados (ex.: EUR-Lex, Curia) e os critérios de pesquisa (período, órgãos, temas, idioma); ou\n  - exemplos concretos de decisões que pretende obter.\n- Após receber os documentos ou instruções concretas, extrairei e apresentarei as decisões solicitadas com citações dos artigos/paragraphos relevantes, conforme pedido.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.14,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 921,
+      "coste_rag_usd": 0.00190625,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 921,
+          "tiempo_s": 10.14
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 15,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Que tipos de documentos legislativos temos?",
+      "respuesta_esperada": [
+        "DECISÃO",
+        "REGULAMENTO"
+      ],
+      "respuesta": "**Respuesta:** Não posso responder com base em documentos fornecidos, porque não foi entregue nenhum documento. Por isso não posso citar artigos, parágrafos ou números de regulamentos a partir de fontes fornecidas. De forma geral (sem citações normativas aqui), os tipos mais comuns de atos legislativos da UE são: regulamentos, diretivas, decisões, recomendações e pareceres.\n\nBase normativa:\n- Nenhum documento fornecido – impossível citar artigos ou excertos relevantes.\n\nContexto adicional:\n- Como não tenho documentos para referenciar, não apresento citações normativas. Se desejar, posso:\n  - Fornecer as citações legais precisas (por exemplo, do Tratado sobre o Funcionamento da União Europeia e atos secundários) se autorizar que eu use fontes externas padrão; ou\n  - Analisar e citar especificamente os fragmentos de documentos UE que enviar.\n- Observação prática (sem citação): os regulamentos são normalmente de aplicação direta e geral; as diretivas vinculam o resultado a alcançar e exigem transposição pelos Estados-Membros; as decisões são vinculativas para os destinatários que indicam; recomendações e pareceres não vinculam juridicamente. Se quer as definições legais formais e os artigos exatos, envie os documentos ou permita a consulta às normas primárias/secundárias para eu citar com precisão.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 18.795,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 1440,
+      "coste_rag_usd": 0.0029435,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 1440,
+          "tiempo_s": 18.795
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 16,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Existe algum documento de tipo retificação?",
+      "respuesta_esperada": {
+        "existe": false,
+        "documentos": []
+      },
+      "respuesta": "**Respuesta:** Não posso confirmar — não foram fornecidos documentos, por isso não há como verificar a existência de alguma \"retificação\".\n\n**Base normativa:**\n- Nenhum documento fornecido – não há excertos ou referências normativas disponíveis para citar.\n\n**Contexto adicional:** Para que eu possa responder com precisão legal, por favor forneça um ou mais dos seguintes elementos (ou carregue os fragmentos relevantes):\n- título completo do ato ou documento da UE;\n- referência (número) do documento ou do processo (por exemplo, COM/…, 20xx/…, ou número CELEX);\n- referência do Jornal Oficial da UE (L ou C), data e página;\n- excerto ou imagem do texto onde apareceria a palavra \"retificação\" ou \"corrigendum\".\n\nCom essas informações poderei indicar se existe uma retificação (corrigendum/erratum/rectificação) e citar o artigo, parágrafo ou referência do Jornal Oficial correspondente.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.306,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 974,
+      "coste_rag_usd": 0.0020115,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 974,
+          "tiempo_s": 12.306
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 17,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Filtre os documentos que são regulamentos de execução.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600246_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível filtrar quais documentos são regulamentos de execução porque não foi fornecido nenhum documento ou excerto para análise. Por favor, envie os documentos ou os seus excertos/títulos para que eu os identifique.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, números ou excertos disponíveis para citar.\n\n**Contexto adicional:** Para quando enviar os documentos, aqui estão indicações práticas que uso para reconhecer regulamentos de execução (sem citar normas específicas, apenas critérios de identificação):\n- O título costuma incluir expressões como \"Regulamento de Execução\" (português) ou \"Implementing Regulation\" (inglês).\n- A referência formal aparece normalmente como \"Regulation (UE) N.º .../ano\" seguida do objecto; o sumário ou preâmbulo indica que se trata de um ato de execução.\n- São atos que estabelecem regras detalhadas para aplicar um ato legislativo existente (em contraste com regulamentos delegados ou atos legislativos).\n- Publicação no Jornal Oficial da União Europeia com menção expressa à natureza de execução confirma a qualificação.\n\nEnvie os fragmentos ou a lista de documentos e eu os filtro e cito artigos/números conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 16.194,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 1163,
+      "coste_rag_usd": 0.00239025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 1163,
+          "tiempo_s": 16.194
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 18,
+      "categoria": "pesquisa_por_tipo",
+      "pregunta": "Quais são os documentos emitidos pela Comissão Europeia?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600264_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível responder com base nos documentos fornecidos, porque não foi enviado nenhum documento. Por isso não posso citar artigos, parágrafos ou números de regulamento nem indicar extratos normativos.\n\nBase normativa:\n- Nenhum documento fornecido – não há material disponível para extrair citações ou referências normativas.\n\nContexto adicional:\n- Se pretende uma resposta fundamentada em documentos concretos, por favor anexe os fragmentos ou indique-os.  \n- Se autoriza que responda com base no meu conhecimento geral sobre a União Europeia (fora dos documentos que devia usar exclusivamente), posso fornecer uma lista comum de tipos de atos e documentos que a Comissão Europeia emite e citar as fontes normativas correspondentes; indique por favor se deseja essa opção.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.942,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 869,
+      "coste_rag_usd": 0.00180225,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 869,
+          "tiempo_s": 11.942
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 19,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Quais documentos tratam de pesca?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600266_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos tratam de pesca porque não foram fornecidos documentos ou fragmentos normativos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há fragmentos disponíveis que permitam citar artigos, párrafos ou números de regulamentação relacionados com pesca.\n\n**Contexto adicional:** Conforme pedido, não inventarei referências nem citarei legislação que não conste nos documentos fornecidos. Se pretende uma resposta concreta, por favor carregue ou cole os fragmentos/documentos da UE relevantes (títulos, artigos ou excertos). Com esses elementos poderei indicar exatamente quais tratam de pesca e citar os artigos e parágrafos aplicáveis.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.948,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 789,
+      "coste_rag_usd": 0.0016415,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 789,
+          "tiempo_s": 11.948
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 20,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Quais documentos se referem a dispositivos médicos?",
+      "respuesta_esperada": [
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos se referem a dispositivos médicos porque não foram fornecidos documentos ou fragmentos normativos para analisar.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, parágrafos ou números de regulamento disponíveis para citar.\n\n**Contexto adicional:** De acordo com as instruções, não posso inventar referências nem alegar artigos que não estejam nos documentos apresentados. Se fornecer os fragmentos ou indicar os documentos concretos, procederei a identificar e citar, com precisão legal (artigos, parágrafos e números), quais deles tratam de dispositivos médicos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.631,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 519,
+      "coste_rag_usd": 0.001102,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 519,
+          "tiempo_s": 6.631
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 21,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Em que documentos é mencionado Marrocos?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502664_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar documentos que mencionem Marrocos porque não foram fornecidos documentos.  \n\n**Base normativa:**\n- Nenhum documento fornecido — não há fragmentos ou referências normativas disponíveis para extrair artigos, pontos ou números.\n\n**Contexto adicional:** Não posso inventar referências nem citar textos que não foram incluídos. Se fornecer os fragmentos/documents da UE que pretende analisar, extrairei com precisão as menções a Marrocos indicando artigo, número e excerto relevante. Em geral, quando procurar menções a Marrocos em atos da UE, procure em acordos bilaterais (por exemplo, acordos de associação, pesca, readmissão), decisões do Conselho e textos da Comissão, mas precise enviar os documentos para confirmação.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.934,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 617,
+      "coste_rag_usd": 0.00129775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 617,
+          "tiempo_s": 7.934
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 22,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Existem documentos que mencionam pesticidas ou resíduos de pesticidas?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202600215_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível confirmar a existência de documentos que mencionem pesticidas ou resíduos de pesticidas porque não foram fornecidos documentos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, parágrafos ou excertos disponíveis para citar.\n\n**Contexto adicional:** Não inventarei referências normativas. Se pretende que eu verifique se a legislação da UE trata de pesticidas ou resíduos de pesticidas, forneça os fragmentos/documents que quer que eu analise ou autorize-me a utilizar a legislação da UE conhecida (por exemplo, regulamentos e directivas relevantes) para citar artigos concretos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.871,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 524,
+      "coste_rag_usd": 0.001113,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 524,
+          "tiempo_s": 7.871
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 23,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Quais documentos fazem referência ao Regulamento (UE) 2017/745?",
+      "respuesta_esperada": [
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT"
+      ],
+      "respuesta": "Resposta: Não é possível identificar quais documentos fazem referência ao Regulamento (UE) 2017/745 porque não foram fornecidos documentos ou fragmentos para análise.\n\nBase normativa:\n- Nenhum documento fornecido – não há texto disponível do qual extrair referências ou citar artigos, números ou parárafos do Regulamento (UE) 2017/745.\n\nContexto adicional:\n- Sem os documentos indicados, não posso cumprir a exigência de citar artigos, parágrafos ou excertos relevantes.  \n- Se fornecer os documentos ou fragmentos (nomes de atos, trechos ou anexos), procederei a identificar e citar exatamente onde e como cada um refere o Regulamento (UE) 2017/745.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 15.434,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 1181,
+      "coste_rag_usd": 0.00242775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 1181,
+          "tiempo_s": 15.434
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 24,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Existe algum documento sobre substâncias de origem humana?",
+      "respuesta_esperada": [],
+      "respuesta": "**Respuesta:** Não é possível confirmar nem citar nenhum documento sobre substâncias de origem humana porque não foi fornecido nenhum documento para análise. Não posso citar artigos, números ou excertos normativos sem os documentos solicitados.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há base normativa disponível neste pedido.\n\n**Contexto adicional:** Se desejar, posso:\n- Analisar documentos que você carregar ou colar aqui e, com base neles, indicar artigos e excertos relevantes;\n- Ou, com sua autorização explícita para recorrer a fontes públicas externas, pesquisar a legislação da UE sobre matérias relacionadas (por exemplo: sangue, tecidos e células humanos, órgãos, produtos derivados de origem humana) e citar os instrumentos legais aplicáveis e os artigos correspondentes.\n\nIndique como prefere prosseguir.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.125,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 875,
+      "coste_rag_usd": 0.001814,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 875,
+          "tiempo_s": 9.125
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 25,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "A Tunísia é mencionada em algum dos documentos?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT"
+      ],
+      "respuesta": "**Respuesta:** Nos documentos fornecidos não há menção à Tunísia.\n\n**Base normativa:**\n- Nenhum documento foi fornecido (0 documentos únicos) – não existem fragmentos nos quais possa procurar ou citar artigos, parágrafos ou números de regulamentação.\n\n**Contexto adicional:** Não posso inventar referências ou citar normas que não constem nos documentos entregues. Se pretende que verifique menções à Tunísia em textos específicos da UE, por favor forneça os fragmentos ou títulos dos documentos e eu os examinarei e citarei os artigos relevantes. Se desejar informação geral (fora do âmbito dos documentos fornecidos) sobre a relação UE–Tunísia, indique-o explicitamente.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.188,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 602,
+      "coste_rag_usd": 0.0012685,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 602,
+          "tiempo_s": 10.188
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 26,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Quais documentos mencionam um Conselho de Associação?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar — nenhum documento foi fornecido que permita identificar quais documentos mencionam um \"Conselho de Associação\".\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos, artigos ou números de regulamento disponíveis para consulta.\n\n**Contexto adicional:** Para responder com precisão legal e citar artigos/parágrafos, preciso que forneça os fragmentos ou identificar os atos (por exemplo, acordos de associação concretos, regulamentos ou diretivas) a serem verificados. Se enviar os documentos ou indicar títulos/refs, procurarei e citarei exatamente onde o \"Conselho de Associação\" é mencionado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.379,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 718,
+      "coste_rag_usd": 0.0015,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 718,
+          "tiempo_s": 8.379
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 27,
+      "categoria": "pesquisa_por_conteudo",
+      "pregunta": "Existem documentos relacionados com a Política Externa e de Segurança Comum (PESC)?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Nos fragmentos fornecidos não há documentos relacionados com a Política Externa e de Segurança Comum (PESC).\n\n**Base normativa:**\n- Nenhum documento fornecido – Não é possível citar artigos, números ou excertos relevantes porque não foram incluídos documentos ou fragmentos sobre PESC.\n\n**Contexto adicional:** Para poder responder com precisão legal e citar artigos/pares concretos, preciso dos fragmentos ou títulos dos atos regulamentares, diretivas, decisões do Conselho, posições comuns, acordos internacionais ou outras normas que se queira verificar. Sem esses documentos, não posso inventar referências nem alegar a existência de normas específicas. Se fornecer os documentos ou indicar títulos/trechos concretos, farei a análise e citarei os artigos e passagens pertinentes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.549,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 264,
+      "tokens_out": 872,
+      "coste_rag_usd": 0.00181,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 264,
+          "tokens_out": 872,
+          "tiempo_s": 10.549
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 28,
+      "categoria": "contagem",
+      "pregunta": "Quantos documentos existem no total na base de dados?",
+      "respuesta_esperada": 18,
+      "respuesta": "**Respuesta:** Não é possível determinar o número total de documentos porque não foram fornecidos documentos nem metadados na base de dados do contexto.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, regulamentos ou fragmentos disponíveis para extrair a informação solicitada.\n\n**Contexto adicional:** Conforme as instruções, não posso inventar referências nem números. Para responder com precisão indique:\n- quais são os documentos ou forneça os ficheiros/metadados da base de dados; ou\n- informe a que “base de dados” específica se refere (por ex., uma base interna da instituição, EUR-Lex, etc.); ou\n- forneça o resultado de uma consulta (por ex., SELECT COUNT(*) FROM documentos) ou acesso à API/metadados. Posso então ajudar a interpretar o resultado ou a formular a consulta necessária.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.215,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 634,
+      "coste_rag_usd": 0.00133225,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 634,
+          "tiempo_s": 10.215
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 29,
+      "categoria": "contagem",
+      "pregunta": "Quantas páginas somam todos os documentos juntos?",
+      "respuesta_esperada": 3027,
+      "respuesta": "**Respuesta:** Não é possível determinar o número total de páginas porque não foram fornecidos documentos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, parágrafos ou números de regulação disponíveis para citação.\n\n**Contexto adicional:**  \n- Para calcular a soma de páginas é necessário que nos sejam fornecidos os ficheiros (PDF, DOCX, ODT, etc.) ou, pelo menos, metadados indicando o número de páginas de cada documento.  \n- Método prático: abrir cada ficheiro e ler o número de páginas (em PDF o campo \"Number of pages\"; em Word ver a contagem de páginas); somar esses valores.  \n- Se quiser, envie os documentos ou os respetivos números de páginas e eu calculo a soma e citarei referências específicas conforme o conteúdo.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.034,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 627,
+      "coste_rag_usd": 0.001318,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 627,
+          "tiempo_s": 9.034
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 30,
+      "categoria": "contagem",
+      "pregunta": "Qual é o documento mais longo em número de páginas?",
+      "respuesta_esperada": {
+        "documento": "OJ_L_202502621_PT",
+        "paginas": 2400
+      },
+      "respuesta": "**Respuesta:** Não é possível determinar qual é o documento mais longo porque nenhum documento foi fornecido.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, parágrafos ou excertos disponíveis para citação.\n\n**Contexto adicional:**  \n- Para responder com precisão é necessário o conjunto de documentos ou, pelo menos, metadados (títulos e número de páginas de cada documento).  \n- Observações metodológicas relevantes: a contagem de páginas deve referir-se à versão oficial (por exemplo, o PDF publicado no Jornal Oficial ou no EUR-Lex), incluindo anexos e eventuais corrigenda; as contagens podem variar entre línguas e formatos.  \n- Próximos passos recomendados: forneça os documentos (ou uma lista com títulos e número de páginas ou links para as versões oficiais); então poderei indicar, com citação das fontes, qual é o mais longo.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.322,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 837,
+      "coste_rag_usd": 0.00173825,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 837,
+          "tiempo_s": 10.322
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 31,
+      "categoria": "contagem",
+      "pregunta": "Qual é a média de páginas por documento?",
+      "respuesta_esperada": 168.2,
+      "respuesta": "**Respuesta:** Não é possível calcular a média de páginas por documento porque não foram fornecidos documentos nem contagens de páginas.\n\nBase normativa:\n- Nenhum documento fornecido — não há artigos, regulamentos ou excertos disponíveis para referência.\n\nContexto adicional:\n- Fórmula para cálculo (se os dados fossem fornecidos): média = (soma do número de páginas de todos os documentos) / (número de documentos).\n- Observação matemática: se o número de documentos for 0, a média é indefinida (algumas práticas informais podem indicar \"N/A\" ou 0, mas estatisticamente não se pode dividir por zero).\n- Para efectuar o cálculo, forneça uma lista de documentos com o número de páginas de cada um (ou o total de páginas e o número total de documentos).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.762,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 752,
+      "coste_rag_usd": 0.00156775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 752,
+          "tiempo_s": 11.762
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 32,
+      "categoria": "contagem",
+      "pregunta": "Quais são os 5 documentos mais breves?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202600246_PT",
+          "paginas": 2
+        },
+        {
+          "documento": "OJ_L_202600197_PT",
+          "paginas": 3
+        },
+        {
+          "documento": "OJ_L_202600193_PT",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600220_PT",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600232_PT",
+          "paginas": 4
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar os 5 documentos mais breves porque não foram fornecidos quaisquer documentos ou fragmentos para análise. Solicito os documentos para poder avaliar e ordenar por comprimento.\n\n**Base normativa:**\n- Nenhum documento disponibilizado – não há artigos, números ou excertos que permita cumprir a instrução de citar artigos, parágrafos e números de regulação.\n\n**Contexto adicional:** \n- Para proceder, envie os documentos ou os excertos (ou indique um repositório/links) e especifique o critério de \"mais breves\" (número de palavras, número de páginas, número de caracteres ou tamanho em bytes). \n- Assim que receber os documentos, apresentarei os 5 mais curtos e incluirei as referências legais (artigos, parágrafos, números) extraídas dos fragmentos fornecidos, sem inventar citações.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.007,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 704,
+      "coste_rag_usd": 0.00147225,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 704,
+          "tiempo_s": 9.007
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 33,
+      "categoria": "contagem",
+      "pregunta": "Quantos tipos diferentes de documentos existem?",
+      "respuesta_esperada": 2,
+      "respuesta": "**Respuesta:** Não é possível determinar quantos tipos diferentes de documentos existem com base nos documentos fornecidos, porque não foi entregue nenhum documento ou fragmento normativo que defina ou enumere tipos de documentos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos/fragmentos para citar.\n\n**Contexto adicional:**  \n- A resposta depende da definição e do âmbito pedidos (por exemplo: \"atos jurídicos da UE\" vs. \"documentos institucionais e administrativos\", ou uma listagem interna de um serviço específico). Sem um texto normativo ou um inventário fornecido, não posso citar artigos, parágrafos ou números de regulamentação nem fornecer um número preciso.  \n- Se pretende uma contagem precisa, por favor forneça um ou mais dos seguintes elementos: (a) o fragmento normativo que define/enumera os tipos de documento; (b) a referência à legislação ou regulamento (ex.: artigo e ato) onde a tipologia consta; ou (c) o âmbito concreto da pergunta (instituições/serviços e tipos de documentos que deseja considerar). Com esse material, poderei responder citando os artigos e parágrafos relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.169,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 829,
+      "coste_rag_usd": 0.0017215,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 829,
+          "tiempo_s": 10.169
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 34,
+      "categoria": "contagem",
+      "pregunta": "Qual é a distribuição de documentos por tipo?",
+      "respuesta_esperada": [
+        {
+          "tipo": "REGULAMENTO",
+          "cantidad": 10
+        },
+        {
+          "tipo": "DECISÃO",
+          "cantidad": 8
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar a distribuição de documentos por tipo porque não foram fornecidos documentos nem fragmentos normativos que permitam essa contagem.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, preceitos ou excertos normativos disponíveis para citar ou fundamentar a resposta.\n\n**Contexto adicional:** Para fornecer a distribuição por tipo (por exemplo: Regulamentos, Diretivas, Decisões, Comunicados, Acordos, Pareceres, etc.) seria necessário pelo menos um conjunto de dados ou lista com cada documento e o respetivo tipo. Se disponibilizar esta lista (por exemplo: título do documento | tipo | data | identificador), posso:\n- contar quantos documentos existem de cada tipo,\n- calcular percentagens e apresentar uma tabela de distribuição,\n- citar artigos relevantes apenas se os fragmentos normativos associados forem fornecidos.\n\nNão se efetuou qualquer inferência nem se citaram normas porque isso exigiria documentos que não foram incluídos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.933,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 790,
+      "coste_rag_usd": 0.00164375,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 790,
+          "tiempo_s": 10.933
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 35,
+      "categoria": "contagem",
+      "pregunta": "Quantos documentos mencionam a palavra «pesca»?",
+      "respuesta_esperada": 6,
+      "respuesta": "**Respuesta:** Não é possível determinar. Não foram fornecidos documentos (0 documentos), pelo que não há como verificar quantos mencionam a palavra «pesca».\n\nBase normativa:\n- Nenhum documento fornecido – não há artigos, secções ou excertos disponíveis para análise.\n\nContexto adicional:\n- Para obter uma resposta precisa, forneça os documentos a analisar ou indique a base de dados e o âmbito (por ex., conjunto de diretivas/regulamentos específicos ou o sítio EUR-Lex) para que se proceda à verificação. Não foram inventadas ou citadas referências normativas em falta.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.961,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 646,
+      "coste_rag_usd": 0.0013565,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 646,
+          "tiempo_s": 8.961
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 36,
+      "categoria": "contagem",
+      "pregunta": "Quantos documentos foram emitidos em dezembro de 2025?",
+      "respuesta_esperada": 3,
+      "respuesta": "**Respuesta:** Não é possível determinar quantos documentos foram emitidos em dezembro de 2025 com os fragmentos fornecidos; não foram fornecidos documentos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos ou excertos que permitam contar ou identificar documentos emitidos em dezembro de 2025.\n\n**Contexto adicional:** \n- Falta de informação: a pergunta não especifica que tipo de \"documentos\" (atos legislativos — regulamentos, diretivas, decisões; atos administrativos; comunicações; publicações no Jornal Oficial; documentos internos de instituições) nem qual instituição da UE (Comissão, Conselho, Parlamento, Tribunal de Justiça, etc.). Sem os documentos ou essa especificação, não é possível dar um número preciso nem citar artigos ou artigos normativos relevantes.\n- Como obter a informação: para apurar o número real, consulte fontes oficiais da UE, por exemplo:\n  - EUR-Lex (https://eur-lex.europa.eu): filtrar por datas (01/12/2025–31/12/2025) e por tipo de acto/assunto.\n  - Jornal Oficial da União Europeia (séries L e C) para dezembro de 2025.\n  - Registos documentais das instituições (registro de documentos da Comissão, do Conselho, do Parlamento — Legislative Observatory / OEIL).\n- Se fornecer os excertos ou especificar a natureza dos documentos e a instituição, poderei contar e citar precisamente os artigos/itens relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.69,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 829,
+      "coste_rag_usd": 0.00172275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 829,
+          "tiempo_s": 8.69
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 37,
+      "categoria": "contagem",
+      "pregunta": "Quantos documentos fazem referência a outros regulamentos da UE?",
+      "respuesta_esperada": 15,
+      "respuesta": "**Respuesta:** Não é possível determinar — nenhum documento foi fornecido para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos, artigos ou excertos disponíveis para verificar referências a outros regulamentos da UE.\n\n**Contexto adicional:**  \n- Para responder com precisão seria necessário ter acesso aos documentos a examinar. O procedimento adequado para obter a contagem é:\n  1. Fornecer os documentos ou cópias dos excertos pertinentes.\n  2. Procurar em cada documento menções a outros atos da UE (ex.: “Regulamento (UE) n.º …”, “Reg. (UE) …”, ou referências por título e número).\n  3. Contabilizar quantos documentos contêm pelo menos uma referência a outro regulamento da UE.\n\n- Sem os documentos, não posso citar artigos, números ou parágrafos nem inventar referências. Se quiser, carregue os documentos ou cole os excertos, e eu farei a contagem e citarei os trechos relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.654,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 606,
+      "coste_rag_usd": 0.0012765,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 606,
+          "tiempo_s": 8.654
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 38,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "A que outros regulamentos ou decisões faz referência o documento 2026/197?",
+      "respuesta_esperada": [
+        "1025/2012",
+        "2017/745",
+        "2017/746"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar a que outros regulamentos ou decisões faz referência o documento \"2026/197\" porque não foram fornecidos quaisquer documentos ou excertos relevantes para consulta.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigo, preâmbulo, nota de rodapé ou referência disponível do documento 2026/197 para extrair referências normativas.\n\n**Contexto adicional:** Para responder com precisão legal é necessário o texto do documento 2026/197 (pelo menos os considerandos e as disposições que contenham remissões) ou indicação da referência do Jornal Oficial (n.º, L/ ou C/, data). Tipicamente, as referências a outros atos aparecem:\n- nos considerandos (recitals) do ato,\n- nos artigos que contêm remissões ou disposições transitórias,\n- nas notas de rodapé do Jornal Oficial.\n\nSe fornecer o excerto ou a referência completa do documento 2026/197, indicarei exatamente quais regulamentos ou decisões ele menciona, citando artigos, números e pontos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.966,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 806,
+      "coste_rag_usd": 0.00167775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 806,
+          "tiempo_s": 9.966
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 39,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Liste as normas citadas no documento 2026/193.",
+      "respuesta_esperada": [
+        "1025/2012",
+        "1223/2009",
+        "2017/745",
+        "2017/746"
+      ],
+      "respuesta": "**Respuesta:** Não posso listar as normas citadas no documento 2026/193 porque não foi fornecido esse documento nem quaisquer fragmentos. Sem o texto do documento não é possível identificar as referências normativas citadas.\n\n**Base normativa:**\n- Documento 2026/193 – não fornecido / nenhum fragmento disponibilizado.\n\n**Contexto adicional:** Se desejar que eu identifique as normas citadas, forneça:\n- o texto integral do documento 2026/193 ou os excertos relevantes onde constem as referências normativas; ou\n- um link oficial (por exemplo, EUR-Lex) para o documento.\nApós receber o documento/fragmentos, responderei indicando as normas citadas com a citação precisa de artigos, números e passagens, conforme pedido. Não inventarei nem assumirei referências legais.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.218,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 436,
+      "coste_rag_usd": 0.00093675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 436,
+          "tiempo_s": 6.218
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 40,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Que legislação anterior menciona o documento 2025/2649?",
+      "respuesta_esperada": [
+        "1305/2013",
+        "1306/2013",
+        "1308/2013",
+        "1405/2006",
+        "2015/1017",
+        "2016/2031",
+        "2016/429",
+        "2018/1725",
+        "2018/848",
+        "2021/1060",
+        "2021/2015",
+        "2021/2115",
+        "2021/2116",
+        "2021/523",
+        "2023/2831",
+        "2024/1468"
+      ],
+      "respuesta": "**Respuesta:** Não posso responder — não foram fornecidos quaisquer documentos. Sem o texto do documento 2025/2649 (ou excertos relevantes), não é possível identificar a legislação anterior que ele menciona.\n\nBase normativa:\n- Nenhum documento fornecido — não há excertos do documento 2025/2649 para citar artigos, considerandos ou referências normativas.\n\nContexto adicional:\n- Se pretende que eu identifique a legislação prévia mencionada no documento 2025/2649, por favor forneça:\n  - o texto integral ou os excertos do documento (em especial a secção de considerandos e a secção \"Referências\" / \"References\"), ou\n  - o identificador EUR-Lex ou um link para o documento.\n- Orientações para obter as referências por si:\n  - No EUR-Lex, abra o documento 2025/2649 e consulte a secção \"Documentos citados\" / \"References\" e os considerandos iniciais; aí constam normalmente as referências a atos jurídicos anteriores com os números e artigos pertinentes.\n  - Verifique os artigos e os considerandos (recitais) do próprio ato para encontrar menções a legislação anterior e números de artigo concretos.\n- Assim que receber o documento ou excertos relevantes, extrairei e citarei com precisão os atos anteriores (incluindo artigos, números e parágrafos) conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.159,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 939,
+      "coste_rag_usd": 0.001943,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 939,
+          "tiempo_s": 11.159
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 41,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Dê-me as referências a outros atos legislativos que aparecem em 2026/246.",
+      "respuesta_esperada": [
+        "1151/2012",
+        "2024/1143"
+      ],
+      "respuesta": "**Respuesta:** Não posso indicar referências a outros atos legislativos constantes no regulamento 2026/246 porque não foram fornecidos quaisquer fragmentos ou textos desse ato. Sem o texto do regulamento, não posso citar artigos, números ou excertos relevantes.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há texto do Regulamento 2026/246 disponível para extração de referências.\n\n**Contexto adicional:**  \n- Para obter as referências a outros atos legislativos dentro de um regulamento da UE procure, no texto do próprio regulamento, sobretudo:\n  - os considerandos (recitais), que frequentemente mencionam atos e bases jurídicas;\n  - as disposições finais (artigos finais) e as notas de rodapé, onde aparecem remissões a outros instrumentos (diretivas, regulamentos, decisões), muitas vezes com o número e o ano;\n  - o artigo que contém a cláusula de “entrada em vigor” ou “repeal/alteração” que costuma citar atos revogados ou alterados.\n- Ferramentas úteis: disponibilize o texto (ou um link para o Jornal Oficial / EUR-Lex) ou copie os excertos em que aparecem remissões. Se me fornecer o texto do regulamento 2026/246, extraio e cito precisamente os atos legislativos referidos, indicando artigos, números e excertos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 15.023,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 265,
+      "tokens_out": 1062,
+      "coste_rag_usd": 0.00219025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 265,
+          "tokens_out": 1062,
+          "tiempo_s": 15.023
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 42,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Identifique a legislação da UE referenciada em 2026/249.",
+      "respuesta_esperada": [
+        "1006/2008",
+        "1100/2007",
+        "1224/2009",
+        "1380/2013",
+        "2015/1565",
+        "2016/1627",
+        "2017/1004",
+        "2017/2107",
+        "2017/2403",
+        "2018/973",
+        "2018/975",
+        "2019/1241",
+        "2019/472",
+        "2021/1139",
+        "2021/56",
+        "2022/314",
+        "2023/194",
+        "2023/2053",
+        "2024/257",
+        "2025/202"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar a legislação da UE referenciada como \"2026/249\" com base nos documentos fornecidos, porque não foi disponibilizado nenhum texto ou fragmento documental relativo a esse número.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há trechos, artigos ou referências legislativas apresentados para permitir a identificação.\n\n**Contexto adicional:**  \n- Para identificar corretamente uma norma da UE com um número do tipo \"2026/249\" é necessário o texto ou, pelo menos, a referência completa (por exemplo, \"Regulamento (UE) n.º 2026/249\", \"Decisão (UE) 2026/249\", ou título e data).  \n- Se desejar, posso localizar e citar a legislação se fornecer:\n  - o texto do acto 2026/249; ou\n  - um link para o documento (por exemplo em EUR-Lex); ou\n  - a designação completa (tipo de acto, título e data).  \n- Alternativamente, pode procurar o documento na base de dados EUR-Lex (https://eur-lex.europa.eu) usando o número e o ano, e depois partilhar o fragmento para que eu o analise e cite artigos e parágrafos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.641,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 654,
+      "coste_rag_usd": 0.00137325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 654,
+          "tiempo_s": 9.641
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 43,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Quais documentos fazem referência ao Regulamento/Decisão 2017/746?",
+      "respuesta_esperada": [
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos fazem referência ao Regulamento/Decisão 2017/746 porque não foram fornecidos documentos para análise. Não posso citar artigos, parágrafos ou números de regulamento sem os textos a examinar.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há referências disponíveis ao Regulamento/Decisão 2017/746 nos documentos disponibilizados.\n\n**Contexto adicional:** Se pretende que procure referências específicas ao Regulamento/Decisão 2017/746 dentro de documentos da UE, por favor anexe os documentos relevantes (ou os fragmentos) e indicarei, com precisão legal, onde aparecem as menções incluindo citações de artigos e números de disposição.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.608,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 669,
+      "coste_rag_usd": 0.00140375,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 669,
+          "tiempo_s": 7.608
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 44,
+      "categoria": "referencias_cruzadas",
+      "pregunta": "Quantas referências a outros atos contém o documento 2025/2621?",
+      "respuesta_esperada": 1,
+      "respuesta": "**Respuesta:** Não é possível determinar. Não foram fornecidos os documentos ou fragmentos do documento 2025/2621, pelo que não posso contar as referências a outros atos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há texto do documento 2025/2621 disponível para análise.\n\n**Contexto adicional:** Se me fornecer o texto integral ou os fragmentos relevantes do documento 2025/2621, contarei as referências a outros atos (por exemplo, menções a regulamentos, diretivas, decisões ou tratados, incluindo artigos e números) e indicarei onde essas referências ocorrem, citando artigos, parágrafos e números conforme solicitado. Não inventarei referências nem farei suposições sem o texto apresentado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.884,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 549,
+      "coste_rag_usd": 0.0011635,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 549,
+          "tiempo_s": 7.884
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 45,
+      "categoria": "estrutura",
+      "pregunta": "Quantos artigos tem o documento 2025/2621?",
+      "respuesta_esperada": 2,
+      "respuesta": "**Respuesta:** Não é possível determinar quantos artigos tem o documento 2025/2621 porque nenhum documento ou fragmento relativo a esse número foi fornecido.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos, artigos ou excertos do documento 2025/2621 disponíveis para consulta.\n\n**Contexto adicional:** Se pretende que eu conte os artigos de um ato concreto da UE identificado por \"2025/2621\", por favor:\n- Anexe o texto ou os excertos do documento 2025/2621, ou\n- Indique se se trata de um regulamento, directiva, decisão ou proposta e, se possível, forneça a referência completa (por exemplo, publicação no Jornal Oficial ou ficheiro EUR-Lex).  \nPosso então citar os artigos/párrafos exactos e responder com precisão legal.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.402,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 761,
+      "coste_rag_usd": 0.00158675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 761,
+          "tiempo_s": 8.402
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 46,
+      "categoria": "estrutura",
+      "pregunta": "Quantos considerandos contém o preâmbulo de 2026/246?",
+      "respuesta_esperada": 3,
+      "respuesta": "**Respuesta:** Não é possível determinar quantos considerandos contém o preâmbulo do ato identificado como \"2026/246\" porque nenhum documento ou fragmento foi fornecido.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há texto do regulamento/decisão 2026/246 disponível para análise.\n\n**Contexto adicional:**  \n- Para obter o número de considerandos, consulte o texto oficial disponível no repositório EUR-Lex (https://eur-lex.europa.eu) ou forneça o texto do preâmbulo. Os considerandos do direito da UE normalmente aparecem antes do corpo normativo e são numerados entre parênteses: (1), (2), (3), etc. Conte cada linha ou bloco iniciado por um número entre parênteses para obter o número total de considerandos.  \n- Se me enviar o texto do preâmbulo ou um link para o documento 2026/246, eu conto os considerandos e forneço a referência exacta (considerando nº X, etc.).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.876,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 993,
+      "coste_rag_usd": 0.00205175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 993,
+          "tiempo_s": 11.876
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 47,
+      "categoria": "estrutura",
+      "pregunta": "Indique o número de considerandos do documento 2026/243.",
+      "respuesta_esperada": 2026,
+      "respuesta": "**Resposta:** Não é possível indicar o número de considerandos do documento 2026/243 porque os documentos fornecidos no contexto são inexistentes e, por isso, o texto do documento 2026/243 não foi disponibilizado para consulta.\n\nBase normativa:\n- Documentos fornecidos: nenhum – não há fragmentos do documento 2026/243 nos materiais disponibilizados pelo utilizador.\n\nContexto adicional:\n- Para obter o número de considerandos, consulte a versão oficial do documento no sítio EUR-Lex (https://eur-lex.europa.eu) ou no Jornal Oficial da União Europeia, procurando pelo número do documento (por exemplo «2026/243», «COM(…) 2026» ou o número CELEX correspondente). Os considerandos (recitais) constam no preâmbulo do ato e estão numerados de forma sequencial; a contagem é visível no PDF/HTML oficial do ato. Se fornecer o texto ou um excerto do documento 2026/243, poderei contar e indicar o número exacto de considerandos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.949,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 998,
+      "coste_rag_usd": 0.00206125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 998,
+          "tiempo_s": 11.949
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 48,
+      "categoria": "estrutura",
+      "pregunta": "Quantos pontos tem a parte considerativa de 2026/220?",
+      "respuesta_esperada": 14,
+      "respuesta": "**Respuesta:** Não é possível responder — não foram fornecidos os fragmentos do ato \"2026/220\" nem a sua parte considerativa nos documentos anexados. Sem o texto, não posso indicar o número de pontos (considerandos).\n\n**Base normativa:**\n- Nenhum documento fornecido – não há excertos relativos a \"2026/220\" disponíveis para consulta.\n\n**Contexto adicional:** Para responder com precisão, preciso de um dos seguintes itens:\n- o texto completo do ato 2026/220 (preâmbulo/parte considerativa), ou\n- um link ao documento na base EUR-Lex ou cópia dos considerandos.  \nCom esse material contarei e indicarei o número exacto de considerandos, citando-os conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.365,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 807,
+      "coste_rag_usd": 0.00167925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 807,
+          "tiempo_s": 10.365
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 49,
+      "categoria": "estrutura",
+      "pregunta": "Quais documentos contêm anexos?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar quais documentos contêm anexos porque não foram fornecidos documentos ou fragmentos para análise.\n\n**Base normativa:**\n- [Nenhum documento fornecido], [—] – Não há textos, artigos ou excertos normativos disponibilizados a partir dos quais identificar anexos.\n\n**Contexto adicional:** Se pretende que eu identifique quais documentos contêm anexos, por favor forneça os títulos ou os excertos dos documentos da UE em questão (ou carregue os ficheiros). Sem esses documentos, não posso citar artigos, números ou anexos específicos nem dar referências legais concretas.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 13.805,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 1032,
+      "coste_rag_usd": 0.0021275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 1032,
+          "tiempo_s": 13.805
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 50,
+      "categoria": "estrutura",
+      "pregunta": "Liste todos os documentos ordenados por número de páginas de maior a menor.",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502621_PT",
+          "paginas": 2400
+        },
+        {
+          "documento": "OJ_L_202600249_PT",
+          "paginas": 212
+        },
+        {
+          "documento": "OJ_L_202502664_PT",
+          "paginas": 106
+        },
+        {
+          "documento": "OJ_L_202502660_PT",
+          "paginas": 87
+        },
+        {
+          "documento": "OJ_L_202600266_PT",
+          "paginas": 40
+        },
+        {
+          "documento": "OJ_L_202502649_PT",
+          "paginas": 38
+        },
+        {
+          "documento": "OJ_L_202600215_PT",
+          "paginas": 37
+        },
+        {
+          "documento": "OJ_L_202600243_PT",
+          "paginas": 22
+        },
+        {
+          "documento": "OJ_L_202600230_PT",
+          "paginas": 20
+        },
+        {
+          "documento": "OJ_L_202600264_PT",
+          "paginas": 18
+        },
+        {
+          "documento": "OJ_L_202600271_PT",
+          "paginas": 16
+        },
+        {
+          "documento": "OJ_L_202600238_PT",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600239_PT",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600193_PT",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600220_PT",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600232_PT",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600197_PT",
+          "paginas": 3
+        },
+        {
+          "documento": "OJ_L_202600246_PT",
+          "paginas": 2
+        }
+      ],
+      "respuesta": "**Respuesta:** Não foram fornecidos documentos (0 documentos). Por isso, não é possível listar ou ordenar documentos por número de páginas nem citar artigos ou regulamentos a partir de documentos inexistentes.\n\nBase normativa:\n- Nenhum documento fornecido – não existem artigos, parágrafos ou excertos disponíveis para citar.\n\nContexto adicional:\n- Para cumprir rigorosamente o pedido preciso que você forneça os documentos ou, no mínimo, metadados: título do documento e número de páginas (ou ficheiro PDF). Só com essa informação poderei ordenar os documentos por número de páginas e, quando aplicável, citar os artigos/fragmentos relevantes.\n- Não inventarei referências nem contarei páginas sem os documentos ou metadados fornecidos, em conformidade com sua instrução de honestidade.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.936,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 618,
+      "coste_rag_usd": 0.00130125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 618,
+          "tiempo_s": 7.936
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 51,
+      "categoria": "estrutura",
+      "pregunta": "Quais documentos especificam uma data de aplicação?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600249_PT"
+      ],
+      "respuesta": "**Respuesta:** Nenhum documento foi fornecido; portanto, não é possível identificar — com base no material disponível — quais documentos especificam uma data de aplicação.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, secções nem excertos disponíveis para citar.\n\n**Contexto adicional:** Para que eu possa indicar especificamente quais documentos e quais artigos/pares definem uma data de aplicação, envie os fragmentos ou a referência dos documentos (títulos e números CE/Regulamento/Directiva/Decisão) que pretende analisar. Sem esses textos, não posso inventar nem presumir citações normativas.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.981,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 1034,
+      "coste_rag_usd": 0.002132,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 1034,
+          "tiempo_s": 12.981
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 52,
+      "categoria": "estrutura",
+      "pregunta": "Existem documentos com disposições transitórias?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502664_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar se existem documentos com disposições transitórias porque não foram fornecidos documentos para análise. Não posso citar artigos ou preceitos normativos inexistentes nos documentos recebidos.\n\nBase normativa:\n- Nenhum documento fornecido — não há base normativa disponível nos elementos remitidos para poder citar artigos, parágrafos ou números de regulamento.\n\nContexto adicional:\n- Em atos jurídicos da UE, as disposições transitórias costumam aparecer nas «disposições finais», «cláusulas de entrada em vigor» ou num artigo explicitamente intitulado «disposições transitórias» ou «medidas transitórias». Tais disposições normalmente fixam prazos escalonados, derrogações temporárias, regras de coordenação com normas existentes ou datas de cessação de efeitos de regimes anteriores.\n- Para responder com precisão legal e citar artigos concretos, preciso que me forneça o(s) documento(s) (texto do regulamento, directiva, decisão ou acordo) ou um link ao Diário Oficial (OJ) / EUR-Lex. Com esse material, identificarei e citarei exatamente as disposições transitórias relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.259,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 631,
+      "coste_rag_usd": 0.00132575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 631,
+          "tiempo_s": 8.259
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 53,
+      "categoria": "estrutura",
+      "pregunta": "Quais documentos se declaram obrigatórios em todos os seus elementos?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não foi possível identificar quais documentos \"se declaram obrigatórios em todos os seus elementos\" porque nenhum documento ou fragmento legislativo da UE foi fornecido para análise.\n\nBase normativa:\n- Nenhum documento fornecido – não há textos disponíveis para citar artigos, alíneas ou trechos.\n\nContexto adicional:\n- Nota: Sem os documentos solicitados não posso citar artigos nem fornecer uma resposta vinculante com base nas fontes exigidas. Se desejar, posso:\n  - Analisar documentos que forneça (suba os fragmentos ou indique os atos/trechos concretos), ou\n  - Fornecer uma explicação geral de direito da UE sobre que tipos de atos costumam ser \"obrigatórios em todos os seus elementos\" (por exemplo, normalmente os regulamentos da UE são descritos na doutrina e na prática como vinculativos em todos os seus elementos e diretamente aplicáveis nos Estados‑membros), mas essa explicação geral não substituirá citações normativas específicas nem estará baseada nos documentos que você exigiu como fonte.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.226,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 737,
+      "coste_rag_usd": 0.001539,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 737,
+          "tiempo_s": 10.226
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 54,
+      "categoria": "existencia",
+      "pregunta": "Existe algum documento sobre pesca no Atlântico?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202600249_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não posso confirmar. Não foram fornecidos documentos para análise, pelo que não tenho base normativa para afirmar se existe um documento sobre pesca no Atlântico entre os materiais que queria que eu examinasse.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há referências disponíveis nos documentos recebidos.\n\n**Contexto adicional:** Se pretende que eu verifique a existência e o teor de normas sobre pesca no Atlântico, envie os fragmentos ou identifique os documentos (por exemplo: título, número de regulamento/directiva, ou ficheiro). Só então poderei citar artigos, artigos/considerandos e trechos relevantes conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.66,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 717,
+      "coste_rag_usd": 0.00149775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 717,
+          "tiempo_s": 8.66
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 55,
+      "categoria": "existencia",
+      "pregunta": "Existe algum regulamento de execução na base de dados?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_PT",
+          "OJ_L_202600220_PT",
+          "OJ_L_202600238_PT",
+          "OJ_L_202600246_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não. Não é possível confirmar a existência de qualquer regulamento de execução na base de dados porque não foram fornecidos documentos.\n\n**Base normativa:**\n- (Nenhum documento fornecido) – não há fragmentos ou referências normativas na base de dados disponibilizada para análise.\n\n**Contexto adicional:** Não posso inventar referências nem citar artigos/regulamentos inexistentes nos documentos fornecidos. Se pretende uma verificação concreta, por favor forneça os documentos relevantes (texto completo ou excertos), ou indique referências concretas (n.º CELEX, título, data ou Jornal Oficial da UE) para que eu possa confirmar se existe um regulamento de execução e citar os artigos aplicáveis.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.195,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 600,
+      "coste_rag_usd": 0.00126425,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 600,
+          "tiempo_s": 8.195
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 56,
+      "categoria": "existencia",
+      "pregunta": "Existem documentos que tratam da Ucrânia?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_PT",
+          "OJ_L_202600271_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não — não há documentos fornecidos que tratem da Ucrânia. Não posso confirmar nem citar normativa sobre a Ucrânia com base no contexto atual porque não foram incluídos fragmentos de documentos.\n\n**Base normativa:**\n- Nenhum documento fornecido — não existem fragmentos disponíveis para extrair artigos, números ou excertos.\n\n**Contexto adicional:** Não posso inventar ou supor referências legais. Se pretende uma resposta precisa com citações (artigos, considerandos, números de regulamento ou diretiva), por favor envie os fragmentos dos documentos relevantes ou indique os atos concretos da UE (por exemplo: regulamento do Conselho n.º ..., decisão do Conselho de ... , acordo de associação, etc.). Com esses documentos, fornecerei as citações e o resumo jurídico solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.614,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 557,
+      "coste_rag_usd": 0.001178,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 557,
+          "tiempo_s": 8.614
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 57,
+      "categoria": "existencia",
+      "pregunta": "A Rússia é mencionada em algum documento?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_PT",
+          "OJ_L_202600271_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não — nos documentos fornecidos não há menção à Rússia.\n\n**Base normativa:**\n- Nenhum documento foi disponibilizado – não há artigos, parágrafos ou excertos que refiram a Rússia.\n\n**Contexto adicional:** Não posso inventar ou inferir referências normativas. Se pretende que eu verifique a presença de menções à Rússia em documentos concretos da UE, por favor carregue ou cole os fragmentos relevantes (ou indique títulos e referências precisas). Então poderei citar artigos e excertos específicos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.515,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 378,
+      "coste_rag_usd": 0.00081975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 378,
+          "tiempo_s": 6.515
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 58,
+      "categoria": "existencia",
+      "pregunta": "Existe algum documento relativo ao Espaço Económico Europeu (EEE)?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_PT",
+          "OJ_L_202502660_PT",
+          "OJ_L_202502664_PT",
+          "OJ_L_202600193_PT",
+          "OJ_L_202600197_PT",
+          "OJ_L_202600215_PT",
+          "OJ_L_202600220_PT",
+          "OJ_L_202600230_PT",
+          "OJ_L_202600243_PT",
+          "OJ_L_202600264_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não há nenhum documento relativo ao Espaço Económico Europeu (EEE) entre os fragmentos fornecidos; por isso, não é possível citar normas, artigos ou números de regulamento.\n\n**Base normativa:**\n- Nenhum documento fornecido – não foram disponibilizados textos legais ou fragmentos sobre o EEE que permitam extrair citações normativas.\n\n**Contexto adicional:** Não posso inventar referências legais. Se pretende que eu indique artigos concretos (por exemplo, do Acordo sobre o Espaço Económico Europeu ou de atos da UE relacionados), carregue os fragmentos ou documentos relevantes e eu os citarei exatamente com artigos, números e excertos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.294,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 793,
+      "coste_rag_usd": 0.001651,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 793,
+          "tiempo_s": 10.294
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 59,
+      "categoria": "existencia",
+      "pregunta": "Existe algum documento que mencione uma denominação de origem protegida (DOP)?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502660_PT",
+          "OJ_L_202502664_PT",
+          "OJ_L_202600243_PT",
+          "OJ_L_202600246_PT",
+          "OJ_L_202600249_PT"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não — entre os documentos fornecidos não há nenhum que mencione uma denominação de origem protegida (DOP).\n\n**Base normativa:**\n- Nenhum documento fornecido no contexto – não é possível citar artigos, parágrafos ou excertos porque não há documentos acessíveis.\n\n**Contexto adicional:** Para dar uma resposta com citações legais precisas (artigos e números de regulamento) preciso dos documentos relevantes. Se pretendes, podes:\n- Fornecer os textos/documentos em que queres que eu procure menções a DOP; ou\n- Autorizar-me a consultar legislação externa (por exemplo, atos da UE sobre esquemas de qualidade e indicações geográficas) para que eu possa citar os dispositivos aplicáveis.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.094,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 868,
+      "coste_rag_usd": 0.00180175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 868,
+          "tiempo_s": 10.094
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 60,
+      "categoria": "listagem",
+      "pregunta": "Dê-me a lista completa de todos os documentos disponíveis.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não há nenhum documento disponível para listar. Nos dados fornecidos consta explicitamente: \"CONTEXTO – DOCUMENTOS UE (0 documentos únicos)\". Logo, não é possível fornecer uma lista completa de documentos que não foram fornecidos.\n\nBase normativa:\n- Nenhum documento fornecido (CONTEXT: DOCUMENTOS UE (0 documentos únicos)) – Não há textos ou referências normativas disponíveis para citar artigos, capítulos ou números de regulamentação.\n\nContexto adicional:\n- Não posso inventar nem extrapolar referências legais; se pretende que eu liste documentos, por favor forneça os fragmentos/textos ou, no mínimo, os títulos ou números CELEX dos atos (ex.: \"Regulamento (UE) 2016/679\", \"Diretiva 2001/83/CE\", etc.).\n- Alternativamente, se autoriza consulta a bases externas, indique-o explicitamente e forneça o âmbito da procura (ex.: \"todos os regulamentos EU sobre proteção de dados até 2020\"). Sem autorização e sem documentos, apenas posso trabalhar com o material que me der.\n- Sugestão prática para envio: anexe os fragmentos relevantes ou indique uma lista de documentos com título e artigo(s) que deseja incluir; após isso, eu posso produzir a lista completa e citar artigos/párrafos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.792,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 984,
+      "coste_rag_usd": 0.0020325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 984,
+          "tiempo_s": 10.792
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 61,
+      "categoria": "listagem",
+      "pregunta": "Quais são todos os documentos na base de dados?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não há documentos na base de dados — foram fornecidos 0 documentos únicos.\n\n**Base normativa:**\n- CONTEXTO – DOCUMENTOS UE (0 documentos únicos) – \"DOCUMENTOS UE (0 documentos únicos):\" (nenhum texto adicional fornecido; sem artigos, sem títulos, sem números de referência).\n\n**Contexto adicional:** Não é possível enumerar ou citar regulamentos, diretivas ou outros atos porque não foram disponibilizados fragmentos de documentos. Não inventarei referências nem citações legislativas; se pretende uma listagem, forneça os documentos ou os metadados (títulos, números CE/Reg./Dir., datas) que deseja que eu utilize.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.451,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 663,
+      "coste_rag_usd": 0.00139025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 663,
+          "tiempo_s": 10.451
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 62,
+      "categoria": "listagem",
+      "pregunta": "Enumere todos os documentos da coleção.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Resposta:** Não é possível enumerar documentos porque não foram fornecidos documentos na coleção (0 documentos).\n\n**Base normativa:**\n- Nenhum documento fornecido — não há fragmentos ou referências normativas disponíveis no contexto para citar artigos, artigos/pares ou números de regulamento.\n\n**Contexto adicional:** Solicite ou carregue os documentos (títulos completos, identificadores CE/Reg./Diretiva/Decisão, ou excertos) para que eu possa enumerá‑los e citar, com precisão legal, os artigos e números regulamentares relevantes. Sem os documentos fornecidos, não posso inventar referências nem listar conteúdos que não constam do material disponibilizado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.966,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 659,
+      "coste_rag_usd": 0.0013815,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 659,
+          "tiempo_s": 8.966
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 63,
+      "categoria": "listagem",
+      "pregunta": "Preciso de ver o catálogo completo dos documentos da UE.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível fornecer o catálogo completo dos documentos da UE porque não foram entregados fragmentos ou documentos sobre os quais basear a resposta. Peça, por favor, os documentos ou autorize a consulta a uma base de dados oficial para que eu possa extrair e citar o catálogo solicitado.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, artigos/pares ou excertos disponíveis para citar.\n\n**Contexto adicional:** Se pretende que eu elabore o catálogo com citações e referências legais precisas, tem duas opções:\n- Forneça aqui os fragmentos/documentos concretos da UE que quer que utilize; ou\n- Autorize-me a consultar uma fonte oficial (por exemplo, EUR-Lex / Publications Office) para recolher o catálogo. Sem documentos fornecidos ou autorização para consultar fontes externas, não posso criar nem citar o catálogo nem apresentar artigos ou números de regulamento.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 13.344,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 967,
+      "coste_rag_usd": 0.0019985,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 967,
+          "tiempo_s": 13.344
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 64,
+      "categoria": "listagem",
+      "pregunta": "Liste todos os documentos emitidos pela Parlamento Europeu.",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível listar os documentos emitidos pelo Parlamento Europeu porque não foram fornecidos quaisquer fragmentos ou documentos no contexto. Não há informação normativa disponível para citar artigos, números ou parágrafos.\n\n**Base normativa:**\n- Nenhum documento fornecido; não há artigos, rubricas ou excertos legais disponíveis para citar.\n\n**Contexto adicional:**  \n- Não vou inventar referências normativas. Se pretende uma lista (p.ex. tipos de atos, relatórios, resoluções, pareceres, propostas de resolução, perguntas parlamentares, declarações escritas, atos legislativos adoptados pelo Parlamento, etc.), por favor forneça os fragmentos relevantes ou autorize a consulta a fontes oficiais (EUR-Lex, site do Parlamento Europeu, Observatório Legislativo do Parlamento).  \n- Se enviar os documentos ou especificar o âmbito temporal/tipo, responderei com precisão legal citando artigos, números e excertos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 13.982,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 1162,
+      "coste_rag_usd": 0.00238825,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 1162,
+          "tiempo_s": 13.982
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 65,
+      "categoria": "listagem",
+      "pregunta": "Quais documentos são do ano 2025?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600264_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos são do ano 2025 porque não foram fornecidos documentos no contexto. (Não há nenhum documento disponibilizado.)\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, secções ou números de regulação disponíveis para citar.\n\n**Contexto adicional:** Para responder com precisão legal, por favor forneça os fragmentos ou a lista dos documentos da UE (títulos e/ou textos) que pretende que sejam analisados. Sem esses textos não posso determinar datas nem citar disposições específicas. Não inventarei referências nem atribuirei anos a documentos sem base nos documentos fornecidos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.437,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 459,
+      "coste_rag_usd": 0.000982,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 459,
+          "tiempo_s": 6.437
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 66,
+      "categoria": "relacoes",
+      "pregunta": "Qual é o documento mais longo e qual é o mais curto?",
+      "respuesta_esperada": {
+        "mais_longo": {
+          "documento": "OJ_L_202502621_PT",
+          "paginas": 2400
+        },
+        "mais_curto": {
+          "documento": "OJ_L_202600246_PT",
+          "paginas": 2
+        }
+      },
+      "respuesta": "**Respuesta:** Não é possível determinar qual é o documento mais longo e qual é o mais curto porque não foram fornecidos quaisquer documentos para análise.\n\n**Base normativa:**\n- Nenhum documento foi disponibilizado – não há artigos, seções nem números de regulamento aos quais remeter.\n\n**Contexto adicional:**  \n- Para responder seria necessário receber os documentos ou, pelo menos, metadados comparáveis (por exemplo: número de páginas, número de palavras, tamanho do ficheiro).  \n- A avaliação objetiva habitualmente baseia‑se em contagens de páginas ou palavras (ou bytes).  \n- Não posso inventar citações nem criar referências normativas inexistentes; por isso não forneço artigos ou parágrafos que não constem dos documentos entregues.  \n\nSe quiser que eu compare documentos, envie os textos ou os metadados (páginas/palavras/tamanho) e eu indicarei, citando exactamente as partes relevantes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.436,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 524,
+      "coste_rag_usd": 0.00111275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 524,
+          "tiempo_s": 7.436
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 67,
+      "categoria": "relacoes",
+      "pregunta": "Existem documentos que tratem simultaneamente de pesca e saúde?",
+      "respuesta_esperada": [
+        "OJ_L_202600230_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível responder com base em documentos, porque não foram fornecidos fragmentos normativos. Portanto, não posso citar artigos, números ou excertos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos normativos disponíveis para extrair citações.\n\n**Contexto adicional:**  \n- Em termos gerais (sem citar normas concretas, já que isso exigiria documentos), na União Europeia existem domínios legislativos distintos que tratam de pescas (política das pescas, gestão de pesca e aquicultura) e de saúde (segurança alimentar, saúde pública, saúde animal). Pode haver interseções práticas — por exemplo, regras sobre a comercialização de produtos da pesca ou controles oficiais de segurança alimentar e de saúde animal relativos a pescado — mas a existência e o alcance de atos jurídicos que tratem simultaneamente de \"pesca\" e \"saúde\" só podem ser confirmados citando textos concretos.\n- Se pretende uma resposta com citações e artigos, por favor forneça os fragmentos ou o(s) documento(s) específicos que deseja que eu analise (ou autorize a consulta de normas concretas), e eu indicarei exatamente quais artigos/considerandos tratam simultaneamente de pesca e de aspetos de saúde.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.091,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 784,
+      "coste_rag_usd": 0.00163275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 784,
+          "tiempo_s": 10.091
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 68,
+      "categoria": "relacoes",
+      "pregunta": "Quais são os 5 documentos com mais referências a outros atos legislativos?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202600249_PT",
+          "num_referencias": 20
+        },
+        {
+          "documento": "OJ_L_202502649_PT",
+          "num_referencias": 16
+        },
+        {
+          "documento": "OJ_L_202600266_PT",
+          "num_referencias": 9
+        },
+        {
+          "documento": "OJ_L_202600264_PT",
+          "num_referencias": 8
+        },
+        {
+          "documento": "OJ_L_202600271_PT",
+          "num_referencias": 5
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar os 5 documentos com mais referências a outros atos legislativos porque não foram fornecidos documentos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, capítulos ou excertos disponíveis para consulta.\n\n**Contexto adicional:**\n- Para realizar a análise seriam necessários os textos integrais dos documentos. Procedimento recomendado:\n  1. Reunir todos os documentos a analisar em formato pesquisável (texto, não apenas imagens).\n  2. Definir o que conta como \"referência a outros atos legislativos\" (p.ex. citações a Tratados, Regulamentos, Diretivas, Decisões, Acordos; referências a artigos e números; menções a atos delegados ou de execução).\n  3. Usar ferramentas automatizadas (busca por padrões: \"Regulamento (UE) n.º\", \"Diretiva (UE) 20xx/xx\", \"artigo\", \"n.º\", nomes de atos) ou expressões regulares para extrair e contar referências por documento.\n  4. Validar manualmente amostras para garantir que abreviações e formatos diversos sejam contabilizados corretamente.\n  5. Ordenar os documentos pelo número de referências identificadas e apresentar os 5 primeiros, citando os trechos onde aparecem as referências (artigo/seção/linha).\n- Observações metodológicas:\n  - Diferentes idiomas e formatos de citação podem exigir normalização.\n  - Referências implícitas (p.ex. \"nos termos do presente Regulamento\" sem citar número) podem ser difíceis de quantificar automaticamente.\n  - Se desejar, posso executar a metodologia acima a partir dos documentos que nos fornecer; entregue-os e procedo à contagem e à listagem com citações precisas.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.738,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 639,
+      "coste_rag_usd": 0.0013435,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 639,
+          "tiempo_s": 8.738
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 69,
+      "categoria": "relacoes",
+      "pregunta": "Em que documentos é mencionado(a) Espanha?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600266_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar em que documentos é mencionada a Espanha porque não foram fornecidos documentos para análise.\n\n**Base normativa:**\n- Nenhum documento foi incluído no contexto fornecido – não há artigos, artigos/pares ou números de regulamentos disponíveis para citar.\n\n**Contexto adicional:** Se pretende que eu verifique onde a Espanha é mencionada, por favor forneça os fragmentos ou títulos dos documentos (diretivas, regulamentos, decisões, acordos ou outros textos da UE). Com os textos fornecidos poderei citar artigos, recitais e números de forma precisa e cumprir a exigência de referência legal.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.171,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 652,
+      "coste_rag_usd": 0.00136775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 652,
+          "tiempo_s": 8.171
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 70,
+      "categoria": "relacoes",
+      "pregunta": "Quais documentos foram emitidos conjuntamente pelo Parlamento Europeu e pelo Conselho?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar quais documentos foram emitidos conjuntamente pelo Parlamento Europeu e pelo Conselho com base nos documentos fornecidos, porque não foram fornecidos documentos.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, parágrafos ou números de regulamento disponíveis para citar.\n\n**Contexto adicional:** Para que eu possa responder com precisão legal, por favor forneça os fragmentos dos documentos relevantes (ou a lista dos atos em questão). Apenas com esses textos poderei citar os artigos e números exactos e indicar quais documentos foram emitidos conjuntamente.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.537,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 575,
+      "coste_rag_usd": 0.00121525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 575,
+          "tiempo_s": 8.537
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 71,
+      "categoria": "relacoes",
+      "pregunta": "Quais documentos estão relacionados com saúde ou questões médicas?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600243_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos se relacionam com saúde ou questões médicas porque não foram fornecidos quaisquer documentos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, números ou excertos disponíveis para citar.\n\n**Contexto adicional:** Não posso inventar ou extrapolar referências legais. Se pretende que eu identifique normas relacionadas com saúde, por favor envie os fragmentos ou títulos dos documentos (por exemplo, diretivas, regulamentos, decisões ou acordos) ou indique onde encontrá‑los; então os analisarei e citarei artigos e parágrafos conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.343,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 584,
+      "coste_rag_usd": 0.0012325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 584,
+          "tiempo_s": 8.343
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 72,
+      "categoria": "relacoes",
+      "pregunta": "Quais documentos tratam de comércio internacional ou relações externas?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600249_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos tratam de comércio internacional ou relações externas porque não foram fornecidos fragmentos nem documentos da UE para analisar. Peça, por favor, os documentos ou fragmentos específicos que deseja que eu examine.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há referências normativas disponíveis para citar.\n\n**Contexto adicional:** \n- Para que eu possa responder com precisão legal (citando artigos e números), envie os fragmentos ou indique os documentos concretos (por ex., títulos de regulamentos, diretivas, decisões do Conselho ou acordos internacionais).\n- Exemplos de que tipos de documentos normalmente contêm matérias sobre comércio internacional e relações externas (sem citar normas específicas): tratados da UE, instrumentos de política comercial, acordos de associação e de livre comércio, regulamentos e medidas de execução relativos a importações/exportações, decisões do Conselho sobre acordo internacional, e atos institucionais que referem a política externa/comercial. Se quiser, posso analisar quaisquer desses documentos assim que os forneça.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.127,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 990,
+      "coste_rag_usd": 0.0020445,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 990,
+          "tiempo_s": 12.127
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 73,
+      "categoria": "relacoes",
+      "pregunta": "Quais documentos contêm disposições sobre entrada em vigor?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos contêm disposições sobre entrada em vigor porque não foram fornecidos fragmentos ou documentos normativos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos disponíveis para citar artigos, parágrafos ou números de regulação.\n\n**Contexto adicional:** \n- Para obter uma resposta precisa, envie os fragmentos ou títulos dos documentos da UE que deseja analisar. Com os textos poderei citar exatamente o artigo ou a disposição final que trata da entrada em vigor.\n- Informação geral (orientativa, não baseada em documentos fornecidos): em atos jurídicos da UE (regulamentos, diretivas, decisões) e em acordos internacionais é habitual que exista uma cláusula final com título como \"Entry into force\" / \"Entry into force and application\" ou, em português, \"Entrada em vigor\" / \"Entrada em vigor e aplicação\", indicando a data ou condição (por exemplo, na data da publicação, X dias após publicação, ou após ratificação/notificação). Essas observações são apenas indicativas; para exatidão jurídica são necessárias as citações dos textos concretos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.573,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 948,
+      "coste_rag_usd": 0.0019605,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 948,
+          "tiempo_s": 9.573
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 74,
+      "categoria": "relacoes",
+      "pregunta": "Compare os documentos 2025/2621 e 2025/2649: o que têm em comum?",
+      "respuesta_esperada": {
+        "tipo_comum": "REGULAMENTO",
+        "doc1": {
+          "codigo": "2025/2621",
+          "fecha": "16 de dezembro de 2025",
+          "paginas": 2400
+        },
+        "doc2": {
+          "codigo": "2025/2649",
+          "fecha": "19 de dezembro de 2025",
+          "paginas": 38
+        }
+      },
+      "respuesta": "**Respuesta:** Não é possível comparar os documentos 2025/2621 e 2025/2649 porque não foram fornecidos os textos ou extratos desses atos. Sem os documentos fornecidos, não posso citar artigos, números ou trechos normativos nem determinar o que têm em comum de forma juridicamente precisa.\n\n**Base normativa:**\n- Documento 2025/2621 – não fornecido; nenhum artigo ou excerto disponível para análise.\n- Documento 2025/2649 – não fornecido; nenhum artigo ou excerto disponível para análise.\n\n**Contexto adicional:** Para efetuar uma comparação precisa e conforme pedido (citando artigos, parágrafos e números de regulamentação), por favor forneça pelo menos um dos seguintes elementos:\n- o texto completo de cada documento (preferível); ou\n- os títulos legais completos (ex.: \"Regulamento (UE) 2025/2621 da Comissão, de [data]\") e os artigos ou excertos relevantes; ou\n- recitals e artigos específicos que queira comparar.\n\nSem esses elementos só posso oferecer orientações genéricas (por exemplo, tipos de pontos que normalmente se comparam: base jurídica, âmbito de aplicação, definições, obrigações dos destinatários, medidas de execução e disposições finais), mas isso não substituirá a comparação baseada nos documentos reais.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.267,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 269,
+      "tokens_out": 796,
+      "coste_rag_usd": 0.00165925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 269,
+          "tokens_out": 796,
+          "tiempo_s": 9.267
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 75,
+      "categoria": "relacoes",
+      "pregunta": "Como se distribuem os documentos por mês de emissão?",
+      "respuesta_esperada": [
+        {
+          "mes": "janeiro",
+          "quantidade": 13
+        },
+        {
+          "mes": "dezembro",
+          "quantidade": 3
+        },
+        {
+          "mes": "outubro",
+          "quantidade": 2
+        }
+      ],
+      "respuesta": "**Resposta:** Não é possível determinar como se distribuem os documentos por mês de emissão porque não foram fornecidos quaisquer documentos nem fragmentos normativos contendo essa informação.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, números ou excertos disponíveis para citar que descrevam a distribuição por mês de emissão.\n\n**Contexto adicional:**\n- Para obter a distribuição por mês seria necessário um conjunto de dados que inclua, para cada documento, pelo menos um campo de data claro (data de emissão). A análise consiste em agrupar os documentos por mês/ano dessa data e contar ocorrências por grupo (ex.: janeiro‑2025: N documentos, fevereiro‑2025: M documentos, etc.).\n- Questões a considerar ao preparar os dados: escolher a data correta (data de emissão vs. data de publicação), tratar documentos sem data ou com datas incompletas, harmonizar fusos horários e formatos, e decidir se a agregação é por mês civil (jan, fev, ...) ou por período móvel.\n- Se fornecer o ficheiro ou os excertos com as datas de emissão, posso agrupar e devolver a distribuição por mês citando exactamente os campos e resultados.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.299,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 958,
+      "coste_rag_usd": 0.00198025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 958,
+          "tiempo_s": 11.299
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 76,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Qual é o conteúdo do Artigo 1.° do documento 2025/2621?",
+      "respuesta_esperada": "Valores predefinidos 1. Se as emissões incorporadas das mercadorias importadas forem determinadas com base em valores predefinidos em conformidade com o artigo 7.o, n.o2, alínea b), do Regulamento (UE) 2023/956, devem utilizar-se os valores predefinidos estabelecidos no anexo I desse regulamento. 2. Se as emissões incorporadas das mercadorias complexas forem determinadas com base em valores reais e as emissões incorporadas dos precursores utilizados na produção dessas mercadorias complexas forem",
+      "respuesta": "**Respuesta:** Não é possível indicar o conteúdo do Artigo 1.º do documento 2025/2621 porque o(s) documento(s) referidos não foram fornecidos no contexto. Não posso inventar nem deduzir o texto legal sem a fonte.\n\n**Base normativa:**\n- Documento 2025/2621, Artigo 1.º – não consta entre os documentos fornecidos; não há extracto disponível para citação.\n\n**Contexto adicional:**\n- Se pretende que eu apresente o texto ou uma análise do Artigo 1.º, por favor forneça o fragmento relevante ou o documento completo 2025/2621.\n- Alternativamente, pode obter o documento em EUR-Lex (https://eur-lex.europa.eu) pesquisando pelo número \"2025/2621\" ou consultando o Jornal Oficial da União Europeia onde o ato foi publicado (L ou OJ conforme o tipo de acto). Depois de me fornecer o texto, posso citá‑lo exactamente e explicar o seu alcance jurídico.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.375,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 266,
+      "tokens_out": 799,
+      "coste_rag_usd": 0.0016645,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 266,
+          "tokens_out": 799,
+          "tiempo_s": 12.375
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 77,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Que informação aparece na página 2 do documento 2025/2621?",
+      "respuesta_esperada": "PT JO L de 31.12.2025 (7) Para as emissões indiretas incorporadas, o valor predefinido deve ser calculado com base na média do fator de emissão da rede elétrica do país de origem. Esse método de cálculo é o mais adequado para conseguir tanto evitar a fuga de carbono como preservar a integridade ambi",
+      "respuesta": "**Respuesta:** Não é possível indicar o que aparece na página 2 do documento 2025/2621 porque nenhum documento ou fragmento foi fornecido. Sem o texto ou acesso ao documento não posso citar conteúdos, artigos ou números de regulamentação.\n\n**Base normativa:**\n- Documento 2025/2621 — página 2: conteúdo não disponível nos documentos fornecidos.\n\n**Contexto adicional:** Para fornecer uma resposta precisa e citar artigos, parágrafos e números (conforme solicitado), por favor anexe o documento 2025/2621 ou copie aqui o conteúdo da página 2. Alternativamente, indique um link público confiável (por exemplo, EUR-Lex) onde eu possa verificar o documento; sem isso, não posso inventar nem inferir o conteúdo.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.953,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 810,
+      "coste_rag_usd": 0.0016855,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 810,
+          "tiempo_s": 7.953
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 78,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Quais documentos especificam a data de entrada em vigor e quando é?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502621_PT",
+          "entrada_em_vigor": "terceiro dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202502649_PT",
+          "entrada_em_vigor": "dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202502664_PT",
+          "entrada_em_vigor": "na data da sua adoção e é aplicável a partir dessa data"
+        },
+        {
+          "documento": "OJ_L_202600193_PT",
+          "entrada_em_vigor": "dia da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600197_PT",
+          "entrada_em_vigor": "dia da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600215_PT",
+          "entrada_em_vigor": "vigésimo dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600220_PT",
+          "entrada_em_vigor": "vigésimo dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600232_PT",
+          "entrada_em_vigor": "na data da sua adoção"
+        },
+        {
+          "documento": "OJ_L_202600238_PT",
+          "entrada_em_vigor": "dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600239_PT",
+          "entrada_em_vigor": "dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600246_PT",
+          "entrada_em_vigor": "vigésimo dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600249_PT",
+          "entrada_em_vigor": "dia da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600264_PT",
+          "entrada_em_vigor": "vigésimo dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600266_PT",
+          "entrada_em_vigor": "dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        },
+        {
+          "documento": "OJ_L_202600271_PT",
+          "entrada_em_vigor": "dia seguinte ao da sua publicação no Jornal Oficial da União Europeia"
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos especificam a data de entrada em vigor nem indicar essa data porque não foram fornecidos fragmentos ou documentos da UE para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não existem textos, artigos ou números a citar.\n\n**Contexto adicional:**  \n- Orientação prática: nos atos jurídicos da UE a cláusula sobre a data de entrada em vigor costuma aparecer nas disposições finais (normalmente o último artigo) e pode:\n  - estabelecer que o ato \"entra em vigor no dia seguinte ao da sua publicação no Jornal Oficial da União Europeia\", ou\n  - fixar uma data concreta, ou\n  - indicar um prazo a partir da publicação (\"entra em vigor X dias após a publicação\") e, por vezes, distinguir entre \"entrada em vigor\" e \"data de aplicação\" (quando as obrigações começam a produzir efeitos).\n- Se fornecer os fragmentos ou indicar os textos (títulos ou números de atos), localizo e cito exactamente o artigo/número que especifica a data de entrada em vigor.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.912,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 935,
+      "coste_rag_usd": 0.00193525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 935,
+          "tiempo_s": 9.912
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 79,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Quais documentos definem o seu âmbito de aplicação?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Resposta:** Não é possível identificar nem citar quais documentos definem o âmbito de aplicação porque não foram fornecidos fragmentos ou documentos legais sobre os quais basear a resposta.\n\nBase normativa:\n- Nenhum documento fornecido – não há artigos, jornais oficiais, diretivas, regulamentos ou números de preceitos para citar.\n\nContexto adicional:\n- Só posso responder com precisão legal e citar artigos, parágrafos e números se me fornecer os excertos dos documentos relevantes (ex.: título do ato da UE e os artigos/recursos concretos).\n- Para que eu responda de forma completa, envie os fragmentos ou indique: o tipo de ato (Regulamento, Diretiva, Decisão, Acordo), o número/identificador e os artigos/recortes que deseja que eu examine.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.963,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 942,
+      "coste_rag_usd": 0.00194825,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 942,
+          "tiempo_s": 11.963
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 80,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Quais documentos alteram legislação preexistente?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos alteram legislação preexistente porque não foram fornecidos documentos ou fragmentos normativos no contexto. Não há referências concretas para citar.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há excertos normativos disponíveis para citar.\n\n**Contexto adicional:**\n- De forma geral, em actos da União Europeia, alteram legislação preexistente os textos que:\n  - contêm expressões como \"amends\", \"is amended as follows\", \"repeals\", \"is hereby repealed\" ou \"corrigendum\" e que indicam explicitamente alterações a atos anteriores;\n  - adoptam a redação substitutiva de artigos ou anexos de actos anteriores;\n  - estabelecem cláusulas de revogação ou transição que modificam o alcance de normas anteriores;\n  - conferem poderes delegados ou mecanismos de alteração (por exemplo, para ajustar elementos não essenciais), quando o acto legislativo base prevê essa faculdade.\n- Para determinar com precisão quais documentos alteram legislação preexistente é necessário dispor dos textos ou dos excertos relevantes (préambulo e os artigos que contenham as fórmulas de alteração). Sem esses documentos não posso citar artigos, parágrafos ou números regulamentares concretos.\n- Se fornecer os documentos ou fragmentos, indicarei exactamente quais disposições alteram legislação anterior, citando artigos, parágrafos e números conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.824,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 944,
+      "coste_rag_usd": 0.001952,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 944,
+          "tiempo_s": 10.824
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 81,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Em quais documentos se faz referência a comités?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202502664_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600232_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar em quais documentos se faz referência a comitês porque não foram fornecidos documentos ou fragmentos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há excertos disponíveis para citar artigos, pontos ou números.\n\n**Contexto adicional:** Se desejar, envie os fragmentos ou a lista de documentos (diretivas, regulamentos, decisões, acordos, etc.) que quer que eu examine. Após receber os textos, indicarei precisamente em quais documentos e em que artigos, parágrafos ou números aparecem referências a comitês, citando os excertos relevantes conforme solicitado.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.077,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 715,
+      "coste_rag_usd": 0.001494,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 715,
+          "tiempo_s": 11.077
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 82,
+      "categoria": "conteudo_especifico",
+      "pregunta": "Quais documentos se baseiam no Tratado sobre o Funcionamento da União Europeia?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_PT",
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202600193_PT",
+        "OJ_L_202600197_PT",
+        "OJ_L_202600215_PT",
+        "OJ_L_202600220_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600243_PT",
+        "OJ_L_202600246_PT",
+        "OJ_L_202600249_PT",
+        "OJ_L_202600264_PT",
+        "OJ_L_202600266_PT",
+        "OJ_L_202600271_PT"
+      ],
+      "respuesta": "**Respuesta:** Não é possível identificar quais documentos se baseiam no Tratado sobre o Funcionamento da União Europeia porque não foram fornecidos fragmentos ou documentos a partir dos quais fundamentar a resposta.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há textos nem referências para citar artigos, artigos/considerandos ou números de regulamento.\n\n**Contexto adicional:** Para responder com precisão legal e citar artigos e números concretos (conforme solicitado), preciso que você anexe os fragmentos ou documentos da UE aos quais quer que eu me refira. Se preferir, pode fornecer títulos ou trechos específicos (por exemplo, um regulamento, uma directiva ou uma decisão) e eu indicarei, com base nesses textos, se e onde se invoca o Tratado sobre o Funcionamento da União Europeia (TFEU), citando os artigos pertinentes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.322,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 507,
+      "coste_rag_usd": 0.00107975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 507,
+          "tiempo_s": 6.322
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 83,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Liste TODOS os documentos do corpus que citam o regulamento 2016/429.",
+      "respuesta_esperada": [
+        "OJ_L_202502649_PT",
+        "OJ_L_202502660_PT",
+        "OJ_L_202600230_PT",
+        "OJ_L_202600243_PT"
+      ],
+      "respuesta": "**Respuesta:** Nenhum — o corpus fornecido não contém documentos, pelo que não há nenhum documento que cite o Regulamento (UE) 2016/429.\n\n**Base normativa:**\n- Não há documentos no corpus para analisar; portanto, não é possível identificar citações ao Regulamento (UE) 2016/429.\n\n**Contexto adicional:** Conforme as instruções, baseei-me exclusivamente nos documentos fornecidos. Se quiser que procure quais documentos citam o Regulamento (UE) 2016/429, por favor forneça os textos ou indique o corpus a analisar (ou envie fragmentos que incluam referências, por exemplo \"Regulamento (UE) 2016/429\" ou \"2016/429\"). Só então poderei extrair e citar artigos/números concretos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.758,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 264,
+      "tokens_out": 752,
+      "coste_rag_usd": 0.00157,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 264,
+          "tokens_out": 752,
+          "tiempo_s": 7.758
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 84,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quantos documentos do corpus fazem referência ao regulamento 1025/2012?",
+      "respuesta_esperada": 2,
+      "respuesta": "**Respuesta:** 0 documentos do corpus fazem referência ao Regulamento 1025/2012.\n\n**Base normativa:**\n- Nenhum documento no corpus (0 documentos fornecidos) – não há excertos que permitam identificar referências ao Regulamento (UE) n.º 1025/2012.\n\n**Contexto adicional:** Não é possível citar artigos, parágrafos ou trechos do regulamento a partir dos documentos fornecidos porque não foram fornecidos documentos. Se pretende uma verificação concreta, por favor forneça os documentos do corpus ou permita acesso aos textos em que procurar‑se‑ia a referência ao Regulamento (UE) n.º 1025/2012.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.388,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 917,
+      "coste_rag_usd": 0.00189975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 917,
+          "tiempo_s": 9.388
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 85,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quantos atos legislativos externos distintos são citados em todo o corpus?",
+      "respuesta_esperada": 66,
+      "respuesta": "**Respuesta:** 0\n\n**Base normativa:**\n- Nenhum documento foi fornecido no corpus (0 documentos) – não existem fragmentos nos quais procurar ou identificar atos legislativos externos citados.\n\n**Contexto adicional:**  \n- Não é possível citar artigos, números ou quaisquer referências normativas porque não há documentos/provas no conjunto fornecido.  \n- Se pretende que eu conte atos legislativos externos citados, envie os fragmentos ou o corpus relevante; então poderei indicar o número exacto e, quando existir, citar artigos e parágrafos correspondentes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.669,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 574,
+      "coste_rag_usd": 0.00121325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 574,
+          "tiempo_s": 8.669
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 86,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quais regulamentos externos são citados por 2 ou mais documentos do corpus?",
+      "respuesta_esperada": [
+        "1025/2012",
+        "1100/2007",
+        "1224/2009",
+        "1380/2013",
+        "2016/429",
+        "2017/745",
+        "2017/746",
+        "2018/1725",
+        "2019/1241"
+      ],
+      "respuesta": "**Respuesta:** Não é possível determinar quais regulamentos externos são citados por 2 ou mais documentos do corpus, porque não foram fornecidos documentos ou fragmentos para análise.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há extratos disponíveis para extração de citações normativas.\n\n**Contexto adicional:**  \n- Conforme solicitado, baseio-me exclusivamente nos fragmentos de documentos fornecidos. Como não foram entregues documentos (o contexto indica 0 documentos), não existe informação que permita identificar regulamentos externos citados repetidamente.  \n- Não inventarei referências nem atribuirei citações sem fonte. Se desejar que eu faça a análise, por favor forneça os documentos ou os excertos relevantes (títulos das peças, artigos ou parágrafos que contenham referências normativas).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.039,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 365,
+      "coste_rag_usd": 0.00079575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 365,
+          "tiempo_s": 5.039
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 87,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quais atos legislativos são citados TANTO pelo documento 2026/249 COMO pelo documento 2026/266?",
+      "respuesta_esperada": [
+        "1100/2007",
+        "1224/2009",
+        "1380/2013",
+        "2019/1241"
+      ],
+      "respuesta": "**Respuesta:** Não é possível responder: não foram fornecidos os conteúdos dos documentos 2026/249 nem 2026/266, pelo que não há como identificar os atos legislativos que ambos citam.\n\n**Base normativa:**\n- Documento 2026/249 – sem conteúdo fornecido; não é possível extrair citações legais.\n- Documento 2026/266 – sem conteúdo fornecido; não é possível extrair citações legais.\n\n**Contexto adicional:** Para identificar com precisão os atos legislativos citados TANTO por 2026/249 como por 2026/266 seria necessário dispor dos fragmentos ou textos integrais desses documentos (ou de uma lista explícita das referências normativas que cada um cita). Sem esses elementos não devo nem posso inventar referências nem atribuir citações que não constem nos documentos. Se fornecer os trechos relevantes (ou links/indicadores de cláusulas), procederei à comparação e indicarei, com referência a artigos e números, os atos legislativos comuns.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.906,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 272,
+      "tokens_out": 668,
+      "coste_rag_usd": 0.001404,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 272,
+          "tokens_out": 668,
+          "tiempo_s": 8.906
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 88,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Qual par de documentos do corpus partilha mais referências cruzadas? Quantas partilham?",
+      "respuesta_esperada": {
+        "documento_1": "2026/249",
+        "documento_2": "2026/266",
+        "num_partilhadas": 4,
+        "refs_partilhadas": [
+          "1100/2007",
+          "1224/2009",
+          "1380/2013",
+          "2019/1241"
+        ]
+      },
+      "respuesta": "**Respuesta:** Não é possível determinar qual par de documentos do corpus partilha mais referências cruzadas porque não foram fornecidos documentos no corpus. Não existe informação disponível nos documentos fornecidos para contabilizar referências cruzadas.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, recitais ou números de regulamento a citar.\n\n**Contexto adicional:**\n- Para obter a resposta, seriam necessários os textos completos (ou extratos que incluam citações/referências) de todos os documentos do corpus. Procedimento recomendado para calcular o par com mais referências cruzadas:\n  1. Definir claramente o que conta como “referência cruzada” (por exemplo: citações formais a artigos/considerandos/outros atos por número e/ou título; menções a outro ato sem número; referências a anexos).\n  2. Extrair todas as referências de cada documento (por ex., usando expressões regulares que detectem formatos típicos: “Artigo X”, “considerando Y”, “Regulamento (UE) 20XX/NNN”, “Diretiva 20XX/NNN”, etc.) e normalizá‑las (unificar variações de formatação e linguagem).\n  3. Resolver ambiguidade: mapear referências ao identificador único do documento citado (número/ano/abreviação) para evitar contagens duplicadas por variantes de escrita.\n  4. Construir uma matriz ou grafo em que nós = documentos e arestas = número de referências de um documento para outro. Decidir se conta-se referências diretas (A→B) separadamente de B→A, ou se se soma para obter uma contagem mútua (A↔B).\n  5. Calcular, para cada par, o número total de referências (direcionais ou mútuas, conforme definição) e identificar o par com maior valor.\n  6. Validar manualmente as principais referências detectadas para evitar falso positivos (p.ex., menções genéricas que não se referem ao ato pretendido).\n- Cuidados e matizes: diferenças de língua e variantes de formatação entre documentos podem requerer normalização adicional; considerações sobre se considerar referências a atos revogados ou versões consolidadas; o critério de contagem (ocorrências individuais vs. referência única por documento) altera o resultado.\n- Se fornecerem os documentos do corpus, posso executar ou descrever passo a passo a análise e indicar o par com o maior número de referências, citando os artigos/números correspondentes.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.199,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 265,
+      "tokens_out": 927,
+      "coste_rag_usd": 0.00192025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 265,
+          "tokens_out": 927,
+          "tiempo_s": 12.199
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 89,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quais documentos do corpus não citam nenhum outro ato legislativo?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_PT",
+        "OJ_L_202600238_PT",
+        "OJ_L_202600239_PT"
+      ],
+      "respuesta": "**Respuesta:** Não há documentos no corpus para analisar; portanto, não é possível identificar documentos que não citem nenhum outro acto legislativo.\n\n**Base normativa:**\n- Nenhum documento fornecido – não existem excertos ou referências legais no corpus para comprovar citações de actos legislativos.\n\n**Contexto adicional:** Por ausência de documentos, não é possível citar artigos, parágrafos ou números de regulamentos. Se fornecer os documentos ou os excertos relevantes do corpus, procederei à análise e indicarei, artigo por artigo, quais documentos não referenciam outros actos legislativos.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.736,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 577,
+      "coste_rag_usd": 0.001219,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 577,
+          "tiempo_s": 7.736
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 90,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Quais são os 3 documentos que citam o maior número de regulamentos externos? Indique códigos e quantidades.",
+      "respuesta_esperada": [
+        {
+          "documento": "2026/249",
+          "num_referencias": 20
+        },
+        {
+          "documento": "2025/2649",
+          "num_referencias": 16
+        },
+        {
+          "documento": "2026/266",
+          "num_referencias": 9
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível responder — não foram fornecidos documentos para analisar, portanto não consigo identificar quais 3 documentos citam o maior número de regulamentos externos nem indicar códigos e quantidades.\n\n**Base normativa:**\n- Nenhum documento fornecido — não há artigos, secções ou excertos disponíveis para extrair referências a regulamentos externos.\n\n**Contexto adicional:**\n- Para cumprir a sua solicitação seria necessário fornecer os documentos (ou excertos) a analisar. A análise consistiria em:\n  1. Procurar em cada documento as menções a regulamentos externos (ex.: \"Regulation (EU) 2016/679\", \"Regulation (EC) No 883/2004\", etc.).\n  2. Normalizar as citações (código/ano/número) para evitar contagens duplicadas por variações de formatação.\n  3. Contabilizar o número de regulamentos distintos citados em cada documento.\n  4. Ordenar os documentos pela quantidade decrescente e fornecer os três primeiros com códigos e quantidades, citando os excertos relevantes (artigo/secção) onde aparecem as menções.\n\n- Limitações e matizes:\n  - Só posso usar as informações presentes nos documentos que me forneça; não inventarei citações nem consultarei fontes externas.\n  - Se as citações estiverem abreviadas ou incompletas, a normalização poderá exigir interpretação; para precisão, inclua as citações tal como aparecem no texto.\n  - Indique se pretende contar menções repetidas ao mesmo regulamento dentro de um documento (contagem de menções) ou o número de regulamentos distintos citados (contagem distinta).\n\nSe desejar, envie os documentos (ou excertos) e eu procederei à contagem e fornecerei os três documentos com mais citações de regulamentos externos, indicando códigos, quantidades e os excertos relevantes (artigos/secções).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.136,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 271,
+      "tokens_out": 602,
+      "coste_rag_usd": 0.00127175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 271,
+          "tokens_out": 602,
+          "tiempo_s": 8.136
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 91,
+      "categoria": "documentos_cruzados",
+      "pregunta": "Entre os documentos emitidos pela Comissão Europeia, liste os seus códigos e datas.",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502621_PT",
+          "codigo": "2025/2621",
+          "fecha": "16 de dezembro de 2025"
+        },
+        {
+          "documento": "OJ_L_202502660_PT",
+          "codigo": "2025/2660",
+          "fecha": "23 de dezembro de 2025"
+        },
+        {
+          "documento": "OJ_L_202600193_PT",
+          "codigo": "2026/193",
+          "fecha": "28 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600197_PT",
+          "codigo": "2026/197",
+          "fecha": "28 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600215_PT",
+          "codigo": "2026/215",
+          "fecha": "29 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600220_PT",
+          "codigo": "2026/220",
+          "fecha": "29 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600230_PT",
+          "codigo": "2026/230",
+          "fecha": "26 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600243_PT",
+          "codigo": "2026/243",
+          "fecha": "26 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600246_PT",
+          "codigo": "2026/246",
+          "fecha": "23 de janeiro de 2026"
+        },
+        {
+          "documento": "OJ_L_202600264_PT",
+          "codigo": "2026/264",
+          "fecha": "27 de outubro de 2025"
+        }
+      ],
+      "respuesta": "**Respuesta:** Não é possível listar códigos e datas porque não foram fornecidos fragmentos de documentos da Comissão Europeia.\n\n**Base normativa:**\n- Nenhum documento fornecido – não há artigos, números ou excertos disponíveis para citar.\n\n**Contexto adicional:** Conforme as instruções, devo basear-me exclusivamente nos fragmentos de documentos que me forem entregues. Como não recebi nenhum desses fragmentos (0 documentos), não posso identificar nem enumerar códigos e datas. Se quiser, forneça os fragmentos ou os arquivos dos documentos da Comissão Europeia (ou indique onde estão os excertos relevantes) e eu extrairei e listarei os códigos e as datas, citando os artigos/pares relevantes quando possível.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.68,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 859,
+      "coste_rag_usd": 0.0017835,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 859,
+          "tiempo_s": 10.68
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    }
+  ]
+}

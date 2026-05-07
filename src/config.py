@@ -118,8 +118,10 @@ class RAGConfig:
     # === CVs – RETRIEVAL MASIVO ===
     # Número de chunks a recuperar en la búsqueda directa (sin RAG Fusion)
     cvs_top_k: int = int(os.getenv("AZURE_SEARCH_TOP_K_CVS", os.getenv("CVS_TOP_K", "50")))
+    # top_k exclusivo para cvs_parallel (cobertura total del corpus)
+    cvs_parallel_top_k: int = int(os.getenv("CVS_PARALLEL_TOP_K", "300"))
     # Tamaño de lote al pasar chunks a mini-LLM
-    cvs_chunk_size: int = int(os.getenv("CVS_CHUNK_SIZE", "12"))
+    cvs_chunk_size: int = int(os.getenv("CVS_CHUNK_SIZE", "8"))
     # Ruta al fichero historial de CVs
     cvs_history_path: str = os.getenv("CVS_HISTORY_PATH", "data/historial/cvs_history.json")
     # Si True, grupo1 también pasa por mini-LLM; si False, extrae nombres directamente de doc_title

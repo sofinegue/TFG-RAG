@@ -174,6 +174,112 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
 
         return groups
 
+    # ── Pre-filtro programático por keywords ─────────────────────────
+
+    @staticmethod
+    def _extract_keywords_from_query(query: str) -> List[str]:
+        """
+        Extrae keywords buscables de la consulta del usuario.
+        Detecta nombres de skills, tecnologías, idiomas, puestos, etc.
+        y los splitea por AND/OR para búsqueda individual.
+        """
+        raw_keywords: List[str] = []
+
+        # 1. Términos entre comillas
+        for m in re.finditer(r'"([^"]+)"', query):
+            raw_keywords.append(m.group(1))
+        for m in re.finditer(r"'([^']+)'", query):
+            raw_keywords.append(m.group(1))
+
+        # 2. Detectar patrones "have X among/in", "know X", "with X", etc.
+        patterns = [
+            r"(?:have|has|know|knows|with|proficient in|expertise in|experience (?:in|with)|"
+            r"familiar with|work with|skilled in|trained in|include|includes|containing|"
+            r"claims? to know|competency|competencies in|mention|mentions)\s+(.+?)(?:\s+(?:among|in|on|as|listed|"
+            r"their|the|hard|soft|technical|skills|profile|CV|resume|competenc)|\?|$)",
+            # "position of X", "role of X", "title of X"
+            r"(?:position|role|title|job)\s+(?:of|is|as)\s+(.+?)(?:\?|$|\.|,)",
+            # "speak X", "language X"
+            r"(?:speak|speaks|language)\s+(.+?)(?:\?|$|\.|,)",
+            # "studied X", "degree in X"
+            r"(?:studied|degree in|qualification|education.*?in)\s+(.+?)(?:\?|$|\.|,)",
+        ]
+        for pat in patterns:
+            for m in re.finditer(pat, query, re.IGNORECASE):
+                kw = m.group(1).strip().rstrip("?.!,")
+                kw = re.sub(r"\s+(among|in|on|as|their|the)$", "", kw, flags=re.IGNORECASE)
+                if len(kw) > 1:
+                    raw_keywords.append(kw)
+
+        # 3. Splitear por AND / OR / "y" / "o" para obtener keywords individuales
+        split_keywords: List[str] = []
+        for kw in raw_keywords:
+            parts = re.split(r"\s+(?:AND|OR|and|or)\s+", kw)
+            for part in parts:
+                part = part.strip().rstrip("?.!,")
+                if len(part) > 1:
+                    split_keywords.append(part)
+
+        # 4. Filtrar keywords genéricas que no son buscables
+        stop_phrases = {
+            "at least", "more than", "less than", "no more", "no less",
+            "the position of", "the role of",
+        }
+        filtered: List[str] = []
+        for kw in split_keywords:
+            kw_low = kw.lower()
+            if any(kw_low.startswith(sp) for sp in stop_phrases):
+                # Intentar extraer la parte útil después del stop phrase
+                for sp in stop_phrases:
+                    if kw_low.startswith(sp):
+                        rest = kw[len(sp):].strip()
+                        if rest and not rest.replace(" ", "").isdigit():
+                            filtered.append(rest)
+                        break
+            elif re.match(r"^\d+$", kw.strip()):
+                continue  # números sueltos no son keywords
+            else:
+                filtered.append(kw)
+
+        # 5. Dedup preservando orden
+        seen = set()
+        result = []
+        for kw in filtered:
+            kw_low = kw.lower()
+            if kw_low not in seen:
+                seen.add(kw_low)
+                result.append(kw)
+        return result
+
+    @staticmethod
+    def _keyword_scan_chunks(
+        chunks: List[Dict], keywords: List[str],
+    ) -> Tuple[List[Dict], List[Dict]]:
+        """
+        Divide chunks en dos listas:
+          - matched: el contenido contiene AL MENOS UNA keyword (case-insensitive)
+          - unmatched: no contiene ninguna
+
+        Para cada chunk matched, añade el campo '_kw_match' con las keywords
+        encontradas (para reasoning).
+        """
+        if not keywords:
+            return [], chunks  # sin keywords → todo va al LLM
+
+        matched, unmatched = [], []
+        needles = [(kw, kw.lower()) for kw in keywords]
+
+        for chunk in chunks:
+            content_lower = chunk.get("content", "").lower()
+            found = [kw for kw, kw_low in needles if kw_low in content_lower]
+            if found:
+                chunk["_kw_match"] = found
+                matched.append(chunk)
+            else:
+                unmatched.append(chunk)
+
+        return matched, unmatched
+
     # ── Mini-LLM para todos los grupos ────────────────────────────────
 
     def _call_mini_llm_batch(
@@ -194,18 +300,20 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
                     model=mini_deployment,
                     messages=[{"role": "user", "content": prompt}],
                     temperature=0.1,
-                    max_completion_tokens=400,
+                    max_completion_tokens=1200,
                 )
             )
+            tok_in  = response.usage.prompt_tokens     if response.usage else 0
+            tok_out = response.usage.completion_tokens if response.usage else 0
             text = response.choices[0].message.content.strip()
             # Parsear data: y reasoning:
             data_match      = re.search(r"data:\s*(.+?)(?:\nreasoning:|$)", text, re.DOTALL)
             reasoning_match = re.search(r"reasoning:\s*(.+)$", text, re.DOTALL)
             data      = data_match.group(1).strip()      if data_match      else text
             reasoning = reasoning_match.group(1).strip() if reasoning_match else ""
-            return data, reasoning
+            return data, reasoning, tok_in, tok_out
         except Exception as e:
-            return "error", str(e)
+            return "error", str(e), 0, 0
 
     def _process_group_with_mini_llm(
         self,
@@ -216,43 +324,83 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         mini_deployment: str,
     ) -> Dict:
         """
-        Divide group_chunks en lotes de CVS_CHUNK_SIZE y lanza llamadas
-        al mini-LLM en paralelo. Devuelve el dict de grupo listo para historial.
+        Pipeline por grupo:
+          1. Pre-filtro programático: busca keywords extraídas de la query
+             directamente en el contenido de cada chunk (100% fiable).
+          2. Los chunks sin match van al mini-LLM para detección semántica.
+          3. Fusiona ambos resultados (dedup por nombre).
         """
-        chunk_size = config.cvs_chunk_size
-        batches    = [
-            group_chunks[i: i + chunk_size]
-            for i in range(0, len(group_chunks), chunk_size)
-        ]
+        # ── Paso 1: Pre-filtro por keywords ──
+        keywords = self._extract_keywords_from_query(query)
+        kw_matched, kw_unmatched = self._keyword_scan_chunks(group_chunks, keywords)
 
-        all_data:      List[str] = []
+        # Extraer nombres de los chunks que matchearon por keyword
+        kw_names: List[str] = []
+        kw_reasons: List[str] = []
+        for chunk in kw_matched:
+            name = self._extract_name_from_chunk(chunk)
+            if name and name not in kw_names:
+                kw_names.append(name)
+                found_kws = chunk.get("_kw_match", [])
+                kw_reasons.append(f"{name}: {', '.join(found_kws)} encontrado en contenido")
+
+        # ── Paso 2: Mini-LLM solo para chunks sin match por keyword ──
+        total_tok_in  = 0
+        total_tok_out = 0
+        total_calls   = 0
+        llm_data: List[str] = []
+        llm_reasoning: List[str] = []
+
+        if kw_unmatched:
+            chunk_size = config.cvs_chunk_size
+            batches = [
+                kw_unmatched[i: i + chunk_size]
+                for i in range(0, len(kw_unmatched), chunk_size)
+            ]
+
+            with ThreadPoolExecutor(max_workers=min(len(batches), 8)) as executor:
+                futures = {
+                    executor.submit(
+                        self._call_mini_llm_batch,
+                        query, batch, reliability_label, mini_client, mini_deployment,
+                    ): idx
+                    for idx, batch in enumerate(batches)
+                }
+                batch_results = [None] * len(batches)
+                for future in as_completed(futures):
+                    idx = futures[future]
+                    batch_results[idx] = future.result()
+
+            for data, reasoning, tok_in, tok_out in batch_results:
+                total_tok_in  += tok_in
+                total_tok_out += tok_out
+                total_calls   += 1
+                if data and data.lower() not in ("ninguno", "error"):
+                    llm_data.append(data)
+                if reasoning and reasoning.lower() != "error" and not reasoning.startswith("BadRequest"):
+                    llm_reasoning.append(reasoning)
+
+        # ── Paso 3: Fusionar (dedup) ──
+        all_data: List[str] = []
+        if kw_names:
+            all_data.append(" | ".join(kw_names))
+        all_data.extend(llm_data)
+
         all_reasoning: List[str] = []
-
-        with ThreadPoolExecutor(max_workers=min(len(batches), 8)) as executor:
-            futures = {
-                executor.submit(
-                    self._call_mini_llm_batch,
-                    query, batch, reliability_label, mini_client, mini_deployment,
-                ): idx
-                for idx, batch in enumerate(batches)
-            }
-            # Recoger resultados en orden de llegada
-            batch_results = [""] * len(batches)
-            for future in as_completed(futures):
-                idx = futures[future]
-                data, reasoning = future.result()
-                batch_results[idx] = (data, reasoning)
-
-        for data, reasoning in batch_results:
-            if data and data.lower() != "ninguno":
-                all_data.append(data)
-            if reasoning:
-                all_reasoning.append(reasoning)
+        if kw_reasons:
+            all_reasoning.append(" | ".join(kw_reasons))
+        all_reasoning.extend(llm_reasoning)
 
         return {
-            "reliability": reliability_label,
-            "data":        " | ".join(all_data) if all_data else "ninguno",
-            "reasoning":   " | ".join(all_reasoning),
+            "reliability":   reliability_label,
+            "data":          " | ".join(all_data) if all_data else "ninguno",
+            "reasoning":     " | ".join(all_reasoning),
+            "mini_tok_in":   total_tok_in,
+            "mini_tok_out":  total_tok_out,
+            "mini_calls":    total_calls,
+            "input_chunks":  len(group_chunks),
+            "kw_matches":    len(kw_matched),
+            "llm_chunks":    len(kw_unmatched),
         }
 
     # ── Pipeline CVs completo ──────────────────────────────────────────
@@ -358,7 +506,20 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         # 5. Persistir en historial
         history_id = self.history.add_entry(query=query, groups=groups_result, language=language)
 
-        return {"groups": groups_result, "history_id": history_id}
+        # 6. Agregar uso total del mini-LLM (todos los grupos)
+        total_mini_tok_in  = sum(g.get("mini_tok_in",  0) for g in groups_result.values())
+        total_mini_tok_out = sum(g.get("mini_tok_out", 0) for g in groups_result.values())
+        total_mini_calls   = sum(g.get("mini_calls",   0) for g in groups_result.values())
+
+        return {
+            "groups":     groups_result,
+            "history_id": history_id,
+            "mini_llm_usage": {
+                "prompt_tokens":     total_mini_tok_in,
+                "completion_tokens": total_mini_tok_out,
+                "num_calls":         total_mini_calls,
+            },
+        }
 
     # ── Response Format: respuesta final con LLM potente ───────────────
 
@@ -397,8 +558,8 @@ class CVsUseCaseHandler(BaseUseCaseHandler):
         system_message = self.get_system_message()
 
         # max_tokens alto para CVs: con muchos perfiles, la lista necesita espacio
-        # ~15 tokens por perfil * hasta 150 perfiles = ~2250, más headers y resumen
-        max_tokens_response = max(config.max_tokens, 4096)
+        # ~15 tokens por perfil * hasta 300 perfiles = ~4500, más headers y resumen
+        max_tokens_response = max(config.max_tokens, 8192)
 
         response = client.chat.completions.create(
             **safe_create_kwargs(

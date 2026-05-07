@@ -1,0 +1,3575 @@
+{
+  "caso_uso": "documentos_ue",
+  "use_case_rag": "eu",
+  "idioma": "en",
+  "total_preguntas": 98,
+  "errores": 0,
+  "tiempo_total_ejecucion_s": 764.86,
+  "fecha_ejecucion": "2026-05-07T00:17:22",
+  "rag_version": "graph_rag",
+  "descripcion": "Gold standard for evaluating a RAG system on Official Journal of the EU documents in English (regulations, decisions, corrigenda). Contains questions on identification, type search, content search, counting, cross-references, structure, existence, listing, relationships and specific content. Includes a 'cross_document' category with multi-hop questions (shared cross-references, reference chains, multi-doc aggregations) designed to expose the limits of basic vector RAG and to be answerable by a knowledge graph. All answers computed from data.",
+  "preguntas": [
+    {
+      "id": 1,
+      "categoria": "identification",
+      "pregunta": "What type of document is 2026/246?",
+      "respuesta_esperada": "REGULATION",
+      "respuesta": "**Respuesta:** I cannot determine what type of document \"2026/246\" is because no EU document fragments or references were provided. There is insufficient information in the materials made available to identify whether 2026/246 is a Regulation, Directive, Decision, Recommendation, Opinion, Commission act, Council act, or another instrument.\n\n**Base normativa:**\n- No documents provided – no Articles, recital numbers, Official Journal references, or other extractable identification information were included for the identifier \"2026/246.\"\n\n**Contexto adicional:** To identify the document type precisely, please supply one of the following:\n- the Official Journal citation (e.g. OJ L or OJ C number and date),\n- the full title (e.g. \"Regulation (EU) 2026/246 of the ...\"),\n- the EUR-Lex link or CELEX number,\n- or the text/fragment of the act itself.\n\nWith any of those, I can quote the exact legal form and relevant article references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 20.298,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 854,
+      "coste_rag_usd": 0.00177225,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 854,
+          "tiempo_s": 20.298
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 2,
+      "categoria": "identification",
+      "pregunta": "Give me the full title of document OJ_L_202600197_EN.",
+      "respuesta_esperada": "COMMISSION IMPLEMENTING DECISION(EU) 2026/197 of 28 January 2026 amending Implementing Decision (EU) 2021/1195 as regards harmonised standards for sterilization of health care products and information supplied by the manufacturer (labelling)",
+      "respuesta": "**Respuesta:** I cannot provide the full title of document OJ_L_202600197_EN because no EU documents or extracts were supplied in the context. The full title cannot be determined from the information given.\n\n**Base normativa:**\n- No documents provided in the task context – the requested document (OJ_L_202600197_EN) was not among the supplied materials, so its text and title cannot be quoted or cited.\n\n**Contexto adicional:** To obtain the full title yourself, consult the Official Journal (OJ) or EUR-Lex and search for the identifier OJ L 2026/197 (or OJ_L_202600197_EN). The code conventionally refers to the OJ L (Legislation) series, year 2026, item/issue 197, English edition; the definitive title must be read in the Official Journal entry for that item.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.487,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 764,
+      "coste_rag_usd": 0.0015935,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 764,
+          "tiempo_s": 10.487
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 3,
+      "categoria": "identification",
+      "pregunta": "Which European institution is responsible for document 2026/220?",
+      "respuesta_esperada": [
+        "European Commission"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which European institution is responsible for document \"2026/220\" because no documents or document fragments were provided to consult.\n\nBase normativa:\n- No source documents were supplied – therefore I cannot cite any article, paragraph or regulation regarding document 2026/220.\n\nContexto adicional:\n- To establish which institution is responsible for a specific EU document reference, consult the document metadata in the following official sources:\n  - EUR-Lex (https://eur-lex.europa.eu) — search by the document number, title or keywords; EUR-Lex shows the issuing institution and Official Journal references.\n  - European Commission document register (for Commission proposals and communications).\n  - Council of the European Union public register / Document hub (for Council and working-party documents).\n  - European Parliament Legislative Observatory (OEIL) and the Parliament’s document repository (for parliamentary documents).\n  - The EU Official Journal (OJ) — check the year and number in the OJ L or OJ C series.\n- If you can provide the text or a fragment of document 2026/220 (or the precise reference as it appears in EUR-Lex or the Official Journal), I will identify the responsible institution and cite the applicable legal references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.738,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 1029,
+      "coste_rag_usd": 0.00212275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 1029,
+          "tiempo_s": 10.738
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 4,
+      "categoria": "identification",
+      "pregunta": "How many pages does document 2026/215 have?",
+      "respuesta_esperada": 37,
+      "respuesta": "**Respuesta:** I cannot determine how many pages document \"2026/215\" has because no documents or excerpts were provided in your query.\n\n**Base normativa:**\n- No documents supplied – there is no Article/Section or extract available to cite.\n\n**Contexto adicional:** If you need the page count, please provide the document or an excerpt. Alternatively, you can locate the information yourself by:\n- Searching EUR-Lex (https://eur-lex.europa.eu/) for the document identifier \"2026/215\" (or the full CELEX or COM/SEC/2016 style number if known).\n- Opening the PDF version on EUR-Lex and checking the PDF viewer/page count or the file properties (many PDF viewers show total pages).\n- If the document is an EU Official Journal (OJ) act, the OJ PDF or its metadata will indicate the number of pages.\n\nIf you provide the document or its text, I will answer precisely and cite the relevant articles/sections as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.589,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 660,
+      "coste_rag_usd": 0.0013845,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 660,
+          "tiempo_s": 5.589
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 5,
+      "categoria": "identification",
+      "pregunta": "I need to know what OJ_L_202600271_EN is about. What is its main subject?",
+      "respuesta_esperada": "REGULATION (EU) 2026/271 of 29 January 2026 amending Regulation (EU) 2023/1529 concerning restrictive measures in view of Iran’s military support to Russia’s war of aggression against Ukraine and to armed groups and entities in the Middle East and the Red Sea region THE COUNCIL OF THE EUROPEAN UNION",
+      "respuesta": "**Respuesta:** I cannot determine the main subject of OJ_L_202600271_EN because no text or fragment of that Official Journal issue was provided among the documents you supplied.\n\nBase normativa:\n- No documents provided – The item \"OJ_L_202600271_EN\" was not included in the supplied material, so there are no articles or passages I can cite.\n\nContexto adicional:\n- The code \"OJ_L_YYYYnnn_EN\" denotes an Official Journal of the European Union, L series (Legislation), in English. To identify the main subject you should consult the Official Journal entry itself.\n- Practical next steps to locate the document:\n  - Search EUR-Lex (https://eur-lex.europa.eu) using the identifier OJ L and the year 2026 and number 271 (e.g., search for \"OJ L 2026 271\" or enter the file name OJ_L_202600271_EN).\n  - Use the Official Journal database on EUR-Lex or the Publications Office to retrieve the PDF or HTML of the issue and then read the table of contents or the specific act to determine the main subject.\n- If you provide the text or an extract from OJ_L_202600271_EN, I will cite the relevant Articles/paragraphs and state the main subject precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.584,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 268,
+      "tokens_out": 854,
+      "coste_rag_usd": 0.001775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 268,
+          "tokens_out": 854,
+          "tiempo_s": 8.584
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 6,
+      "categoria": "identification",
+      "pregunta": "Briefly describe the purpose of document 2025/2621.",
+      "respuesta_esperada": "COMMISSION IMPLEMENTING REGULATION(EU) 2025/2621 of 16 December 2025 laying down rules for the application of Regulation (EU) 2023/956 of the European Parliament and the Council as regards the establishment of default values",
+      "respuesta": "**Respuesta:** I cannot describe the purpose of document 2025/2621 because no document text or excerpts were provided.\n\n**Base normativa:**\n- No documents supplied – no Article/Section extract available.\n\n**Contexto adicional:** Because no fragments or metadata for document 2025/2621 were included in the materials you supplied, I cannot quote or paraphrase any provisions, articles, recitals or operative clauses. If you provide the text or an authoritative reference (for example an EUR-Lex link or the full document extract), I can then cite specific articles/paragraphs and give a precise legal description of its purpose.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.102,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 329,
+      "coste_rag_usd": 0.000723,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 329,
+          "tiempo_s": 5.102
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 7,
+      "categoria": "identification",
+      "pregunta": "Is document OJ_L_202502621_EN a regulation or a decision?",
+      "respuesta_esperada": "REGULATION",
+      "respuesta": "**Respuesta:** I cannot determine whether OJ_L_202502621_EN is a regulation or a decision because no document or excerpt was provided.\n\n**Base normativa:**\n- No documents provided – there is no Article/Section extract available in the materials you supplied.\n\n**Context adicional:**  \n- The Official Journal issue and the act itself state the legal form in the heading (e.g. the PDF and table of contents of the L-series entry show \"REGULATION (...)\" or \"DECISION (...)\").  \n- On EUR-Lex the entry for the Official Journal document also shows a metadata field \"Document type\" (Regulation / Decision / Directive, etc.).  \n- If you provide the document text or the Official Journal issue/page header, I can identify and cite the exact wording (e.g. the heading \"REGULATION (EU) ...\" or \"DECISION (EU) ...\") and any relevant article references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.357,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 1091,
+      "coste_rag_usd": 0.0022475,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 1091,
+          "tiempo_s": 8.357
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 8,
+      "categoria": "identification",
+      "pregunta": "State the date of adoption of OJ_L_202502660_EN.",
+      "respuesta_esperada": "23 December 2025",
+      "respuesta": "**Respuesta:** I cannot determine the date of adoption of OJ_L_202502660_EN because no documents or extracts were provided.\n\n**Base normativa:**\n- No document supplied – no article/section available to quote.\n\n**Context adicional:** I have not been given the Official Journal document or any excerpt containing the adoption date. To obtain the adoption date you can:\n- Consult the EUR-Lex entry for that Official Journal issue (search for \"OJ L 266 2025\" or the exact identifier \"OJ_L_202502660_EN\") — the EUR-Lex metadata and the PDF front page of the OJ provide the adoption/publication date.\n- If you provide the text or a PDF extract of OJ_L_202502660_EN, I will cite the exact article/paragraph showing the adoption date.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.586,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 688,
+      "coste_rag_usd": 0.00144125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 688,
+          "tiempo_s": 7.586
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 9,
+      "categoria": "search_by_type",
+      "pregunta": "How many regulations are there in the database?",
+      "respuesta_esperada": 10,
+      "respuesta": "**Respuesta:** I cannot determine how many regulations are in the database because no documents or database extracts were provided.\n\n**Base normativa:**\n- No documents supplied – no articles, recitals or database extracts available to consult.\n\n**Context adicional:** Without access to the database contents or to document fragments listing or summarising the dataset, it is impossible to cite any Regulation numbers or to produce a legally precise count. To obtain the number, please provide (a) an export or listing from the database, or (b) searchable fragments indicating the total, or allow access to the database so the count can be verified and properly cited.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.541,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 583,
+      "coste_rag_usd": 0.00122975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 583,
+          "tiempo_s": 5.541
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 10,
+      "categoria": "search_by_type",
+      "pregunta": "How many decisions does the collection contain?",
+      "respuesta_esperada": 8,
+      "respuesta": "**Respuesta:** I cannot determine how many decisions the collection contains because no document fragments were provided.\n\n**Base normativa:**\n- No documents were included in the provided context — therefore there are no articles, sections or extracts to cite.\n\n**Context adicional:** To obtain the number, please provide the collection (or its table of contents) or permit access to the relevant document fragments. Alternatively, you can determine the number by one of these methods:\n- Check the collection's table of contents or index for entries titled \"Decision\" (or the language-equivalent).\n- Search the collection text for the term \"Decision\" (and language variants) and count distinct acts.\n- If the collection is an EU Official Journal issue or an EUR-Lex query result, use the metadata filters (document type = Decision) and the hit count shown by EUR-Lex.\n\nIf you upload the fragments or identify the specific collection (title, year, Official Journal issue, or URL), I will count and cite the relevant items precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.089,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 724,
+      "coste_rag_usd": 0.0015115,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 724,
+          "tiempo_s": 8.089
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 11,
+      "categoria": "search_by_type",
+      "pregunta": "List all available regulations.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot list any regulations because no EU document fragments were provided. Please supply the document(s) or specify the policy area and timeframe so I can list the available regulations based exclusively on those materials.\n\nBase normativa:\n- No documents were provided – there are therefore no articles, paragraphs or regulation numbers available to cite.\n\nContexto adicional:\n- I must rely solely on the fragments you provide. If you want a list of regulations I can cite precisely, please attach the relevant document(s) or indicate the exact set of documents (for example: \"Regulations in the provided annex\", or \"all regulations cited in Document X dated YYYY-MM-DD\").\n- If you instead want guidance on where to find the complete and authoritative list of EU regulations, consult EUR-Lex (the official access point to EU law) and the Official Journal of the European Union (OJ). If you permit me to use public sources beyond the provided fragments, state that explicitly and specify the scope (policy field, time period, or particular instruments).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.471,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 251,
+      "tokens_out": 727,
+      "coste_rag_usd": 0.00151675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 251,
+          "tokens_out": 727,
+          "tiempo_s": 7.471
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 12,
+      "categoria": "search_by_type",
+      "pregunta": "Give me all decisions from the database.",
+      "respuesta_esperada": [
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot list any decisions because no documents or database extracts were provided. Please supply the database export or the specific documents/filters you want me to use.\n\nBase normativa:\n- No documents were provided in the input; therefore there are no normative fragments to cite.\n\nContexto adicional:\n- To allow a precise, legally sourced list, please provide one of the following:\n  - the database export/file (PDF, CSV, XML, etc.) containing the decisions you want listed, or\n  - the search criteria (time range, issuing institution — Commission/Council/European Parliament/EEAS, subject matter, country, document identifiers), or\n  - direct links/identifiers (EUR-Lex numbers, OJ references, CELEX numbers) for the decisions to include.\n- If you want guidance to retrieve all EU \"decisions\" yourself, use EUR-Lex advanced search: set \"Legal acts\" to Decision and apply any date/institution/subject filters; you can then export results (CSV/XML) and supply that export for extraction.\n- I will base any subsequent listing exclusively on the documents you provide and will cite article/paragraph numbers only when those are present in the supplied fragments.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.852,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 959,
+      "coste_rag_usd": 0.0019815,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 959,
+          "tiempo_s": 7.852
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 13,
+      "categoria": "search_by_type",
+      "pregunta": "What types of legislative documents do we have?",
+      "respuesta_esperada": [
+        "DECISION",
+        "REGULATION"
+      ],
+      "respuesta": "**Respuesta:**  \nNo documents were provided, so I cannot cite or quote EU legal texts. Based on general EU practice, the main types of EU legislative and quasi‑legislative acts are: Regulations, Directives, Decisions, Recommendations, Opinions, Delegated Acts, and Implementing Acts. Below is a concise description of each.\n\nBase normativa:\n- No documents were provided – therefore I cannot cite specific articles, paragraphs or official extracts.\n\nContexto adicional:\n- Regulation: binding in its entirety and directly applicable in all Member States (i.e., it creates rights and obligations enforceable without national implementing measures).  \n- Directive: binding as to the result to be achieved on Member States to which it is addressed, but leaves national authorities the choice of form and methods for achieving that result. Directives normally require transposition into national law.  \n- Decision: binding in full. If it specifies addressees, it is binding only on them; if not, it may be of general application.  \n- Recommendation and Opinion: non‑binding instruments; they do not have legal force but may carry persuasive effect.  \n- Delegated Act: a non‑legislative act adopted by the Commission (or another institution empowered by the legislature) to supplement or amend non‑essential elements of a legislative act. It is subject to control mechanisms set by the legislature.  \n- Implementing Act: non‑legislative act adopted to ensure uniform conditions for implementing legally binding Union acts; normally put in place where uniform implementation by Member States is needed.  \n- International agreements: agreements concluded between the EU (or the European Community historically) and one or more third countries or international organisations; their legal status depends on their subject matter and the institutional competence.  \n\nLimitations and notes:\n- Because no specific documents were provided, I cannot quote the exact legal definitions or article numbers from the Treaties, Regulations, Directives or other acts. If you supply the relevant text fragments or indicate which EU instrument(s) you want me to use, I will quote the exact articles and provide a response strictly based on those excerpts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.159,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 1010,
+      "coste_rag_usd": 0.00208375,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 1010,
+          "tiempo_s": 9.159
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 14,
+      "categoria": "search_by_type",
+      "pregunta": "Is there any corrigendum document?",
+      "respuesta_esperada": {
+        "existe": false,
+        "documentos": []
+      },
+      "respuesta": "**Respuesta:** I cannot determine whether there is any corrigendum document because no documents or fragments were provided.\n\n**Base normativa:**\n- No EU documents or fragments were supplied in the input, therefore there are no articles, paragraphs or citations available to confirm or deny the existence of a corrigendum.\n\n**Contexto adicional:**  \nIf you want me to check for a corrigendum, please provide the relevant document or fragment(s). Alternatively, you can search directly on EUR-Lex or the Official Journal for a corrigendum/rectification associated with the specific act (use the act’s title, document number or OJ reference).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.207,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 775,
+      "coste_rag_usd": 0.00161325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 775,
+          "tiempo_s": 7.207
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 15,
+      "categoria": "search_by_type",
+      "pregunta": "Filter documents that are implementing regulations.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600246_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot filter documents because no documents were provided. Please upload or paste the documents to be filtered.\n\nBase normativa:\n- No documents or legal fragments were provided, therefore no articles, paragraphs or regulation numbers can be cited from the supplied material.\n\nContexto adicional:\n- To help you when you supply the materials, here are practical signs to identify implementing regulations within a set of EU documents (guidance only; not citing external legal texts):\n  - Check the title: implementing regulations commonly use phrases like \"Commission Implementing Regulation\", \"Council Implementing Regulation\" or \"Implementing Regulation (EU) …\".\n  - Look for wording that indicates they \"implement\" or \"lay down rules for the application of\" a higher-level act (regulation or directive).\n  - Check for a legal basis clause near the start stating that the act is adopted pursuant to a specific provision of another EU act—this often signals an implementing act.\n  - Verify the act’s form: implementing regulations are directly applicable legal acts that generally have the word \"Regulation\" (not \"Directive\" or \"Decision\") and are intended to implement rather than amend a framework.\n  - If you want precise legal classification (e.g., implementing vs delegated act), provide the document text and I will identify and cite the exact articles and paragraphs present in those fragments.\n\nIf you provide the documents or fragments now, I will filter and cite the implementing regulations found, quoting the relevant article/number from the supplied text.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.362,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 822,
+      "coste_rag_usd": 0.00170725,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 822,
+          "tiempo_s": 8.362
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 16,
+      "categoria": "search_by_type",
+      "pregunta": "Which documents were issued by the European Commission?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600264_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, so it is not possible to determine which documents were issued by the European Commission from the material available.\n\nBase normativa:\n- No EU documents were supplied in the context; therefore there are no articles, paragraphs or document extracts to cite.\n\nContexto adicional:\n- If you provide the texts or a list of documents, I can identify which ones were issued by the European Commission and quote the relevant reference lines (e.g. header, issuing body, document number).\n- Practical tips to identify Commission-issued documents (guidance only; not extracted from your files):\n  - Commission-origin documents typically display on the first page an issuing header such as \"European Commission\" or the Commission logo and are signed by the President or a Commissioner.\n  - Internal/comms numbering conventions commonly used for Commission documents include identifiers such as COM(yyyy) for Commission proposals and communications, SWD(yyyy) for Staff Working Documents (formerly SEC(…)), and formal titles for Commission acts such as \"Commission Delegated Regulation (EU) …\" or \"Commission Implementing Regulation (EU) …\" when the Commission adopts delegated or implementing acts. The Official Journal references for adopted measures also indicate the issuer.\n- Please upload or list the specific documents (or their identifying references) you want checked, and I will identify which were issued by the European Commission and cite the relevant parts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.392,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 1248,
+      "coste_rag_usd": 0.00255975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 1248,
+          "tiempo_s": 10.392
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 17,
+      "categoria": "search_by_type",
+      "pregunta": "Are there any documents from the European Parliament?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine whether there are any documents from the European Parliament because no documents were provided in the input.\n\n**Base normativa:**\n- No documents were supplied – therefore there are no EU document fragments, articles, paragraphs or sections available to cite from the European Parliament or any other EU institution.\n\n**Contexto adicional:** To answer precisely and cite articles/paragraphs as requested, please provide the relevant document fragments (titles or text excerpts). Once supplied, I will identify whether they originate from the European Parliament and cite the exact articles, paragraphs and sections present in those fragments.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.963,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 511,
+      "coste_rag_usd": 0.00108575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 511,
+          "tiempo_s": 5.963
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 18,
+      "categoria": "search_by_type",
+      "pregunta": "Which are the documents from 2025?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600264_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents are from 2025 because no documents were provided.\n\n**Base normativa:**\n- No documents were included in the prompt, so there are no articles, paragraphs or regulation numbers I can cite.\n\n**Contexto adicional:** If you provide the EU document fragments or a list of document titles/refs, I will identify which ones bear a 2025 date (e.g. by the date in the document header or the publication date in the metadata) and cite the exact article/paragraph references from those fragments.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.153,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 504,
+      "coste_rag_usd": 0.00107175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 504,
+          "tiempo_s": 5.153
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 19,
+      "categoria": "search_by_content",
+      "pregunta": "Which documents deal with fishing?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600266_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot identify which documents deal with fishing because no EU document fragments were provided for analysis.\n\n**Base normativa:**\n- No documents were supplied – there are no excerpts to cite.\n\n**Contexto adicional:** I must base my answer exclusively on the document fragments you provide. Please upload or paste the relevant EU document excerpts (or list their titles and article numbers), and I will identify which ones deal with fishing and cite the applicable articles/paragraphs precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.863,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 252,
+      "tokens_out": 488,
+      "coste_rag_usd": 0.001039,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 252,
+          "tokens_out": 488,
+          "tiempo_s": 8.863
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 20,
+      "categoria": "search_by_content",
+      "pregunta": "Which documents make reference to Morocco?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502664_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot identify any documents that make reference to Morocco because no documents were provided in the context.\n\n**Base normativa:**\n- No documents were supplied – there are therefore no Articles, paragraphs or recitals I can cite.\n\n**Contexto adicional:** If you provide the relevant EU document files or the list of document titles (e.g. Regulations, Directives, Agreements, Council conclusions, Commission decisions), I will review them and extract precise references to Morocco, citing article/paragraph numbers and the exact text fragments where Morocco is mentioned. I will not invent or assume any references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.643,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 448,
+      "coste_rag_usd": 0.00095925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 448,
+          "tiempo_s": 4.643
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 21,
+      "categoria": "search_by_content",
+      "pregunta": "List the documents dealing with restrictive measures.",
+      "respuesta_esperada": [
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot list documents dealing with restrictive measures because no EU documents or fragments were provided in the request. Please supply the relevant documents or excerpts so I can identify and cite them precisely.\n\n**Base normativa:**\n- No documents were supplied by the user — therefore there are no documents or normative extracts available to quote (no articles, paragraphs or regulation numbers can be cited).\n\n**Contexto adicional:** \n- Because your instruction requires that I base the answer exclusively on the provided document fragments, I must not invent or assume references. If you want a list drawn from EU sources, please attach the fragments or indicate the specific documents (for example, Council Regulations or Council Decisions) you want examined. Once provided, I will extract and cite the exact articles, paragraphs and numbers that show they deal with restrictive measures.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.482,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 941,
+      "coste_rag_usd": 0.0019455,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 941,
+          "tiempo_s": 8.482
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 22,
+      "categoria": "search_by_content",
+      "pregunta": "Are there documents mentioning pesticides or pesticide residues?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202600215_EN"
+      ],
+      "respuesta": "**Respuesta:** No — no documents were provided, so I cannot identify any that mention pesticides or pesticide residues.\n\n**Base normativa:**\n- No documents provided – \"No documents available for review.\"\n\n**Context adicional:** Because you supplied zero documents/fragments, I cannot cite any articles, paragraphs or regulations nor confirm whether any EU texts in your set refer to pesticides or pesticide residues. If you upload or paste the relevant document(s) or specify their titles (or official references), I will examine them and cite precisely the articles/paragraphs that mention pesticides or residues.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.481,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 507,
+      "coste_rag_usd": 0.00107775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 507,
+          "tiempo_s": 5.481
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 23,
+      "categoria": "search_by_content",
+      "pregunta": "Are there documents about African swine fever?",
+      "respuesta_esperada": [],
+      "respuesta": "**Respuesta:** I cannot confirm or cite any EU documents about African swine fever because no documents were provided in the context. \n\n**Base normativa:**\n- No documents were supplied – therefore I have no specific EU regulation, directive, decision or article to cite regarding African swine fever.\n\n**Context adicional:** If you provide the relevant EU document(s) or excerpts (e.g. titles, document numbers, or text fragments), I will cite the exact articles, paragraphs and relevant passages and summarize whether and how they address African swine fever. Alternatively, authorize me to consult publicly available EU sources and I can locate and cite the applicable acts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.999,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 459,
+      "coste_rag_usd": 0.00098175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 459,
+          "tiempo_s": 5.999
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 24,
+      "categoria": "search_by_content",
+      "pregunta": "Which documents mention avian influenza or bird flu?",
+      "respuesta_esperada": [
+        "OJ_L_202502660_EN"
+      ],
+      "respuesta": "**Respuesta:** None — no provided documents mention avian influenza or \"bird flu\". In fact, there were no documents supplied to review.\n\nBase normativa:\n- No documents were provided for analysis, so there are no articles, paragraphs or regulation numbers to cite from the supplied material.\n\nContexto adicional: I cannot lawfully invent or attribute provisions that are not in the materials you gave me. If you provide the specific EU documents (or excerpts) you want checked, I will identify and cite precisely any occurrences of \"avian influenza\" or \"bird flu\" and give article/paragraph references. Generally, references to avian influenza in EU law are normally found in instruments on animal health, disease control and emergency measures, and in implementing or delegated acts, but I have not been given any texts to cite here.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.84,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 684,
+      "coste_rag_usd": 0.001432,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 684,
+          "tiempo_s": 7.84
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 25,
+      "categoria": "search_by_content",
+      "pregunta": "Is there any document about substances of human origin?",
+      "respuesta_esperada": [],
+      "respuesta": "**Respuesta:** No — among the provided documents there are none concerning \"substances of human origin.\" I cannot confirm or cite any EU legal text on that topic from the supplied material.\n\n**Base normativa:**\n- No documents provided — therefore there are no articles, paragraphs or extracts available regarding substances of human origin in the document set you gave me.\n\n**Contexto adicional:** I cannot invent or invoke external EU legislation. If you want a precise legal answer based on EU law, either (a) provide the documents or excerpts you want me to analyze, or (b) permit me to use external sources so I can reference the relevant EU instruments (for example, if you intended the well‑known act on substances of human origin, that would be a separate query requiring external reference).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.701,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 615,
+      "coste_rag_usd": 0.001294,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 615,
+          "tiempo_s": 6.701
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 26,
+      "categoria": "search_by_content",
+      "pregunta": "Is Tunisia mentioned in any of the documents?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine whether Tunisia is mentioned because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied in the “CONTEXTO – DOCUMENTOS UE” section (0 documents). Therefore there are no articles, paragraphs or regulation numbers available to cite.\n\n**Contexto adicional:** I must base my reply exclusively on the provided document fragments. If you upload or paste the relevant EU documents or excerpts, I will search them and cite any instances mentioning Tunisia with precise article/paragraph references. I will not invent or assume citations.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.521,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 632,
+      "coste_rag_usd": 0.00132775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 632,
+          "tiempo_s": 6.521
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 27,
+      "categoria": "search_by_content",
+      "pregunta": "Which documents refer to the Euro-Mediterranean agreement?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot identify which documents refer to the \"Euro‑Mediterranean agreement\" because no documents or document fragments were provided.\n\n**Base normativa:**\n- No documents were supplied — therefore there are no articles, paragraphs or regulation numbers available to cite from the provided material.\n\n**Contexto adicional:** To answer precisely I need the text fragments or document identifiers (e.g. Commission proposal, Council decision, Regulation, Directive, Agreement title or OJ reference). If you provide the documents or excerpts, I will extract the exact references (article/paragraph/recital and document title/number) that mention the Euro‑Mediterranean agreement.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.152,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 653,
+      "coste_rag_usd": 0.0013705,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 653,
+          "tiempo_s": 12.152
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 28,
+      "categoria": "search_by_content",
+      "pregunta": "Are there documents related to the Common Foreign and Security Policy (CFSP)?",
+      "respuesta_esperada": [
+        "OJ_L_202600232_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot confirm whether there are documents related to the Common Foreign and Security Policy (CFSP) because no documents were provided.\n\n**Base normativa:**\n- No documents were provided – therefore there are no excerpts, articles or paragraphs available to cite.\n\n**Contexto adicional:** I must base my answer exclusively on the provided documents. Since none were supplied, I cannot quote or infer any EU legal provisions (e.g. Treaty articles or Council decisions) or invent references. If you upload or paste the relevant document fragments, I will identify and cite any CFSP-related provisions precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.676,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 512,
+      "coste_rag_usd": 0.00108925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 512,
+          "tiempo_s": 5.676
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 29,
+      "categoria": "search_by_content",
+      "pregunta": "In how many documents is the Official Journal referenced?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** 0\n\n**Base normativa:**\n- No documents were provided – therefore there are no references to the Official Journal in the supplied material.\n\n**Contexto adicional:** You provided zero (0) documents or fragments to analyze. Under your instruction to base the answer exclusively on the provided documents, the correct count is zero. If you supply the documents or fragments, I can search them and report precisely how many reference the Official Journal, citing specific articles/paragraphs as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.801,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 364,
+      "coste_rag_usd": 0.000792,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 364,
+          "tiempo_s": 4.801
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 30,
+      "categoria": "search_by_content",
+      "pregunta": "Is there any document mentioning honey?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_EN",
+        "OJ_L_202600215_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine whether any document mentions \"honey\" because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied – there are no excerpts to review or cite.\n\n**Contexto adicional:** If you provide the document fragments (or identify specific EU instruments or file names), I will search them and cite any articles, paragraphs or recitals that mention \"honey.\"",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.575,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 602,
+      "coste_rag_usd": 0.00126725,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 602,
+          "tiempo_s": 6.575
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 31,
+      "categoria": "counting",
+      "pregunta": "How many documents are there in total in the database?",
+      "respuesta_esperada": 18,
+      "respuesta": "**Respuesta:** Based solely on the material you provided, there are 0 documents. No information allowing determination of the total number of documents in the (unspecified) database was supplied.\n\nBase normativa:\n- No documents provided – there are no Articles, Sections or extracts available to cite.\n\nContexto adicional:\n- The statement \"CONTEXT – DOCUMENTOS UE (0 documentos únicos)\" indicates that the provided set contains zero documents. If you mean a specific EU database (for example EUR-Lex or an institutional repository), the total number of documents cannot be inferred from the supplied material; you must either (a) provide the dataset or a document listing the total, or (b) identify the database so its public metadata or administrators can be consulted to obtain an authoritative count.\n- I cannot invent or cite EU legal provisions or database statistics because they are not present in the provided documents. If you supply the relevant document(s) or name the database, I can answer precisely and cite the applicable excerpts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.999,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 913,
+      "coste_rag_usd": 0.00189025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 913,
+          "tiempo_s": 8.999
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 32,
+      "categoria": "counting",
+      "pregunta": "Which is the longest document by number of pages?",
+      "respuesta_esperada": {
+        "documento": "OJ_L_202502621_EN",
+        "paginas": 2400
+      },
+      "respuesta": "**Respuesta:** I cannot determine which is the longest document because no documents were provided.\n\n**Base normativa:**\n- No documents were included in the request – there are therefore no articles, sections or page counts to cite.\n\n**Contexto adicional:** \n- I cannot invent or assume page counts or citations. To identify the longest document I would need either (a) the files (PDFs or scans) of the documents, or (b) a list of the documents with their page counts. \n- Practical notes if you supply the materials: count the total pages as they appear in the official file (including annexes and attachments, unless you specify otherwise), be careful with multi-language consolidated PDFs (each language may duplicate pages), and ensure you compare the same version/date for each instrument.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.295,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 552,
+      "coste_rag_usd": 0.001168,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 552,
+          "tiempo_s": 5.295
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 33,
+      "categoria": "counting",
+      "pregunta": "What is the average number of pages per document?",
+      "respuesta_esperada": 168.2,
+      "respuesta": "**Respuesta:** It cannot be determined from the materials provided. No documents were supplied (n = 0), so an average number of pages per document is undefined.\n\n**Base normativa:**\n- No documents were provided in the CONTEXT — there are 0 documents to analyse.\n\n**Contexto adicional:**  \n- Mathematically, average = (total pages) / (number of documents). With number of documents = 0 this quotient is undefined.  \n- If you provide the documents or at least (a) the total number of documents and (b) the total number of pages, I will compute the average and cite any relevant document references as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.509,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 527,
+      "coste_rag_usd": 0.001118,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 527,
+          "tiempo_s": 8.509
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 34,
+      "categoria": "counting",
+      "pregunta": "What are the 5 shortest documents?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202600246_EN",
+          "paginas": 2
+        },
+        {
+          "documento": "OJ_L_202600197_EN",
+          "paginas": 3
+        },
+        {
+          "documento": "OJ_L_202600193_EN",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600220_EN",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "paginas": 4
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine the five shortest documents because no EU documents or fragments were provided. There are \"0 documentos únicos\" in the context, so there is no material from which to measure lengths or identify documents.\n\nBase normativa:\n- No documents were supplied — therefore there are no Articles, Recitals, or Regulation/Directive identifiers to cite.\n\nContexto adicional:\n- To identify the \"shortest\" documents I would need one of the following from you:\n  - The set of document texts or fragments to be compared; or\n  - A list of document identifiers (e.g. EUR-Lex CELEX numbers) so I can retrieve them; or\n  - A list with page counts or word counts for each document.\n- Clarification of the metric to use: \"shortest\" by number of pages, number of words, number of articles/recitals, or file size (bytes).\n- Once you provide the documents or identifiers, I will:\n  - Count pages and words, and identify the five shortest by your chosen metric;\n  - Cite the exact document titles and identifiers (CELEX/COM/... numbers) and, where applicable, include article/paragraph references;\n  - Provide the brief extract or metadata supporting the ranking.\n\nI cannot invent or infer legal references or rankings without the underlying documents.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.689,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 532,
+      "coste_rag_usd": 0.0011275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 532,
+          "tiempo_s": 5.689
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 35,
+      "categoria": "counting",
+      "pregunta": "How many different types of documents exist?",
+      "respuesta_esperada": 2,
+      "respuesta": "**Respuesta:** I cannot determine how many different types of documents exist because no supporting EU documents were provided. Please supply the relevant document(s) or specify which classification you mean (e.g. types of EU legal acts, types of Commission documents, Official Journal series, Council document classifications, inter-institutional file types).\n\nBase normativa:\n- No documents were provided – therefore no articles, paragraphs or extracts are available to cite.\n\nContexto adicional:\n- The answer depends entirely on the classification scheme you have in mind (for example: classifications under the Treaties for binding legal acts vs. internal institutional document series vs. classifications used in the Official Journal). If you provide the relevant text(s) or clarify the scope, I will cite the exact provisions (articles/paragraphs/numbers) and give a precise count.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.818,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 813,
+      "coste_rag_usd": 0.0016895,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 813,
+          "tiempo_s": 6.818
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 36,
+      "categoria": "counting",
+      "pregunta": "What is the distribution of documents by type?",
+      "respuesta_esperada": [
+        {
+          "tipo": "REGULATION",
+          "cantidad": 10
+        },
+        {
+          "tipo": "DECISION",
+          "cantidad": 8
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine the distribution of documents by type because no documents or data were provided in the brief. Please supply the list or dataset of documents with their types so I can compute counts and percentages.\n\nBase normativa:\n- No documents were provided in the request — there are therefore no articles, sections or extracts to cite.\n\nContexto adicional:\n- To obtain the distribution you can provide a dataset or list with at least the following fields for each record: document identifier, document type (e.g. Regulation, Directive, Decision, Proposal, Communication, Implementing Act, Delegated Act, Agreement, Other), and date. I will then:\n  - count documents by type,\n  - compute each type’s percentage of the total (percentage = count(type) / total_count × 100),\n  - and present absolute counts and percentages.\n- If you want the distribution to follow a specific legal classification (e.g. only binding acts vs. non‑binding acts), indicate that classification.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.67,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 529,
+      "coste_rag_usd": 0.00112175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 529,
+          "tiempo_s": 8.67
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 37,
+      "categoria": "counting",
+      "pregunta": "How many documents contain numbered articles?",
+      "respuesta_esperada": 18,
+      "respuesta": "**Respuesta:** It is not possible to determine how many documents contain numbered articles because no documents were provided.\n\nBase normativa:\n- No documents were provided — there are 0 source documents to inspect, so no Articles, paragraphs or numbered regulations can be cited.\n\nContexto adicional:\n- If the documents were supplied, the answer would be given by counting how many of those documents include numbered Articles (e.g., \"Article 1\", \"Article 2\", etc.) and by citing the specific Article numbers and document identifiers per instruction [1].  \n- I will not invent or assume any Articles or references not present in the provided material.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.018,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 393,
+      "coste_rag_usd": 0.00084925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 393,
+          "tiempo_s": 8.018
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 38,
+      "categoria": "counting",
+      "pregunta": "Which document has the most articles?",
+      "respuesta_esperada": {
+        "documento": "OJ_L_202600249_EN",
+        "num_articulos": 498
+      },
+      "respuesta": "**Respuesta:** It is not possible to determine which document has the most articles because no document fragments were provided for comparison.\n\n**Base normativa:**\n- No documents were supplied – there are therefore no Article/Section extracts available to cite.\n\n**Contexto adicional:** To answer your question I need the actual EU documents (or clear citations) to compare their article counts. You can provide either:\n- The full text or excerpts of each relevant document, or\n- Precise references (title, OJ citation, and year) so I can count the articles from those texts.\n\nOnce you provide the documents or citations, I will compare them and state which one contains the most articles, citing the specific articles and article counts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.886,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 410,
+      "coste_rag_usd": 0.00088325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 410,
+          "tiempo_s": 4.886
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 39,
+      "categoria": "counting",
+      "pregunta": "How many documents mention sanctions or restrictive measures?",
+      "respuesta_esperada": 3,
+      "respuesta": "**Respuesta:** I cannot determine how many documents mention \"sanctions\" or \"restrictive measures\" because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied – there are 0 documents available to review, so no article, section or extract can be cited.\n\n**Contexto adicional:** I must base my answer exclusively on the document fragments you supply. If you upload or paste the documents (or provide the fragments), I will search them and state how many mention \"sanctions\" or \"restrictive measures\", and — where present — cite the exact articles, paragraphs or recitals that refer to them.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.951,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 520,
+      "coste_rag_usd": 0.00110375,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 520,
+          "tiempo_s": 4.951
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 40,
+      "categoria": "counting",
+      "pregunta": "How many characters does the longest document have?",
+      "respuesta_esperada": 3306121,
+      "respuesta": "**Respuesta:** I cannot determine how many characters the longest document has because no documents were provided for analysis.\n\n**Base normativa:**\n- No documents available – the CONTEXT indicates \"0 documentos únicos\". Therefore there are no Articles/Sections to cite from the provided materials.\n\n**Contexto adicional:** To obtain the requested information, please supply the document texts (or their character counts). Once documents are provided I can:\n- identify the longest document,\n- give its character count,\n- and cite the exact document reference and location if present in the supplied materials.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.732,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 377,
+      "coste_rag_usd": 0.00081775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 377,
+          "tiempo_s": 7.732
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 41,
+      "categoria": "cross_references",
+      "pregunta": "Which other regulations or decisions does document 2026/243 reference?",
+      "respuesta_esperada": [
+        "2016/429",
+        "2020/687",
+        "2025/2256",
+        "2026/105"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which other regulations or decisions document 2026/243 references because no source documents or extracts were provided.\n\n**Base normativa:**\n- No documents supplied – therefore no articles, recitals or extracts from document 2026/243 are available to cite.\n\n**Contexto adicional:** \n- To identify which acts 2026/243 refers to, check the full text of the act (recitals, final provisions and any “References to other acts” section). References commonly appear in:\n  - Recitals (where prior legal bases and related instruments are cited).\n  - Articles that amend or refer to existing regulations/decisions.\n  - Final provisions (e.g. “This Regulation shall be read in conjunction with…”, amendment clauses, or implementing/entry-into-force provisions).\n- Practical steps you can take:\n  1. Retrieve the official text on EUR-Lex by searching the document number (e.g. “2026/243”) or the Official Journal citation.\n  2. Read the recitals and the articles that include amendment, repeal or reference clauses; copy the full citations (e.g. “Regulation (EU) No …”, “Decision (EU) …” with OJ L number and date).\n  3. If you provide the text or the Official Journal link, I will extract and cite the exact referenced regulations/decisions with article/paragraph citations.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.935,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 747,
+      "coste_rag_usd": 0.001559,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 747,
+          "tiempo_s": 6.935
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 42,
+      "categoria": "cross_references",
+      "pregunta": "List the legislation cited in document 2026/264.",
+      "respuesta_esperada": [
+        "1093/2010",
+        "1094/2010",
+        "1095/2010",
+        "2015/847",
+        "2016/1011",
+        "2016/679",
+        "2018/1106",
+        "2018/1637",
+        "2018/1638",
+        "2018/1641",
+        "2018/1643",
+        "2018/1645",
+        "2018/1646",
+        "2018/1725",
+        "2018/66",
+        "2019/2175",
+        "2021/1348",
+        "2021/1350",
+        "2021/1351",
+        "2021/1352"
+      ],
+      "respuesta": "**Respuesta:** I cannot list the legislation cited in document 2026/264 because no text or fragments of that document were provided.\n\n**Base normativa:**\n- No documents were provided in the query — therefore there are no excerpts from document 2026/264 available to extract citations (no articles, recitals, footnotes or reference lists to consult).\n\n**Contexto adicional:** I cannot invent or assume which instruments that document cites. If you provide the text of document 2026/264 (or a link to it, or the section that contains its references/footnotes), I will extract and list the legislation cited including article/paragraph references where present. Alternatively, you can locate cited legislation yourself by consulting the document’s footnotes, recital references, and the “References” or “Legal basis” section (or by searching for the document on EUR-Lex and checking its metadata).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.718,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 510,
+      "coste_rag_usd": 0.0010845,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 510,
+          "tiempo_s": 8.718
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 43,
+      "categoria": "cross_references",
+      "pregunta": "What are the normative references in document 2025/2649?",
+      "respuesta_esperada": [
+        "1305/2013",
+        "1306/2013",
+        "1308/2013",
+        "1405/2006",
+        "2015/1017",
+        "2016/2031",
+        "2016/429",
+        "2018/1725",
+        "2018/1882",
+        "2018/848",
+        "2021/1060",
+        "2021/2015",
+        "2021/2115",
+        "2021/2116",
+        "2021/523",
+        "2022/126",
+        "2022/127",
+        "2022/128",
+        "2023/2831",
+        "2024/1235"
+      ],
+      "respuesta": "**Respuesta:** I cannot identify the normative references in document 2025/2649 because the text of that document was not provided.\n\nBase normativa:\n- Document 2025/2649 — not provided in the materials, therefore no normative references can be extracted.\n\nContext adicional:\n- To obtain the normative references, please provide the text or an excerpt of document 2025/2649. Alternatively, you can locate the document on EUR-Lex (https://eur-lex.europa.eu/) and check the sections titled \"References\" or the final provisions/preamble, where cited acts and legal bases are usually listed. If you supply the document or its relevant sections, I will extract and cite the normative references precisely (including article/paragraph numbers where applicable).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.833,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 547,
+      "coste_rag_usd": 0.001159,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 547,
+          "tiempo_s": 5.833
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 44,
+      "categoria": "cross_references",
+      "pregunta": "Give me the references to other legislative acts found in 2025/2621.",
+      "respuesta_esperada": [
+        "2023/956",
+        "2025/2547",
+        "2025/2620"
+      ],
+      "respuesta": "**Respuesta:** I cannot provide the references to other legislative acts found in \"2025/2621\" because no document fragments were provided in your query. Please supply the text or excerpts of Regulation 2025/2621 (or indicate the specific parts) so I can extract and cite the exact references (articles, paragraphs, and numbers).\n\n**Base normativa:**\n- No documents were supplied in the prompt (0 documents). Therefore there is no source from which to extract the cited legislative acts.\n\n**Contexto adicional:** \n- To locate such references yourself, consult the official text of the act (e.g. on EUR-Lex) and check: the recitals, footnotes, the provisions that state \"This Regulation is without prejudice to...\" or \"References to\" and any explicit cross‑references in articles or annexes. Those places typically name and cite other EU legal acts (with numbers, titles and dates). \n- If you provide the relevant excerpts (recitals/articles/annexes) of 2025/2621 here, I will extract and cite the exact references (article/paragraph numbers) precisely as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.194,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 880,
+      "coste_rag_usd": 0.00182575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 880,
+          "tiempo_s": 7.194
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 45,
+      "categoria": "cross_references",
+      "pregunta": "Which documents reference Regulation/Decision 2017/745?",
+      "respuesta_esperada": [
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, therefore it is not possible to identify any documents that reference Regulation/Decision 2017/745 from the supplied material.\n\n**Base normativa:**\n- No source documents supplied – no articles, sections or extracts available to check for references to Regulation/Decision 2017/745.\n\n**Context adicional:** Because no document fragments were included in the query, I cannot cite any articles, paragraphs or specific references that mention Regulation/Decision 2017/745. If you provide the relevant documents or text excerpts, I can identify and cite precisely which documents reference Regulation/Decision 2017/745 and quote the relevant passages.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.868,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 258,
+      "tokens_out": 462,
+      "coste_rag_usd": 0.0009885,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 258,
+          "tokens_out": 462,
+          "tiempo_s": 4.868
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 46,
+      "categoria": "cross_references",
+      "pregunta": "How many references to other acts does document 2025/2649 contain?",
+      "respuesta_esperada": 20,
+      "respuesta": "**Respuesta:** I cannot determine how many references to other acts document 2025/2649 contains because the text of that document was not provided.\n\n**Base normativa:**\n- No documents were supplied – therefore no article, recital or paragraph from document 2025/2649 is available to examine.\n\n**Contexto adicional:** To obtain the number yourself, open the full text of document 2025/2649 and count each distinct citation to another legal act (Regulation, Directive, Decision, Treaty, etc.) appearing in recitals, articles, footnotes and annexes. Typical places to check are:\n- Recitals and articles (in‑text cross‑references and explicit citations).\n- Footnotes and endnotes (OJ references such as “OJ L …”).\n- Annexes and implementing provisions.\nDecide beforehand whether to count duplicate citations separately (every occurrence) or only unique acts (each act counted once). If you provide the text or excerpts of document 2025/2649, I will count and list the references precisely, citing the relevant articles/paragraphs.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 17.706,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 614,
+      "coste_rag_usd": 0.0012935,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 614,
+          "tiempo_s": 17.706
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 47,
+      "categoria": "structure",
+      "pregunta": "How many articles does document 2025/2621 have?",
+      "respuesta_esperada": 15,
+      "respuesta": "**Respuesta:** I cannot determine how many articles document 2025/2621 contains because no documents or excerpts were provided.\n\n**Base normativa:**\n- No documents provided – the file(s) made available in the task contain zero documents, so document 2025/2621 is not present among them.\n\n**Contexto adicional:** If you provide the text or an excerpt of document 2025/2621, or allow me to access its EUR-Lex entry (searchable at https://eur-lex.europa.eu), I can count and cite the exact number of articles (with article numbers and paragraph citations).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.792,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 711,
+      "coste_rag_usd": 0.00148675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 711,
+          "tiempo_s": 7.792
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 48,
+      "categoria": "structure",
+      "pregunta": "How many recitals are there in the preamble of 2026/246?",
+      "respuesta_esperada": 3,
+      "respuesta": "**Respuesta:** I cannot determine how many recitals are in the preamble of \"2026/246\" because no document excerpts or references were provided.\n\n**Base normativa:**\n- No document provided – no preamble or recital text available to extract or cite.\n\n**Contexto adicional:**  \n- To answer, I need either: (a) the full text or the preamble (recitals) pasted here, or (b) the exact Official Journal reference (e.g. OJ L number and date) or a working link to the EU text (EUR-Lex).  \n- Practical tip: on EUR-Lex open the act \"2026/246\" (by number and year), view the PDF or HTML of the act; the recitals appear in the preamble usually numbered as \"(1), (2), …\" or introduced by \"Whereas\". Count those numbered recital paragraphs to get the total.  \n- If you supply the preamble text, I will count and cite the recital numbers precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.365,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 792,
+      "coste_rag_usd": 0.00164975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 792,
+          "tiempo_s": 7.365
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 49,
+      "categoria": "structure",
+      "pregunta": "State the number of recitals in document 2025/2664.",
+      "respuesta_esperada": 11,
+      "respuesta": "**Respuesta:** I cannot state the number of recitals in document 2025/2664 because no text or fragments of that document were provided.\n\n**Base normativa:**\n- No document fragments provided – the request did not include the text of document 2025/2664, so there is nothing to inspect or cite for recital count.\n\n**Context adicional:** \n- To obtain the number of recitals, retrieve the full text of document 2025/2664 (e.g. from EUR-Lex or the Official Journal) and count the numbered \"Whereas\" clauses (recitals) in the preamble. Typical practical steps:\n  1. Search EUR-Lex by the document number \"2025/2664\" or by act title.\n  2. Open the consolidated or authentic PDF and locate the preamble (usually introduced by \"Whereas\" / recital clauses preceding the articles).\n  3. Count the numbered recital paragraphs (they are usually numbered (1), (2), …). \n\nIf you provide the text or the preamble of document 2025/2664, I will count and report the exact number of recitals with precise citations.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 12.546,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 762,
+      "coste_rag_usd": 0.00158925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 762,
+          "tiempo_s": 12.546
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 50,
+      "categoria": "structure",
+      "pregunta": "How many points does the recital part of 2026/197 contain?",
+      "respuesta_esperada": 2021,
+      "respuesta": "**Respuesta:** I cannot determine how many recital points the recital part of \"2026/197\" contains because the text of that act has not been provided.\n\nBase normativa:\n- No documents provided – The operative and recital text of Regulation/Act \"2026/197\" was not included among the documents available to me, so I cannot cite any article, recital number or paragraph from it.\n\nContext adicional:\n- To obtain the number of recital points, consult the authentic text published in the Official Journal of the European Union or the consolidated act on EUR-Lex (where the recitals are shown at the start of the act). If you provide the recital text or the Official Journal reference (L‑number and date) I can count and cite the recital points precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.564,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 612,
+      "coste_rag_usd": 0.00128925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 612,
+          "tiempo_s": 6.564
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 51,
+      "categoria": "structure",
+      "pregunta": "Which documents contain annexes?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents contain annexes because no documents were provided.\n\n**Base normativa:**\n- No documents supplied – there are 0 documents available to examine, so there are no Articles/Sections I can quote or extract.\n\n**Context additional:** \n- Because you provided no text fragments, I cannot inspect any act for the presence of annexes or cite any article or recital that refers to an annex.\n- Practical steps you can follow to identify annexes in EU instruments:\n  - Check the end of the document for sections titled \"ANNEX\", \"Annex I\", \"Annex II\", \"ANNEXES\" or equivalent headings.\n  - Search the document for the word \"Annex\" (or the local-language equivalent) or for phrases such as \"the Annex forms an integral part of this Regulation/Directive/Decision\" or \"is annexed hereto\".\n  - Examine the final Articles (often the last numbered Articles) where an instrument typically states that annexes are part of the act and specifies their legal status.\n  - Consult the official OJ (Official Journal) reference or the PDF as published on EUR-Lex, where annexes are usually included in the same published act or clearly linked.\n- If you provide the specific documents or extracts, I will identify and cite precisely which contain annexes, giving article/paragraph references as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 13.545,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 252,
+      "tokens_out": 736,
+      "coste_rag_usd": 0.001535,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 252,
+          "tokens_out": 736,
+          "tiempo_s": 13.545
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 52,
+      "categoria": "structure",
+      "pregunta": "Which documents have articles and how many does each have?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202600249_EN",
+          "num_articulos": 498
+        },
+        {
+          "documento": "OJ_L_202502649_EN",
+          "num_articulos": 349
+        },
+        {
+          "documento": "OJ_L_202502660_EN",
+          "num_articulos": 259
+        },
+        {
+          "documento": "OJ_L_202600230_EN",
+          "num_articulos": 259
+        },
+        {
+          "documento": "OJ_L_202600243_EN",
+          "num_articulos": 259
+        },
+        {
+          "documento": "OJ_L_202600271_EN",
+          "num_articulos": 215
+        },
+        {
+          "documento": "OJ_L_202600246_EN",
+          "num_articulos": 90
+        },
+        {
+          "documento": "OJ_L_202502664_EN",
+          "num_articulos": 78
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "num_articulos": 64
+        },
+        {
+          "documento": "OJ_L_202600215_EN",
+          "num_articulos": 49
+        },
+        {
+          "documento": "OJ_L_202600266_EN",
+          "num_articulos": 43
+        },
+        {
+          "documento": "OJ_L_202600264_EN",
+          "num_articulos": 42
+        },
+        {
+          "documento": "OJ_L_202600239_EN",
+          "num_articulos": 29
+        },
+        {
+          "documento": "OJ_L_202600220_EN",
+          "num_articulos": 21
+        },
+        {
+          "documento": "OJ_L_202502621_EN",
+          "num_articulos": 15
+        },
+        {
+          "documento": "OJ_L_202600238_EN",
+          "num_articulos": 12
+        },
+        {
+          "documento": "OJ_L_202600193_EN",
+          "num_articulos": 10
+        },
+        {
+          "documento": "OJ_L_202600197_EN",
+          "num_articulos": 10
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents have articles or how many each has because no document fragments were provided in the context.\n\n**Base normativa:**\n- No documents were included in the provided context. Therefore there are no entries to cite (no [Documento], [Artículo/Sección] or extracto relevant available).\n\n**Contexto adicional:** I must base my answer exclusively on the supplied document fragments. Because none were supplied, I cannot cite or count articles, paragraphs or regulations, nor invent references. If you provide the document fragments (or the titles and full text of the documents you want analysed), I will list which documents contain articles and give the exact article numbers and counts, citing article and paragraph numbers as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.413,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 603,
+      "coste_rag_usd": 0.00127025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 603,
+          "tiempo_s": 6.413
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 53,
+      "categoria": "structure",
+      "pregunta": "List all documents ordered by number of pages from highest to lowest.",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502621_EN",
+          "paginas": 2400
+        },
+        {
+          "documento": "OJ_L_202600249_EN",
+          "paginas": 212
+        },
+        {
+          "documento": "OJ_L_202502664_EN",
+          "paginas": 106
+        },
+        {
+          "documento": "OJ_L_202502660_EN",
+          "paginas": 87
+        },
+        {
+          "documento": "OJ_L_202600266_EN",
+          "paginas": 40
+        },
+        {
+          "documento": "OJ_L_202502649_EN",
+          "paginas": 38
+        },
+        {
+          "documento": "OJ_L_202600215_EN",
+          "paginas": 37
+        },
+        {
+          "documento": "OJ_L_202600243_EN",
+          "paginas": 22
+        },
+        {
+          "documento": "OJ_L_202600230_EN",
+          "paginas": 20
+        },
+        {
+          "documento": "OJ_L_202600264_EN",
+          "paginas": 18
+        },
+        {
+          "documento": "OJ_L_202600271_EN",
+          "paginas": 16
+        },
+        {
+          "documento": "OJ_L_202600238_EN",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600239_EN",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600193_EN",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600220_EN",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600197_EN",
+          "paginas": 3
+        },
+        {
+          "documento": "OJ_L_202600246_EN",
+          "paginas": 2
+        }
+      ],
+      "respuesta": "**Respuesta:** There are no documents provided in the context, so I cannot list or order any documents by number of pages.\n\n**Base normativa:**\n- No documents were included in the provided context — therefore there are no Articles/Sections to cite or excerpts to extract.\n\n**Contexto adicional:** I cannot invent or assume document titles, page counts, or normative citations. To complete your request I need one of the following:\n- Upload the documents (or provide their titles plus page counts), or\n- Provide a list of the documents with their respective number of pages.\n\nOnce you provide the documents or page counts, I will order them from highest to lowest number of pages and—where the documents contain EU legal texts—cite relevant articles/paragraphs as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.827,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 483,
+      "coste_rag_usd": 0.00103075,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 483,
+          "tiempo_s": 9.827
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 54,
+      "categoria": "structure",
+      "pregunta": "Which documents specify a date of application?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600266_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents specify a date of application because no EU documents or excerpts were provided.\n\n**Base normativa:**\n- No documents were provided – therefore there are no Articles, paragraphs or extracts to cite.\n\n**Contexto adicional:** Generally, in EU legal acts the date of application (entry into force and/or applicability) is normally found in the final provisions—commonly under headings such as \"Entry into force\", \"Entry into force and application\", or similar. For regulations and decisions the clause often states the date after publication in the OJ; for directives there is typically an application/transposition timetable and a transposition deadline. However, identifying which specific documents include such clauses (and quoting their exact articles or wording) requires the actual text of the documents, which was not supplied.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.629,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 747,
+      "coste_rag_usd": 0.0015575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 747,
+          "tiempo_s": 9.629
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 55,
+      "categoria": "structure",
+      "pregunta": "Are there documents with transitional provisions?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine whether there are documents with transitional provisions because no EU documents or excerpts were provided.\n\n**Base normativa:**\n- No documents were supplied – therefore no articles, paragraphs or regulations can be cited from the materials.\n\n**Context additional:** If you want a concrete answer, please provide the specific EU act(s) or the document fragments. General guidance (non‑normative, for your convenience): in EU legislation transitional provisions commonly appear in the final provisions (often under headings such as \"Entry into force and application\", \"Transitional provisions\", or similar) and may set application dates, phasing‑in periods, temporary derogations or review clauses. To identify them precisely requires examination of the text of the specific regulation/directive/decision.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.904,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 546,
+      "coste_rag_usd": 0.00115525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 546,
+          "tiempo_s": 5.904
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 56,
+      "categoria": "structure",
+      "pregunta": "Which documents declare themselves binding in their entirety?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents declare themselves binding in their entirety because no document excerpts were provided.\n\nBase normativa:\n- No documents were supplied — there are no excerpts or references available from which to identify any instrument that declares itself binding in its entirety.\n\nContexto adicional: Please provide the relevant document(s) or the specific extracts (title and article/recital text). Once supplied, I will cite the exact article/paragraph numbers and state which instruments declare themselves binding in their entirety.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.639,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 620,
+      "coste_rag_usd": 0.00130375,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 620,
+          "tiempo_s": 6.639
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 57,
+      "categoria": "structure",
+      "pregunta": "Give me an overview of all documents with their type, date and number of pages.",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502621_EN",
+          "tipo": "REGULATION",
+          "fecha": "16 December 2025",
+          "paginas": 2400
+        },
+        {
+          "documento": "OJ_L_202502649_EN",
+          "tipo": "REGULATION",
+          "fecha": "19 December 2025",
+          "paginas": 38
+        },
+        {
+          "documento": "OJ_L_202502660_EN",
+          "tipo": "DECISION",
+          "fecha": "23 December 2025",
+          "paginas": 87
+        },
+        {
+          "documento": "OJ_L_202502664_EN",
+          "tipo": "DECISION",
+          "fecha": "2 October 2025",
+          "paginas": 106
+        },
+        {
+          "documento": "OJ_L_202600193_EN",
+          "tipo": "DECISION",
+          "fecha": "28 January 2026",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600197_EN",
+          "tipo": "DECISION",
+          "fecha": "28 January 2026",
+          "paginas": 3
+        },
+        {
+          "documento": "OJ_L_202600215_EN",
+          "tipo": "REGULATION",
+          "fecha": "29 January 2026",
+          "paginas": 37
+        },
+        {
+          "documento": "OJ_L_202600220_EN",
+          "tipo": "REGULATION",
+          "fecha": "29 January 2026",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600230_EN",
+          "tipo": "DECISION",
+          "fecha": "26 January 2026",
+          "paginas": 20
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "tipo": "DECISION",
+          "fecha": "29 January 2026",
+          "paginas": 4
+        },
+        {
+          "documento": "OJ_L_202600238_EN",
+          "tipo": "REGULATION",
+          "fecha": "29 January 2026",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600239_EN",
+          "tipo": "DECISION",
+          "fecha": "29 January 2026",
+          "paginas": 7
+        },
+        {
+          "documento": "OJ_L_202600243_EN",
+          "tipo": "DECISION",
+          "fecha": "26 January 2026",
+          "paginas": 22
+        },
+        {
+          "documento": "OJ_L_202600246_EN",
+          "tipo": "REGULATION",
+          "fecha": "23 January 2026",
+          "paginas": 2
+        },
+        {
+          "documento": "OJ_L_202600249_EN",
+          "tipo": "REGULATION",
+          "fecha": "26 January 2026",
+          "paginas": 212
+        },
+        {
+          "documento": "OJ_L_202600264_EN",
+          "tipo": "REGULATION",
+          "fecha": "27 October 2025",
+          "paginas": 18
+        },
+        {
+          "documento": "OJ_L_202600266_EN",
+          "tipo": "REGULATION",
+          "fecha": "26 January 2026",
+          "paginas": 40
+        },
+        {
+          "documento": "OJ_L_202600271_EN",
+          "tipo": "REGULATION",
+          "fecha": "29 January 2026",
+          "paginas": 16
+        }
+      ],
+      "respuesta": "**Respuesta:**  \nNo documents were provided in the query. Therefore I cannot produce an overview (type, date and number of pages) of any EU documents, nor can I cite articles, paragraphs or regulation numbers. I will not invent or assume any references.\n\n**Base normativa:**  \n- No source documents supplied – there are no excerpts, titles, OJ/COM/Council numbers, dates or page counts available in the materials you sent. Consequently, no specific Articles/Sections or regulation numbers can be cited.\n\n**Contexto adicional:**  \n- Legal note: Per your instruction to rely exclusively on the provided fragments, I must decline to produce any list or citations because doing so would require inventing document data or citing material not supplied.  \n- If you want the requested overview, please provide for each document at least one of the following: the PDF/text of the document, the official reference (e.g. OJ series and number, COM(yyyy)nnn, Council decision number), or a reliable EUR-Lex link. For each document I will extract and return: document type (Regulation, Directive, Decision, Agreement, COM proposal, Staff Working Document, etc.), date of adoption/publication, and number of pages — and cite specific Articles/paragraphs if the fragments permit.  \n- Suggested minimal submission template you can copy-paste for each document:  \n  - Title:  \n  - Official reference (if known):  \n  - Date (adoption/publication):  \n  - PDF or text (attach or paste):  \n- Next step: provide the documents or their official references and I will produce the precise, legally sourced overview you requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.597,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 923,
+      "coste_rag_usd": 0.00191175,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 923,
+          "tiempo_s": 9.597
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 58,
+      "categoria": "existence",
+      "pregunta": "Is there any document about Atlantic fishing?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202600249_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** No. No documents were provided in the context, so I cannot confirm or cite any EU document about Atlantic fishing.\n\n**Base normativa:**\n- No documents supplied – cannot cite any Article, recital or regulation.\n\n**Context adicional:** If you want a precise legal answer, please provide the relevant document fragments or tell me which specific EU act or file you mean. Alternatively, you can ask me to search for typical sources of EU fisheries law (e.g. Common Fisheries Policy instruments, Council regulations on TACs and quotas, International fisheries agreements), and I can then identify and cite the exact legal texts once those documents or references are provided.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.738,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 652,
+      "coste_rag_usd": 0.0013675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 652,
+          "tiempo_s": 11.738
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 59,
+      "categoria": "existence",
+      "pregunta": "Is there any implementing regulation in the database?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600246_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** I cannot confirm the presence of any implementing regulation because no documents were provided in the dataset you supplied.\n\n**Base normativa:**\n- No documents provided – there are 0 documents in the dataset, so no Articles, provisions or instrument titles are available to cite.\n\n**Contexto adicional:** If you want me to check whether a specific implementing regulation is present in your database, please provide the relevant document list, file(s) or an excerpt. When available, I can search for instruments titled \"Commission Implementing Regulation (EU) No …\" or other implementing acts and cite the exact article/number.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.771,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 581,
+      "coste_rag_usd": 0.00122575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 581,
+          "tiempo_s": 6.771
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 60,
+      "categoria": "existence",
+      "pregunta": "Are there documents dealing with Ukraine?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202600271_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** I cannot determine whether there are documents dealing with Ukraine because no documents were provided for analysis.\n\nBase normativa:\n- No documents supplied – there are no EU texts, articles, or excerpts available to consult or cite.\n\nContexto adicional: I must base my answer exclusively on the fragments you provide and may not invent or presume references. If you upload or paste the EU documents or excerpts you want checked, I will examine them and cite the relevant articles, paragraphs and numbers that mention Ukraine.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.996,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 749,
+      "coste_rag_usd": 0.00156125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 749,
+          "tiempo_s": 7.996
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 61,
+      "categoria": "existence",
+      "pregunta": "Is Russia mentioned in any document?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202600271_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** I cannot confirm that Russia is mentioned because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied – there are 0 documents in the provided corpus, so there are no excerpts to analyse and no articles or paragraphs to cite.\n\n**Contexto adicional:** As no source texts were included, I must not invent or infer references. If you provide the relevant EU documents or text fragments, I will search them and cite the exact article/paragraph/recital where \"Russia\" is mentioned.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.109,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 562,
+      "coste_rag_usd": 0.00118725,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 562,
+          "tiempo_s": 10.109
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 62,
+      "categoria": "existence",
+      "pregunta": "Is there any document relating to the European Economic Area (EEA)?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600264_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** No — based on the materials you provided, there are no documents relating to the European Economic Area (EEA).\n\n**Base normativa:**\n- No documents were provided; therefore there are no excerpts, articles or provisions to cite regarding the EEA.\n\n**Contexto adicional:** You supplied zero documents in the context. If you want a definitive check or citation, please upload or paste the specific EU document(s) you wish me to examine (for example the EEA Agreement or EU decisions concerning EEA cooperation), and I will identify and cite any EEA-related provisions contained therein.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.522,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 449,
+      "coste_rag_usd": 0.000963,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 449,
+          "tiempo_s": 5.522
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 63,
+      "categoria": "existence",
+      "pregunta": "Is there any document mentioning a protected designation of origin (PDO)?",
+      "respuesta_esperada": {
+        "existe": true,
+        "documentos": [
+          "OJ_L_202502660_EN",
+          "OJ_L_202600246_EN"
+        ]
+      },
+      "respuesta": "**Respuesta:** No — none of the provided documents mention a protected designation of origin (PDO). No documents were supplied, so there is nothing to cite.\n\n**Base normativa:**\n- No documents provided — no Article/Section available to extract or cite.\n\n**Context adicional:** I cannot invent or reference EU acts or articles that were not included among the provided documents. If you supply the relevant document(s) or excerpts, I can check them and cite the exact article, paragraph and wording that mention a PDO.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.216,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 432,
+      "coste_rag_usd": 0.00092875,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 432,
+          "tiempo_s": 5.216
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 64,
+      "categoria": "listing",
+      "pregunta": "Give me the complete list of all available documents.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, so I cannot produce a list of available documents. Please supply the documents or specify the corpus to be examined.\n\n**Base normativa:**\n- No documents were provided — there are therefore no Articles, paragraphs or Regulation numbers that I can cite from the supplied material.\n\n**Contexto adicional:** I must base answers exclusively on the fragments you provide. Because no fragments were included (0 documents), I cannot invent or infer a list of EU documents. If you want a complete list of available documents, please either:\n- Upload the document fragments you want me to analyse, or\n- Specify precisely which collection you mean (for example: \"all documents in a given folder\", or name an EU register such as EUR-Lex and give search parameters), so I can list documents contained in that provided corpus.\n\nI will then quote the relevant articles/paragraphs and produce the requested list.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.632,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 513,
+      "coste_rag_usd": 0.00109,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 513,
+          "tiempo_s": 8.632
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 65,
+      "categoria": "listing",
+      "pregunta": "What are all the documents in the database?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** There are no documents in the database — zero documents were provided in the context, so I cannot list any.\n\n**Base normativa:**\n- No documents supplied — therefore no Articles/Sections or extracts are available to cite.\n\n**Context adicional:** I must base answers exclusively on the provided document fragments. Because none were provided, I cannot (and will not) invent document titles, regulation numbers, articles or extracts. If you upload or list the documents (titles, IDs or text fragments), I can then enumerate them and cite the relevant articles/paragraphs precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.433,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 381,
+      "coste_rag_usd": 0.00082575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 381,
+          "tiempo_s": 7.433
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 66,
+      "categoria": "listing",
+      "pregunta": "I need to see the full catalogue of EU documents.",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot produce or show a \"full catalogue of EU documents\" because you have not provided any EU document fragments to base my answer on. Please supply the documents or specify exactly which catalogue/scope you mean (e.g. all legislative acts, the Official Journal issues, preparatory documents, international agreements, or internal Commission documents), and I will respond citing the provided material.\n\n**Base normativa:**\n- No documents provided – there are no excerpts or references in the material you gave me to cite (so I cannot quote Articles, paragraphs or Regulation numbers).\n\n**Contexto adicional:** \n- “Full catalogue of EU documents” can mean different things (e.g. all binding acts adopted under the Treaties, all documents published in the Official Journal, all Commission preparatory documents, or the entire EUR-Lex database). Please clarify scope.\n- To proceed I can:\n  - Work from a corpus you upload (I will then cite article/paragraphs from those fragments as requested), or\n  - If you intend me to use a public source (EUR-Lex, Publications Office), indicate that and specify which parts you want included; note that I currently have no external browsing capability unless you provide the relevant text fragments.\n- I will not invent normative references. Provide the documents or precise scope and I will extract and cite the applicable provisions from the material you supply.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.828,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 863,
+      "coste_rag_usd": 0.00179025,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 863,
+          "tiempo_s": 7.828
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 67,
+      "categoria": "listing",
+      "pregunta": "List all documents issued by the Council.",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot list any documents issued by the Council because no Council document fragments were provided in the request.\n\nBase normativa:\n- No documents were supplied – there are no fragments to cite.\n\nContext additional:\n- To produce the requested list with legal precision (articles, paragraphs, numbers), please provide the Council document fragments or specify which repository/timeframe you want searched.\n- If you prefer to locate Council documents yourself, consult the Council of the European Union public document register and EUR-Lex (use the issuer filter for the Council). Once you provide the relevant document excerpts, I can extract and cite the exact articles and references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 15.267,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 776,
+      "coste_rag_usd": 0.0016155,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 776,
+          "tiempo_s": 15.267
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 68,
+      "categoria": "listing",
+      "pregunta": "Which documents are from the year 2025?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600264_EN"
+      ],
+      "respuesta": "**Respuesta:** It is not possible to identify any documents from the year 2025 because no documents or fragments were provided.\n\n**Base normativa:**\n- No documents were supplied – there are no Articles, recitals, dates or references to cite.\n\n**Contexto adicional:** To determine whether given EU documents are from 2025, one must inspect the supplied texts for an authoring/adoption date or Official Journal reference (for example, adoption/date of signature in the final provisions or the OJ L/ or OJ C/ citation showing the year). Please provide the document fragments (or their metadata) that include dating information (e.g. \"Adopted on [date]\", \"Done at [place], [date]\", or the OJ reference) and I will identify which are from 2025 and cite the exact provisions.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.663,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 627,
+      "coste_rag_usd": 0.001318,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 627,
+          "tiempo_s": 6.663
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 69,
+      "categoria": "relationships",
+      "pregunta": "Which is the longest document and which is the shortest?",
+      "respuesta_esperada": {
+        "longest": {
+          "documento": "OJ_L_202502621_EN",
+          "paginas": 2400
+        },
+        "shortest": {
+          "documento": "OJ_L_202600246_EN",
+          "paginas": 2
+        }
+      },
+      "respuesta": "**Respuesta:** I cannot determine which is the longest and which is the shortest because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied in the query, therefore there are no Articles, paragraphs or regulation numbers to cite. I must rely exclusively on the fragments provided; since there are zero fragments, a comparison is not possible.\n\n**Contexto adicional:** To perform the comparison I would need the actual documents or clear identifiers (full texts, PDF files, or the exact instrument titles with accessible text). Typical, objective ways to determine length are: word count, page count, or number of Articles/Recitals. If you provide the documents or their texts, I will compare and cite the relevant Articles/paragraphs that show length (or state page/word counts) and identify the longest and shortest.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.635,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 494,
+      "coste_rag_usd": 0.00105225,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 494,
+          "tiempo_s": 5.635
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 70,
+      "categoria": "relationships",
+      "pregunta": "Are there documents dealing simultaneously with fishing and health topics?",
+      "respuesta_esperada": [],
+      "respuesta": "**Respuesta:** I cannot determine whether there are EU documents dealing simultaneously with fishing and health topics, because no documents or excerpts were provided for review.\n\n**Base normativa:**\n- No documents were supplied – no articles, recitals or provisions are available to examine.\n\n**Contexto adicional:** \n- To answer this question precisely I need at least the titles or text excerpts (recitals, Article 1 “subject matter”/scope, or operative provisions) of the documents you want checked. \n- If you provide documents, I will check and cite exact articles/paragraphs that show overlapping subject matter (for example provisions on fisheries management together with public/food/animal health measures), and will quote the relevant text.\n- Helpful search cues you can supply or I can use on the texts: look for scope/subject-matter clauses and recitals containing terms such as “fish”, “fisheries”, “seafood”, “food safety”, “public health”, “animal health”, “monitoring”, “control”, or “inspection”.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.539,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 257,
+      "tokens_out": 667,
+      "coste_rag_usd": 0.00139825,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 257,
+          "tokens_out": 667,
+          "tiempo_s": 6.539
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 71,
+      "categoria": "relationships",
+      "pregunta": "What are the 5 documents with the most references to other legislative acts?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502649_EN",
+          "num_referencias": 20
+        },
+        {
+          "documento": "OJ_L_202600249_EN",
+          "num_referencias": 20
+        },
+        {
+          "documento": "OJ_L_202600264_EN",
+          "num_referencias": 20
+        },
+        {
+          "documento": "OJ_L_202600266_EN",
+          "num_referencias": 9
+        },
+        {
+          "documento": "OJ_L_202600230_EN",
+          "num_referencias": 7
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot identify the five documents with the most references because no EU documents were provided for analysis.\n\n**Base normativa:**\n- No documents were supplied in the CONTEXTO. Therefore there are no Articles/Sections or extracts to cite.\n\n**Contexto adicional:** \n- To produce the requested ranked list I need the set of documents (or their text) to be analyzed. The typical, transparent method I would apply on a supplied corpus is:\n  1. Parse each document (including recitals and articles) and extract all citations to other legislative acts (e.g. explicit references to Regulations, Directives, Decisions, Treaties and specific article/paragraph numbers).\n  2. Normalize citation variants (e.g. \"Regulation (EU) 2016/679\", \"Reg. (EU) 2016/679\", \"GDPR\") so the same act counts once per reference instance.\n  3. Count references per document and rank documents by total number of references.\n  4. Where needed, break ties by: number of distinct acts referenced, number of internal cross-references, or presence of recital references.\n- If you provide the texts (or point to specific document identifiers and provide permission), I will perform the count and return:\n  - The top 5 documents,\n  - The number of references found in each,\n  - Exact citation locations (Article/Recital/Paragraph) for verification.\n- I will not invent citations or claim results without the actual documents.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.254,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 700,
+      "coste_rag_usd": 0.00146525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 700,
+          "tiempo_s": 6.254
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 72,
+      "categoria": "relationships",
+      "pregunta": "In which documents is Spain mentioned?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600266_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, therefore Spain is not mentioned in any of the supplied documents.\n\n**Base normativa:**\n- No documents supplied – there are 0 documents in the provided context, so no articles, paragraphs or regulations to cite.\n\n**Contexto adicional:** I cannot invent or infer citations from EU law beyond the material you give me. If you want a list of EU instruments that mention Spain (for example, Treaties, accession instruments, Council decisions, regulations, directives or EU budgetary acts), please provide the specific documents or their text fragments, or indicate which corpus (e.g. Treaties of the European Union, Single Market legislation, Common Foreign and Security Policy acts, Schengen acquis) you want searched and I will identify and cite the exact articles and paragraphs.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.934,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 489,
+      "coste_rag_usd": 0.00104125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 489,
+          "tiempo_s": 4.934
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 73,
+      "categoria": "relationships",
+      "pregunta": "Which documents were jointly issued by the European Parliament and the Council?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents were jointly issued by the European Parliament and the Council because no EU document fragments were provided.\n\nBase normativa:\n- No documents were supplied – 0 documents available to consult.\n\nContexto adicional:\n- Please provide the specific document fragments or identify the documents you want reviewed. Only with the provided text can I cite relevant articles, paragraphs or numbers and state which were jointly issued by the European Parliament and the Council.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.653,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 611,
+      "coste_rag_usd": 0.00128675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 611,
+          "tiempo_s": 6.653
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 74,
+      "categoria": "relationships",
+      "pregunta": "Which documents are related to health or medical matters?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, so I cannot identify which documents relate to health or medical matters from the material you mention.\n\n**Base normativa:**\n- No documents provided – no articles, paragraphs or regulation numbers available to cite.\n\n**Contexto adicional:**  \n- Because there were no fragments supplied, I cannot quote or extract any normative text. If you provide the specific document fragments (titles or text excerpts), I can indicate precisely which ones concern health or medicine and cite the relevant articles/paragraphs.  \n- To help you identify such documents yourself, look for EU legal instruments whose scope or operative provisions use terms such as “health”, “public health”, “medical”, “medicinal products”, “medical devices”, “clinical trials”, “pharmaceuticals”, “patient safety”, “cross‑border healthcare”, “veterinary” (for animal health) or which refer to agencies like EMA/ECDC. Typical forms are Regulations, Directives, Decisions, and Commission Delegated/Implementing Acts.  \n- If you send the document titles or excerpts, I will: (a) state whether they relate to health/medical matters; and (b) cite the exact articles/paragraphs from the provided text in accordance with your instructions.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.95,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 774,
+      "coste_rag_usd": 0.001612,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 774,
+          "tiempo_s": 6.95
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 75,
+      "categoria": "relationships",
+      "pregunta": "Which documents deal with international trade or external relations?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600249_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents deal with international trade or external relations because no EU documents or excerpts were provided.\n\nBase normativa:\n- No documents were supplied to cite; therefore no articles, paragraphs or numbers can be quoted.\n\nContext adicional:\n- To answer precisely I need the texts or excerpts (or at least titles and locations) of the documents you want examined. If you provide them I will:\n  - identify which ones address international trade or external relations,\n  - cite the exact articles/paragraphs where those matters are regulated,\n  - and explain any relevant exceptions or scope limits.\n- If you prefer, you can paste the document fragments or list their official identifiers (e.g. Regulation/Directive/Decision numbers, treaty provisions, or agreement titles), and I will analyze them accordingly.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.163,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 682,
+      "coste_rag_usd": 0.001428,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 682,
+          "tiempo_s": 10.163
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 76,
+      "categoria": "relationships",
+      "pregunta": "Which documents contain provisions on entry into force?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents contain provisions on entry into force because no documents were provided.\n\n**Base normativa:**\n- No documents were supplied; therefore no specific articles, paragraphs or numbers can be cited.\n\n**Contexto adicional:** If you provide the texts or identify the specific EU legal acts (e.g., Regulation/Directive/Decision numbers or titles), I can examine them and cite exactly where their entry-into-force provisions appear (typically in the final provisions/articles). Please attach the documents or give their identifiers to proceed.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.557,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 821,
+      "coste_rag_usd": 0.00170575,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 821,
+          "tiempo_s": 6.557
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 77,
+      "categoria": "relationships",
+      "pregunta": "Compare documents 2025/2621 and 2025/2649: what do they have in common?",
+      "respuesta_esperada": {
+        "common_type": "REGULATION",
+        "doc1": {
+          "codigo": "2025/2621",
+          "fecha": "16 December 2025",
+          "paginas": 2400
+        },
+        "doc2": {
+          "codigo": "2025/2649",
+          "fecha": "19 December 2025",
+          "paginas": 38
+        }
+      },
+      "respuesta": "**Respuesta:** I cannot compare documents 2025/2621 and 2025/2649 because no text or excerpts from those documents were provided. No articles, recitals or other provisions from those documents are available to me, so I cannot state what they have in common based on primary evidence.\n\n**Base normativa:**\n- Document 2025/2621 – No content provided in the materials available to me; no articles, recitals or provisions to cite.\n- Document 2025/2649 – No content provided in the materials available to me; no articles, recitals or provisions to cite.\n\n**Contexto adicional:** \n- If you provide the titles and/or the full text (or at least the table of contents, recitals and key articles) of 2025/2621 and 2025/2649, I can perform a precise legal comparison and cite specific articles, paragraphs and numbers as requested.\n- Generally (this is generic, not specific to the two documents), EU legal acts often share structural features such as: legal basis and references to Treaty articles, recitals explaining purpose, operative articles setting obligations, entry-into-force and applicability clauses, addressees (Member States, individuals, companies), and provisions on implementing measures or delegated acts. Note that this is a general overview and must not be taken as a statement about the specific documents 2025/2621 and 2025/2649.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.321,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 269,
+      "tokens_out": 686,
+      "coste_rag_usd": 0.00143925,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 269,
+          "tokens_out": 686,
+          "tiempo_s": 6.321
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 78,
+      "categoria": "relationships",
+      "pregunta": "Which are the most recent documents?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202600215_EN",
+          "fecha": "29 January 2026"
+        },
+        {
+          "documento": "OJ_L_202600220_EN",
+          "fecha": "29 January 2026"
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "fecha": "29 January 2026"
+        },
+        {
+          "documento": "OJ_L_202600238_EN",
+          "fecha": "29 January 2026"
+        },
+        {
+          "documento": "OJ_L_202600239_EN",
+          "fecha": "29 January 2026"
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents are the most recent because no documents or document fragments were provided.\n\n**Base normativa:**\n- No documents were provided – there are no Articles, recitals or dates to cite.\n\n**Contexto adicional:** If you supply the document fragments or at least their identifying metadata (title, document number, adoption date, publication reference in the Official Journal), I can identify which is most recent and cite the relevant dates/paragraphs. In general, to determine which EU instrument is most recent you should check the following elements in the provided material:\n- the adoption or signature date shown on the document;\n- the date of publication in the Official Journal (OJ L or OJ C) and the OJ reference;\n- any stated entry into force date or amendment history (including corrigenda and successive amendments);\n- whether a text is a consolidated version (which will indicate amendment dates).\n\nProvide the documents or those metadata and I will compare dates and cite the exact provisions showing the relevant dates.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.849,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 661,
+      "coste_rag_usd": 0.00138525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 661,
+          "tiempo_s": 7.849
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 79,
+      "categoria": "relationships",
+      "pregunta": "Which documents address security or defence topics?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents address security or defence topics because no documents or excerpts were provided.\n\n**Base normativa:**\n- No documents were supplied — there are 0 documents in the provided context, so I have no textual material to inspect or cite.\n\n**Contexto adicional:** If you supply the texts or excerpts (or identify the documents by title and give the relevant passages), I will examine them and cite the specific articles, paragraphs and numbers that relate to security or defence topics.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.579,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 557,
+      "coste_rag_usd": 0.0011775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 557,
+          "tiempo_s": 6.579
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 80,
+      "categoria": "relationships",
+      "pregunta": "Are there documents related to the environment?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202600249_EN"
+      ],
+      "respuesta": "**Respuesta:** No — there are no documents provided in the CONTEXT, so I cannot determine or cite any documents related to the environment.\n\n**Base normativa:**\n- No documents were supplied in the CONTEXT (0 documents). Therefore there are no Articles, paragraphs or excerpts available to quote.\n\n**Contexto adicional:** To answer precisely I need the actual document(s) or explicit references (titles, document numbers, or excerpts). If you provide those, I will cite the exact Articles/paragraphs and state whether — and which — of them relate to the environment. If helpful, when you supply documents I can search them for terms such as \"environment\", \"environmental\", \"habitat\", \"EIA\", \"SEA\", \"Natura 2000\", \"pollution\", \"waste\", \"water\", \"air\", etc., and report the precise legal citations found.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.541,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 700,
+      "coste_rag_usd": 0.0014635,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 700,
+          "tiempo_s": 10.541
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 81,
+      "categoria": "relationships",
+      "pregunta": "How are the documents distributed by month of issuance?",
+      "respuesta_esperada": [
+        {
+          "month": "January",
+          "count": 13
+        },
+        {
+          "month": "December",
+          "count": 3
+        },
+        {
+          "month": "October",
+          "count": 2
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine how the documents are distributed by month of issuance because no documents were provided (0 documents). There are no issuance dates or document metadata available to compute a monthly distribution.\n\n**Base normativa:**\n- No documents were provided — no articles, regulations or excerpts available to cite.\n\n**Contexto adicional:** If you supply the documents or a dataset with an issuance date field, the typical, legally neutral method to obtain the distribution by month is:\n- Decide which date to use when multiple dates exist (e.g., date of adoption, date of signature, date of publication). Be explicit about this choice because results differ.\n- Normalize each document's issuance date to a year–month value (e.g., 2026-05).\n- Aggregate counts by that year–month value and present the results (table, chart).\n- Tools/queries (examples):\n  - SQL: SELECT DATE_TRUNC('month', issuance_date) AS month, COUNT(*) AS n FROM documents GROUP BY month ORDER BY month;\n  - Excel: add a Month/Year column using =TEXT(issuance_date,\"yyyy-mm\") and create a pivot table counting documents by that column.\n- Pay attention to edge cases: missing or invalid dates, time zones if timestamps are used, documents with multiple relevant dates, and whether you need to group by calendar month or rolling 30-day periods.\n- If you provide the documents or their metadata, I can compute the monthly distribution and cite exact document identifiers/dates.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 8.82,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 256,
+      "tokens_out": 889,
+      "coste_rag_usd": 0.001842,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 256,
+          "tokens_out": 889,
+          "tiempo_s": 8.82
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 82,
+      "categoria": "specific_content",
+      "pregunta": "What is the content of Article 1 of document 2025/2621?",
+      "respuesta_esperada": "Default values 1. Where the embedded emissions in imported goods are determined on the basis of default values in accordance with Article 7(2), point (b), of Regulation (EU) 2023/956, the default values laid down in Annex I to this Regulation shall be used. 2. Where the embedded emissions of complex goods are determined on the basis of actual values, and the embedded emissions of precursors used in the production of those complex goods are determined on the basis of default values in accordance ",
+      "respuesta": "**Respuesta:** I cannot provide the content of Article 1 of document 2025/2621 because no text or document fragments were supplied for me to consult.\n\n**Base normativa:**\n- No documents were provided – the text of \"2025/2621\" (Article 1) is not among the supplied materials.\n\n**Context adicional:** To obtain the exact wording of Article 1 of document 2025/2621, consult an authoritative source such as the EUR-Lex database or the Official Journal of the European Union (search by document number \"2025/2621\"). If you can paste the relevant document fragment or the full text of Article 1 here, I will quote it precisely and indicate the specific paragraph and numbering as requested.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.2,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 546,
+      "coste_rag_usd": 0.00115775,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 546,
+          "tiempo_s": 6.2
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 83,
+      "categoria": "specific_content",
+      "pregunta": "Which documents specify their date of entry into force and when is it?",
+      "respuesta_esperada": [
+        {
+          "documento": "OJ_L_202502649_EN",
+          "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202502664_EN",
+          "entry_into_force": "on, and apply as from, the date of its adoption"
+        },
+        {
+          "documento": "OJ_L_202600193_EN",
+          "entry_into_force": "the day of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600197_EN",
+          "entry_into_force": "the day of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600232_EN",
+          "entry_into_force": "the date of its adoption"
+        },
+        {
+          "documento": "OJ_L_202600238_EN",
+          "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600239_EN",
+          "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600249_EN",
+          "entry_into_force": "the date of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600266_EN",
+          "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+        },
+        {
+          "documento": "OJ_L_202600271_EN",
+          "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+        }
+      ],
+      "respuesta": "**Respuesta:** No document fragments were provided, so it is not possible to identify which documents specify their date of entry into force or to state those dates.\n\nBase normativa:\n- No documents aportados — no artículos, párrafos ni extractos disponibles para citar.\n\nContexto adicional:\n- In EU acts the information on entry into force is normally found in the final provisions (often the last article or recital block). Typical formulations are either a specific calendar date (e.g. \"This Regulation shall enter into force on [date]\") or a link to publication in the Official Journal (e.g. \"This Regulation shall enter into force on the day following its publication in the Official Journal of the European Union\"). Directives frequently add a transposition deadline rather than an immediate entry-into-force date for Member States.\n- To determine the entry-into-force date for a specific EU act, consult the act’s final provisions and the Official Journal (OJ L or OJ C) publication details. If you provide the text or a fragment of the specific document(s), I can quote the exact article/paragraph that specifies the entry-into-force date.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.569,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 623,
+      "coste_rag_usd": 0.001311,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 623,
+          "tiempo_s": 6.569
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 84,
+      "categoria": "specific_content",
+      "pregunta": "Which documents define their scope of application?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** No information available — no documents were provided, so I cannot identify or cite which documents define their scope of application.\n\n**Base normativa:**\n- No documents supplied — therefore there are no Articles/Sections or extracts to quote.\n\n**Context adicional:** Typically, in EU legal instruments the scope of application is set out in an early provision often titled \"Subject matter and scope\" (frequently Article 1), but I cannot cite or rely on any specific article, paragraph or regulation because no source texts were included. If you provide the relevant document fragments, I will identify and quote the exact provisions that define their scope of application.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.782,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 458,
+      "coste_rag_usd": 0.0009795,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 458,
+          "tiempo_s": 5.782
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 85,
+      "categoria": "specific_content",
+      "pregunta": "Which documents contain repeal clauses?",
+      "respuesta_esperada": [],
+      "respuesta": "**Respuesta:** I cannot determine which documents contain repeal clauses because no EU documents or excerpts were provided.\n\n**Base normativa:**\n- No documents were supplied — therefore there are no articles, paragraphs or regulation numbers I can cite from the provided material.\n\n**Contexto adicional:**\n- As general guidance (not based on any provided text), repeal clauses in EU primary and secondary legislation normally appear in the final provisions section of the act and typically use language such as “is hereby repealed” followed by the identifier(s) of the repealed act(s). However, I have not been given any documents to check, so I cannot point to specific articles or quote any repeal clauses.\n- If you provide the texts (or identifiers and the relevant fragments), I can: (a) cite the exact article/paragraph that contains a repeal clause, (b) list which documents include such clauses, and (c) quote the relevant language precisely.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.238,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 252,
+      "tokens_out": 645,
+      "coste_rag_usd": 0.001353,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 252,
+          "tokens_out": 645,
+          "tiempo_s": 6.238
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 86,
+      "categoria": "specific_content",
+      "pregunta": "In which documents are committees referred to?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents were provided, so it is not possible to determine in which documents committees are referred to from the material supplied.\n\n**Base normativa:**\n- No documents supplied — no articles, paragraphs or numbers can be cited.\n\n**Contexto adicional:** If you provide the specific EU documents or excerpts (regulations, directives, decisions, agreements or other institutional texts), I will identify and cite precisely the provisions (articles, paragraphs, recital numbers) that refer to committees. Alternatively, you may name particular EU acts (e.g. by CELEX number or title) you want checked and I will examine those texts if you supply them.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.501,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 254,
+      "tokens_out": 395,
+      "coste_rag_usd": 0.0008535,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 254,
+          "tokens_out": 395,
+          "tiempo_s": 5.501
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 87,
+      "categoria": "specific_content",
+      "pregunta": "Which documents are based on the Treaty on the Functioning of the European Union?",
+      "respuesta_esperada": [
+        "OJ_L_202502621_EN",
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202600193_EN",
+        "OJ_L_202600197_EN",
+        "OJ_L_202600215_EN",
+        "OJ_L_202600220_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600243_EN",
+        "OJ_L_202600246_EN",
+        "OJ_L_202600249_EN",
+        "OJ_L_202600264_EN",
+        "OJ_L_202600266_EN",
+        "OJ_L_202600271_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which documents are based on the Treaty on the Functioning of the European Union because no document fragments were provided.\n\nBase normativa:\n- No EU documents supplied — no articles, recitals or legal-basis clauses available to cite.\n\nContexto adicional: If you provide the text or titles (or the legal-basis recital) of the specific EU documents you want checked, I will identify which ones rely on the TFEU and quote the exact Article(s) and paragraph(s) as stated in those documents. Typically, the legal basis appears in the recital or introductory clause of an EU act; please paste that part if available.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.674,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 262,
+      "tokens_out": 653,
+      "coste_rag_usd": 0.0013715,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 262,
+          "tokens_out": 653,
+          "tiempo_s": 6.674
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 88,
+      "categoria": "specific_content",
+      "pregunta": "How many documents refer to the Member States?",
+      "respuesta_esperada": 15,
+      "respuesta": "**Respuesta:** I cannot determine how many documents refer to the Member States because no documents or fragments were provided.\n\n**Base normativa:**\n- No documents were supplied – therefore there are no Articles, paragraphs or extracts to cite.\n\n**Contexto adicional:** To answer precisely I need the set of documents or their fragments. Please provide the documents (or specify the criteria for \"refer to the Member States\" — e.g. presence of the term \"Member State(s)\", explicit obligations on Member States, or any indirect reference) and I will count and cite the exact Articles/paragraphs that refer to Member States.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.842,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 255,
+      "tokens_out": 388,
+      "coste_rag_usd": 0.00083975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 255,
+          "tokens_out": 388,
+          "tiempo_s": 4.842
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 89,
+      "categoria": "specific_content",
+      "pregunta": "In which documents is cooperation mentioned?",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502664_EN",
+        "OJ_L_202600232_EN",
+        "OJ_L_202600249_EN"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine in which documents \"cooperation\" is mentioned because no EU documents or excerpts were provided for review.\n\n**Base normativa:**\n- No documents supplied — therefore there are no Articles/Sections to cite.\n\n**Contexto adicional:** If you provide the specific documents or excerpts (e.g., directives, regulations, treaties, agreements, or their citations), I will search only those texts and identify where \"cooperation\" is mentioned, citing the exact document titles and the relevant articles, paragraphs and numbers. I will not invent references.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 6.044,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 253,
+      "tokens_out": 441,
+      "coste_rag_usd": 0.00094525,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 253,
+          "tokens_out": 441,
+          "tiempo_s": 6.044
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 90,
+      "categoria": "cross_document",
+      "pregunta": "List ALL documents in our corpus that cite regulation 2016/429.",
+      "respuesta_esperada": [
+        "OJ_L_202502649_EN",
+        "OJ_L_202502660_EN",
+        "OJ_L_202600230_EN",
+        "OJ_L_202600243_EN"
+      ],
+      "respuesta": "**Respuesta:** No documents in the provided corpus cite Regulation 2016/429. The corpus contains zero documents, so no citations could be found.\n\n**Base normativa:**\n- None — no documents were provided in the corpus to inspect, so there are no entries to list that cite Regulation 2016/429.\n\n**Contexto adicional:** Because the input corpus is empty (0 documents), I cannot extract or quote any article, paragraph or excerpt that would show a citation to Regulation (EU) 2016/429. If you provide the documents (or a corpus containing them), I will search them and list every document that cites Regulation 2016/429, including the specific articles/paragraphs and relevant extracts.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 10.834,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 604,
+      "coste_rag_usd": 0.00127325,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 604,
+          "tiempo_s": 10.834
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 91,
+      "categoria": "cross_document",
+      "pregunta": "How many documents in the corpus reference regulation 2020/687?",
+      "respuesta_esperada": 3,
+      "respuesta": "**Respuesta:** 0 documents.\n\n**Base normativa:**\n- No documents were provided in the corpus. Therefore there are no excerpts to cite that reference Regulation 2020/687.\n\n**Context adicional:** Because the corpus contains zero documents, it is impossible to verify any references to Regulation (EU) 2020/687 within it. If you supply the documents or a corpus list, I can count and cite the specific document(s) and the exact places (articles/paragraphs) where Regulation 2020/687 is referenced.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 5.083,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 260,
+      "tokens_out": 438,
+      "coste_rag_usd": 0.000941,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 260,
+          "tokens_out": 438,
+          "tiempo_s": 5.083
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 92,
+      "categoria": "cross_document",
+      "pregunta": "How many distinct external legislative acts are referenced across the entire corpus?",
+      "respuesta_esperada": 100,
+      "respuesta": "**Respuesta:** 0\n\n**Base normativa:**\n- No documents provided in the corpus — therefore there are no cited external legislative acts to reference.\n\n**Contexto adicional:** Because the corpus contains zero documents (stated as \"0 documentos únicos\"), there are no fragments from which to extract references to external legislative acts. Accordingly, it is not possible to cite any Articles, paragraphs or Regulation numbers. If you supply the document fragments, I can enumerate and cite each distinct external legislative act referenced (with article/paragraph citations where available).",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.648,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 501,
+      "coste_rag_usd": 0.00106675,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 501,
+          "tiempo_s": 4.648
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 93,
+      "categoria": "cross_document",
+      "pregunta": "Which external regulations are cited by 2 or more documents in our corpus?",
+      "respuesta_esperada": [
+        "1025/2012",
+        "1100/2007",
+        "1224/2009",
+        "1380/2013",
+        "2016/429",
+        "2017/745",
+        "2017/746",
+        "2018/1725",
+        "2018/1882",
+        "2019/1241",
+        "2020/687"
+      ],
+      "respuesta": "**Respuesta:** No external regulations can be identified because the corpus contains zero documents. There are no citations to analyze.\n\nBase normativa:\n- No documents were provided in the corpus (0 documents), so there are no excerpts to extract or cross‑check for external regulation citations.\n\nContexto adicional:\n- If you want a list of external regulations cited by two or more documents, please provide the corpus (upload the documents or paste the relevant fragments). \n- When you supply the documents, I will extract each explicit citation (e.g., \"Regulation (EU) No ...\", \"Directive 20XX/...\", international treaties or third‑country laws), count occurrences across documents, and report those cited in two or more documents with exact article/paragraph references where present.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 4.79,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 261,
+      "tokens_out": 483,
+      "coste_rag_usd": 0.00103125,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 261,
+          "tokens_out": 483,
+          "tiempo_s": 4.79
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 94,
+      "categoria": "cross_document",
+      "pregunta": "Which legislative acts are referenced by BOTH document 2026/249 AND document 2026/266?",
+      "respuesta_esperada": [
+        "1100/2007",
+        "1224/2009",
+        "1380/2013",
+        "2019/1241"
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which legislative acts are referenced by BOTH document 2026/249 and document 2026/266 because neither document (nor any excerpts from them) was provided for analysis.\n\nBase normativa:\n- No documents supplied – there are no Article/Section extracts available to compare.\n\nContexto adicional:\n- To answer precisely I need the texts or the citation sections of documents 2026/249 and 2026/266 (full texts, PDFs, or copy/pasted excerpts showing their legal references). Once provided I will:\n  - extract every legislative act cited in each document (with article/paragraph where cited),\n  - produce the intersection (acts cited by both), and\n  - cite the exact locations (document number, article/recital/footnote).\n- If you cannot provide full texts, you may paste the lists of cited legal acts from each document (usually in the “Legal basis” or “References” section); that will be sufficient for a definitive comparison.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.451,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 267,
+      "tokens_out": 596,
+      "coste_rag_usd": 0.00125875,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 267,
+          "tokens_out": 596,
+          "tiempo_s": 9.451
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 95,
+      "categoria": "cross_document",
+      "pregunta": "Which pair of documents in the corpus shares the most cross-references? How many shared references do they have?",
+      "respuesta_esperada": {
+        "document_1": "2026/249",
+        "document_2": "2026/266",
+        "shared_count": 4,
+        "shared_refs": [
+          "1100/2007",
+          "1224/2009",
+          "1380/2013",
+          "2019/1241"
+        ]
+      },
+      "respuesta": "**Respuesta:** I cannot determine which pair of documents shares the most cross-references because no documents or fragments were provided in the corpus.\n\nBase normativa:\n- No documents were supplied in the prompt. Therefore there are no Articles, Sections or extracts I can cite or analyse.\n\nContexto adicional:\n- Under the instruction to base the answer exclusively on the provided fragments, I must not invent or assume references. If you supply the corpus (or extracts) I will identify cross-references precisely by:\n  - extracting all cited legal references from each document (e.g. \"Regulation (EU) 2016/679, Article 6(1)\"),\n  - normalising citation strings (to account for variant formatting),\n  - computing pairwise intersections of citation sets, and\n  - reporting the pair with the largest intersection and the number of shared references, citing the exact Articles/paragraphs involved.\n- Please provide the documents (or their extracts) and I will perform the analysis and report the result with citations to the specific Articles/paragraphs.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 11.576,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 268,
+      "tokens_out": 477,
+      "coste_rag_usd": 0.001021,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 268,
+          "tokens_out": 477,
+          "tiempo_s": 11.576
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 96,
+      "categoria": "cross_document",
+      "pregunta": "Which documents in the corpus do not cite any other legislative act?",
+      "respuesta_esperada": [
+        "OJ_L_202502664_EN",
+        "OJ_L_202600238_EN",
+        "OJ_L_202600239_EN"
+      ],
+      "respuesta": "**Respuesta:** The corpus you provided contains no documents. Therefore it is not possible to identify any document in the corpus that does not cite other legislative acts. (There are zero documents to evaluate.)\n\n**Base normativa:**\n- No documents were provided in the corpus — no articles, recitals or footnotes are available to inspect.\n\n**Contexto adicional:** \n- To answer this question when documents are available, one must inspect each document’s recitals, articles and footnotes for explicit references to EU legislative acts (Treaties, Regulations, Directives, Decisions) or to other legislative instruments. If you provide the documents (or their texts), I will list which ones contain no citations to other legislative acts, citing the specific articles/paragraphs/recitals that show the absence or presence of such citations.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 14.576,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 259,
+      "tokens_out": 684,
+      "coste_rag_usd": 0.00143275,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 259,
+          "tokens_out": 684,
+          "tiempo_s": 14.576
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 97,
+      "categoria": "cross_document",
+      "pregunta": "Which 3 documents cite the largest number of external regulations? Provide codes and counts.",
+      "respuesta_esperada": [
+        {
+          "document": "2025/2649",
+          "num_references": 20
+        },
+        {
+          "document": "2026/249",
+          "num_references": 20
+        },
+        {
+          "document": "2026/264",
+          "num_references": 20
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot determine which three documents cite the largest number of external regulations because no documents or excerpts were provided.\n\nBase normativa:\n- No documents were supplied in the “CONTEXTO – DOCUMENTOS UE”; therefore there are no Articles/Sections or extracts to cite.\n\nContexto adicional:\n- Per your instruction to base the answer exclusively on the provided fragments, I must not invent or infer citations. To perform the requested ranking I would need the full set of documents (or their relevant fragments). For each document I would then:\n  1. Identify and count explicit citations to external regulations (e.g., references to EU Regulations, Directives, Decisions, international agreements), noting article and paragraph numbers where given.\n  2. Rank documents by these counts and return the top three with codes and counts, citing the specific Articles/paragraphs that contain the references.\n\nPlease provide the documents (or their excerpts) you want analyzed, and I will produce the requested list with precise article/paragraph citations.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 7.435,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 263,
+      "tokens_out": 532,
+      "coste_rag_usd": 0.00112975,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 263,
+          "tokens_out": 532,
+          "tiempo_s": 7.435
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    },
+    {
+      "id": 98,
+      "categoria": "cross_document",
+      "pregunta": "Among documents issued by the European Commission, list their codes and dates (requires correlating body and metadata across multiple documents).",
+      "respuesta_esperada": [
+        {
+          "document": "OJ_L_202502621_EN",
+          "codigo": "2025/2621",
+          "fecha": "16 December 2025"
+        },
+        {
+          "document": "OJ_L_202502660_EN",
+          "codigo": "2025/2660",
+          "fecha": "23 December 2025"
+        },
+        {
+          "document": "OJ_L_202600193_EN",
+          "codigo": "2026/193",
+          "fecha": "28 January 2026"
+        },
+        {
+          "document": "OJ_L_202600197_EN",
+          "codigo": "2026/197",
+          "fecha": "28 January 2026"
+        },
+        {
+          "document": "OJ_L_202600215_EN",
+          "codigo": "2026/215",
+          "fecha": "29 January 2026"
+        },
+        {
+          "document": "OJ_L_202600220_EN",
+          "codigo": "2026/220",
+          "fecha": "29 January 2026"
+        },
+        {
+          "document": "OJ_L_202600230_EN",
+          "codigo": "2026/230",
+          "fecha": "26 January 2026"
+        },
+        {
+          "document": "OJ_L_202600243_EN",
+          "codigo": "2026/243",
+          "fecha": "26 January 2026"
+        },
+        {
+          "document": "OJ_L_202600246_EN",
+          "codigo": "2026/246",
+          "fecha": "23 January 2026"
+        },
+        {
+          "document": "OJ_L_202600264_EN",
+          "codigo": "2026/264",
+          "fecha": "27 October 2025"
+        }
+      ],
+      "respuesta": "**Respuesta:** I cannot list codes and dates because no European Commission documents or document fragments were provided. The information requested must be extracted from the documents' metadata/headers, which are not available here.\n\n**Base normativa:**\n- No documents were supplied – there are no Articles/Sections or extracts to cite.\n\n**Contexto adicional:** To obtain the requested list, please supply the Commission documents or their metadata (for example: the header or first page containing the document code and the adoption/publication date). Practical guidance for what I will extract once you supply the texts:\n\n- What to provide: the document header or cover page (or PDF), or copy of the metadata fields that normally include issuing institution (European Commission), document code (e.g. the Commission numbering appearing as COM(YYYY)NNN, SEC(YYYY)NNN, SWD(YYYY)NNN, C(YYYY)NNN, etc.), the title and the adoption or signing date, and if relevant the date of publication in the Official Journal.\n- How I will process them: for each supplied document I will read the header/metadata, record the issuing body (European Commission), the official document code exactly as shown, and the date of adoption/signature/publication as indicated. If multiple fragments refer to the same document, I will correlate by identical document code and reconcile any differing dates by citing the metadata field (e.g. \"date of adoption\" vs \"date of publication\").\n- If you want legal citations: provide the document fragments and I will cite the exact Articles/paragraphs or regulation numbers only if these appear in the supplied material. I will not infer or invent references.\n\nPlease upload or paste the documents or their header metadata, and I will extract and list the codes and dates.",
+      "chunks_consultados": 0,
+      "chunks_usados": 0,
+      "tiempo_total_s": 9.267,
+      "modelos": [
+        "gpt-5-mini"
+      ],
+      "num_llamadas_llm": 1,
+      "tokens_in": 270,
+      "tokens_out": 1008,
+      "coste_rag_usd": 0.0020835,
+      "llm_calls": [
+        {
+          "model": "gpt-5-mini",
+          "tokens_in": 270,
+          "tokens_out": 1008,
+          "tiempo_s": 9.267
+        }
+      ],
+      "rag_version": "graph_rag",
+      "error": null
+    }
+  ]
+}
