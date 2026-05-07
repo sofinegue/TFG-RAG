@@ -234,6 +234,7 @@ def _run_async(coro):
 _PERSISTENT_LOOP: Optional[asyncio.AbstractEventLoop] = None
 _PERSISTENT_THREAD = None
 _PERSISTENT_LOCK = None  # threading.Lock perezoso para evitar import en top-level
+_AUTH_FAILURE_DISABLED = False
 
 
 def _get_persistent_loop():
@@ -278,6 +279,8 @@ class GraphRagStrategy(BaseStrategy):
     name = "graph_rag"
 
     def retrieve(self, state: Dict) -> Dict:
+        global _AUTH_FAILURE_DISABLED
+
         use_case = state.get("use_case", "")
         query    = state.get("query", "")
         language = state.get("language", "")
@@ -287,11 +290,38 @@ class GraphRagStrategy(BaseStrategy):
             f"mode={config.graph_rag_mode}, top_k={config.graph_rag_top_k}]"
         )
 
+        neo4j_password = (config.neo4j_password or "").strip()
+        if not neo4j_password:
+            print("   ❌ GraphRAG desactivado: NEO4J_PASSWORD vacio o invalido en configuracion")
+            chunks = []
+            state["synthetic_queries"] = [query]
+            state["chunks_retrieved"] = chunks
+            return state
+
+        if _AUTH_FAILURE_DISABLED:
+            print("   ⚠️  GraphRAG omitido: error previo de autenticacion Neo4j (reinicia tras corregir credenciales)")
+            chunks = []
+            state["synthetic_queries"] = [query]
+            state["chunks_retrieved"] = chunks
+            return state
+
         try:
             chunks = _run_async(_search_async(use_case, query))
         except Exception as e:
-            print(f"   ❌ Error en GraphRAG retrieval: {e}")
-            import traceback; traceback.print_exc()
+            msg = str(e)
+            auth_markers = (
+                "Neo.ClientError.Security.Unauthorized",
+                "Neo.ClientError.Security.AuthenticationRateLimit",
+                "authentication failure",
+                "incorrect authentication details",
+            )
+            if any(marker in msg for marker in auth_markers):
+                _AUTH_FAILURE_DISABLED = True
+                print(f"   ❌ Error de autenticacion Neo4j: {e}")
+                print("   ⚠️  GraphRAG queda desactivado en este proceso para evitar reintentos fallidos")
+            else:
+                print(f"   ❌ Error en GraphRAG retrieval: {e}")
+                import traceback; traceback.print_exc()
             chunks = []
 
         print(f"   ✅ {len(chunks)} elementos de KG recuperados")

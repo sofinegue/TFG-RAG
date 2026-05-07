@@ -170,13 +170,13 @@ class RAGConfig:
     
     # === NEO4J (Graphiti Knowledge Graph) ===
     # Conexión compartida (una sola instancia Neo4j)
-    neo4j_uri: str = os.getenv("NEO4J_URI", "bolt://localhost:7687")
-    neo4j_user: str = os.getenv("NEO4J_USER", "neo4j")
-    neo4j_password: str = os.getenv("NEO4J_PASSWORD", "password")
+    neo4j_uri: str = os.getenv("NEO4J_URI", "bolt://localhost:7687").strip()
+    neo4j_user: str = os.getenv("NEO4J_USER", "neo4j").strip()
+    neo4j_password: str = os.getenv("NEO4J_PASSWORD", "password").strip()
 
     # --- Databases separadas por caso de uso ---
-    neo4j_wiki_database: str = os.getenv("NEO4J_WIKI_DATABASE", "neo4j")
-    neo4j_eu_database: str = os.getenv("NEO4J_EU_DATABASE", "neo4j")
+    neo4j_wiki_database: str = os.getenv("NEO4J_WIKI_DATABASE", "neo4j").strip()
+    neo4j_eu_database: str = os.getenv("NEO4J_EU_DATABASE", "neo4j").strip()
 
     # === LOGGING ===
     log_level: str = os.getenv("LOG_LEVEL", "INFO")

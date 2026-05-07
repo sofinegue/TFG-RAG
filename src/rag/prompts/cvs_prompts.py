@@ -116,38 +116,11 @@ Ejemplo:
             content   = chunk.get("content", "")[:1200]
             context_text += f"\n[CV {i}] {doc_title}:\n{content}\n---"
 
-        # Instrucción de exigencia adaptada al nivel de fiabilidad
-        # Los labels tienen formato "≥90%", "70%–90%", "50%–70%", "30%–50%", "<30%"
-        # Clasificamos: grupo1-2 = alto, grupo3 = medio, grupo4-5 = bajo
-        import re as _re
-        nums = [int(x) for x in _re.findall(r"(\d+)%", reliability_label)]
-        # El umbral inferior del rango determina la exigencia
-        min_pct = min(nums) if nums else 0
-
-        if min_pct >= 60:
-            strictness = (
-                "3. CRITERIO INCLUSIVO (fiabilidad alta): Estos fragmentos ya fueron seleccionados "
-                "como muy relevantes por el buscador. En caso de duda razonable, INCLUYE al perfil. "
-                "Es preferible un falso positivo a perder un perfil relevante."
-            )
-        elif min_pct >= 40:
-            strictness = (
-                "3. CRITERIO MODERADO (fiabilidad media): Incluye al perfil SOLO si encuentras "
-                "evidencia clara del criterio buscado en el contenido del CV (mención explícita "
-                "del término o variación morfológica directa)."
-            )
-        else:
-            strictness = (
-                "3. CRITERIO ESTRICTO (fiabilidad baja): Estos fragmentos tienen baja relevancia "
-                "según el buscador. Incluye al perfil ÚNICAMENTE si el término buscado aparece "
-                "de forma LITERAL en el contenido del CV. No interpretes ni inferir competencias "
-                "a partir de contexto indirecto."
-            )
-
         return f"""Eres un asistente de análisis de perfiles profesionales. Tu tarea es analizar fragmentos de CVs
 de miembros de la compañía y determinar si son relevantes para la consulta del usuario.
 
-Fiabilidad de estos fragmentos: {reliability_label}
+Nivel de similitud de estos fragmentos con la consulta: {reliability_label}
+Esto indica cuánto de probable es que haya coincidencias entre la pregunta y los fragmentos de este lote. Un nivel alto significa que es muy probable que muchos fragmentos sean relevantes; un nivel bajo significa que pocos lo serán, pero aun así debes analizar cada uno.
 
 CONSULTA DEL USUARIO:
 {query}
@@ -158,21 +131,20 @@ FRAGMENTOS DE CVs:
 INSTRUCCIONES:
 1. Analiza CADA fragmento individualmente y decide si la persona es relevante para la consulta.
 2. EXHAUSTIVIDAD: Incluye TODOS los perfiles que cumplan el criterio. No omitas ninguno. Si hay 10 perfiles relevantes, lista los 10.
-{strictness}
-4. BÚSQUEDA EN TODO EL CV: Cuando la consulta pregunte por una skill, tecnología o competencia, búscala en TODAS las secciones del CV:
+3. BÚSQUEDA EN TODO EL CV: Cuando la consulta pregunte por una skill, tecnología o competencia, búscala en TODAS las secciones del CV:
    - hard_skills (lista explícita de habilidades técnicas)
    - experiencia (descripciones de proyectos y tareas: si alguien menciona "microservices" en su experiencia, SÍ tiene esa competencia)
    - otros (certificaciones, idiomas, etc.)
    - estudios
    No te limites solo a hard_skills. Si una persona menciona "Microservices" en su experiencia profesional, es tan relevante como si apareciera en hard_skills.
-5. OPERADORES LÓGICOS — interprétalos estrictamente:
+4. OPERADORES LÓGICOS — interprétalos estrictamente:
    - Si la consulta contiene "AND" o "y" entre criterios: la persona debe cumplir TODOS los criterios simultáneamente. Si solo cumple uno, NO la incluyas.
    - Si la consulta contiene "OR" o "o" entre criterios: basta con que la persona cumpla AL MENOS UNO de los criterios.
-6. CONSULTAS DE CONTEO ("cuántos", "how many", "al menos N"): No filtres. Extrae el dato numérico relevante de cada CV (ej. número de hard skills) e incluye a TODOS los que cumplan la condición numérica.
-7. COINCIDENCIA: Busca el término en el contenido del CV. Acepta variaciones morfológicas (ej. "Microservices" también matchea "microservice architecture"). Pero no asumas que una tecnología similar equivale a la buscada (p. ej. "Kafka" ≠ "RabbitMQ", "French" ≠ "Spanish").
-8. Extrae el NOMBRE COMPLETO (nombre y apellidos) del campo nombre_apellidos del contenido del CV.
-9. NUNCA devuelvas nombres de ficheros (ej. "cv_134.json"). Siempre busca el campo nombre_apellidos dentro del contenido.
-10. Si ninguna persona es relevante, indica "ninguno".
+5. CONSULTAS DE CONTEO ("cuántos", "how many", "al menos N"): No filtres. Extrae el dato numérico relevante de cada CV (ej. número de hard skills) e incluye a TODOS los que cumplan la condición numérica.
+6. COINCIDENCIA: Busca el término en el contenido del CV. Acepta variaciones morfológicas (ej. "Microservices" también matchea "microservice architecture"). Pero no asumas que una tecnología similar equivale a la buscada (p. ej. "Kafka" ≠ "RabbitMQ", "French" ≠ "Spanish").
+7. Extrae el NOMBRE COMPLETO (nombre y apellidos) del campo nombre_apellidos del contenido del CV.
+8. NUNCA devuelvas nombres de ficheros (ej. "cv_134.json"). Siempre busca el campo nombre_apellidos dentro del contenido.
+9. Si ninguna persona es relevante, indica "ninguno".
 
 FORMATO DE RESPUESTA:
 data: <lista de nombres completos relevantes separados por " | ", o "ninguno">
