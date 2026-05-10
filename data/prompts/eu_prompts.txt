@@ -1,0 +1,252 @@
+PROMPTS COMPLETOS — CASO DE USO: EU / LEGISLACIÓN UNIÓN EUROPEA
+Generado automáticamente por src/scripts/generate_eu_prompts.py
+Configuración: max_chars=20000, rag_fusion_k=4, top_k=20
+
+
+================================================================================
+  1. SYSTEM MESSAGE
+================================================================================
+
+
+Eres un experto en legislación y documentos institucionales de la Unión Europea. Respondes con precisión legal.
+
+
+================================================================================
+  2. PROMPT DE GENERACIÓN PRINCIPAL (EUPrompts.generation)
+================================================================================
+
+
+Se envía como mensaje 'user' al LLM junto con el system message.
+Los chunks son inyectados dentro del prompt.
+
+Query de ejemplo: "¿Qué establece el artículo 6 del RGPD sobre la licitud del tratamiento de datos?"
+
+Eres un experto en legislación y documentos institucionales de la Unión Europea.
+
+Tu tarea es responder con precisión a preguntas sobre normativa, directivas, reglamentos y acuerdos de la UE
+basándote exclusivamente en los fragmentos de documentos proporcionados.
+
+**CONTEXTO – DOCUMENTOS UE (1 documentos únicos):**
+
+[DOC 1]: Reglamento (UE) 2016/679 – RGPD
+Sección: Artículo 6 – Licitud del tratamiento
+Páginas: 35-36
+Contenido:
+1. El tratamiento solo será lícito si se cumple al menos una de las siguientes condiciones: a) el interesado dio su consentimiento para el tratamiento de sus datos personales para uno o varios fines específicos; b) el tratamiento es necesario para la ejecución de un contrato en el que el interesado es parte; c) el tratamiento es necesario para el cumplimiento de una obligación legal aplicable al responsable del tratamiento; d) el tratamiento es necesario para proteger intereses vitales del interesado o de otra persona física; e) el tratamiento es necesario para el cumplimiento de una misión realizada en interés público; f) el tratamiento es necesario para la satisfacción de intereses legítimos perseguidos por el responsable del tratamiento.
+---
+
+[DOC 2]: Reglamento (UE) 2016/679 – RGPD
+Sección: Considerando 40 – Bases legales
+Páginas: 8
+Contenido:
+Para que el tratamiento sea lícito, los datos personales deben ser tratados con el consentimiento del interesado o sobre alguna otra base legítima establecida por ley, incluida la necesidad de cumplir la obligación legal aplicable al responsable del tratamiento o la necesidad de ejecutar un contrato en el que sea parte el interesado.
+---
+
+[DOC 3]: Reglamento (UE) 2016/679 – RGPD
+Sección: Artículo 7 – Condiciones para el consentimiento
+Páginas: 36-37
+Contenido:
+1. Cuando el tratamiento se base en el consentimiento del interesado, el responsable deberá ser capaz de demostrar que aquel consintió el tratamiento de sus datos personales. 2. Si el consentimiento del interesado se da en el contexto de una declaración escrita que también se refiera a otros asuntos, la solicitud de consentimiento se presentará de tal forma que se distinga claramente de los demás asuntos.
+---
+
+
+**PREGUNTA:**
+¿Qué establece el artículo 6 del RGPD sobre la licitud del tratamiento de datos?
+
+**INSTRUCCIONES:**
+
+[1] PRECISIÓN LEGAL: Cita artículos, párrafos y números de regulación cuando sea posible.
+
+[2] ESTRUCTURA DE RESPUESTA (Markdown):
+**Respuesta:** [respuesta directa y concisa]
+
+**Base normativa:**
+- [Documento], [Artículo/Sección] – [extracto relevante]
+
+**Contexto adicional:** [matices, excepciones o información complementaria si existe]
+
+[3] HONESTIDAD: Si la información no está en los documentos proporcionados, indícalo claramente.
+No inventes referencias normativas.
+
+[4] IDIOMA: Responde en el idioma de la pregunta (español por defecto).
+
+Máximo 20000 caracteres.
+
+
+================================================================================
+  3. PROMPT DE RAG FUSION (EUPrompts.rag_fusion)
+================================================================================
+
+
+EU usa RAG Fusion HABILITADO (use_rag_fusion=True).
+Se generan 4 queries sintéticas alternativas para ampliar la búsqueda.
+
+
+Eres un experto en legislación y documentos normativos de la Unión Europea.
+
+Pregunta original: "¿Qué establece el artículo 6 del RGPD sobre la licitud del tratamiento de datos?"
+
+Genera 4 versiones alternativas de esta pregunta para buscar en documentos legales y normativos que:
+- Usen terminología jurídica equivalente (ej. "ley" → "reglamento", "directiva", "normativa")
+- Incluyan referencias posibles a artículos o secciones relacionadas
+- Amplíen a conceptos legales afines o excepciones a la regla
+- Consideren distintas formas de redacción formal/técnica
+
+Responde ÚNICAMENTE con las 4 preguntas reformuladas, una por línea, numeradas.
+
+Ejemplo:
+1. [reformulación con terminología jurídica alternativa]
+2. [reformulación apuntando a artículos o disposiciones]
+...
+
+
+================================================================================
+  4. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)
+================================================================================
+
+
+Se usa cuando hay historial conversacional para expandir queries genéricas.
+
+
+Analiza si esta query necesita información del contexto conversacional.
+
+CONVERSACIÓN RECIENTE:
+USER: ¿Qué dice el RGPD sobre el consentimiento?
+ASSISTANT: El artículo 7 del RGPD establece las condiciones para el consentimiento...
+
+NOMBRES IDENTIFICADOS: ninguno
+
+QUERY ACTUAL:
+¿Y sobre la licitud del tratamiento?
+
+TAREA: Si la query usa términos genéricos y en el historial se mencionaron personas/candidatos
+específicos, expande la query incluyendo sus nombres. Si ya es específica, devuélvela sin cambios.
+Máximo 15 palabras. Solo nombres, tecnologías y términos clave.
+
+Responde SOLO con la query (expandida o sin cambios):
+
+
+================================================================================
+  5. GUARDRAILS DE ENTRADA
+================================================================================
+
+
+[Guardrails de Entrada — Patrones de inyección detectados]
+
+Patrones regex que se comprueban contra cada query de entrada:
+- ignore\s+(previous|above|all)\s+instructions
+- disregard\s+.*\s+instructions
+- you\s+are\s+now\s+a\s+different
+- pretend\s+to\s+be
+- act\s+as\s+if\s+you\s+are
+- from\s+now\s+on
+- <script[^>]*>.*?</script>
+- eval\s*\(
+- exec\s*\(
+
+Palabras sospechosas: jailbreak, bypass, override, sudo, admin, password, token, secret, credential
+
+Validaciones:
+- Query no vacía y >= 2 caracteres
+- Longitud <= 5000 caracteres
+- Detección de prompt injection (regex)
+- Moderación de contenido (opcional, vía Azure OpenAI Moderations API)
+- Sanitización: elimina HTML tags, caracteres de control, normaliza espacios
+
+
+================================================================================
+  6. GUARDRAILS DE SALIDA
+================================================================================
+
+
+[Guardrails de Salida]
+
+Validaciones aplicadas a la respuesta generada:
+- Longitud mínima: 10 caracteres
+- Longitud máxima: max_answer_chars * 1.2 (se trunca si excede)
+- Verificación de HTML válido (tags abiertos/cerrados)
+- Detección de alucinaciones (mini-LLM compara respuesta vs fuentes)
+
+Prompt de detección de alucinaciones:
+"""
+Verifica si la siguiente RESPUESTA está basada solo en las FUENTES.
+
+FUENTES:
+[Fuente 1]: <contenido chunk 1, max 500 chars>
+[Fuente 2]: <contenido chunk 2, max 500 chars>
+...
+
+RESPUESTA:
+<respuesta generada, max 800 chars>
+
+¿La respuesta inventa información que NO está en las fuentes? Responde solo SÍ o NO.
+"""
+
+Disclaimers automáticos para temas sensibles:
+- Médico/salud → "⚠️ Esta información es orientativa. Consulta con un profesional de la salud."
+- Legal → "⚠️ Esta información es general. Para asesoría legal, consulta con un abogado."
+- Financiero → "⚠️ Esta información no constituye asesoría financiera."
+
+
+
+================================================================================
+  7. PROMPT DE ENRIQUECIMIENTO QA (add_context)
+================================================================================
+
+
+Se usa durante la ingesta para generar pares pregunta-respuesta por chunk.
+Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.
+
+
+Eres un experto en generación de preguntas para sistemas de recuperación de información (RAG).
+
+Se te proporciona un fragmento de texto extraído de un documento legal o normativo de la Unión Europea.
+
+FRAGMENTO:
+"""
+1. El tratamiento solo será lícito si se cumple al menos una de las siguientes condiciones: a) el interesado dio su consentimiento para el tratamiento de sus datos personales para uno o varios fines específicos; b) el tratamiento es necesario para la ejecución de un contrato.
+"""
+
+Tu tarea:
+1. Formula UNA sola pregunta concreta y específica cuya respuesta esté completamente contenida en el fragmento anterior.
+2. Escribe la respuesta correcta y completa a esa pregunta, basándote ÚNICAMENTE en el fragmento.
+
+Responde con el siguiente formato exacto (sin texto adicional):
+PREGUNTA: <pregunta>
+RESPUESTA: <respuesta>
+
+
+================================================================================
+  8. FLUJO COMPLETO DEL PIPELINE EU
+================================================================================
+
+
+El pipeline EU sigue estos pasos:
+
+1. VALIDATE_USER_INPUT
+   - Verifica que la query no esté vacía y tenga >= 2 caracteres.
+
+2. GUARDRAILS_INPUT (si habilitado)
+   - Detección de prompt injection, keywords sospechosos, moderación.
+   - Sanitización de la query.
+
+3. CLASSIFY_CONTEXT
+   - Decide si se necesita retrieval (siempre sí en modo GPT).
+
+4. RETRIEVE
+   a. Query Expansion: si hay historial, expande la query con contexto.
+   b. RAG Fusion: genera 4 queries sintéticas alternativas.
+   c. Búsqueda híbrida (texto + vector) en Azure Search por cada query.
+   d. RRF (Reciprocal Rank Fusion): fusiona y rankea resultados.
+   e. Filtrado por min_relevance_score y max_chunks_used.
+   → Resultado: 20 chunks máximo.
+
+5. GENERATE
+   a. Handler EU construye el prompt de generación con los chunks.
+   b. Se envía al LLM: [system_message] + [last Q&A opcional] + [user: rag_prompt].
+   c. Post-procesado de la respuesta (por defecto sin cambios).
+
+6. GUARDRAILS_OUTPUT (si habilitado)
+   - Verificación de longitud, alucinaciones, HTML, disclaimers.
+
+7. DEVOLVER RESPUESTA al usuario.

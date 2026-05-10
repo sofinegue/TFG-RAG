@@ -64,17 +64,86 @@
       },
       {
         "id": 7,
-        "categoria": "definicion",
-        "pregunta": "Necesito saber qué es The Seafarer (poema). ¿Puedes explicármelo?",
-        "tipo_respuesta": "texto",
-        "respuesta": "The Seafarer (en español: El navegante) es un poema elegíaco en inglés antiguo de 124 líneas, seguido de la palabra \"Amén\"."
+        "categoria": "listado",
+        "pregunta": "Lista TODOS los artículos del corpus cuyo título sea una sola palabra (sin espacios, sin paréntesis, sin guiones). Proporciona la lista exhaustiva.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 44,
+          "articulos": [
+            "Alchemised",
+            "Antología",
+            "Asonancia",
+            "Autor",
+            "Bookstagram",
+            "Criptopoesia",
+            "Culturalismo",
+            "Decadentismo",
+            "Drama",
+            "Ecopoesía",
+            "Encabalgamiento",
+            "Epigrama",
+            "Escansión",
+            "Escolión",
+            "Escritor",
+            "Gnómica",
+            "Jitanjáfora",
+            "Kavya",
+            "Letrismo",
+            "Literatura",
+            "Macarronea",
+            "McOndo",
+            "Metapoesía",
+            "Micrograma",
+            "Miñosí",
+            "Negrismo",
+            "Nescio",
+            "Paraliteratura",
+            "Poema",
+            "Poesía",
+            "Poeta",
+            "Poetismo",
+            "Polipoesía",
+            "Positivismo",
+            "Postumismo",
+            "Protréptico",
+            "Rapsoda",
+            "Rubaiyat",
+            "Sijo",
+            "Subliteratura",
+            "Tautograma",
+            "Titanismo",
+            "Tzantzismo",
+            "Ultraísmo"
+          ]
+        }
       },
       {
         "id": 8,
-        "categoria": "definicion",
-        "pregunta": "Resume en una frase el tema de Julie Pfannenschmidt.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Julie Pfannenschmidt, de soltera Burow (Kydullen, Prusia Oriental, 24 de febrero de 1806 - Bromberg, 20 de febrero de 1868) fue una escritora alemana."
+        "categoria": "metadatos",
+        "pregunta": "¿Cuáles son los 5 artículos con MÁS categorías asignadas? Da el título y el número de categorías de cada uno.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "articulo": "Enrica von Handel-Mazzetti",
+            "categorias": 15
+          },
+          {
+            "articulo": "Lidio Mosca Bustamante",
+            "categorias": 12
+          },
+          {
+            "articulo": "Arcadia (poesía)",
+            "categorias": 9
+          },
+          {
+            "articulo": "Extinción (novela)",
+            "categorias": 9
+          },
+          {
+            "articulo": "Gigi (novela)",
+            "categorias": 9
+          }
+        ]
       },
       {
         "id": 9,
@@ -99,10 +168,124 @@
       },
       {
         "id": 12,
-        "categoria": "definicion",
-        "pregunta": "¿A qué se refiere el concepto de Catón castellano?",
-        "tipo_respuesta": "texto",
-        "respuesta": "Se conoce como Catón Castellano o Castigos y ejemplos de Catón a las diversas traducciones e interpretaciones en castellano de la consagrada obra de tradición latina Disticha Catonis."
+        "categoria": "relaciones",
+        "pregunta": "Lista todos los pares de artículos del corpus que compartan al menos 3 categorías en común. Da el número total de pares y cada par con su número de categorías compartidas.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count_pares": 22,
+          "pares": [
+            {
+              "a": "Francisco López Martínez (pintor)",
+              "b": "Ultraísmo",
+              "compartidas": 6
+            },
+            {
+              "a": "Poesía arraigada",
+              "b": "Poesía desarraigada",
+              "compartidas": 5
+            },
+            {
+              "a": "Enrica von Handel-Mazzetti",
+              "b": "Extinción (novela)",
+              "compartidas": 4
+            },
+            {
+              "a": "Enrica von Handel-Mazzetti",
+              "b": "Lidio Mosca Bustamante",
+              "compartidas": 4
+            },
+            {
+              "a": "Extinción (novela)",
+              "b": "Lidio Mosca Bustamante",
+              "compartidas": 4
+            },
+            {
+              "a": "A Lion Among Men",
+              "b": "John Dies at the End (novela)",
+              "compartidas": 3
+            },
+            {
+              "a": "Basel Saneeb",
+              "b": "Orlando Loayza Condori",
+              "compartidas": 3
+            },
+            {
+              "a": "Creacionismo (poesía)",
+              "b": "Culturalismo",
+              "compartidas": 3
+            },
+            {
+              "a": "Creacionismo (poesía)",
+              "b": "Poesía fonética",
+              "compartidas": 3
+            },
+            {
+              "a": "Creacionismo (poesía)",
+              "b": "Poesía visual",
+              "compartidas": 3
+            },
+            {
+              "a": "Editorial Papeles de Buenos Aires",
+              "b": "Revista El Barrilete",
+              "compartidas": 3
+            },
+            {
+              "a": "Encabalgamiento",
+              "b": "Esticomitia (métrica)",
+              "compartidas": 3
+            },
+            {
+              "a": "Enrica von Handel-Mazzetti",
+              "b": "Julie Pfannenschmidt",
+              "compartidas": 3
+            },
+            {
+              "a": "Gustavo Olivo",
+              "b": "Juan Taveras",
+              "compartidas": 3
+            },
+            {
+              "a": "L.A. Confidential (novela)",
+              "b": "Los fantasmas del sombrerero",
+              "compartidas": 3
+            },
+            {
+              "a": "Literatura del naturalismo",
+              "b": "Naturalismo (literatura)",
+              "compartidas": 3
+            },
+            {
+              "a": "Micrograma",
+              "b": "Poesía visual",
+              "compartidas": 3
+            },
+            {
+              "a": "Micrograma",
+              "b": "Prosa poética",
+              "compartidas": 3
+            },
+            {
+              "a": "Nueva narrativa ecuatoriana",
+              "b": "Tzantzismo",
+              "compartidas": 3
+            },
+            {
+              "a": "Poesía fonética",
+              "b": "Poesía visual",
+              "compartidas": 3
+            },
+            {
+              "a": "Poesía visual",
+              "b": "Prosa poética",
+              "compartidas": 3
+            },
+            {
+              "a": "Realismo mágico",
+              "b": "Vanguardismo iberoamericano",
+              "compartidas": 3
+            }
+          ]
+        }
       },
       {
         "id": 13,
@@ -127,10 +310,28 @@
       },
       {
         "id": 16,
-        "categoria": "definicion",
-        "pregunta": "¿Podrías decirme qué es Epigrama de forma concisa?",
-        "tipo_respuesta": "texto",
-        "respuesta": "El epigrama (del griego antiguo ἐπί-γράφω: literalmente, 'sobreescribir' o 'escribir encima') es una composición poética breve que expresa un solo pensamiento principal, festivo o satírico, de forma ingeniosa."
+        "categoria": "categorias_articulo",
+        "pregunta": "¿Qué categorías aparecen en 5 o más artículos distintos del corpus? Da la lista exhaustiva.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 14,
+          "categorias": [
+            "Escritores",
+            "Géneros literarios",
+            "Hombres",
+            "Literatura",
+            "Literatura de vanguardia",
+            "Literatura del siglo XIX",
+            "Literatura del siglo XX",
+            "Literatura en alemán",
+            "Literatura en español",
+            "Movimientos literarios",
+            "Novelas",
+            "Poesía",
+            "Poesía moderna",
+            "Subgéneros líricos"
+          ]
+        }
       },
       {
         "id": 17,
@@ -141,10 +342,31 @@
       },
       {
         "id": 18,
-        "categoria": "definicion",
-        "pregunta": "Quiero entender qué es Enrica von Handel-Mazzetti. Resúmelo.",
-        "tipo_respuesta": "texto",
-        "respuesta": "Enrica von Handel-Mazzetti (Viena, 10 de enero de 1871-Linz, 8 de abril de 1955) fue una poeta y escritora austríaca, conocida por escribir novelas históricas, en particular La pobre Margarita."
+        "categoria": "metadatos",
+        "pregunta": "¿Cuáles son los 5 artículos con más palabras? Da el título y el número de palabras de cada uno.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "articulo": "Literatura del naturalismo",
+            "palabras": 9403
+          },
+          {
+            "articulo": "Literatura taoísta",
+            "palabras": 9296
+          },
+          {
+            "articulo": "Revista El Barrilete",
+            "palabras": 8901
+          },
+          {
+            "articulo": "Poesía taurina",
+            "palabras": 8848
+          },
+          {
+            "articulo": "Revistas literarias del exilio español",
+            "palabras": 8362
+          }
+        ]
       },
       {
         "id": 19,
@@ -445,13 +667,13 @@
       },
       {
         "id": 40,
-        "categoria": "busqueda_por_categoria",
-        "pregunta": "¿Qué artículos pertenecen a la categoría Novela?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "El buen salvaje (novela)",
-          "Novela en verso"
-        ],
+        "categoria": "existencia",
+        "pregunta": "¿Cuántos artículos del corpus NO tienen ninguna categoría asignada? Lístalos todos.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "count": 0,
+          "articulos": []
+        },
         "num_resultados": 2
       },
       {
@@ -838,9 +1060,30 @@
       {
         "id": 56,
         "categoria": "metadatos",
-        "pregunta": "¿Cuál es la URL del artículo sobre Matate, amor?",
-        "tipo_respuesta": "texto",
-        "respuesta": "https://es.wikipedia.org/wiki/Matate,_amor"
+        "pregunta": "¿Cuáles son los 5 artículos con MENOS secciones (con al menos 1 sección)? Da el título y el número de secciones.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "articulo": "Cuento de iniciación",
+            "secciones": 1
+          },
+          {
+            "articulo": "Escansión",
+            "secciones": 1
+          },
+          {
+            "articulo": "Lengua histórica",
+            "secciones": 1
+          },
+          {
+            "articulo": "Literatura modernista en portugués",
+            "secciones": 1
+          },
+          {
+            "articulo": "Macarronea",
+            "secciones": 1
+          }
+        ]
       },
       {
         "id": 57,
@@ -1204,197 +1447,43 @@
       {
         "id": 74,
         "categoria": "listado",
-        "pregunta": "¿Cuáles son todos los títulos de artículos de la base de datos?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "A Lion Among Men",
-          "Alborada (música)",
-          "Alchemised",
-          "Antología",
-          "Arcadia (poesía)",
-          "Archivos Husserl",
-          "Asonancia",
-          "Autor",
-          "Avant-propos",
-          "Balada romántica (poesía)",
-          "Basel Saneeb",
-          "Bizarro (género literario)",
-          "Bloqueo del escritor",
-          "Bookstagram",
-          "Boom latinoamericano",
-          "Catón castellano",
-          "Chbab Srey",
-          "Clasicismo de Weimar",
-          "Colección (edición)",
-          "Conflicto dramático",
-          "Conversaciones entre amigos",
-          "Cosmopolitismo en la literatura",
-          "Creacionismo (poesía)",
-          "Criollismo (literatura)",
-          "Criptopoesia",
-          "Cuento de iniciación",
-          "Culturalismo",
-          "Círculo de Lovecraft",
-          "Decadentismo",
-          "Diccionario de rimas",
-          "Diván (poesía)",
-          "Drama",
-          "Décima (Perú)",
-          "Día Mundial de la Poesía",
-          "Ecopoesía",
-          "Edad de Oro de la ciencia ficción",
-          "Editorial Doble Ese",
-          "Editorial Papeles de Buenos Aires",
-          "El buen salvaje (novela)",
-          "El gran inquisidor",
-          "El grupo de poetas de Nueva York",
-          "Encabalgamiento",
-          "Enrica von Handel-Mazzetti",
-          "Enrique Hambleton von Borstel",
-          "Epigrama",
-          "Escansión",
-          "Escolión",
-          "Escritor",
-          "Escritura asémica",
-          "Escritura femenina",
-          "Escuela de las nuevas sensaciones",
-          "Esticomitia (métrica)",
-          "Extinción (novela)",
-          "Fix-up",
-          "Francisco López Martínez (pintor)",
-          "Futurismo latino",
-          "Generación Kindle",
-          "Generación de la Sangre",
-          "Generación del 99",
-          "Generación literaria",
-          "Gigi (novela)",
-          "Gnómica",
-          "Grupo de Coppet",
-          "Gustavo Olivo",
-          "Gótico latinoamericano",
-          "Jitanjáfora",
-          "John Dies at the End (novela)",
-          "Jorge Aristides Lira",
-          "Juan Taveras",
-          "Julie Pfannenschmidt",
-          "Justa poética",
-          "Kavya",
-          "L.A. Confidential (novela)",
-          "La Gruta (revista literaria)",
-          "La Mujer (revista colombiana)",
-          "La saga de los ancestros",
-          "Lengua histórica",
-          "Letra (música)",
-          "Letrismo",
-          "Libros de secretos",
-          "Lidio Mosca Bustamante",
-          "Lilith's Brood",
-          "Literatura",
-          "Literatura del Impresionismo",
-          "Literatura del absurdo",
-          "Literatura del naturalismo",
-          "Literatura modernista",
-          "Literatura modernista en portugués",
-          "Literatura taoísta",
-          "Los fantasmas del sombrerero",
-          "Lírica cancioneril",
-          "Macarronea",
-          "Mark Freeman",
-          "Martina Pierra de Poo",
-          "Matate, amor",
-          "Maximalismo (arte)",
-          "McOndo",
-          "Metapoesía",
-          "Micrograma",
-          "Misterio histórico",
-          "Miñosí",
-          "Movimiento de Vanguardia de Nicaragua",
-          "Movimiento literario",
-          "Método ideográmico",
-          "Naturaleza y romanticismo",
-          "Naturalismo (literatura)",
-          "Negrismo",
-          "Nescio",
-          "Novela en verso",
-          "Novela paralela",
-          "Novísima poesía latinoamericana",
-          "Nuestros clásicos contemporáneos",
-          "Nueva Ola (ciencia ficción)",
-          "Nueva narrativa ecuatoriana",
-          "Nueva narrativa norteña",
-          "Orlando Loayza Condori",
-          "Paraliteratura",
-          "Peniarth 51",
-          "Perqué (poesía)",
-          "Piedra y cielo (movimiento)",
-          "Piero da Filicaia",
-          "Poema",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía de la experiencia",
-          "Poesía desarraigada",
-          "Poesía dub",
-          "Poesía en performance",
-          "Poesía escáldica",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía lárica",
-          "Poesía metafísica",
-          "Poesía moderna",
-          "Poesía náhuatl",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Poetas brumosos",
-          "Poetismo",
-          "Polipoesía",
-          "Polígrafo (autor)",
-          "Positivismo",
-          "Post-Boom",
-          "Postumismo",
-          "Primera escuela de Silesia",
-          "Prosa poética",
-          "Protréptico",
-          "Rapsoda",
-          "Realismo literario",
-          "Realismo mágico",
-          "Realismo épico",
-          "Redactor publicitario",
-          "Renacimiento vasco",
-          "Revista El Barrilete",
-          "Revistas literarias del exilio español",
-          "Rima interna",
-          "Rima silábica",
-          "Romance oscuro",
-          "Rubaiyat",
-          "Saliendo de la Estación de Atocha (novela)",
-          "Segunda escuela de Silesia",
-          "Sherlock Holmes y los Irregulares de Baker Street",
-          "Sijo",
-          "Spoken word",
-          "Subliteratura",
-          "Talleres Populares de Poesía",
-          "Tautograma",
-          "Tema literario",
-          "The Cadfael Chronicles",
-          "The Seafarer (poema)",
-          "The Story of the Trapp Family Singers",
-          "Timing (arte)",
-          "Titanismo",
-          "Tono (literatura)",
-          "Traducción literaria",
-          "Tzantzismo",
-          "Ultraísmo",
-          "Vanguardismo iberoamericano",
-          "Verso blanco",
-          "Wehrwolf (novela)"
-        ],
+        "pregunta": "Lista todos los artículos cuyo título contenga un desambiguador entre paréntesis (por ejemplo, \"(novela)\" o \"(literatura)\"). Da la lista exhaustiva.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 30,
+          "articulos": [
+            "Alborada (música)",
+            "Arcadia (poesía)",
+            "Balada romántica (poesía)",
+            "Bizarro (género literario)",
+            "Colección (edición)",
+            "Creacionismo (poesía)",
+            "Criollismo (literatura)",
+            "Diván (poesía)",
+            "Décima (Perú)",
+            "El buen salvaje (novela)",
+            "Esticomitia (métrica)",
+            "Extinción (novela)",
+            "Francisco López Martínez (pintor)",
+            "Gigi (novela)",
+            "John Dies at the End (novela)",
+            "L.A. Confidential (novela)",
+            "La Gruta (revista literaria)",
+            "La Mujer (revista colombiana)",
+            "Letra (música)",
+            "Maximalismo (arte)",
+            "Naturalismo (literatura)",
+            "Nueva Ola (ciencia ficción)",
+            "Perqué (poesía)",
+            "Piedra y cielo (movimiento)",
+            "Polígrafo (autor)",
+            "Saliendo de la Estación de Atocha (novela)",
+            "The Seafarer (poema)",
+            "Timing (arte)",
+            "Tono (literatura)",
+            "Wehrwolf (novela)"
+          ]
+        },
         "num_resultados": 187
       },
       {
@@ -1804,13 +1893,15 @@
       {
         "id": 78,
         "categoria": "relaciones",
-        "pregunta": "Dame los artículos que tienen en común la categoría Métrica.",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Encabalgamiento",
-          "Esticomitia (métrica)",
-          "Verso blanco"
-        ],
+        "pregunta": "¿Qué DOS artículos del corpus comparten el MAYOR número de categorías en común? Da el par y el número de categorías compartidas.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "par": [
+            "Francisco López Martínez (pintor)",
+            "Ultraísmo"
+          ],
+          "categorias_compartidas": 6
+        },
         "num_resultados": 3
       },
       {
@@ -1927,83 +2018,44 @@
       },
       {
         "id": 88,
-        "categoria": "relaciones",
-        "pregunta": "¿Qué artículos están clasificados en categorías relacionadas con poesía?",
-        "tipo_respuesta": "lista_articulos",
-        "respuesta": [
-          "Alborada (música)",
-          "Antología",
-          "Arcadia (poesía)",
-          "Asonancia",
-          "Balada romántica (poesía)",
-          "Catón castellano",
-          "Chbab Srey",
-          "Creacionismo (poesía)",
-          "Criptopoesia",
-          "Culturalismo",
-          "Diccionario de rimas",
-          "Diván (poesía)",
-          "Décima (Perú)",
-          "Día Mundial de la Poesía",
-          "Ecopoesía",
-          "Editorial Doble Ese",
-          "Editorial Papeles de Buenos Aires",
-          "Encabalgamiento",
-          "Epigrama",
-          "Escansión",
-          "Escolión",
-          "Escritura asémica",
-          "Esticomitia (métrica)",
-          "Gnómica",
-          "Jitanjáfora",
-          "Justa poética",
-          "Letra (música)",
-          "Literatura modernista",
-          "Literatura modernista en portugués",
-          "Macarronea",
-          "Metapoesía",
-          "Micrograma",
-          "Miñosí",
-          "Método ideográmico",
-          "Novela en verso",
-          "Peniarth 51",
-          "Perqué (poesía)",
-          "Piedra y cielo (movimiento)",
-          "Poema",
-          "Poema en prosa",
-          "Poesía",
-          "Poesía arraigada",
-          "Poesía augusta",
-          "Poesía desarraigada",
-          "Poesía dub",
-          "Poesía en performance",
-          "Poesía escáldica",
-          "Poesía fonética",
-          "Poesía homoerótica hispanohebrea",
-          "Poesía infantil",
-          "Poesía judía",
-          "Poesía lárica",
-          "Poesía moderna",
-          "Poesía náhuatl",
-          "Poesía pastoril",
-          "Poesía taurina",
-          "Poesía visual",
-          "Poesía árabe",
-          "Poeta",
-          "Polipoesía",
-          "Prosa poética",
-          "Rapsoda",
-          "Revista El Barrilete",
-          "Rima interna",
-          "Rima silábica",
-          "Rubaiyat",
-          "Sijo",
-          "Spoken word",
-          "Talleres Populares de Poesía",
-          "Tautograma",
-          "The Seafarer (poema)",
-          "Verso blanco"
-        ],
+        "categoria": "conteo",
+        "pregunta": "¿Cuántos artículos del corpus tienen un título que empieza por vocal mayúscula (A, E, I, O, U)? Lístalos todos.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "count": 30,
+          "articulos": [
+            "A Lion Among Men",
+            "Alborada (música)",
+            "Alchemised",
+            "Antología",
+            "Arcadia (poesía)",
+            "Archivos Husserl",
+            "Asonancia",
+            "Autor",
+            "Avant-propos",
+            "Ecopoesía",
+            "Edad de Oro de la ciencia ficción",
+            "Editorial Doble Ese",
+            "Editorial Papeles de Buenos Aires",
+            "El buen salvaje (novela)",
+            "El gran inquisidor",
+            "El grupo de poetas de Nueva York",
+            "Encabalgamiento",
+            "Enrica von Handel-Mazzetti",
+            "Enrique Hambleton von Borstel",
+            "Epigrama",
+            "Escansión",
+            "Escolión",
+            "Escritor",
+            "Escritura asémica",
+            "Escritura femenina",
+            "Escuela de las nuevas sensaciones",
+            "Esticomitia (métrica)",
+            "Extinción (novela)",
+            "Orlando Loayza Condori",
+            "Ultraísmo"
+          ]
+        },
         "num_resultados": 72
       },
       {

@@ -1,7 +1,7 @@
 PROMPTS COMPLETOS — CASO DE USO: CVs / TALENTO
 Generado automáticamente por src/scripts/generate_cvs_prompts.py
-Configuración: max_chars=1200, rag_fusion_k=4, chunk_size=5
-Umbrales fiabilidad: T1=0.9, T2=0.7, T3=0.5, T4=0.3
+Configuración: max_chars=20000, rag_fusion_k=4, chunk_size=10
+Umbrales fiabilidad: T1=0.85, T2=0.6, T3=0.4, T4=0.2
 
 
 ================================================================================
@@ -94,7 +94,7 @@ Sugerencias: [alternativas concretas]
 - "Senior" → Sr., Lead, Principal, Consultor Senior
 - "ML" → Machine Learning, Deep Learning, AI
 
-RESPONDE EN ESPAÑOL. Máximo 1200 caracteres.
+RESPONDE EN ESPAÑOL. Máximo 20000 caracteres.
 
 
 ================================================================================
@@ -130,14 +130,14 @@ Ejemplo:
 
 
 Se envía a un modelo ligero (gpt4o-mini) para cada lote de chunks.
-Tamaño de lote: 5 chunks.
+Tamaño de lote: 10 chunks.
 Se ejecuta para los grupos 2-5 (y opcionalmente grupo 1 si CVS_GROUP1_USE_LLM=true).
 
 
 Eres un asistente de análisis de perfiles profesionales. Tu tarea es analizar fragmentos de CVs
 de miembros de la compañía y determinar si son relevantes para la consulta del usuario.
 
-Fiabilidad de estos fragmentos: 70%–90%
+Fiabilidad de estos fragmentos: 60%–85%
 
 CONSULTA DEL USUARIO:
 ¿Quién tiene experiencia en Spark y certificaciones de Azure?
@@ -186,23 +186,23 @@ Se ha realizado una búsqueda exhaustiva en el corpus de CVs para la siguiente c
 
 **RESULTADOS POR GRUPO DE FIABILIDAD:**
 
-[GRUPO1 — fiabilidad ≥90%]
+[GRUPO1 — fiabilidad ≥85%]
   Perfiles: María García López
   Razonamiento: Perfil con Spark y certificaciones AZ-900, DP-600 explícitas en el CV.
 
-[GRUPO2 — fiabilidad 70%–90%]
+[GRUPO2 — fiabilidad 60%–85%]
   Perfiles: Carlos Fernández Ruiz
   Razonamiento: Spark SQL y certificación AI-900, aunque no es exactamente Azure cert clásica.
 
-[GRUPO3 — fiabilidad 50%–70%]
+[GRUPO3 — fiabilidad 40%–60%]
   Perfiles: ninguno
   Razonamiento: Sin perfiles relevantes en este rango de fiabilidad.
 
-[GRUPO4 — fiabilidad 30%–50%]
+[GRUPO4 — fiabilidad 20%–40%]
   Perfiles: ninguno
   Razonamiento: Sin perfiles relevantes en este rango de fiabilidad.
 
-[GRUPO5 — fiabilidad <30%]
+[GRUPO5 — fiabilidad <20%]
   Perfiles: Ana Martínez Soto
   Razonamiento: Tiene PySpark pero no certificaciones Azure; fiabilidad baja.
 
@@ -231,7 +231,7 @@ N. **Nombre** — razón (fiabilidad: XX%)
 
 **Resumen:** [X] perfiles encontrados ([N] alta fiabilidad, [M] fiabilidad media/baja).
 
-Responde en español. Máximo 1200 caracteres.
+Responde en español. Máximo 20000 caracteres.
 
 
 ================================================================================

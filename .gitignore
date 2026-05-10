@@ -8,8 +8,9 @@ libs/*
 data/cvs/*
 data/wikipedia/*
 data/eu/*
+data/historial/*
 
-src_rag/*
+doc/*
 
 frontend/build/*
 frontend/node_modules/*

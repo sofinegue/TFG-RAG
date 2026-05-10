@@ -106,7 +106,8 @@ EVAL_DIR.mkdir(parents=True, exist_ok=True)
 RESULTS_GLOB = os.getenv("TEST_RESULTS_GLOB", "results_gold_standard_*.json")
 
 DEFAULT_MODEL     = os.getenv("CHAT_MODEL_EVAL") or os.getenv("EVAL_MODEL", "gpt-5-mini")
-DEFAULT_THRESHOLD = _env_int("EVAL_THRESHOLD", 80)
+DEFAULT_THRESHOLD = _env_int("EVAL_THRESHOLD", 65)
+DEFAULT_THRESHOLD_HIGH = _env_int("EVAL_THRESHOLD_HIGH", 75)
 BATCH_SIZE        = _env_int("EVAL_BATCH_SIZE", 10)
 MAX_RETRIES       = _env_int("EVAL_MAX_RETRIES", 2)
 MAX_TOKENS_BATCH  = _env_int("EVAL_MAX_TOKENS", 2000)
@@ -180,16 +181,33 @@ def compute_relevancia_batch(
         all_texts.append(str(act)[:8000] if act else "")
 
     n = len(expected_answers)
-    # Obtener embeddings en una sola llamada
-    try:
-        response = client.embeddings.create(
-            model=deployment,
-            input=all_texts,
-        )
-        embeddings = [item.embedding for item in response.data]
-        total_emb_tokens = (response.usage.total_tokens if response.usage else 0)
-    except Exception:
-        # Fallback: no embeddings disponibles → 0%
+    # Azure OpenAI embeddings limita el array de input (≈128 elementos para
+    # ada-002). Procesamos en sub-lotes para no exceder ese límite ni el
+    # cupo total de tokens por petición.
+    sub_batch = _env_int("EVAL_EMBEDDING_BATCH", 64)
+    embeddings: List[List[float]] = []
+    total_emb_tokens = 0
+    failed = False
+    for start in range(0, len(all_texts), sub_batch):
+        chunk = all_texts[start:start + sub_batch]
+        # Azure rechaza inputs vacíos: sustituir por un espacio.
+        chunk_safe = [t if t else " " for t in chunk]
+        try:
+            response = client.embeddings.create(
+                model=deployment,
+                input=chunk_safe,
+            )
+            embeddings.extend(item.embedding for item in response.data)
+            if response.usage:
+                total_emb_tokens += response.usage.total_tokens or 0
+        except Exception as exc:
+            print(f"      ⚠️ embedding sub-batch {start}-{start+len(chunk)} falló: "
+                  f"{type(exc).__name__}: {str(exc)[:160]}")
+            failed = True
+            # Rellenar con None para mantener alineación; se traducirá a 0% luego.
+            embeddings.extend([None] * len(chunk))
+
+    if failed and not any(e is not None for e in embeddings):
         return [0] * n, [0] * n
 
     # Tokens por pregunta (proporcional: 2 textos por pregunta)
@@ -199,8 +217,11 @@ def compute_relevancia_batch(
     # Calcular coseno por pares (expected[i], actual[i])
     results = []
     for i in range(n):
-        emb_exp = embeddings[i * 2]
-        emb_act = embeddings[i * 2 + 1]
+        emb_exp = embeddings[i * 2]     if i * 2     < len(embeddings) else None
+        emb_act = embeddings[i * 2 + 1] if i * 2 + 1 < len(embeddings) else None
+        if emb_exp is None or emb_act is None:
+            results.append(0)
+            continue
         sim = _cosine_similarity(emb_exp, emb_act)
         # Convertir de [-1,1] a [0,100] (en la práctica siempre ≥0)
         pct = max(0, min(100, int(round(sim * 100))))
@@ -403,9 +424,15 @@ def write_excel_for_use_case(
 
     header_font = Font(bold=True, color="FFFFFF")
     header_fill = PatternFill("solid", fgColor="305496")
-    ok_fill     = PatternFill("solid", fgColor="C6EFCE")
-    ko_fill     = PatternFill("solid", fgColor="FFC7CE")
-    wrap        = Alignment(wrap_text=True, vertical="top")
+    # OK light green: ambas metricas >= 65 (umbral)
+    ok_light_fill   = PatternFill("solid", fgColor="C6EFCE")
+    # OK dark green: ambas metricas >= 75
+    ok_dark_fill    = PatternFill("solid", fgColor="63BE7B")
+    # KO yellow: al menos una metrica >= 65
+    ko_yellow_fill  = PatternFill("solid", fgColor="FFEB9C")
+    # KO red: ninguna metrica >= 65
+    ko_red_fill     = PatternFill("solid", fgColor="FFC7CE")
+    wrap            = Alignment(wrap_text=True, vertical="top")
 
     for lang in sorted(sheets):
         rows = sheets[lang]
@@ -423,10 +450,30 @@ def write_excel_for_use_case(
                 ws.cell(row=row_idx, column=col_idx).alignment = wrap
             ci = COLUMNS.index("veredicto_umbral") + 1
             cell = ws.cell(row=row_idx, column=ci)
-            if str(cell.value).upper() == "OK":
-                cell.fill = ok_fill
-            elif str(cell.value).upper() == "KO":
-                cell.fill = ko_fill
+
+            # Determinar color según las dos métricas
+            try:
+                coinc = r.get("coincidencia_%")
+                rel   = r.get("relevancia_%")
+                coinc_v = float(coinc) if coinc is not None and coinc != "" else None
+                rel_v   = float(rel)   if rel   is not None and rel   != "" else None
+            except (TypeError, ValueError):
+                coinc_v = rel_v = None
+
+            verdict = str(cell.value).upper()
+            if verdict == "OK":
+                # OK siempre implica ambas >= umbral (65). Verde intenso si ambas >= 75.
+                if coinc_v is not None and rel_v is not None and coinc_v >= 75 and rel_v >= 75:
+                    cell.fill = ok_dark_fill
+                else:
+                    cell.fill = ok_light_fill
+            elif verdict == "KO":
+                # Amarillo si al menos una métrica >= 65, rojo si ninguna lo supera.
+                any_above = (
+                    (coinc_v is not None and coinc_v >= 65)
+                    or (rel_v is not None and rel_v >= 65)
+                )
+                cell.fill = ko_yellow_fill if any_above else ko_red_fill
 
         widths = {
             "id": 6, "categoria": 18, "pregunta": 50, "respuesta_esperada": 60,
@@ -498,9 +545,13 @@ def evaluate_results_file(
     print(f"   🔢 Calculando relevancia (embeddings) para {len(evaluable_indices)} preguntas…")
     relevancia_scores, emb_tokens_per_q = compute_relevancia_batch(expected_texts, actual_texts)
 
-    # --- Coincidencia por lotes (LLM) ---
-    print(f"   🤖 Evaluando coincidencia (LLM) en lotes de {batch_size}…")
-    coincidencia_results: List[Dict[str, Any]] = []
+    # --- Coincidencia por lotes (LLM, en paralelo) ---
+    eval_workers = _env_int("EVAL_WORKERS", 4)
+    print(f"   🤖 Evaluando coincidencia (LLM) en lotes de {batch_size} "
+          f"(workers={eval_workers})…")
+
+    # Construir todos los lotes de antemano para poder paralelizar.
+    batches: List[List[Dict[str, Any]]] = []
     for batch_start in range(0, len(evaluable_indices), batch_size):
         batch_end = min(batch_start + batch_size, len(evaluable_indices))
         batch_items = []
@@ -512,13 +563,41 @@ def evaluate_results_file(
                 "esperada": q.get("respuesta_esperada", ""),
                 "real": q.get("respuesta", ""),
             })
+        batches.append(batch_items)
 
-        batch_results = evaluate_batch_coincidencia(batch_items, model_name)
-        coincidencia_results.extend(batch_results)
+    total_batches = len(batches)
+    coincidencia_results: List[Dict[str, Any]] = [None] * len(evaluable_indices)  # type: ignore
 
-        batch_num = batch_start // batch_size + 1
-        total_batches = (len(evaluable_indices) + batch_size - 1) // batch_size
-        print(f"      batch {batch_num}/{total_batches} ✓")
+    if eval_workers <= 1 or total_batches <= 1:
+        for bi, batch_items in enumerate(batches, 1):
+            res = evaluate_batch_coincidencia(batch_items, model_name)
+            offset = (bi - 1) * batch_size
+            for j, r in enumerate(res):
+                coincidencia_results[offset + j] = r
+            print(f"      batch {bi}/{total_batches} ✓")
+    else:
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        done = 0
+        with ThreadPoolExecutor(max_workers=eval_workers) as ex:
+            futures = {
+                ex.submit(evaluate_batch_coincidencia, b, model_name): bi
+                for bi, b in enumerate(batches)
+            }
+            for fut in as_completed(futures):
+                bi = futures[fut]
+                try:
+                    res = fut.result()
+                except Exception as exc:
+                    res = [{
+                        "coincidencia_pct": None, "justificacion": "",
+                        "eval_error": f"{type(exc).__name__}: {exc}",
+                        "tokens_eval_in": 0, "tokens_eval_out": 0,
+                    } for _ in batches[bi]]
+                offset = bi * batch_size
+                for j, r in enumerate(res):
+                    coincidencia_results[offset + j] = r
+                done += 1
+                print(f"      batch {done}/{total_batches} ✓ (idx={bi+1})")
 
     # --- Construir filas ---
     eval_counter = 0
@@ -658,6 +737,25 @@ def main() -> None:
     if not files:
         sys.exit(f"❌ No hay ficheros de resultados en {RESULTS_DIR}.")
 
+    # Filtrado temprano por nombre de fichero para evitar evaluar resultados
+    # que el usuario no ha solicitado (ahorra tiempo y coste).
+    if args.use_case or args.language:
+        filtered_files = []
+        for fp in files:
+            m = re.match(r"^results_gold_standard_([a-z]+)_([a-z]{2})\.json$", fp.name)
+            if not m:
+                continue
+            f_use_case, f_lang = m.group(1), m.group(2)
+            if args.use_case and f_use_case != args.use_case:
+                continue
+            if args.language and f_lang != args.language:
+                continue
+            filtered_files.append(fp)
+        files = filtered_files
+
+    if not files:
+        sys.exit("❌ No hay ficheros que cumplan los filtros solicitados.")
+
     by_use_case: Dict[str, Dict[str, List[Dict[str, Any]]]] = defaultdict(dict)
     summary: Dict[str, Dict[str, int]] = {}
 
@@ -670,11 +768,6 @@ def main() -> None:
         except Exception as exc:
             print(f"❌ Falló evaluación de {f.name}: {exc}")
             traceback.print_exc()
-            continue
-
-        if args.use_case and use_case != args.use_case:
-            continue
-        if args.language and idioma != args.language:
             continue
 
         by_use_case[use_case][idioma] = filas

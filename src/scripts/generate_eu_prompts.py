@@ -1,5 +1,4 @@
-"""
-Genera los prompts completos del caso de uso EU (legislación UE) y los guarda en data/prompts/eu_prompts.txt
+"""Genera los prompts completos del caso de uso EU y los guarda en data/prompts/eu_prompts.txt.
 
 Uso:
     python -m src.scripts.generate_eu_prompts
@@ -8,6 +7,7 @@ Uso:
 import os
 
 from src.config import config
+from src.scripts.prompt_export_utils import PromptExportBuilder, write_prompt_export
 
 OUTPUT_DIR = os.path.join("data", "prompts")
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "eu_prompts.txt")
@@ -59,13 +59,6 @@ EXAMPLE_CHUNKS = [
         "pages": "36-37",
     },
 ]
-
-
-def _separator(label: str) -> str:
-    line = "=" * 80
-    return f"\n\n{line}\n  {label}\n{line}\n\n"
-
-
 def _build_system_message() -> str:
     return (
         "Eres un experto en legislación y documentos institucionales "
@@ -239,12 +232,10 @@ RESPUESTA: <respuesta>"""
 
 
 def generate():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-    sections = []
+    builder = PromptExportBuilder()
 
     # ── Header ─────────────────────────────────────────────────────
-    sections.append(
+    builder.add(
         "PROMPTS COMPLETOS — CASO DE USO: EU / LEGISLACIÓN UNIÓN EUROPEA\n"
         "Generado automáticamente por src/scripts/generate_eu_prompts.py\n"
         f"Configuración: max_chars={MAX_ANSWER_CHARS}, rag_fusion_k={RAG_FUSION_K}, "
@@ -252,63 +243,59 @@ def generate():
     )
 
     # ── 1. System Message ──────────────────────────────────────────
-    sections.append(_separator("1. SYSTEM MESSAGE"))
-    sections.append(_build_system_message())
+    builder.add_section("1. SYSTEM MESSAGE", _build_system_message())
 
     # ── 2. Generation Prompt ───────────────────────────────────────
-    sections.append(_separator("2. PROMPT DE GENERACIÓN PRINCIPAL (EUPrompts.generation)"))
-    sections.append(
+    builder.add_section(
+        "2. PROMPT DE GENERACIÓN PRINCIPAL (EUPrompts.generation)",
         "Se envía como mensaje 'user' al LLM junto con el system message.\n"
         "Los chunks son inyectados dentro del prompt.\n\n"
-        f"Query de ejemplo: \"{EXAMPLE_QUERY}\"\n"
+        f"Query de ejemplo: \"{EXAMPLE_QUERY}\"\n",
+        _build_generation_prompt(EXAMPLE_QUERY, EXAMPLE_CHUNKS, MAX_ANSWER_CHARS),
     )
-    sections.append(_build_generation_prompt(EXAMPLE_QUERY, EXAMPLE_CHUNKS, MAX_ANSWER_CHARS))
 
     # ── 3. RAG Fusion Prompt ───────────────────────────────────────
-    sections.append(_separator("3. PROMPT DE RAG FUSION (EUPrompts.rag_fusion)"))
-    sections.append(
+    builder.add_section(
+        "3. PROMPT DE RAG FUSION (EUPrompts.rag_fusion)",
         "EU usa RAG Fusion HABILITADO (use_rag_fusion=True).\n"
-        f"Se generan {RAG_FUSION_K} queries sintéticas alternativas para ampliar la búsqueda.\n\n"
+        f"Se generan {RAG_FUSION_K} queries sintéticas alternativas para ampliar la búsqueda.\n\n",
+        _build_rag_fusion_prompt(EXAMPLE_QUERY, RAG_FUSION_K),
     )
-    sections.append(_build_rag_fusion_prompt(EXAMPLE_QUERY, RAG_FUSION_K))
 
     # ── 4. Query Expansion Prompt ──────────────────────────────────
-    sections.append(_separator("4. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)"))
-    sections.append(
-        "Se usa cuando hay historial conversacional para expandir queries genéricas.\n\n"
+    builder.add_section(
+        "4. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)",
+        "Se usa cuando hay historial conversacional para expandir queries genéricas.\n\n",
     )
     example_history = (
         "USER: ¿Qué dice el RGPD sobre el consentimiento?\n"
         "ASSISTANT: El artículo 7 del RGPD establece las condiciones para el consentimiento..."
     )
-    sections.append(
+    builder.add(
         _build_query_expansion_prompt("¿Y sobre la licitud del tratamiento?", example_history, [])
     )
 
     # ── 5. Guardrails Input ────────────────────────────────────────
-    sections.append(_separator("5. GUARDRAILS DE ENTRADA"))
-    sections.append(_build_guardrails_input_prompt())
+    builder.add_section("5. GUARDRAILS DE ENTRADA", _build_guardrails_input_prompt())
 
     # ── 6. Guardrails Output ───────────────────────────────────────
-    sections.append(_separator("6. GUARDRAILS DE SALIDA"))
-    sections.append(_build_guardrails_output_prompt())
+    builder.add_section("6. GUARDRAILS DE SALIDA", _build_guardrails_output_prompt())
 
     # ── 7. Add Context (QA enrichment) ─────────────────────────────
-    sections.append(_separator("7. PROMPT DE ENRIQUECIMIENTO QA (add_context)"))
-    sections.append(
+    builder.add_section(
+        "7. PROMPT DE ENRIQUECIMIENTO QA (add_context)",
         "Se usa durante la ingesta para generar pares pregunta-respuesta por chunk.\n"
-        "Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.\n\n"
+        "Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.\n\n",
     )
     example_content = (
         "1. El tratamiento solo será lícito si se cumple al menos una de las siguientes condiciones: "
         "a) el interesado dio su consentimiento para el tratamiento de sus datos personales para uno "
         "o varios fines específicos; b) el tratamiento es necesario para la ejecución de un contrato."
     )
-    sections.append(_build_add_context_prompt(example_content))
+    builder.add(_build_add_context_prompt(example_content))
 
     # ── 8. Flujo completo ──────────────────────────────────────────
-    sections.append(_separator("8. FLUJO COMPLETO DEL PIPELINE EU"))
-    sections.append(f"""El pipeline EU sigue estos pasos:
+    builder.add_section("8. FLUJO COMPLETO DEL PIPELINE EU", f"""El pipeline EU sigue estos pasos:
 
 1. VALIDATE_USER_INPUT
    - Verifica que la query no esté vacía y tenga >= 2 caracteres.
@@ -339,11 +326,8 @@ def generate():
 7. DEVOLVER RESPUESTA al usuario.""")
 
     # ── Escribir fichero ───────────────────────────────────────────
-    output = "\n".join(sections)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
-
-    print(f"✅ Prompts EU generados en {OUTPUT_FILE} ({len(output)} caracteres)")
+    output = builder.render()
+    write_prompt_export(OUTPUT_FILE, output, "EU")
 
 
 if __name__ == "__main__":

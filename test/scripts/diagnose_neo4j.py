@@ -1,48 +1,55 @@
-"""Script temporal para diagnosticar la conexión Neo4j."""
+"""Diagnostica la conectividad con Neo4j y los nombres de base de datos.
+
+Uso:
+    python -m test.scripts.diagnose_neo4j
+"""
+
 import asyncio
+
 from neo4j import AsyncGraphDatabase
+
 
 URI = "neo4j+s://6396cf17.databases.neo4j.io"
 USER = "6396cf17"
 PASS = "_Q07Zm2X1WykUftlEErLjamIn_KuhRSlalivtuppRH0"
 
-async def try_db(name):
+
+async def try_db(name: str) -> bool:
     driver = AsyncGraphDatabase.driver(URI, auth=(USER, PASS))
     try:
-        records, _, _ = await driver.execute_query(
-            "RETURN 1 AS n", database_=name
-        )
+        await driver.execute_query("RETURN 1 AS n", database_=name)
         print(f"  DB '{name}' -> OK")
         return True
-    except Exception as e:
-        print(f"  DB '{name}' -> {type(e).__name__}: {e}")
+    except Exception as exc:
+        print(f"  DB '{name}' -> {type(exc).__name__}: {exc}")
         return False
     finally:
         await driver.close()
 
-async def show_databases():
+
+async def show_databases() -> None:
     driver = AsyncGraphDatabase.driver(URI, auth=(USER, PASS))
     try:
-        # system DB suele existir siempre
         records, _, _ = await driver.execute_query(
             "SHOW DATABASES", database_="system"
         )
         print("Bases de datos disponibles:")
-        for r in records:
-            print(f"  - {r['name']} (status={r.get('currentStatus', '?')})")
-    except Exception as e:
-        print(f"SHOW DATABASES (system): {type(e).__name__}: {e}")
+        for record in records:
+            print(f"  - {record['name']} (status={record.get('currentStatus', '?')})")
+    except Exception as exc:
+        print(f"SHOW DATABASES (system): {type(exc).__name__}: {exc}")
     finally:
         await driver.close()
 
-async def main():
+
+async def main() -> None:
     print("=== Probando conectividad ===")
     driver = AsyncGraphDatabase.driver(URI, auth=(USER, PASS))
     try:
         await driver.verify_connectivity()
         print("Conectividad SSL OK\n")
-    except Exception as e:
-        print(f"Conectividad FALLO: {e}\n")
+    except Exception as exc:
+        print(f"Conectividad FALLO: {exc}\n")
     finally:
         await driver.close()
 
@@ -53,4 +60,6 @@ async def main():
     print("\n=== Listando DBs desde system ===")
     await show_databases()
 
-asyncio.run(main())
+
+if __name__ == "__main__":
+    asyncio.run(main())

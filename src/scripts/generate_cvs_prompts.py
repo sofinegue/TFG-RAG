@@ -1,5 +1,4 @@
-"""
-Genera los prompts completos del caso de uso CVs y los guarda en data/prompts/cvs_prompts.txt
+"""Genera los prompts completos del caso de uso CVs y los guarda en data/prompts/cvs_prompts.txt.
 
 Uso:
     python -m src.scripts.generate_cvs_prompts
@@ -8,6 +7,7 @@ Uso:
 import os
 
 from src.config import config
+from src.scripts.prompt_export_utils import PromptExportBuilder, write_prompt_export
 
 OUTPUT_DIR = os.path.join("data", "prompts")
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "cvs_prompts.txt")
@@ -86,13 +86,6 @@ EXAMPLE_GROUPS = {
         "reasoning": "Tiene PySpark pero no certificaciones Azure; fiabilidad baja.",
     },
 }
-
-
-def _separator(label: str) -> str:
-    line = "=" * 80
-    return f"\n\n{line}\n  {label}\n{line}\n\n"
-
-
 def _build_system_message() -> str:
     return (
         "Eres un asistente especializado en análisis de CVs técnicos "
@@ -375,12 +368,10 @@ RESPUESTA: <respuesta>"""
 
 
 def generate():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-    sections = []
+    builder = PromptExportBuilder()
 
     # ── Header ─────────────────────────────────────────────────────
-    sections.append(
+    builder.add(
         "PROMPTS COMPLETOS — CASO DE USO: CVs / TALENTO\n"
         "Generado automáticamente por src/scripts/generate_cvs_prompts.py\n"
         f"Configuración: max_chars={MAX_ANSWER_CHARS}, rag_fusion_k={RAG_FUSION_K}, "
@@ -390,81 +381,77 @@ def generate():
     )
 
     # ── 1. System Message ──────────────────────────────────────────
-    sections.append(_separator("1. SYSTEM MESSAGE"))
-    sections.append(_build_system_message())
+    builder.add_section("1. SYSTEM MESSAGE", _build_system_message())
 
     # ── 2. Generation Prompt ───────────────────────────────────────
-    sections.append(_separator("2. PROMPT DE GENERACIÓN PRINCIPAL (CVsPrompts.generation)"))
-    sections.append(
+    builder.add_section(
+        "2. PROMPT DE GENERACIÓN PRINCIPAL (CVsPrompts.generation)",
         "Se envía como mensaje 'user' al LLM junto con el system message.\n"
         "Los chunks son inyectados dentro del prompt.\n\n"
-        f"Query de ejemplo: \"{EXAMPLE_QUERY}\"\n"
+        f"Query de ejemplo: \"{EXAMPLE_QUERY}\"\n",
+        _build_generation_prompt(EXAMPLE_QUERY, EXAMPLE_CHUNKS, MAX_ANSWER_CHARS),
     )
-    sections.append(_build_generation_prompt(EXAMPLE_QUERY, EXAMPLE_CHUNKS, MAX_ANSWER_CHARS))
 
     # ── 3. RAG Fusion Prompt ───────────────────────────────────────
-    sections.append(_separator("3. PROMPT DE RAG FUSION (CVsPrompts.rag_fusion)"))
-    sections.append(
+    builder.add_section(
+        "3. PROMPT DE RAG FUSION (CVsPrompts.rag_fusion)",
         "NOTA: En CVs, RAG Fusion está DESHABILITADO por defecto (use_rag_fusion=False).\n"
-        "Se incluye aquí como referencia del prompt disponible.\n\n"
+        "Se incluye aquí como referencia del prompt disponible.\n\n",
+        _build_rag_fusion_prompt(EXAMPLE_QUERY, RAG_FUSION_K),
     )
-    sections.append(_build_rag_fusion_prompt(EXAMPLE_QUERY, RAG_FUSION_K))
 
     # ── 4. Mini-LLM Batch Prompt ──────────────────────────────────
-    sections.append(_separator("4. PROMPT MINI-LLM BATCH (CVsPrompts.mini_llm_batch)"))
-    sections.append(
+    builder.add_section(
+        "4. PROMPT MINI-LLM BATCH (CVsPrompts.mini_llm_batch)",
         "Se envía a un modelo ligero (gpt4o-mini) para cada lote de chunks.\n"
         f"Tamaño de lote: {CVS_CHUNK_SIZE} chunks.\n"
-        "Se ejecuta para los grupos 2-5 (y opcionalmente grupo 1 si CVS_GROUP1_USE_LLM=true).\n\n"
+        "Se ejecuta para los grupos 2-5 (y opcionalmente grupo 1 si CVS_GROUP1_USE_LLM=true).\n\n",
     )
     label = f"{CVS_RELIABILITY_T2:.0%}–{CVS_RELIABILITY_T1:.0%}"
-    sections.append(_build_mini_llm_batch_prompt(EXAMPLE_QUERY, EXAMPLE_MINI_LLM_CHUNKS, label))
+    builder.add(_build_mini_llm_batch_prompt(EXAMPLE_QUERY, EXAMPLE_MINI_LLM_CHUNKS, label))
 
     # ── 5. Response Format Prompt ──────────────────────────────────
-    sections.append(_separator("5. PROMPT RESPONSE FORMAT (CVsPrompts.response_format)"))
-    sections.append(
+    builder.add_section(
+        "5. PROMPT RESPONSE FORMAT (CVsPrompts.response_format)",
         "Se envía al LLM potente (gpt4.1) con los resultados de los 5 grupos.\n"
-        "Es el paso final que ensambla la respuesta para el usuario.\n\n"
+        "Es el paso final que ensambla la respuesta para el usuario.\n\n",
+        _build_response_format_prompt(EXAMPLE_QUERY, EXAMPLE_GROUPS, MAX_ANSWER_CHARS),
     )
-    sections.append(_build_response_format_prompt(EXAMPLE_QUERY, EXAMPLE_GROUPS, MAX_ANSWER_CHARS))
 
     # ── 6. Query Expansion Prompt ──────────────────────────────────
-    sections.append(_separator("6. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)"))
-    sections.append(
-        "Se usa cuando hay historial conversacional para expandir queries genéricas.\n\n"
+    builder.add_section(
+        "6. PROMPT DE EXPANSIÓN DE QUERY (Retriever._expand_query_with_context)",
+        "Se usa cuando hay historial conversacional para expandir queries genéricas.\n\n",
     )
     example_history = (
         "USER: ¿Quién tiene experiencia en Spark?\n"
         "ASSISTANT: Encontré 3 perfiles con experiencia en Spark: María García López, Carlos Fernández Ruiz..."
     )
-    sections.append(
+    builder.add(
         _build_query_expansion_prompt("¿alguien más?", example_history, ["María García López", "Carlos Fernández Ruiz"])
     )
 
     # ── 7. Guardrails Input ────────────────────────────────────────
-    sections.append(_separator("7. GUARDRAILS DE ENTRADA"))
-    sections.append(_build_guardrails_input_prompt())
+    builder.add_section("7. GUARDRAILS DE ENTRADA", _build_guardrails_input_prompt())
 
     # ── 8. Guardrails Output ───────────────────────────────────────
-    sections.append(_separator("8. GUARDRAILS DE SALIDA"))
-    sections.append(_build_guardrails_output_prompt())
+    builder.add_section("8. GUARDRAILS DE SALIDA", _build_guardrails_output_prompt())
 
     # ── 9. Add Context (QA enrichment) ─────────────────────────────
-    sections.append(_separator("9. PROMPT DE ENRIQUECIMIENTO QA (add_context)"))
-    sections.append(
+    builder.add_section(
+        "9. PROMPT DE ENRIQUECIMIENTO QA (add_context)",
         "Se usa durante la ingesta para generar pares pregunta-respuesta por chunk.\n"
-        "Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.\n\n"
+        "Modelo: gpt4o-mini. Se almacena en el campo QuestionsText de Cosmos DB.\n\n",
     )
     example_content = (
         "NOMBRE_APELLIDOS: María García López\n"
         "Experiencia con Apache Spark, PySpark y Databricks durante 3 años. "
         "Certificaciones: AZ-900, DP-600. Proyectos en el sector bancario con pipelines ETL."
     )
-    sections.append(_build_add_context_prompt(example_content))
+    builder.add(_build_add_context_prompt(example_content))
 
     # ── 10. Flujo completo ─────────────────────────────────────────
-    sections.append(_separator("10. FLUJO COMPLETO DEL PIPELINE CVs"))
-    sections.append("""El pipeline CVs sigue estos pasos:
+    builder.add_section("10. FLUJO COMPLETO DEL PIPELINE CVs", """El pipeline CVs sigue estos pasos:
 
 1. VALIDATE_USER_INPUT
    - Verifica que la query no esté vacía y tenga >= 2 caracteres.
@@ -495,11 +482,8 @@ def generate():
 7. DEVOLVER RESPUESTA al usuario.""")
 
     # ── Escribir fichero ───────────────────────────────────────────
-    output = "\n".join(sections)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
-
-    print(f"✅ Prompts CVs generados en {OUTPUT_FILE} ({len(output)} caracteres)")
+    output = builder.render()
+    write_prompt_export(OUTPUT_FILE, output, "CVs")
 
 
 if __name__ == "__main__":

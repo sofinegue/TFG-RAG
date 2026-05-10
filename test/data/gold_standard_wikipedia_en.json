@@ -64,17 +64,81 @@
       },
       {
         "id": 7,
-        "categoria": "definition",
-        "pregunta": "I need to know what Natural school is. Can you explain?",
-        "tipo_respuesta": "text",
-        "respuesta": "The natural school (Russian: Натуральная школа, romanized: Naturalnaya shkola) was a literary movement that arose under the influence of Nikolai Gogol in the 1840s up to the 1850s in Russia, and included such diverse authors as Nikolai Nekrasov, Ivan Goncharov, Ivan Turgenev, Mikhail Saltykov-Shchedrin, Ivan Panayev, Dmitry Grigorovich, Alexander Hertzen, Aleksey Pisemsky, Vladimir Dal, Fyodor Dostoyevsky and Evgeny Grebyonka, among others."
+        "categoria": "listing",
+        "pregunta": "List ALL articles in the corpus whose title is a single word (no spaces, no parentheses, no hyphens). Provide the exhaustive list.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 39,
+          "articles": [
+            "Allusion",
+            "Atticism",
+            "Cartonera",
+            "Chicanafuturism",
+            "Condorism",
+            "Costumbrismo",
+            "Créolie",
+            "Créolité",
+            "Déprimisme",
+            "Epigram",
+            "Fyrtiotalism",
+            "Félibrige",
+            "Geopoetics",
+            "Imaginism",
+            "Jadid",
+            "Liberature",
+            "Literature",
+            "Lyrics",
+            "Mahjar",
+            "Maximalism",
+            "Nadaism",
+            "Novel",
+            "Novísimos",
+            "Négritude",
+            "Onirism",
+            "Parnassianism",
+            "Poetics",
+            "Poetry",
+            "Postism",
+            "Pyreneanism",
+            "Romanticism",
+            "Shinkankakuha",
+            "Signalism",
+            "Stylistics",
+            "Topothesia",
+            "Tzantzismo",
+            "Unanimism",
+            "Writer",
+            "Zenitism"
+          ]
+        }
       },
       {
         "id": 8,
-        "categoria": "definition",
-        "pregunta": "Summarize the topic of Poetry in one sentence.",
-        "tipo_respuesta": "text",
-        "respuesta": "Poetry (from the Greek word poiesis, \"making\") is a form of literary art that uses aesthetic and often rhythmic qualities of language to evoke meanings in addition to, or in place of, literal or surface-level meanings."
+        "categoria": "metadata",
+        "pregunta": "Which 5 articles have the highest number of categories assigned? Provide title and category count for each.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "article": "Signalism",
+            "categories": 15
+          },
+          {
+            "article": "Free library movement",
+            "categories": 13
+          },
+          {
+            "article": "List of people who achieved posthumous recognition",
+            "categories": 13
+          },
+          {
+            "article": "Progressive Writers' Movement",
+            "categories": 13
+          },
+          {
+            "article": "Intelligence literature",
+            "categories": 11
+          }
+        ]
       },
       {
         "id": 9,
@@ -99,10 +163,144 @@
       },
       {
         "id": 12,
-        "categoria": "definition",
-        "pregunta": "What does the concept of Xungen movement refer to?",
-        "tipo_respuesta": "text",
-        "respuesta": "The Xúngēn movement (simplified Chinese: 寻根文学; traditional Chinese: 尋根文學; lit."
+        "categoria": "relationships",
+        "pregunta": "List all pairs of articles in the corpus that share at least 3 categories in common. Provide the count and each pair with its number of shared categories.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count_pairs": 26,
+          "pairs": [
+            {
+              "a": "Chicanafuturism",
+              "b": "Latino Futurism",
+              "shared": 8
+            },
+            {
+              "a": "Indianism (arts)",
+              "b": "Ultra-Romanticism",
+              "shared": 5
+            },
+            {
+              "a": "Bizarro fiction",
+              "b": "Neo-Decadence",
+              "shared": 4
+            },
+            {
+              "a": "Condorism",
+              "b": "Indianism (arts)",
+              "shared": 4
+            },
+            {
+              "a": "Condorism",
+              "b": "Ultra-Romanticism",
+              "shared": 4
+            },
+            {
+              "a": "Neo-Decadence",
+              "b": "Signalism",
+              "shared": 4
+            },
+            {
+              "a": "Acmeist poetry",
+              "b": "Generación del 45",
+              "shared": 3
+            },
+            {
+              "a": "Acmeist poetry",
+              "b": "Zenitism",
+              "shared": 3
+            },
+            {
+              "a": "Asiatic style",
+              "b": "Atticism",
+              "shared": 3
+            },
+            {
+              "a": "Birmingham Group (authors)",
+              "b": "Rhyming Chroniclers",
+              "shared": 3
+            },
+            {
+              "a": "Chicanafuturism",
+              "b": "Indigenous futurisms",
+              "shared": 3
+            },
+            {
+              "a": "Costumbrismo",
+              "b": "Indianism (arts)",
+              "shared": 3
+            },
+            {
+              "a": "Costumbrismo",
+              "b": "Ultra-Romanticism",
+              "shared": 3
+            },
+            {
+              "a": "Créolité",
+              "b": "Négritude",
+              "shared": 3
+            },
+            {
+              "a": "Decadent movement",
+              "b": "Mystical anarchism",
+              "shared": 3
+            },
+            {
+              "a": "Decadent movement",
+              "b": "Neo-Decadence",
+              "shared": 3
+            },
+            {
+              "a": "Decadent movement",
+              "b": "Neo-romanticism",
+              "shared": 3
+            },
+            {
+              "a": "Decadent movement",
+              "b": "Romanticism",
+              "shared": 3
+            },
+            {
+              "a": "Déprimisme",
+              "b": "Unanimism",
+              "shared": 3
+            },
+            {
+              "a": "Generación del 45",
+              "b": "Zenitism",
+              "shared": 3
+            },
+            {
+              "a": "Halqa-e Arbab-e Zauq",
+              "b": "Progressive Writers' Movement",
+              "shared": 3
+            },
+            {
+              "a": "Indigenous futurisms",
+              "b": "Latino Futurism",
+              "shared": 3
+            },
+            {
+              "a": "Nadaism",
+              "b": "Stone and Sky (movement)",
+              "shared": 3
+            },
+            {
+              "a": "Persona poetry",
+              "b": "Poetry",
+              "shared": 3
+            },
+            {
+              "a": "Signalism",
+              "b": "Zenitism",
+              "shared": 3
+            },
+            {
+              "a": "Wiener Gruppe",
+              "b": "Young Vienna",
+              "shared": 3
+            }
+          ]
+        }
       },
       {
         "id": 13,
@@ -127,10 +325,25 @@
       },
       {
         "id": 16,
-        "categoria": "definition",
-        "pregunta": "Could you tell me what Poetics is in a concise manner?",
-        "tipo_respuesta": "text",
-        "respuesta": "Poetics is the study or theory of poetry, specifically the study or theory of device, structure, form, type, and effect with regards to poetry, though usage of the term can also refer to literature broadly."
+        "categoria": "article_categories",
+        "pregunta": "Which categories appear in 5 or more distinct articles of the corpus? Provide the exhaustive list.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 11,
+          "categories": [
+            "19th-century literature",
+            "Art movements",
+            "CS1: long volume value",
+            "Genres of poetry",
+            "Latin American literature",
+            "Literary movement stubs",
+            "Literary movements",
+            "Literature",
+            "Modern art",
+            "Poetry",
+            "Submovements of Romanticism"
+          ]
+        }
       },
       {
         "id": 17,
@@ -141,10 +354,31 @@
       },
       {
         "id": 18,
-        "categoria": "definition",
-        "pregunta": "I want to understand what Film adaptation is. Summarize it.",
-        "tipo_respuesta": "text",
-        "respuesta": "A film adaptation transfers the details or story of an existing source text, such as a novel, into a feature film."
+        "categoria": "metadata",
+        "pregunta": "Which 5 articles have the most words? Provide the title and the word count for each.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "article": "Romanticism",
+            "words": 13003
+          },
+          {
+            "article": "Poetry",
+            "words": 9188
+          },
+          {
+            "article": "Novel",
+            "words": 7758
+          },
+          {
+            "article": "Writer",
+            "words": 7661
+          },
+          {
+            "article": "New Wave (science fiction)",
+            "words": 6556
+          }
+        ]
       },
       {
         "id": 19,
@@ -463,17 +697,15 @@
       },
       {
         "id": 40,
-        "categoria": "search_by_category",
-        "pregunta": "List all articles classified under 19th-century literature.",
-        "tipo_respuesta": "article_list",
-        "respuesta": [
-          "Catholic literary revival",
-          "Coppet group",
-          "Decadent movement",
-          "Literary costumbrismo",
-          "Romantic literature",
-          "Romanticism"
-        ],
+        "categoria": "existence",
+        "pregunta": "How many articles in the corpus have NO categories assigned? List them all.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "count": 1,
+          "articles": [
+            "Western canon"
+          ]
+        },
         "num_resultados": 6
       },
       {
@@ -935,9 +1167,30 @@
       {
         "id": 56,
         "categoria": "metadata",
-        "pregunta": "What is the URL of the article about List of literary movements?",
-        "tipo_respuesta": "text",
-        "respuesta": "https://en.wikipedia.org/wiki/List_of_literary_movements"
+        "pregunta": "Which 5 articles have the FEWEST sections (with at least 1 section)? Provide title and section count.",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          {
+            "article": "Deep image",
+            "sections": 1
+          },
+          {
+            "article": "Déprimisme",
+            "sections": 1
+          },
+          {
+            "article": "Halqa-e Arbab-e Zauq",
+            "sections": 1
+          },
+          {
+            "article": "Impressionism (literature)",
+            "sections": 1
+          },
+          {
+            "article": "Pink Decade",
+            "sections": 1
+          }
+        ]
       },
       {
         "id": 57,
@@ -1101,145 +1354,27 @@
       {
         "id": 74,
         "categoria": "listing",
-        "pregunta": "Give me the complete list of all available articles.",
-        "tipo_respuesta": "article_list",
-        "respuesta": [
-          "Abbaye de Créteil",
-          "Acmeist poetry",
-          "Allusion",
-          "Alternative literature",
-          "Anticipatory plagiarism",
-          "Asemic writing",
-          "Asiatic style",
-          "Atticism",
-          "Birmingham Group (authors)",
-          "Bizarro fiction",
-          "British Poetry Revival",
-          "Caribbean poetry",
-          "Cartonera",
-          "Catholic literary revival",
-          "Chicanafuturism",
-          "Classical Prose Movement",
-          "Colon (rhetoric)",
-          "Comedy of menace",
-          "Committed literature",
-          "Condorism",
-          "Coppet group",
-          "Costumbrismo",
-          "Créolie",
-          "Créolité",
-          "Decadent movement",
-          "Deep image",
-          "Dolce Stil Novo",
-          "Domestic realism",
-          "Dream vision",
-          "Déprimisme",
-          "Epigram",
-          "Film adaptation",
-          "Film-poem",
-          "Forum Lingkar Pena",
-          "Free library movement",
-          "Futurism (literature)",
-          "Fyrtiotalism",
-          "Félibrige",
-          "Generación del 45",
-          "Generation Kindle",
-          "Generation of '38",
-          "Geopoetics",
-          "Glossary of poetry terms",
-          "Grupo Taller de Estocolmo",
-          "Halqa-e Arbab-e Zauq",
-          "Imaginism",
-          "Impressionism (literature)",
-          "Indianism (arts)",
-          "Indigenous futurisms",
-          "Intelligence literature",
-          "Interlingue literature",
-          "Irrealism (the arts)",
-          "Jadid",
-          "Jindyworobak Movement",
-          "Jutland Movement",
-          "Latin American Boom",
-          "Latin American poetry",
-          "Latino Futurism",
-          "Liberature",
-          "List of literary movements",
-          "List of people who achieved posthumous recognition",
-          "Literary costumbrismo",
-          "Literary language",
-          "Literature",
-          "Lost Harbor",
-          "Lyrics",
-          "Magnetic Poetry",
-          "Mahjar",
-          "Maximalism",
-          "Mennonite literature",
-          "Mundane science fiction",
-          "My Brain",
-          "Mystical anarchism",
-          "Nadaism",
-          "Natural school",
-          "Naturalism (literature)",
-          "Naturalism (theatre)",
-          "Neo-Decadence",
-          "Neo-romanticism",
-          "New Wave (science fiction)",
-          "Novel",
-          "Novísimos",
-          "Négritude",
-          "Offbeat generation",
-          "Onirism",
-          "Oral-formulaic composition",
-          "Outdoor literature",
-          "Outline of literature",
-          "Outline of poetry",
-          "Parnassianism",
-          "Persona poetry",
-          "Pink Decade",
-          "Poetic tradition",
-          "Poetics",
-          "Poetry",
-          "Poetry in judicial opinions",
-          "Poetry reading",
-          "Popular history",
-          "Postism",
-          "Praise name",
-          "Progressive Writers' Movement",
-          "Pyreneanism",
-          "Quantum aesthetics",
-          "Recluse literature",
-          "Rhyming Chroniclers",
-          "Romantic literature",
-          "Romanticism",
-          "Sardinian Literary Spring",
-          "Sastra wangi",
-          "Second Sophistic",
-          "Sentimentalism (literature)",
-          "Serapion Brothers",
-          "Shihua (poetry talks)",
-          "Shinkankakuha",
-          "Signalism",
-          "Sociology of literature",
-          "Stone and Sky (movement)",
-          "Stylistics",
-          "Symbolism (movement)",
-          "The Papelipolas",
-          "Thơ mới",
-          "Topothesia",
-          "Transcendental poetry",
-          "Tzantzismo",
-          "Ultra-Romanticism",
-          "Unanimism",
-          "Verismo (literature)",
-          "Wellington Group",
-          "Western canon",
-          "Wiener Gruppe",
-          "Writer",
-          "Xungen movement",
-          "Yiddishist movement",
-          "Young Vienna",
-          "Zenitism"
-        ],
+        "pregunta": "List all articles whose title contains a parenthesis disambiguator (e.g. \"(literature)\"). Provide the exhaustive list.",
+        "tipo_respuesta": "lista",
+        "respuesta": {
+          "count": 14,
+          "articles": [
+            "Birmingham Group (authors)",
+            "Colon (rhetoric)",
+            "Futurism (literature)",
+            "Impressionism (literature)",
+            "Indianism (arts)",
+            "Irrealism (the arts)",
+            "Naturalism (literature)",
+            "Naturalism (theatre)",
+            "New Wave (science fiction)",
+            "Sentimentalism (literature)",
+            "Shihua (poetry talks)",
+            "Stone and Sky (movement)",
+            "Symbolism (movement)",
+            "Verismo (literature)"
+          ]
+        },
         "num_resultados": 135
       },
       {
@@ -1555,12 +1690,15 @@
       {
         "id": 78,
         "categoria": "relationships",
-        "pregunta": "Which articles share the category 'Naturalism (literature)'?",
-        "tipo_respuesta": "article_list",
-        "respuesta": [
-          "Naturalism (literature)",
-          "Verismo (literature)"
-        ],
+        "pregunta": "Which TWO articles in the corpus share the LARGEST number of categories in common? Provide the pair and the count of shared categories.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "pair": [
+            "Chicanafuturism",
+            "Latino Futurism"
+          ],
+          "shared_categories": 8
+        },
         "num_resultados": 2
       },
       {
@@ -1699,50 +1837,38 @@
       },
       {
         "id": 88,
-        "categoria": "relationships",
-        "pregunta": "What articles are classified in categories related to poetry?",
-        "tipo_respuesta": "article_list",
-        "respuesta": [
-          "Acmeist poetry",
-          "Anticipatory plagiarism",
-          "Asemic writing",
-          "British Poetry Revival",
-          "Caribbean poetry",
-          "Colon (rhetoric)",
-          "Deep image",
-          "Dolce Stil Novo",
-          "Dream vision",
-          "Epigram",
-          "Film-poem",
-          "Geopoetics",
-          "Glossary of poetry terms",
-          "Imaginism",
-          "Latin American poetry",
-          "List of people who achieved posthumous recognition",
-          "Lost Harbor",
-          "Lyrics",
-          "Magnetic Poetry",
-          "My Brain",
-          "Onirism",
-          "Oral-formulaic composition",
-          "Outline of poetry",
-          "Parnassianism",
-          "Persona poetry",
-          "Poetic tradition",
-          "Poetics",
-          "Poetry",
-          "Poetry in judicial opinions",
-          "Poetry reading",
-          "Postism",
-          "Praise name",
-          "Shihua (poetry talks)",
-          "Signalism",
-          "Symbolism (movement)",
-          "Topothesia",
-          "Transcendental poetry",
-          "Wellington Group",
-          "Wiener Gruppe"
-        ],
+        "categoria": "counting",
+        "pregunta": "How many articles in the corpus have a title starting with an upper-case vowel (A, E, I, O, U)? List them all.",
+        "tipo_respuesta": "mixto",
+        "respuesta": {
+          "count": 24,
+          "articles": [
+            "Abbaye de Créteil",
+            "Acmeist poetry",
+            "Allusion",
+            "Alternative literature",
+            "Anticipatory plagiarism",
+            "Asemic writing",
+            "Asiatic style",
+            "Atticism",
+            "Epigram",
+            "Imaginism",
+            "Impressionism (literature)",
+            "Indianism (arts)",
+            "Indigenous futurisms",
+            "Intelligence literature",
+            "Interlingue literature",
+            "Irrealism (the arts)",
+            "Offbeat generation",
+            "Onirism",
+            "Oral-formulaic composition",
+            "Outdoor literature",
+            "Outline of literature",
+            "Outline of poetry",
+            "Ultra-Romanticism",
+            "Unanimism"
+          ]
+        },
         "num_resultados": 39
       },
       {
