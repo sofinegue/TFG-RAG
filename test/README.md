@@ -59,8 +59,8 @@ mediante **dos métricas automáticas**:
 
 | Métrica | Método | Coste |
 |---------|--------|-------|
-| `coincidencia_%` | LLM (`gpt-5-mini`) en lotes de 10 preguntas/llamada | ~$0.00009/q |
-| `relevancia_%`   | Cosine similarity con embeddings `ada-002` (sin LLM) | ~$0.0001/q |
+| `coincidencia_%` | LLM (`gpt-5-mini`) en lotes de 10 preguntas/llamada, comparando respuesta real vs. esperada | Variable según tokens |
+| `relevancia_%`   | LLM (`gpt-5-mini`) en la misma llamada, evaluando coherencia respuesta real vs. pregunta | Variable según tokens |
 
 `veredicto_umbral` = `OK` si **ambas métricas ≥ umbral** (por defecto 80 %).
 
@@ -69,11 +69,11 @@ Columnas del Excel:
 | Campo | Descripción |
 |-------|-------------|
 | `coincidencia_%` | Similitud semántica respuesta real vs. esperada (LLM, 0-100) |
-| `relevancia_%`   | Similitud por embeddings coseno (ada-002, 0-100) |
+| `relevancia_%`   | Coherencia semántica entre pregunta y respuesta real (LLM, 0-100) |
 | `veredicto_umbral` | `OK` / `KO` según ambas métricas ≥ umbral |
 | `justificacion`  | Explicación breve del LLM evaluador |
 | `coste_rag_usd`  | Coste Fase 1 (tokens generación RAG) |
-| `coste_eval_usd` | Coste Fase 2 (LLM evaluación + embeddings) |
+| `coste_eval_usd` | Coste Fase 2 (LLM evaluación) |
 | `coste_total_usd`| Suma de ambas fases |
 
 Después construye **un Excel por caso de uso** con **una hoja por idioma** en
@@ -140,7 +140,7 @@ Requiere `openpyxl` (`pip install openpyxl`).
 | Solo `wiki`   | $0.36 | $0.03 | **~$0.39** |
 | **Run completo** | **$1.78** | **$0.16** | **~$1.94** |
 
-Fase 2 = ~849 preguntas × ($0.00009 LLM coincidencia + $0.0001 embeddings relevancia).
+Fase 2 depende del número total de tokens consumidos por el LLM evaluador al calcular ambas métricas en cada lote.
 
 ---
 

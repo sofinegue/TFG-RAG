@@ -8,13 +8,13 @@ generados por :mod:`execute_tests`.
 Por cada fichero ``test/results/results_<gold_standard>.json``:
 
 * **Coincidencia (%)** – un LLM (por lotes de N preguntas) juzga cuánto
-  cubre la respuesta real respecto a la esperada (entidades, hechos).
-* **Relevancia (%)** – métrica automática (coseno de embeddings entre la
-  respuesta esperada y la real). NO usa LLM.
+    cubre la respuesta real respecto a la esperada (entidades, hechos).
+* **Relevancia (%)** – un LLM juzga si la respuesta real responde de forma
+    coherente y pertinente a la pregunta planteada.
 * **Veredicto OK/KO** – OK si coincidencia ≥ umbral **y** relevancia ≥ umbral.
 
 El LLM se llama **en lotes** (por defecto 10 preguntas por llamada) para
-minimizar coste y latencia.
+minimizar coste y latencia, y devuelve ambas métricas en la misma respuesta.
 
 Genera **un Excel por caso de uso** (``cvs.xlsx``, ``eu.xlsx``, ``wiki.xlsx``)
 con **una hoja por idioma**. Columnas:
@@ -44,7 +44,7 @@ Uso
 
 Dependencias
 ------------
-``openpyxl`` para escribir los Excel, ``numpy`` para coseno de embeddings.
+``openpyxl`` para escribir los Excel.
 """
 from __future__ import annotations
 
@@ -58,8 +58,6 @@ import traceback
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-
-import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(REPO_ROOT) not in sys.path:
@@ -115,11 +113,10 @@ TEMPERATURE       = _env_float("EVAL_TEMPERATURE", 0.0)
 RETRY_BACKOFF_S   = _env_float("EVAL_RETRY_BACKOFF_S", 0.6)
 JUSTIF_MAX_CHARS  = _env_int("EVAL_JUSTIFICACION_MAX_CHARS", 300)
 
-EMBEDDING_MODEL   = os.getenv("EMBEDDING_MODEL", "ada-002")
-
 _DEFAULT_SYSTEM_PROMPT = (
     "Eres un evaluador imparcial de sistemas RAG. Comparas respuestas de un "
-    "sistema con las respuestas esperadas (gold standard) y juzgas la coincidencia. "
+    "sistema con las respuestas esperadas (gold standard) y con las preguntas "
+    "originales. Juzgas cobertura factual y coherencia con la pregunta. "
     "Respondes SIEMPRE con un JSON array válido y nada más."
 )
 EVAL_SYSTEM_PROMPT = os.getenv("EVAL_SYSTEM_PROMPT", _DEFAULT_SYSTEM_PROMPT)
@@ -145,103 +142,24 @@ def get_evaluator_client(model_name: str) -> Tuple[AzureOpenAI, str]:
     return client, cfg.deployment
 
 
-def _get_embedding_client() -> Tuple[AzureOpenAI, str]:
-    """Devuelve ``(client, deployment)`` para el modelo de embeddings."""
-    return get_evaluator_client(EMBEDDING_MODEL)
-
-
 # ---------------------------------------------------------------------------
-# Relevancia automática (embedding cosine similarity)
-# ---------------------------------------------------------------------------
-def _cosine_similarity(a: List[float], b: List[float]) -> float:
-    va = np.array(a, dtype=np.float64)
-    vb = np.array(b, dtype=np.float64)
-    dot = np.dot(va, vb)
-    norm = np.linalg.norm(va) * np.linalg.norm(vb)
-    if norm == 0:
-        return 0.0
-    return float(dot / norm)
-
-
-def compute_relevancia_batch(
-    expected_answers: List[str],
-    actual_answers: List[str],
-) -> Tuple[List[int], List[int]]:
-    """Calcula relevancia (0-100) para un lote usando embedding cosine similarity.
-
-    Devuelve ``(scores, emb_tokens_per_question)`` donde ``emb_tokens_per_question``
-    es el número de tokens de embedding consumidos por cada pregunta (proporcional).
-    """
-    client, deployment = _get_embedding_client()
-
-    # Preparar textos (truncar a 8000 chars para no exceder token limit)
-    all_texts = []
-    for exp, act in zip(expected_answers, actual_answers):
-        all_texts.append(str(exp)[:8000] if exp else "")
-        all_texts.append(str(act)[:8000] if act else "")
-
-    n = len(expected_answers)
-    # Azure OpenAI embeddings limita el array de input (≈128 elementos para
-    # ada-002). Procesamos en sub-lotes para no exceder ese límite ni el
-    # cupo total de tokens por petición.
-    sub_batch = _env_int("EVAL_EMBEDDING_BATCH", 64)
-    embeddings: List[List[float]] = []
-    total_emb_tokens = 0
-    failed = False
-    for start in range(0, len(all_texts), sub_batch):
-        chunk = all_texts[start:start + sub_batch]
-        # Azure rechaza inputs vacíos: sustituir por un espacio.
-        chunk_safe = [t if t else " " for t in chunk]
-        try:
-            response = client.embeddings.create(
-                model=deployment,
-                input=chunk_safe,
-            )
-            embeddings.extend(item.embedding for item in response.data)
-            if response.usage:
-                total_emb_tokens += response.usage.total_tokens or 0
-        except Exception as exc:
-            print(f"      ⚠️ embedding sub-batch {start}-{start+len(chunk)} falló: "
-                  f"{type(exc).__name__}: {str(exc)[:160]}")
-            failed = True
-            # Rellenar con None para mantener alineación; se traducirá a 0% luego.
-            embeddings.extend([None] * len(chunk))
-
-    if failed and not any(e is not None for e in embeddings):
-        return [0] * n, [0] * n
-
-    # Tokens por pregunta (proporcional: 2 textos por pregunta)
-    tokens_per_q = (total_emb_tokens // n) if n > 0 else 0
-    emb_tokens = [tokens_per_q] * n
-
-    # Calcular coseno por pares (expected[i], actual[i])
-    results = []
-    for i in range(n):
-        emb_exp = embeddings[i * 2]     if i * 2     < len(embeddings) else None
-        emb_act = embeddings[i * 2 + 1] if i * 2 + 1 < len(embeddings) else None
-        if emb_exp is None or emb_act is None:
-            results.append(0)
-            continue
-        sim = _cosine_similarity(emb_exp, emb_act)
-        # Convertir de [-1,1] a [0,100] (en la práctica siempre ≥0)
-        pct = max(0, min(100, int(round(sim * 100))))
-        results.append(pct)
-    return results, emb_tokens
-
-
-# ---------------------------------------------------------------------------
-# Prompt de evaluación por lotes (coincidencia)
+# Prompt de evaluación por lotes
 # ---------------------------------------------------------------------------
 EVAL_BATCH_TEMPLATE = """Evalúa las siguientes {n} respuestas de un sistema RAG.
-Para CADA una, determina el porcentaje de coincidencia entre la respuesta real
-y la respuesta esperada (mismas entidades, mismos hechos, misma información).
+Para CADA una, asigna DOS puntuaciones:
+1. coincidencia_pct: cuánto cubre la respuesta real respecto a la respuesta
+   esperada (mismas entidades, mismos hechos, misma información).
+2. relevancia_pct: hasta qué punto la respuesta real responde de forma
+   coherente, directa y pertinente a la PREGUNTA planteada. Esta segunda
+   puntuación se basa en la relación entre pregunta y respuesta real, NO en la
+   similitud con la respuesta esperada.
 
 {items}
 
 Devuelve EXCLUSIVAMENTE un JSON array con {n} objetos (sin markdown, sin texto
 adicional), en el MISMO ORDEN, con esta forma:
 [
-  {{"idx": 1, "coincidencia_pct": <0-100>, "justificacion": "<máx 200 chars>"}},
+  {{"idx": 1, "coincidencia_pct": <0-100>, "relevancia_pct": <0-100>, "justificacion": "<máx 200 chars>"}},
   ...
 ]
 
@@ -249,7 +167,13 @@ Criterio para coincidencia_pct:
 - 100: la respuesta real cubre toda la información de la esperada
 - 80+: cubre la gran mayoría de entidades/hechos
 - 50-79: cubre parcialmente
-- <50: omite información clave o contiene errores graves"""
+- <50: omite información clave o contiene errores graves
+
+Criterio para relevancia_pct:
+- 100: responde exactamente a la pregunta, sin desviaciones ni contradicciones
+- 80+: responde bien a la pregunta, con pequeños matices mejorables
+- 50-79: responde solo en parte, es ambigua o mezcla contenido secundario
+- <50: responde poco o nada a la pregunta, o resulta incoherente/off-topic"""
 
 
 def _format_batch_items(batch: List[Dict[str, Any]]) -> str:
@@ -305,9 +229,9 @@ def _coerce_pct(value: Any) -> Optional[int]:
 
 
 # ---------------------------------------------------------------------------
-# Evaluación por lotes (coincidencia via LLM)
+# Evaluación por lotes (coincidencia + relevancia via LLM)
 # ---------------------------------------------------------------------------
-def evaluate_batch_coincidencia(
+def evaluate_batch_metrics(
     batch: List[Dict[str, Any]],
     model_name: str,
     max_retries: int = MAX_RETRIES,
@@ -315,7 +239,8 @@ def evaluate_batch_coincidencia(
     """Evalúa un lote de preguntas con una sola llamada LLM.
 
     Cada item en `batch` debe tener: pregunta, esperada, real.
-    Devuelve lista de dicts con coincidencia_pct, justificacion, eval_error.
+    Devuelve lista de dicts con coincidencia_pct, relevancia_pct, justificacion,
+    eval_error.
     """
     client, deployment = get_evaluator_client(model_name)
     n = len(batch)
@@ -356,6 +281,7 @@ def evaluate_batch_coincidencia(
                 item = results[i] if i < len(results) else {}
                 parsed.append({
                     "coincidencia_pct": _coerce_pct(item.get("coincidencia_pct")),
+                    "relevancia_pct": _coerce_pct(item.get("relevancia_pct")),
                     "justificacion": str(item.get("justificacion", ""))[:JUSTIF_MAX_CHARS],
                     "eval_error": None,
                     "tokens_eval_in":  tokens_in_per_q,
@@ -372,7 +298,8 @@ def evaluate_batch_coincidencia(
     tokens_out_per_q = last_tokens_out // n if n > 0 else 0
     return [
         {
-            "coincidencia_pct": None, "justificacion": "",
+            "coincidencia_pct": None, "relevancia_pct": None,
+            "justificacion": "",
             "eval_error": last_error or "desconocido",
             "tokens_eval_in":  tokens_in_per_q,
             "tokens_eval_out": tokens_out_per_q,
@@ -531,23 +458,9 @@ def evaluate_results_file(
         else:
             evaluable_indices.append(idx)
 
-    # --- Relevancia automática (embeddings) para todas las evaluables ---
-    expected_texts = []
-    actual_texts = []
-    for idx in evaluable_indices:
-        q = preguntas[idx]
-        exp = q.get("respuesta_esperada", "")
-        if isinstance(exp, (list, dict)):
-            exp = json.dumps(exp, ensure_ascii=False)
-        expected_texts.append(str(exp))
-        actual_texts.append(str(q.get("respuesta", "")))
-
-    print(f"   🔢 Calculando relevancia (embeddings) para {len(evaluable_indices)} preguntas…")
-    relevancia_scores, emb_tokens_per_q = compute_relevancia_batch(expected_texts, actual_texts)
-
-    # --- Coincidencia por lotes (LLM, en paralelo) ---
+    # --- Coincidencia + relevancia por lotes (LLM, en paralelo) ---
     eval_workers = _env_int("EVAL_WORKERS", 4)
-    print(f"   🤖 Evaluando coincidencia (LLM) en lotes de {batch_size} "
+    print(f"   🤖 Evaluando coincidencia y relevancia (LLM) en lotes de {batch_size} "
           f"(workers={eval_workers})…")
 
     # Construir todos los lotes de antemano para poder paralelizar.
@@ -570,7 +483,7 @@ def evaluate_results_file(
 
     if eval_workers <= 1 or total_batches <= 1:
         for bi, batch_items in enumerate(batches, 1):
-            res = evaluate_batch_coincidencia(batch_items, model_name)
+            res = evaluate_batch_metrics(batch_items, model_name)
             offset = (bi - 1) * batch_size
             for j, r in enumerate(res):
                 coincidencia_results[offset + j] = r
@@ -580,7 +493,7 @@ def evaluate_results_file(
         done = 0
         with ThreadPoolExecutor(max_workers=eval_workers) as ex:
             futures = {
-                ex.submit(evaluate_batch_coincidencia, b, model_name): bi
+                ex.submit(evaluate_batch_metrics, b, model_name): bi
                 for bi, b in enumerate(batches)
             }
             for fut in as_completed(futures):
@@ -589,7 +502,8 @@ def evaluate_results_file(
                     res = fut.result()
                 except Exception as exc:
                     res = [{
-                        "coincidencia_pct": None, "justificacion": "",
+                        "coincidencia_pct": None, "relevancia_pct": None,
+                        "justificacion": "",
                         "eval_error": f"{type(exc).__name__}: {exc}",
                         "tokens_eval_in": 0, "tokens_eval_out": 0,
                     } for _ in batches[bi]]
@@ -626,8 +540,7 @@ def evaluate_results_file(
             continue
 
         coinc_result = coincidencia_results[eval_counter]
-        rel_score    = relevancia_scores[eval_counter]
-        emb_tokens_q = emb_tokens_per_q[eval_counter]
+        rel_score    = coinc_result.get('relevancia_pct')
         eval_counter += 1
 
         coinc = coinc_result["coincidencia_pct"]
@@ -651,10 +564,6 @@ def evaluate_results_file(
                 model_name,
                 coinc_result.get("tokens_eval_in",  0),
                 coinc_result.get("tokens_eval_out", 0),
-            ) + token_cost_usd(
-                EMBEDDING_MODEL,
-                emb_tokens_q,
-                0,
             ),
             8,
         )
@@ -699,7 +608,7 @@ def evaluate_results_file(
 def main() -> None:
     _import_openpyxl()  # Verificar que openpyxl está instalado antes de nada
     parser = argparse.ArgumentParser(
-        description="Evalúa los resultados del RAG (coincidencia LLM por lotes + relevancia embeddings).",
+        description="Evalúa los resultados del RAG (coincidencia y relevancia con LLM por lotes).",
     )
     parser.add_argument(
         "--model", default=DEFAULT_MODEL,
