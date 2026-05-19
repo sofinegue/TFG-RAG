@@ -60,7 +60,7 @@ Máster en Big Data. PySpark, Hadoop. Sin certificaciones Azure listadas. 1 año
 
 **INSTRUCCIONES:**
 
-[1] COBERTURA COMPLETA: Lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
+[1] COBERTURA COMPLETA: lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
 
 [2] ESTILO NATURAL: Para cada persona escribe un párrafo fluido con:
 - Nombre completo en negrita

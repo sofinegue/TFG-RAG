@@ -1,110 +1,79 @@
 """
-Prompts específicos para el caso de uso CVs.
-
+Prompts específicos para el caso de uso CVs
 Centralizados aquí para que el handler cvs/handler.py los importe y
-los tests de prompts puedan validarlos de forma aislada.
+los tests de prompts puedan validarlos de forma aislada
 """
-from typing import Dict, List
-
 from src.config import config
-
-
 class CVsPrompts:
     """Prompts centrados en búsqueda de perfiles y análisis de CVs técnicos de la compañía."""
-
     # ------------------------------------------------------------------
     # Prompt principal de generación
     # ------------------------------------------------------------------
     @staticmethod
-    def generation(query: str, context: List[Dict], max_chars: int, language: str = "es") -> str:
+    def generation(query: str, context: list[dict], max_chars: int, language: str = "es") -> str:
         context_text = ""
         unique_docs: set = set()
-
         for i, chunk in enumerate(context, 1):
             title     = chunk.get("title", "Sin título")
             content   = chunk.get("content", "")
             doc_title = chunk.get("doc_title", "Unknown")
             pages     = chunk.get("pages", "N/A")
-
             content_preview = content[:800] + ("..." if len(content) > 800 else "")
             context_text += (
                 f"\n[CV {i}]: {doc_title}\n"
                 f"Sección: {title}\nPáginas: {pages}\nContenido:\n{content_preview}\n---\n"
             )
             unique_docs.add(doc_title)
-
         num_docs = len(unique_docs)
-
         return f"""Los CVs que recibes pertenecen a miembros de la compañía (empleados, consultores, profesionales del equipo). NO son candidatos externos a un puesto; son perfiles internos de la organización.
-
 Tu misión es encontrar y listar TODOS los perfiles relevantes basándote en los CVs proporcionados y el historial de conversación.
-
 **CONTEXTO – CVs DISPONIBLES ({num_docs} documentos únicos):**
 {context_text}
-
 **PREGUNTA DEL USUARIO:**
 {query}
-
 **INSTRUCCIONES:**
-
-[1] COBERTURA COMPLETA: Lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
-
+[1] COBERTURA COMPLETA: lista TODOS los perfiles que cumplan el criterio. No te limites a "algunos ejemplos".
 [2] ESTILO NATURAL: Para cada persona escribe un párrafo fluido con:
 - Nombre completo en negrita
 - Qué tiene (skill/certificación/experiencia)
 - Contexto relevante del CV (años, proyectos, otras skills)
 - Nombre del archivo entre paréntesis al final
-
 [3] HISTORIAL CONVERSACIONAL:
 - Pronombres plurales ("tienen", "son", etc.) → habla SOLO de personas mencionadas antes
 - "¿alguien más?" → aporta perfiles DIFERENTES
 - "que no sea X" → excluye explícitamente a X
-
 [4] FORMATO (Markdown):
 **Encontré [X] perfiles con [criterio]:**
-
 **1. Nombre Completo**  
 [Descripción natural]. (CV: archivo.pdf)
-
 ...
-
 **Resumen:** [X] perfiles en {num_docs} CVs revisados.
-
 Si no hay resultados:
 **No encontré perfiles con [criterio exacto].**
-
 Sugerencias: [alternativas concretas]
-
 [5] SINÓNIMOS AUTOMÁTICOS:
 - "Spark" → PySpark, Databricks, Spark SQL
 - "Azure cert" → AZ-900, DP-600, AI-900, PL-300…
 - "Senior" → Sr., Lead, Principal, Consultor Senior
 - "ML" → Machine Learning, Deep Learning, AI
-
 RESPONDE EN {config.get_lang_name(language).upper()}. Máximo {max_chars} caracteres."""
-
     # ------------------------------------------------------------------
     # Prompt de RAG Fusion (adaptado al dominio de talento)
     # ------------------------------------------------------------------
     @staticmethod
     def rag_fusion(query: str, k: int) -> str:
         return f"""Eres un experto en análisis de perfiles profesionales técnicos.
-
 Pregunta original: "{query}"
-
 Genera {k} versiones alternativas de esta pregunta para buscar perfiles en CVs de la compañía que:
 - Incluyan sinónimos de tecnologías (ej. "ML" → "Machine Learning", "aprendizaje automático")
 - Amplíen a certificaciones o roles relacionados (ej. "Python" → "Django, FastAPI, Pandas")
 - Consideren distintos niveles de experiencia (junior, senior, lead, principal)
 - Usen variantes bilingües de términos técnicos (inglés/español)
-
 Responde ÚNICAMENTE con las {k} preguntas reformuladas, una por línea, numeradas.
-
 Ejemplo:
 1. [reformulación con sinónimos tecnológicos]
 2. [reformulación con roles y certificaciones]
 ..."""
-
     # ------------------------------------------------------------------
     # Prompt mini-LLM para clasificación de chunks por fiabilidad
     # ------------------------------------------------------------------
@@ -115,19 +84,14 @@ Ejemplo:
             doc_title = chunk.get("doc_title", "Unknown")
             content   = chunk.get("content", "")[:1200]
             context_text += f"\n[CV {i}] {doc_title}:\n{content}\n---"
-
         return f"""Eres un asistente de análisis de perfiles profesionales. Tu tarea es analizar fragmentos de CVs
 de miembros de la compañía y determinar si son relevantes para la consulta del usuario.
-
 Nivel de similitud de estos fragmentos con la consulta: {reliability_label}
 Esto indica cuánto de probable es que haya coincidencias entre la pregunta y los fragmentos de este lote. Un nivel alto significa que es muy probable que muchos fragmentos sean relevantes; un nivel bajo significa que pocos lo serán, pero aun así debes analizar cada uno.
-
 CONSULTA DEL USUARIO:
 {query}
-
 FRAGMENTOS DE CVs:
 {context_text}
-
 INSTRUCCIONES:
 1. Analiza CADA fragmento individualmente y decide si la persona es relevante para la consulta.
 2. EXHAUSTIVIDAD: Incluye TODOS los perfiles que cumplan el criterio. No omitas ninguno. Si hay 10 perfiles relevantes, lista los 10.
@@ -145,13 +109,10 @@ INSTRUCCIONES:
 7. Extrae el NOMBRE COMPLETO (nombre y apellidos) del campo nombre_apellidos del contenido del CV.
 8. NUNCA devuelvas nombres de ficheros (ej. "cv_134.json"). Siempre busca el campo nombre_apellidos dentro del contenido.
 9. Si ninguna persona es relevante, indica "ninguno".
-
 FORMATO DE RESPUESTA:
 data: <lista de nombres completos relevantes separados por " | ", o "ninguno">
 reasoning: <para cada nombre incluido, indica la evidencia exacta encontrada en el CV (ej. "French C2 en idiomas", "Kafka en hard_skills", "10 hard skills listadas")>
-
 Responde SOLO en el formato indicado."""
-
     # ------------------------------------------------------------------
     # Prompt de "Response Format" – ensamblaje final con LLM potente
     # ------------------------------------------------------------------
@@ -159,13 +120,12 @@ Responde SOLO en el formato indicado."""
     def response_format(query: str, groups: dict, max_chars: int, language: str = "es") -> str:
         """
         Recibe los resultados de los 5 grupos de fiabilidad y pide
-        al LLM potente que genere la respuesta final para el usuario.
-
+        al LLM potente que genere la respuesta final para el usuario
         Importante: el usuario final NUNCA debe ver el concepto de
         "fiabilidad". El primer grupo se presenta como "principales
         resultados" y el resto en una sola sección de "otros perfiles
-        que coinciden", manteniendo el orden interno por fiabilidad.
-        Toda la respuesta debe ser una lista numerada continua.
+        que coinciden", manteniendo el orden interno por fiabilidad
+        Toda la respuesta debe ser una lista numerada continua
         """
         # Construir secciones internas (solo el LLM las ve, no el usuario).
         groups_text = ""
@@ -183,7 +143,6 @@ Responde SOLO en el formato indicado."""
                 f"  Perfiles: {data}\n"
                 f"  Razonamiento: {reasoning}\n"
             )
-
         lang_name = config.get_lang_name(language)
         is_es = language.lower().startswith("es")
         h_main      = "Principales resultados" if is_es else "Main results"
@@ -195,17 +154,12 @@ Responde SOLO en el formato indicado."""
                        if is_es else
                        "No matching profiles were found. Try rephrasing the "
                        "query or broadening the criteria.")
-
         return f"""Se ha realizado una búsqueda exhaustiva en el corpus de CVs (perfiles internos de la compañía) para la siguiente consulta.
-
 **PREGUNTA DEL USUARIO:**
 {query}
-
 **RESULTADOS POR GRUPO (uso interno – NO expongas estos nombres ni el concepto de fiabilidad al usuario):**
 {groups_text}
-
 **INSTRUCCIONES DE CONTENIDO:**
-
 1. SIEMPRE muestra el nombre y apellidos completos. NUNCA muestres nombres de ficheros (p. ej. "cv_134.json"). Si un resultado contiene un nombre de fichero en lugar de un nombre propio, ignóralo.
 2. EXHAUSTIVIDAD: Incluye TODOS los perfiles que aparecen en los resultados de los grupos. Tu trabajo es ensamblar la lista completa, NO resumirla ni acortarla. Si hay 50 nombres, lista los 50.
 3. OPERADORES LÓGICOS — aplícalos como filtro final:
@@ -220,25 +174,15 @@ Responde SOLO en el formato indicado."""
 10. NUNCA repitas el mismo nombre dos veces en toda la respuesta. Si una persona aparece en varios grupos, inclúyela UNA sola vez en la sección de mayor prioridad (GRUPO1 > GRUPO2 > … > GRUPO5).
 11. La justificación debe ser CONCRETA y verificable a partir del CV (p. ej. "French C2 listado", "Goethe-Zertifikat B2", "Microservices en hard skills"). NUNCA escribas justificaciones tautológicas tipo "Habla francés o alemán" o "Cumple el criterio".
 12. NO inventes perfiles que no aparezcan en los resultados de los grupos. Solo lista los que están en los datos proporcionados.
-
 **FORMATO OBLIGATORIO (Markdown):**
-
 La respuesta debe ser ENTERAMENTE una lista numerada continua. NO escribas párrafos en prosa. Sigue EXACTAMENTE esta plantilla, respetando los saltos de línea en blanco entre líneas:
-
 **{intro_tmpl.format(n="[X]", q=query)}**
-
 **{h_main}:**
-
 1. **Nombre Completo** — razón breve
-
 2. **Nombre Completo** — razón breve
-
 **{h_others}:**
-
 3. **Nombre Completo** — razón breve
-
 4. **Nombre Completo** — razón breve
-
 REGLAS DE FORMATO ESTRICTAS:
 - CADA perfil ocupa EXACTAMENTE una línea con el formato `N. **Nombre Completo** — razón`.
 - Inserta una línea en blanco DESPUÉS de cada perfil (cada uno es un párrafo de una sola línea).
@@ -247,6 +191,4 @@ REGLAS DE FORMATO ESTRICTAS:
 - Si una sección no tiene perfiles, OMÍTELA por completo (no escribas el encabezado vacío).
 - NO añadas un "Resumen" final ni metadatos de búsqueda.
 - NO uses HTML; solo Markdown.
-
 Responde en {lang_name}."""
-

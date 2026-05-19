@@ -1,27 +1,18 @@
 """
 src.document_ingestion.cvs.create_index_cvs
-
 Crear índice y indexer de Azure Search **específico para CVs**
-con búsqueda híbrida (Vector + Semantic + Keyword/BM25).
-
-Campos clave para filtrado y búsqueda semántica
-------------------------------------------------
-- **chunk_type** (filterable):  experience | education | skills
-      → permite al agente restringir la búsqueda a un tipo de sección.
-- **nombre_apellidos** (searchable + filterable):
-      → búsqueda y filtrado por nombre del candidato.
-- **puesto** (searchable + filterable):
-      → búsqueda y filtrado por puesto / rol objetivo.
-- **sourceLanguage** (filterable):
-      → filtrar por idioma del CV (es, en …).
-- **sourceCollection** (filterable):
-      → siempre "cvs"; útil si se comparte índice en el futuro.
-
-Configuración semántica
------------------------
-- title_field   : Title  (e.g. "Juan Pérez — Experience")
-- content_fields: content  (el texto real del chunk)
-- keywords_fields: puesto, chunk_type  (mejoran reranking semántico)
+con búsqueda híbrida (Vector + Semantic + Keyword/BM25)
+Uso desde línea de comandos:
+    python -m src.document_ingestion.cvs.create_index_cvs
+Este script crea:
+    - Índice de Azure Search 'cvs' con campos híbridos (vector + text + semantic)
+    - Indexer que conecta con Cosmos DB (Chunks-CVs)
+    - Perfil de búsqueda semántica para ranking mejorado
+Campos principales:
+    - content (searchable, vector): contenido del chunk del CV
+    - Title (searchable): sección del CV (experiencia, educación, skills)
+    - sourceLanguage (filterable): idioma (en/es/...)
+    - sourcePath (filterable): ruta del CV en blob
 """
 from azure.search.documents.indexes import SearchIndexClient, SearchIndexerClient
 from azure.search.documents.indexes.models import (
@@ -47,25 +38,16 @@ from azure.search.documents.indexes.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 from src.config import config
-
-
-# ===========================================================================
-# Índice
-# ===========================================================================
-
 def create_search_index():
     """Crea el índice de Azure Search para CVs con búsqueda híbrida."""
-
     client = SearchIndexClient(
         endpoint=config.azure_search_endpoint,
         credential=AzureKeyCredential(config.azure_search_key),
     )
-
     fields = [
         # === CAMPOS CLAVE ===
         SimpleField(name="id", type=SearchFieldDataType.String, key=True),
         SimpleField(name="chunkId", type=SearchFieldDataType.String, filterable=True),
-
         # === CONTENIDO PRINCIPAL (keyword + semantic) ===
         SearchableField(
             name="content",  # raw text of all the chunk
@@ -83,7 +65,6 @@ def create_search_index():
             filterable=True,
             analyzer_name="es.microsoft",
         ),
-
         # === CAMPOS ESPECÍFICOS DE CV ===
         SimpleField(
             name="chunk_type",  # "education"
@@ -104,7 +85,6 @@ def create_search_index():
             facetable=True,
             analyzer_name="es.microsoft",
         ),
-
         # === CAMPOS OPCIONALES (compatibilidad con pipeline genérico) ===
         SearchableField(
             name="QuestionsText",
@@ -116,7 +96,6 @@ def create_search_index():
             type=SearchFieldDataType.String,
             analyzer_name="es.microsoft",
         ),
-
         # === CAMPOS FILTRABLES ===
         # SimpleField(name="Pages", type=SearchFieldDataType.String, filterable=True),
         SimpleField(
@@ -137,7 +116,6 @@ def create_search_index():
             filterable=True,
             sortable=True,
         ),
-
         # === VECTOR SEARCH ===
         SearchField(
             name="embedding",
@@ -146,7 +124,6 @@ def create_search_index():
             vector_search_profile_name="vector-profile-cvs",
         ),
     ]
-
     # --- Vector Search ---
     vector_search = VectorSearch(
         algorithms=[
@@ -167,7 +144,6 @@ def create_search_index():
             )
         ],
     )
-
     # --- Semantic Search ---
     semantic_config = SemanticConfiguration(
         name="semantic-config-cvs",
@@ -184,7 +160,6 @@ def create_search_index():
         ),
     )
     semantic_search = SemanticSearch(configurations=[semantic_config])
-
     # --- Crear índice ---
     index = SearchIndex(
         name=config.azure_search_index_cvs,
@@ -193,33 +168,23 @@ def create_search_index():
         semantic_search=semantic_search,
         similarity=BM25SimilarityAlgorithm(),
     )
-
     result = client.create_or_update_index(index)
     print(f"✅ Índice CVs creado: {result.name}")
-    print(f"   - Vector Search: ✓  (HNSW / cosine)")
-    print(f"   - Semantic Search: ✓ (title=Title, content=content, kw=puesto+nombre)")
-    print(f"   - Keyword Search: ✓ (BM25)")
+    print(f"   - Vector Search: OK  (HNSW / cosine)")
+    print(f"   - Semantic Search: OK (title=Title, content=content, kw=puesto+nombre)")
+    print(f"   - Keyword Search: OK (BM25)")
     print(f"   - Filtros: chunk_type, nombre_apellidos, puesto, sourceLanguage, isDeleted")
-
-
-# ===========================================================================
-# Indexer (Cosmos DB → Azure Search)
-# ===========================================================================
-
 def create_indexer():
-    """Crea el indexer que conecta Cosmos DB (Chunks-CVs) → Azure Search."""
-
+    """Crea el indexer que conecta Cosmos DB (Chunks-CVs) con Azure Search"""
     indexer_client = SearchIndexerClient(
         endpoint=config.azure_search_endpoint,
         credential=AzureKeyCredential(config.azure_search_key),
     )
-
     cosmos_connection_string = (
         f"AccountEndpoint={config.cosmos_endpoint};"
         f"AccountKey={config.cosmos_key};"
         f"Database={config.cosmosdb_database}"
     )
-
     data_source = SearchIndexerDataSourceConnection(
         name=f"{config.azure_search_index_cvs}-datasource",
         type="cosmosdb",
@@ -228,7 +193,6 @@ def create_indexer():
     )
     indexer_client.create_or_update_data_source_connection(data_source)
     print(f"✅ Data source CVs creado: {data_source.name}")
-
     indexer = SearchIndexer(
         name=config.azure_search_indexer_cvs,
         data_source_name=data_source.name,
@@ -256,25 +220,15 @@ def create_indexer():
             FieldMapping(source_field_name="docSummary", target_field_name="docSummary"),
         ],
     )
-
     result = indexer_client.create_or_update_indexer(indexer)
     print(f"✅ Indexer CVs creado: {result.name}")
-
-
-# ===========================================================================
-# Entry point
-# ===========================================================================
-
 if __name__ == "__main__":
     print("\n" + "=" * 70)
     print("CREANDO INFRAESTRUCTURA AZURE SEARCH — CVs")
     print("=" * 70 + "\n")
-
     create_search_index()
-
-    # Descomentar cuando estés listo para crear el indexer
-    create_indexer()
-
+    # Descomentar para crear el indexer
+    # create_indexer()
     print("\n" + "=" * 70)
     print("COMPLETADO")
     print("=" * 70)

@@ -6,59 +6,48 @@ from openai import AzureOpenAI
 from src.config import config, safe_create_kwargs
 from datetime import datetime
 from typing import Optional
-
-# Configuración
-encoding = tiktoken.encoding_for_model("gpt-4")
-
-
+# Configuración del modelo para tiktoken (parametrizable vía TIKTOKEN_MODEL en .env)
+encoding = tiktoken.encoding_for_model(config.tiktoken_model)
 def num_tokens_from_string(string: str) -> int:
-    """Cuenta tokens en un string"""
-    num_tokens = len(encoding.encode(string))
-    return num_tokens
-
-
+    """
+    Cuenta tokens en un string
+    Args:
+        string (str): Texto a tokenizar
+    Returns:
+        int: Número de tokens
+    """
+    return len(encoding.encode(string))
 def get_embedding(text: str, model: str, session_id: str = "", call_id: str = "", cdu: str = "", entity: dict = {}):
     """
     Genera embedding usando Azure OpenAI desde MODELS_CONFIG
     """
     startrun = datetime.now()
     embedding = None
-    
     try:
         # ✅ Obtener configuración desde MODELS_CONFIG
         embedding_config = config.get_embedding_model_config()
-        
         client = AzureOpenAI(
             azure_endpoint=embedding_config.api_base,
             api_key=embedding_config.api_key,
             api_version=embedding_config.api_version,
         )
-        
         # Generar embedding
         response = client.embeddings.create(
             input=text,
             model=embedding_config.deployment
         )
-        
         embedding = response.data[0].embedding
-        
         # Log si es necesario
         # if config.enable_kibana and session_id:
         #     _log_embedding(text, embedding, startrun, session_id, call_id, cdu)
-        
         return embedding
-        
     except Exception as e:
         print(f"Error obteniendo embedding: {e}")
         import traceback
         traceback.print_exc()
-        
         # if config.enable_kibana and session_id:
         #     _log_embedding(text, None, startrun, session_id, call_id, cdu, error=str(e))
-        
         raise
-
-
 def get_response_from_gpt(
     prompt: str,
     temperature: float,
@@ -75,17 +64,14 @@ def get_response_from_gpt(
     Obtiene respuesta de GPT usando MODELS_CONFIG
     """
     startrun = datetime.now()
-    
     try:
         # ✅ Obtener configuración desde MODELS_CONFIG
         chat_config = config.get_chat_model_config()
-        
         client = AzureOpenAI(
             azure_endpoint=chat_config.api_base,
             api_key=chat_config.api_key,
             api_version=chat_config.api_version
         )
-        
         response = client.chat.completions.create(
             **safe_create_kwargs(
                 model=chat_config.deployment,
@@ -95,33 +81,22 @@ def get_response_from_gpt(
                 logit_bias=logit_bias,
             )
         )
-        
         output = response.choices[0].message.content
-        
         # if config.enable_kibana and session_id:
         #     _log_completion(prompt, output, startrun, session_id, call_id, cdu, model)
-        
         return output
-        
     except Exception as e:
         print(f"Error en GPT: {e}")
-        
         # if config.enable_kibana and session_id:
         #     _log_completion(prompt, None, startrun, session_id, call_id, cdu, model, error=str(e))
-        
         raise
-
-
 # def _log_embedding(text, embedding, startrun, session_id, call_id, cdu, error=None):
 #     """Log de embeddings a Kibana (opcional)"""
 #     try:
 #         from helpers import helper_adapter_kibana
-        
 #         status = 200 if embedding else 999
 #         output = "OK" if embedding else error
-        
 #         embedding_config = config.get_embedding_model_config()
-        
 #         helper_adapter_kibana.sendKibanaAPI(
 #             Url=embedding_config.api_base,
 #             Body=text[:200],
@@ -137,16 +112,12 @@ def get_response_from_gpt(
 #         )
 #     except Exception as e:
 #         print(f"Error logging embedding: {e}")
-
-
 # def _log_completion(prompt, output, startrun, session_id, call_id, cdu, model, error=None):
 #     """Log de completions a Kibana (opcional)"""
 #     try:
 #         from helpers import helper_adapter_kibana
-        
 #         status = 200 if output else 999
 #         chat_config = config.get_chat_model_config()
-        
 #         helper_adapter_kibana.sendKibanaAPI(
 #             Url=chat_config.api_base,
 #             Body=prompt[:200],

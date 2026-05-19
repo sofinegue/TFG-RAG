@@ -1,0 +1,1689 @@
+{
+  "gold_standard": {
+    "caso_uso": "documentos_ue",
+    "idioma": "en",
+    "total_preguntas": 98,
+    "total_documentos_analizados": 18,
+    "fecha_generacion": "2026-04-17",
+    "categorias": {
+      "counting": 10,
+      "cross_document": 9,
+      "cross_references": 6,
+      "existence": 6,
+      "identification": 8,
+      "listing": 5,
+      "relationships": 13,
+      "search_by_content": 12,
+      "search_by_type": 10,
+      "specific_content": 8,
+      "structure": 11
+    },
+    "descripcion": "Gold standard for evaluating a RAG system on Official Journal of the EU documents in English (regulations, decisions, corrigenda). Contains questions on identification, type search, content search, counting, cross-references, structure, existence, listing, relationships and specific content. Includes a 'cross_document' category with multi-hop questions (shared cross-references, reference chains, multi-doc aggregations) designed to expose the limits of basic vector RAG and to be answerable by a knowledge graph. All answers computed from data.",
+    "preguntas": [
+      {
+        "id": 1,
+        "categoria": "identification",
+        "pregunta": "What type of document is 2026/246?",
+        "tipo_respuesta": "texto",
+        "respuesta": "REGULATION"
+      },
+      {
+        "id": 2,
+        "categoria": "identification",
+        "pregunta": "Give me the full title of document OJ_L_202600197_EN.",
+        "tipo_respuesta": "texto",
+        "respuesta": "COMMISSION IMPLEMENTING DECISION(EU) 2026/197 of 28 January 2026 amending Implementing Decision (EU) 2021/1195 as regards harmonised standards for sterilization of health care products and information supplied by the manufacturer (labelling)"
+      },
+      {
+        "id": 3,
+        "categoria": "identification",
+        "pregunta": "Which European institution is responsible for document 2026/220?",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          "European Commission"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 4,
+        "categoria": "identification",
+        "pregunta": "How many pages does document 2026/215 have?",
+        "tipo_respuesta": "numero",
+        "respuesta": 37
+      },
+      {
+        "id": 5,
+        "categoria": "identification",
+        "pregunta": "I need to know what OJ_L_202600271_EN is about. What is its main subject?",
+        "tipo_respuesta": "texto",
+        "respuesta": "REGULATION (EU) 2026/271 of 29 January 2026 amending Regulation (EU) 2023/1529 concerning restrictive measures in view of Iran’s military support to Russia’s war of aggression against Ukraine and to armed groups and entities in the Middle East and the Red Sea region THE COUNCIL OF THE EUROPEAN UNION"
+      },
+      {
+        "id": 6,
+        "categoria": "identification",
+        "pregunta": "Briefly describe the purpose of document 2025/2621.",
+        "tipo_respuesta": "texto",
+        "respuesta": "COMMISSION IMPLEMENTING REGULATION(EU) 2025/2621 of 16 December 2025 laying down rules for the application of Regulation (EU) 2023/956 of the European Parliament and the Council as regards the establishment of default values"
+      },
+      {
+        "id": 7,
+        "categoria": "identification",
+        "pregunta": "Is document OJ_L_202502621_EN a regulation or a decision?",
+        "tipo_respuesta": "texto",
+        "respuesta": "REGULATION"
+      },
+      {
+        "id": 8,
+        "categoria": "identification",
+        "pregunta": "State the date of adoption of OJ_L_202502660_EN.",
+        "tipo_respuesta": "texto",
+        "respuesta": "23 December 2025"
+      },
+      {
+        "id": 9,
+        "categoria": "search_by_type",
+        "pregunta": "How many regulations are there in the database?",
+        "tipo_respuesta": "numero",
+        "respuesta": 10
+      },
+      {
+        "id": 10,
+        "categoria": "search_by_type",
+        "pregunta": "How many decisions does the collection contain?",
+        "tipo_respuesta": "numero",
+        "respuesta": 8
+      },
+      {
+        "id": 11,
+        "categoria": "search_by_type",
+        "pregunta": "list all available regulations.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 12,
+        "categoria": "search_by_type",
+        "pregunta": "Give me all decisions from the database.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 13,
+        "categoria": "search_by_type",
+        "pregunta": "What types of legislative documents do we have?",
+        "tipo_respuesta": "lista",
+        "respuesta": [
+          "DECISION",
+          "REGULATION"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 14,
+        "categoria": "search_by_type",
+        "pregunta": "Is there any corrigendum document?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": false,
+          "documentos": []
+        }
+      },
+      {
+        "id": 15,
+        "categoria": "search_by_type",
+        "pregunta": "Filter documents that are implementing regulations.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600246_EN"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 16,
+        "categoria": "search_by_type",
+        "pregunta": "Which documents were issued by the European Commission?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600264_EN"
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 17,
+        "categoria": "search_by_type",
+        "pregunta": "Are there any documents from the European Parliament?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 18,
+        "categoria": "search_by_type",
+        "pregunta": "Which are the documents from 2025?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600264_EN"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 19,
+        "categoria": "search_by_content",
+        "pregunta": "Which documents deal with fishing?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502664_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600266_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 20,
+        "categoria": "search_by_content",
+        "pregunta": "Which documents make reference to Morocco?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502664_EN"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 21,
+        "categoria": "search_by_content",
+        "pregunta": "list the documents dealing with restrictive measures.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 22,
+        "categoria": "search_by_content",
+        "pregunta": "Are there documents mentioning pesticides or pesticide residues?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202600215_EN"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 23,
+        "categoria": "search_by_content",
+        "pregunta": "Are there documents about African swine fever?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 24,
+        "categoria": "search_by_content",
+        "pregunta": "Which documents mention avian influenza or bird flu?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502660_EN"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 25,
+        "categoria": "search_by_content",
+        "pregunta": "Is there any document about substances of human origin?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 26,
+        "categoria": "search_by_content",
+        "pregunta": "Is Tunisia mentioned in any of the documents?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 27,
+        "categoria": "search_by_content",
+        "pregunta": "Which documents refer to the Euro-Mediterranean agreement?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502664_EN"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 28,
+        "categoria": "search_by_content",
+        "pregunta": "Are there documents related to the Common Foreign and Security Policy (CFSP)?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202600232_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 29,
+        "categoria": "search_by_content",
+        "pregunta": "In how many documents is the Official Journal referenced?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 30,
+        "categoria": "search_by_content",
+        "pregunta": "Is there any document mentioning honey?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502664_EN",
+          "OJ_L_202600215_EN"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 31,
+        "categoria": "counting",
+        "pregunta": "How many documents are there in total in the database?",
+        "tipo_respuesta": "numero",
+        "respuesta": 18
+      },
+      {
+        "id": 32,
+        "categoria": "counting",
+        "pregunta": "Which is the longest document by number of pages?",
+        "tipo_respuesta": "objeto",
+        "respuesta": {
+          "documento": "OJ_L_202502621_EN",
+          "paginas": 2400
+        }
+      },
+      {
+        "id": 33,
+        "categoria": "counting",
+        "pregunta": "What is the average number of pages per document?",
+        "tipo_respuesta": "numero",
+        "respuesta": 168.2
+      },
+      {
+        "id": 34,
+        "categoria": "counting",
+        "pregunta": "What are the 5 shortest documents?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202600246_EN",
+            "paginas": 2
+          },
+          {
+            "documento": "OJ_L_202600197_EN",
+            "paginas": 3
+          },
+          {
+            "documento": "OJ_L_202600193_EN",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600220_EN",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "paginas": 4
+          }
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 35,
+        "categoria": "counting",
+        "pregunta": "How many different types of documents exist?",
+        "tipo_respuesta": "numero",
+        "respuesta": 2
+      },
+      {
+        "id": 36,
+        "categoria": "counting",
+        "pregunta": "What is the distribution of documents by type?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "tipo": "REGULATION",
+            "cantidad": 10
+          },
+          {
+            "tipo": "DECISION",
+            "cantidad": 8
+          }
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 37,
+        "categoria": "counting",
+        "pregunta": "How many documents contain numbered articles?",
+        "tipo_respuesta": "numero",
+        "respuesta": 18
+      },
+      {
+        "id": 38,
+        "categoria": "counting",
+        "pregunta": "Which document has the most articles?",
+        "tipo_respuesta": "objeto",
+        "respuesta": {
+          "documento": "OJ_L_202600249_EN",
+          "num_articulos": 498
+        }
+      },
+      {
+        "id": 39,
+        "categoria": "counting",
+        "pregunta": "How many documents mention sanctions or restrictive measures?",
+        "tipo_respuesta": "numero",
+        "respuesta": 3
+      },
+      {
+        "id": 40,
+        "categoria": "counting",
+        "pregunta": "How many characters does the longest document have?",
+        "tipo_respuesta": "numero",
+        "respuesta": 3306121
+      },
+      {
+        "id": 41,
+        "categoria": "cross_references",
+        "pregunta": "Which other regulations or decisions does document 2026/243 reference?",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "2016/429",
+          "2020/687",
+          "2025/2256",
+          "2026/105"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 42,
+        "categoria": "cross_references",
+        "pregunta": "list the legislation cited in document 2026/264.",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "1093/2010",
+          "1094/2010",
+          "1095/2010",
+          "2015/847",
+          "2016/1011",
+          "2016/679",
+          "2018/1106",
+          "2018/1637",
+          "2018/1638",
+          "2018/1641",
+          "2018/1643",
+          "2018/1645",
+          "2018/1646",
+          "2018/1725",
+          "2018/66",
+          "2019/2175",
+          "2021/1348",
+          "2021/1350",
+          "2021/1351",
+          "2021/1352"
+        ],
+        "num_resultados": 20
+      },
+      {
+        "id": 43,
+        "categoria": "cross_references",
+        "pregunta": "What are the normative references in document 2025/2649?",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "1305/2013",
+          "1306/2013",
+          "1308/2013",
+          "1405/2006",
+          "2015/1017",
+          "2016/2031",
+          "2016/429",
+          "2018/1725",
+          "2018/1882",
+          "2018/848",
+          "2021/1060",
+          "2021/2015",
+          "2021/2115",
+          "2021/2116",
+          "2021/523",
+          "2022/126",
+          "2022/127",
+          "2022/128",
+          "2023/2831",
+          "2024/1235"
+        ],
+        "num_resultados": 20
+      },
+      {
+        "id": 44,
+        "categoria": "cross_references",
+        "pregunta": "Give me the references to other legislative acts found in 2025/2621.",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "2023/956",
+          "2025/2547",
+          "2025/2620"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 45,
+        "categoria": "cross_references",
+        "pregunta": "Which documents reference Regulation/Decision 2017/745?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 46,
+        "categoria": "cross_references",
+        "pregunta": "How many references to other acts does document 2025/2649 contain?",
+        "tipo_respuesta": "numero",
+        "respuesta": 20
+      },
+      {
+        "id": 47,
+        "categoria": "structure",
+        "pregunta": "How many articles does document 2025/2621 have?",
+        "tipo_respuesta": "numero",
+        "respuesta": 15
+      },
+      {
+        "id": 48,
+        "categoria": "structure",
+        "pregunta": "How many recitals are there in the preamble of 2026/246?",
+        "tipo_respuesta": "numero",
+        "respuesta": 3
+      },
+      {
+        "id": 49,
+        "categoria": "structure",
+        "pregunta": "State the number of recitals in document 2025/2664.",
+        "tipo_respuesta": "numero",
+        "respuesta": 11
+      },
+      {
+        "id": 50,
+        "categoria": "structure",
+        "pregunta": "How many points does the recital part of 2026/197 contain?",
+        "tipo_respuesta": "numero",
+        "respuesta": 2021
+      },
+      {
+        "id": 51,
+        "categoria": "structure",
+        "pregunta": "Which documents contain annexes?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 15
+      },
+      {
+        "id": 52,
+        "categoria": "structure",
+        "pregunta": "Which documents have articles and how many does each have?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202600249_EN",
+            "num_articulos": 498
+          },
+          {
+            "documento": "OJ_L_202502649_EN",
+            "num_articulos": 349
+          },
+          {
+            "documento": "OJ_L_202502660_EN",
+            "num_articulos": 259
+          },
+          {
+            "documento": "OJ_L_202600230_EN",
+            "num_articulos": 259
+          },
+          {
+            "documento": "OJ_L_202600243_EN",
+            "num_articulos": 259
+          },
+          {
+            "documento": "OJ_L_202600271_EN",
+            "num_articulos": 215
+          },
+          {
+            "documento": "OJ_L_202600246_EN",
+            "num_articulos": 90
+          },
+          {
+            "documento": "OJ_L_202502664_EN",
+            "num_articulos": 78
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "num_articulos": 64
+          },
+          {
+            "documento": "OJ_L_202600215_EN",
+            "num_articulos": 49
+          },
+          {
+            "documento": "OJ_L_202600266_EN",
+            "num_articulos": 43
+          },
+          {
+            "documento": "OJ_L_202600264_EN",
+            "num_articulos": 42
+          },
+          {
+            "documento": "OJ_L_202600239_EN",
+            "num_articulos": 29
+          },
+          {
+            "documento": "OJ_L_202600220_EN",
+            "num_articulos": 21
+          },
+          {
+            "documento": "OJ_L_202502621_EN",
+            "num_articulos": 15
+          },
+          {
+            "documento": "OJ_L_202600238_EN",
+            "num_articulos": 12
+          },
+          {
+            "documento": "OJ_L_202600193_EN",
+            "num_articulos": 10
+          },
+          {
+            "documento": "OJ_L_202600197_EN",
+            "num_articulos": 10
+          }
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 53,
+        "categoria": "structure",
+        "pregunta": "list all documents ordered by number of pages from highest to lowest.",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202502621_EN",
+            "paginas": 2400
+          },
+          {
+            "documento": "OJ_L_202600249_EN",
+            "paginas": 212
+          },
+          {
+            "documento": "OJ_L_202502664_EN",
+            "paginas": 106
+          },
+          {
+            "documento": "OJ_L_202502660_EN",
+            "paginas": 87
+          },
+          {
+            "documento": "OJ_L_202600266_EN",
+            "paginas": 40
+          },
+          {
+            "documento": "OJ_L_202502649_EN",
+            "paginas": 38
+          },
+          {
+            "documento": "OJ_L_202600215_EN",
+            "paginas": 37
+          },
+          {
+            "documento": "OJ_L_202600243_EN",
+            "paginas": 22
+          },
+          {
+            "documento": "OJ_L_202600230_EN",
+            "paginas": 20
+          },
+          {
+            "documento": "OJ_L_202600264_EN",
+            "paginas": 18
+          },
+          {
+            "documento": "OJ_L_202600271_EN",
+            "paginas": 16
+          },
+          {
+            "documento": "OJ_L_202600238_EN",
+            "paginas": 7
+          },
+          {
+            "documento": "OJ_L_202600239_EN",
+            "paginas": 7
+          },
+          {
+            "documento": "OJ_L_202600193_EN",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600220_EN",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600197_EN",
+            "paginas": 3
+          },
+          {
+            "documento": "OJ_L_202600246_EN",
+            "paginas": 2
+          }
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 54,
+        "categoria": "structure",
+        "pregunta": "Which documents specify a date of application?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600266_EN"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 55,
+        "categoria": "structure",
+        "pregunta": "Are there documents with transitional provisions?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN"
+        ],
+        "num_resultados": 2
+      },
+      {
+        "id": 56,
+        "categoria": "structure",
+        "pregunta": "Which documents declare themselves binding in their entirety?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 57,
+        "categoria": "structure",
+        "pregunta": "Give me an overview of all documents with their type, date and number of pages.",
+        "tipo_respuesta": "tabla",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202502621_EN",
+            "tipo": "REGULATION",
+            "fecha": "16 December 2025",
+            "paginas": 2400
+          },
+          {
+            "documento": "OJ_L_202502649_EN",
+            "tipo": "REGULATION",
+            "fecha": "19 December 2025",
+            "paginas": 38
+          },
+          {
+            "documento": "OJ_L_202502660_EN",
+            "tipo": "DECISION",
+            "fecha": "23 December 2025",
+            "paginas": 87
+          },
+          {
+            "documento": "OJ_L_202502664_EN",
+            "tipo": "DECISION",
+            "fecha": "2 October 2025",
+            "paginas": 106
+          },
+          {
+            "documento": "OJ_L_202600193_EN",
+            "tipo": "DECISION",
+            "fecha": "28 January 2026",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600197_EN",
+            "tipo": "DECISION",
+            "fecha": "28 January 2026",
+            "paginas": 3
+          },
+          {
+            "documento": "OJ_L_202600215_EN",
+            "tipo": "REGULATION",
+            "fecha": "29 January 2026",
+            "paginas": 37
+          },
+          {
+            "documento": "OJ_L_202600220_EN",
+            "tipo": "REGULATION",
+            "fecha": "29 January 2026",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600230_EN",
+            "tipo": "DECISION",
+            "fecha": "26 January 2026",
+            "paginas": 20
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "tipo": "DECISION",
+            "fecha": "29 January 2026",
+            "paginas": 4
+          },
+          {
+            "documento": "OJ_L_202600238_EN",
+            "tipo": "REGULATION",
+            "fecha": "29 January 2026",
+            "paginas": 7
+          },
+          {
+            "documento": "OJ_L_202600239_EN",
+            "tipo": "DECISION",
+            "fecha": "29 January 2026",
+            "paginas": 7
+          },
+          {
+            "documento": "OJ_L_202600243_EN",
+            "tipo": "DECISION",
+            "fecha": "26 January 2026",
+            "paginas": 22
+          },
+          {
+            "documento": "OJ_L_202600246_EN",
+            "tipo": "REGULATION",
+            "fecha": "23 January 2026",
+            "paginas": 2
+          },
+          {
+            "documento": "OJ_L_202600249_EN",
+            "tipo": "REGULATION",
+            "fecha": "26 January 2026",
+            "paginas": 212
+          },
+          {
+            "documento": "OJ_L_202600264_EN",
+            "tipo": "REGULATION",
+            "fecha": "27 October 2025",
+            "paginas": 18
+          },
+          {
+            "documento": "OJ_L_202600266_EN",
+            "tipo": "REGULATION",
+            "fecha": "26 January 2026",
+            "paginas": 40
+          },
+          {
+            "documento": "OJ_L_202600271_EN",
+            "tipo": "REGULATION",
+            "fecha": "29 January 2026",
+            "paginas": 16
+          }
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 58,
+        "categoria": "existence",
+        "pregunta": "Is there any document about Atlantic fishing?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202600249_EN"
+          ]
+        }
+      },
+      {
+        "id": 59,
+        "categoria": "existence",
+        "pregunta": "Is there any implementing regulation in the database?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202502621_EN",
+            "OJ_L_202600220_EN",
+            "OJ_L_202600238_EN",
+            "OJ_L_202600246_EN"
+          ]
+        }
+      },
+      {
+        "id": 60,
+        "categoria": "existence",
+        "pregunta": "Are there documents dealing with Ukraine?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202502621_EN",
+            "OJ_L_202600271_EN"
+          ]
+        }
+      },
+      {
+        "id": 61,
+        "categoria": "existence",
+        "pregunta": "Is Russia mentioned in any document?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202502621_EN",
+            "OJ_L_202600271_EN"
+          ]
+        }
+      },
+      {
+        "id": 62,
+        "categoria": "existence",
+        "pregunta": "Is there any document relating to the European Economic Area (EEA)?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202502621_EN",
+            "OJ_L_202502660_EN",
+            "OJ_L_202502664_EN",
+            "OJ_L_202600193_EN",
+            "OJ_L_202600197_EN",
+            "OJ_L_202600215_EN",
+            "OJ_L_202600220_EN",
+            "OJ_L_202600230_EN",
+            "OJ_L_202600243_EN",
+            "OJ_L_202600264_EN"
+          ]
+        }
+      },
+      {
+        "id": 63,
+        "categoria": "existence",
+        "pregunta": "Is there any document mentioning a protected designation of origin (PDO)?",
+        "tipo_respuesta": "booleano",
+        "respuesta": {
+          "existe": true,
+          "documentos": [
+            "OJ_L_202502660_EN",
+            "OJ_L_202600246_EN"
+          ]
+        }
+      },
+      {
+        "id": 64,
+        "categoria": "listing",
+        "pregunta": "Give me the complete list of all available documents.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 65,
+        "categoria": "listing",
+        "pregunta": "What are all the documents in the database?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 66,
+        "categoria": "listing",
+        "pregunta": "I need to see the full catalogue of EU documents.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 18
+      },
+      {
+        "id": 67,
+        "categoria": "listing",
+        "pregunta": "list all documents issued by the Council.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 68,
+        "categoria": "listing",
+        "pregunta": "Which documents are from the year 2025?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600264_EN"
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 69,
+        "categoria": "relationships",
+        "pregunta": "Which is the longest document and which is the shortest?",
+        "tipo_respuesta": "objeto",
+        "respuesta": {
+          "longest": {
+            "documento": "OJ_L_202502621_EN",
+            "paginas": 2400
+          },
+          "shortest": {
+            "documento": "OJ_L_202600246_EN",
+            "paginas": 2
+          }
+        }
+      },
+      {
+        "id": 70,
+        "categoria": "relationships",
+        "pregunta": "Are there documents dealing simultaneously with fishing and health topics?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 71,
+        "categoria": "relationships",
+        "pregunta": "What are the 5 documents with the most references to other legislative acts?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202502649_EN",
+            "num_referencias": 20
+          },
+          {
+            "documento": "OJ_L_202600249_EN",
+            "num_referencias": 20
+          },
+          {
+            "documento": "OJ_L_202600264_EN",
+            "num_referencias": 20
+          },
+          {
+            "documento": "OJ_L_202600266_EN",
+            "num_referencias": 9
+          },
+          {
+            "documento": "OJ_L_202600230_EN",
+            "num_referencias": 7
+          }
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 72,
+        "categoria": "relationships",
+        "pregunta": "In which documents is Spain mentioned?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600266_EN"
+        ],
+        "num_resultados": 6
+      },
+      {
+        "id": 73,
+        "categoria": "relationships",
+        "pregunta": "Which documents were jointly issued by the European Parliament and the Council?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN"
+        ],
+        "num_resultados": 1
+      },
+      {
+        "id": 74,
+        "categoria": "relationships",
+        "pregunta": "Which documents are related to health or medical matters?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 75,
+        "categoria": "relationships",
+        "pregunta": "Which documents deal with international trade or external relations?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600249_EN"
+        ],
+        "num_resultados": 8
+      },
+      {
+        "id": 76,
+        "categoria": "relationships",
+        "pregunta": "Which documents contain provisions on entry into force?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 15
+      },
+      {
+        "id": 77,
+        "categoria": "relationships",
+        "pregunta": "Compare documents 2025/2621 and 2025/2649: what do they have in common?",
+        "tipo_respuesta": "objeto",
+        "respuesta": {
+          "common_type": "REGULATION",
+          "doc1": {
+            "codigo": "2025/2621",
+            "fecha": "16 December 2025",
+            "paginas": 2400
+          },
+          "doc2": {
+            "codigo": "2025/2649",
+            "fecha": "19 December 2025",
+            "paginas": 38
+          }
+        }
+      },
+      {
+        "id": 78,
+        "categoria": "relationships",
+        "pregunta": "Which are the most recent documents?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202600215_EN",
+            "fecha": "29 January 2026"
+          },
+          {
+            "documento": "OJ_L_202600220_EN",
+            "fecha": "29 January 2026"
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "fecha": "29 January 2026"
+          },
+          {
+            "documento": "OJ_L_202600238_EN",
+            "fecha": "29 January 2026"
+          },
+          {
+            "documento": "OJ_L_202600239_EN",
+            "fecha": "29 January 2026"
+          }
+        ],
+        "num_resultados": 5
+      },
+      {
+        "id": 79,
+        "categoria": "relationships",
+        "pregunta": "Which documents address security or defence topics?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 6
+      },
+      {
+        "id": 80,
+        "categoria": "relationships",
+        "pregunta": "Are there documents related to the environment?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202600249_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 81,
+        "categoria": "relationships",
+        "pregunta": "How are the documents distributed by month of issuance?",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "month": "January",
+            "count": 13
+          },
+          {
+            "month": "December",
+            "count": 3
+          },
+          {
+            "month": "October",
+            "count": 2
+          }
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 82,
+        "categoria": "specific_content",
+        "pregunta": "What is the content of Article 1 of document 2025/2621?",
+        "tipo_respuesta": "texto_largo",
+        "respuesta": "Default values 1. Where the embedded emissions in imported goods are determined on the basis of default values in accordance with Article 7(2), point (b), of Regulation (EU) 2023/956, the default values laid down in Annex I to this Regulation shall be used. 2. Where the embedded emissions of complex goods are determined on the basis of actual values, and the embedded emissions of precursors used in the production of those complex goods are determined on the basis of default values in accordance "
+      },
+      {
+        "id": 83,
+        "categoria": "specific_content",
+        "pregunta": "Which documents specify their date of entry into force and when is it?",
+        "tipo_respuesta": "lista_detallada",
+        "respuesta": [
+          {
+            "documento": "OJ_L_202502649_EN",
+            "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202502664_EN",
+            "entry_into_force": "on, and apply as from, the date of its adoption"
+          },
+          {
+            "documento": "OJ_L_202600193_EN",
+            "entry_into_force": "the day of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600197_EN",
+            "entry_into_force": "the day of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600232_EN",
+            "entry_into_force": "the date of its adoption"
+          },
+          {
+            "documento": "OJ_L_202600238_EN",
+            "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600239_EN",
+            "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600249_EN",
+            "entry_into_force": "the date of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600266_EN",
+            "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+          },
+          {
+            "documento": "OJ_L_202600271_EN",
+            "entry_into_force": "the day following that of its publication in the Official Journal of the European Union"
+          }
+        ],
+        "num_resultados": 10
+      },
+      {
+        "id": 84,
+        "categoria": "specific_content",
+        "pregunta": "Which documents define their scope of application?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 6
+      },
+      {
+        "id": 85,
+        "categoria": "specific_content",
+        "pregunta": "Which documents contain repeal clauses?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [],
+        "num_resultados": 0
+      },
+      {
+        "id": 86,
+        "categoria": "specific_content",
+        "pregunta": "In which documents are committees referred to?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN"
+        ],
+        "num_resultados": 16
+      },
+      {
+        "id": 87,
+        "categoria": "specific_content",
+        "pregunta": "Which documents are based on the Treaty on the Functioning of the European Union?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502621_EN",
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202600193_EN",
+          "OJ_L_202600197_EN",
+          "OJ_L_202600215_EN",
+          "OJ_L_202600220_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600243_EN",
+          "OJ_L_202600246_EN",
+          "OJ_L_202600249_EN",
+          "OJ_L_202600264_EN",
+          "OJ_L_202600266_EN",
+          "OJ_L_202600271_EN"
+        ],
+        "num_resultados": 15
+      },
+      {
+        "id": 88,
+        "categoria": "specific_content",
+        "pregunta": "How many documents refer to the Member States?",
+        "tipo_respuesta": "numero",
+        "respuesta": 15
+      },
+      {
+        "id": 89,
+        "categoria": "specific_content",
+        "pregunta": "In which documents is cooperation mentioned?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502664_EN",
+          "OJ_L_202600232_EN",
+          "OJ_L_202600249_EN"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 90,
+        "categoria": "cross_document",
+        "pregunta": "list ALL documents in our corpus that cite regulation 2016/429.",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502649_EN",
+          "OJ_L_202502660_EN",
+          "OJ_L_202600230_EN",
+          "OJ_L_202600243_EN"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 91,
+        "categoria": "cross_document",
+        "pregunta": "How many documents in the corpus reference regulation 2020/687?",
+        "tipo_respuesta": "numero",
+        "respuesta": 3
+      },
+      {
+        "id": 92,
+        "categoria": "cross_document",
+        "pregunta": "How many distinct external legislative acts are referenced across the entire corpus?",
+        "tipo_respuesta": "numero",
+        "respuesta": 100
+      },
+      {
+        "id": 93,
+        "categoria": "cross_document",
+        "pregunta": "Which external regulations are cited by 2 or more documents in our corpus?",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "1025/2012",
+          "1100/2007",
+          "1224/2009",
+          "1380/2013",
+          "2016/429",
+          "2017/745",
+          "2017/746",
+          "2018/1725",
+          "2018/1882",
+          "2019/1241",
+          "2020/687"
+        ],
+        "num_resultados": 11
+      },
+      {
+        "id": 94,
+        "categoria": "cross_document",
+        "pregunta": "Which legislative acts are referenced by BOTH document 2026/249 AND document 2026/266?",
+        "tipo_respuesta": "lista_referencias",
+        "respuesta": [
+          "1100/2007",
+          "1224/2009",
+          "1380/2013",
+          "2019/1241"
+        ],
+        "num_resultados": 4
+      },
+      {
+        "id": 95,
+        "categoria": "cross_document",
+        "pregunta": "Which pair of documents in the corpus shares the most cross-references? How many shared references do they have?",
+        "tipo_respuesta": "objeto",
+        "respuesta": {
+          "document_1": "2026/249",
+          "document_2": "2026/266",
+          "shared_count": 4,
+          "shared_refs": [
+            "1100/2007",
+            "1224/2009",
+            "1380/2013",
+            "2019/1241"
+          ]
+        }
+      },
+      {
+        "id": 96,
+        "categoria": "cross_document",
+        "pregunta": "Which documents in the corpus do not cite any other legislative act?",
+        "tipo_respuesta": "lista_documentos",
+        "respuesta": [
+          "OJ_L_202502664_EN",
+          "OJ_L_202600238_EN",
+          "OJ_L_202600239_EN"
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 97,
+        "categoria": "cross_document",
+        "pregunta": "Which 3 documents cite the largest number of external regulations? Provide codes and counts.",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "document": "2025/2649",
+            "num_references": 20
+          },
+          {
+            "document": "2026/249",
+            "num_references": 20
+          },
+          {
+            "document": "2026/264",
+            "num_references": 20
+          }
+        ],
+        "num_resultados": 3
+      },
+      {
+        "id": 98,
+        "categoria": "cross_document",
+        "pregunta": "Among documents issued by the European Commission, list their codes and dates (requires correlating body and metadata across multiple documents).",
+        "tipo_respuesta": "ranking",
+        "respuesta": [
+          {
+            "document": "OJ_L_202502621_EN",
+            "codigo": "2025/2621",
+            "fecha": "16 December 2025"
+          },
+          {
+            "document": "OJ_L_202502660_EN",
+            "codigo": "2025/2660",
+            "fecha": "23 December 2025"
+          },
+          {
+            "document": "OJ_L_202600193_EN",
+            "codigo": "2026/193",
+            "fecha": "28 January 2026"
+          },
+          {
+            "document": "OJ_L_202600197_EN",
+            "codigo": "2026/197",
+            "fecha": "28 January 2026"
+          },
+          {
+            "document": "OJ_L_202600215_EN",
+            "codigo": "2026/215",
+            "fecha": "29 January 2026"
+          },
+          {
+            "document": "OJ_L_202600220_EN",
+            "codigo": "2026/220",
+            "fecha": "29 January 2026"
+          },
+          {
+            "document": "OJ_L_202600230_EN",
+            "codigo": "2026/230",
+            "fecha": "26 January 2026"
+          },
+          {
+            "document": "OJ_L_202600243_EN",
+            "codigo": "2026/243",
+            "fecha": "26 January 2026"
+          },
+          {
+            "document": "OJ_L_202600246_EN",
+            "codigo": "2026/246",
+            "fecha": "23 January 2026"
+          },
+          {
+            "document": "OJ_L_202600264_EN",
+            "codigo": "2026/264",
+            "fecha": "27 October 2025"
+          }
+        ],
+        "num_resultados": 10
+      }
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 """
-Backend RAG – tres casos de uso: CVs, EU (legislación), Wiki (Wikipedia).
-
+Backend RAG – tres casos de uso: CVs, EU (legislación), Wiki (Wikipedia)
 Ejecutar con:
     python -m src.rag.main
     uvicorn src.rag.main:app --reload --port 8000
@@ -12,12 +11,10 @@ import uuid
 import asyncio
 import threading
 import pytz
-
 from datetime import datetime
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
-from typing import Optional, List
-
+from typing import Optional
 import uvicorn
 from azure.cosmos import CosmosClient
 from fastapi import FastAPI, Form, Request
@@ -25,13 +22,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-
 from src.config import config
 from src.rag.app_langgraph import rag_graph
 from src.rag.utils.pricing import load_model_pricing, calculate_cost
-
 app = FastAPI(title="RAG Backend – Multi Use-Case")
-
 # ──────────────────────────────────────────────────────────────────────
 # CORS
 # ──────────────────────────────────────────────────────────────────────
@@ -40,7 +34,6 @@ ALLOWED_ORIGINS = [
     os.getenv("FRONTEND_URL", ""),
 ]
 ALLOWED_ORIGINS = [o for o in ALLOWED_ORIGINS if o]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS or ["*"],
@@ -48,7 +41,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # ──────────────────────────────────────────────────────────────────────
 # Cosmos DB (conversaciones)
 # ──────────────────────────────────────────────────────────────────────
@@ -56,17 +48,13 @@ COSMOS_ENDPOINT = os.getenv("COSMOS_ENDPOINT", "")
 COSMOS_KEY      = os.getenv("COSMOS_KEY", "")
 COSMOS_DB       = os.getenv("COSMOS_CONVERSATIONS_DB", "RAG_DB")
 COSMOS_COLL     = os.getenv("COSMOS_CONVERSATIONS_CONTAINER", "Conversations")
-
 cosmos_client = CosmosClient(COSMOS_ENDPOINT, COSMOS_KEY)
 _db        = cosmos_client.get_database_client(COSMOS_DB)
 _container = _db.get_container_client(COSMOS_COLL)
-
 # Fallback en memoria cuando Cosmos no está disponible
 _mem_store: dict = {}
-
 MODEL_PRICING, PRICING_DATE = load_model_pricing()
 executor = ThreadPoolExecutor(max_workers=4)
-
 # ──────────────────────────────────────────────────────────────────────
 # USE CASES CONFIG
 # ──────────────────────────────────────────────────────────────────────
@@ -93,7 +81,6 @@ USE_CASES = {
         "index":       config.azure_search_index_wiki,
     },
 }
-
 # ──────────────────────────────────────────────────────────────────────
 # Helpers de conversación (Cosmos DB con fallback en memoria)
 # ──────────────────────────────────────────────────────────────────────
@@ -102,8 +89,6 @@ def get_conversation(conv_id: str):
         return _container.read_item(item=conv_id, partition_key=conv_id)
     except Exception:
         return _mem_store.get(conv_id)
-
-
 def create_new_conversation(user_id: str, use_case: str = "cvs"):
     new_id = str(uuid.uuid4())
     doc = {
@@ -121,8 +106,6 @@ def create_new_conversation(user_id: str, use_case: str = "cvs"):
     except Exception:
         _mem_store[new_id] = doc
     return new_id
-
-
 def update_conversation(conv_id: str, conv: dict):
     if "convId" not in conv:
         conv["convId"] = conv_id
@@ -130,8 +113,6 @@ def update_conversation(conv_id: str, conv: dict):
         _container.upsert_item(body=conv)
     except Exception:
         _mem_store[conv_id] = conv
-
-
 def update_title(conv_id: str, query: str):
     item = get_conversation(conv_id)
     if not item:
@@ -142,8 +123,6 @@ def update_title(conv_id: str, query: str):
         _container.upsert_item(body=item)
     except Exception:
         _mem_store[conv_id] = item
-
-
 def delete_conversation(conv_id: str) -> bool:
     _mem_store.pop(conv_id, None)
     try:
@@ -151,8 +130,6 @@ def delete_conversation(conv_id: str) -> bool:
         return True
     except Exception:
         return conv_id not in _mem_store
-
-
 def get_conversations_by_user(user_id: str) -> list:
     try:
         query = (
@@ -166,17 +143,13 @@ def get_conversations_by_user(user_id: str) -> list:
             key=lambda c: c.get("created_at", ""),
             reverse=True,
         )
-
 # ──────────────────────────────────────────────────────────────────────
 # ENDPOINTS
 # ──────────────────────────────────────────────────────────────────────
-
 @app.get("/api/use-cases")
 async def list_use_cases():
-    """Devuelve los casos de uso disponibles para el frontend."""
+    """Devuelve los casos de uso disponibles para el frontend"""
     return {"use_cases": list(USE_CASES.values())}
-
-
 @app.post("/api/chat")
 async def chat(
     query:           str  = Form(...),
@@ -194,9 +167,7 @@ async def chat(
             status_code=400,
             content={"error": f"use_case '{use_case}' no válido. Opciones: {list(USE_CASES.keys())}"},
         )
-
     user_id = user_id or "anonymous"
-
     # Obtener o crear conversación
     if conversation_id:
         current_conv = get_conversation(conversation_id)
@@ -206,7 +177,6 @@ async def chat(
     else:
         conversation_id = create_new_conversation(user_id, use_case)
         current_conv    = get_conversation(conversation_id)
-
     if current_conv is None:
         # create_new_conversation ya guardó en _mem_store si Cosmos falló,
         # pero por seguridad lo insertamos directamente aquí.
@@ -216,18 +186,14 @@ async def chat(
             "query_count": 0, "messages": [], "title": query[:50],
         }
         _mem_store[conversation_id] = current_conv
-
     if current_conv.get("query_count", 0) == 0:
         update_title(conversation_id, query)
-
     conversation_history = [
         {"role": m["role"], "content": m["content"]}
         for m in current_conv["messages"]
     ]
-
     current_conv["messages"].append({"role": "user", "content": query})
     current_conv["query_count"] = current_conv.get("query_count", 0) + 1
-
     # Ejecutar RAG
     try:
         result = rag_graph.run(
@@ -242,7 +208,6 @@ async def chat(
     except Exception as e:
         current_conv["messages"].pop()
         return JSONResponse(status_code=500, content={"error": str(e)})
-
     # Guardrails: bloquear si fue una violación
     if result.get("error") in ("input_violation", "guardrails_violation"):
         current_conv["messages"].pop()
@@ -250,15 +215,12 @@ async def chat(
             status_code=400,
             content={"error": result.get("answer", "Consulta rechazada por políticas de uso.")},
         )
-
     answer   = result.get("answer", "")
     metadata = result.get("metadata", {}) if isinstance(result.get("metadata"), dict) else {}
     usage    = metadata.get("usage", {}) if isinstance(metadata.get("usage"), dict) else {}
-
     # Registrar respuesta en el historial
     current_conv["messages"].append({"role": "assistant", "content": answer})
     update_conversation(conversation_id, current_conv)
-
     # Calcular costo
     cost_info = {}
     model_name = usage.get("model", "")
@@ -270,7 +232,6 @@ async def chat(
             cached_tokens=usage.get("cached_tokens", 0),
             pricing_dict=MODEL_PRICING,
         )
-
     response_payload = {
         "answer":          answer,
         "conversation_id": conversation_id,
@@ -285,13 +246,9 @@ async def chat(
             "chunks_count":      len(result.get("chunks_used", [])),
         },
     }
-
     if show_timestamps:
         response_payload["timestamps"] = result.get("timestamps", {})
-
     return response_payload
-
-
 @app.post("/api/conversations/create")
 async def create_conversation(
     user_id:  str = Form(...),
@@ -299,62 +256,45 @@ async def create_conversation(
 ):
     conv_id = create_new_conversation(user_id, use_case)
     return {"conversation_id": conv_id}
-
-
 @app.get("/api/conversations")
 async def get_conversations(user_id: str):
     convs = get_conversations_by_user(user_id)
     return {"conversations": convs}
-
-
 @app.get("/api/conversations/{conv_id}")
 async def get_single_conversation(conv_id: str):
     conv = get_conversation(conv_id)
     if not conv:
         return JSONResponse(status_code=404, content={"error": "Conversación no encontrada"})
     return conv
-
-
 @app.delete("/api/delete-conversation")
 async def delete_conv(conversation_id: str = Form(...)):
     ok = delete_conversation(conversation_id)
     return {"success": ok}
-
-
 @app.get("/health")
 async def health():
     return {"status": "ok", "use_cases": list(USE_CASES.keys()), "timestamp": datetime.now().isoformat()}
-
-
 @app.get("/api/version")
 async def version():
     return {"version": "1.0.0", "project": config.project_name}
-
-
 # ──────────────────────────────────────────────────────────────────────
 # Servir frontend React (producción)
 # ──────────────────────────────────────────────────────────────────────
 FRONTEND_BUILD = Path(__file__).parent.parent.parent / "frontend" / "build"
-
 if FRONTEND_BUILD.exists():
     app.mount(
         "/static",
         StaticFiles(directory=str(FRONTEND_BUILD / "static")),
         name="static",
     )
-
     @app.get("/")
     async def serve_index():
         return FileResponse(str(FRONTEND_BUILD / "index.html"))
-
     @app.get("/{full_path:path}")
     async def serve_spa(full_path: str):
         # Dejar pasar las rutas /api/
         if full_path.startswith("api/"):
             return JSONResponse(status_code=404, content={"error": "Not found"})
         return FileResponse(str(FRONTEND_BUILD / "index.html"))
-
-
 # ──────────────────────────────────────────────────────────────────────
 # Entry point
 # ──────────────────────────────────────────────────────────────────────

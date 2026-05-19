@@ -1,39 +1,30 @@
 """
-GraphRagStrategy — retrieval sobre Knowledge Graph en Neo4j vía Graphiti.
-
+GraphRagStrategy — retrieval sobre Knowledge Graph en Neo4j vía Graphiti
 Aplica a:
   · use_case = "eu",   language ∈ {en, fr, it, pt}  → database NEO4J_EU_DATABASE
   · use_case = "wiki", language ∈ {en, ...}         → database NEO4J_WIKI_DATABASE
-
 Características:
   · Usa `graphiti.search_(...)` con un `SearchConfig` (combined / edges / nodes)
-    según `GRAPH_RAG_MODE`.
+    según `GRAPH_RAG_MODE`
   · Devuelve los chunks como una mezcla de:
         - facts (edges)        → contienen relaciones extraídas
         - entities (nodes)     → contienen resúmenes de entidades
         - episodes             → contienen el texto original ingestado
   · Cachea una instancia singleton de Graphiti por database para evitar
-    re-inicializar la conexión Neo4j en cada query.
-
+    re-inicializar la conexión Neo4j en cada query
 NOTA: la API `search_()` de Graphiti es asíncrona. Como las estrategias se
 invocan dentro de un nodo síncrono de LangGraph, envolvemos la llamada en
-un loop dedicado (similar al patrón usado en `app_langgraph.generate_answer_async`).
+un loop dedicado (similar al patrón usado en `app_langgraph.generate_answer_async`)
 """
 from __future__ import annotations
-
 import asyncio
 import os
-from typing import Dict, List, Optional
-
+from typing import Optional
 from src.config import config
 from src.rag.strategies.base import BaseStrategy
-
-
 # ─── Estado global (singletons por database) ───────────────────────────
-_GRAPHITI_INSTANCES: Dict[str, "Graphiti"] = {}  # noqa: F821 — forward ref
+_GRAPHITI_INSTANCES: dict[str, "Graphiti"] = {}  # noqa: F821 — forward ref
 _GRAPHITI_LOCK = None  # se inicializa en primer uso (asyncio.Lock requiere loop)
-
-
 def _build_azure_base_url() -> str:
     base = config.azure_openai_url or ""
     if not base.endswith("/"):
@@ -41,23 +32,17 @@ def _build_azure_base_url() -> str:
     if not base.endswith("openai/v1/"):
         base += "openai/v1/"
     return base
-
-
 def _resolve_database(use_case: str) -> str:
     if use_case == "eu":
         return config.neo4j_eu_database
     if use_case == "wiki":
         return config.neo4j_wiki_database
     raise ValueError(f"GraphRagStrategy: use_case '{use_case}' no soportado")
-
-
 async def _get_or_create_graphiti(database: str):
-    """Devuelve (y cachea) una instancia de Graphiti para la database indicada."""
+    """Devuelve (y cachea) una instancia de Graphiti para la database indicada"""
     global _GRAPHITI_INSTANCES
-
     if database in _GRAPHITI_INSTANCES:
         return _GRAPHITI_INSTANCES[database]
-
     # Imports diferidos: graphiti_core puede no estar disponible al importar
     # el módulo (p. ej. en tests sin Neo4j).
     from openai import AsyncOpenAI
@@ -68,17 +53,14 @@ async def _get_or_create_graphiti(database: str):
     from graphiti_core.llm_client.azure_openai_client import AzureOpenAILLMClient
     from graphiti_core.cross_encoder.openai_reranker_client import OpenAIRerankerClient
     from graphiti_core.llm_client.config import LLMConfig
-
     # Skip-verify para proxies corporativos
     neo4j_uri = config.neo4j_uri
     if os.environ.get("NEO4J_SKIP_VERIFY", "").lower() in ("1", "true", "yes"):
         neo4j_uri = neo4j_uri.replace("neo4j+s://", "neo4j+ssc://").replace(
             "bolt+s://", "bolt+ssc://"
         )
-
     azure_base_url = _build_azure_base_url()
     azure_client = AsyncOpenAI(base_url=azure_base_url, api_key=config.azure_openai_key)
-
     llm_config = LLMConfig(
         api_key=config.azure_openai_key,
         base_url=azure_base_url,
@@ -86,11 +68,9 @@ async def _get_or_create_graphiti(database: str):
         small_model=config.azure_openai_mini_name,
     )
     llm_client = AzureOpenAILLMClient(azure_client=azure_client, config=llm_config)
-
     emb_cfg = config.get_embedding_model_config()
     embedder = AzureOpenAIEmbedderClient(azure_client=azure_client, model=emb_cfg.deployment)
     reranker = OpenAIRerankerClient(config=llm_config, client=azure_client)
-
     print(f"   🧠 Inicializando Graphiti para database='{database}'...")
     neo4j_driver = Neo4jDriver(
         uri=neo4j_uri,
@@ -107,7 +87,6 @@ async def _get_or_create_graphiti(database: str):
         connection_acquisition_timeout=60,
     )
     await old_driver.close()
-
     graphiti = Graphiti(
         llm_client=llm_client,
         embedder=embedder,
@@ -117,16 +96,13 @@ async def _get_or_create_graphiti(database: str):
     _GRAPHITI_INSTANCES[database] = graphiti
     print(f"   ✅ Graphiti listo (database='{database}')")
     return graphiti
-
-
 def _build_search_config(num_results: int):
-    """Devuelve un SearchConfig según GRAPH_RAG_MODE."""
+    """Devuelve un SearchConfig según GRAPH_RAG_MODE"""
     from graphiti_core.search.search_config_recipes import (
         COMBINED_HYBRID_SEARCH_RRF,
         EDGE_HYBRID_SEARCH_RRF,
         NODE_HYBRID_SEARCH_RRF,
     )
-
     mode = (config.graph_rag_mode or "combined").lower()
     if mode == "edges":
         cfg = EDGE_HYBRID_SEARCH_RRF.model_copy(deep=True)
@@ -134,20 +110,16 @@ def _build_search_config(num_results: int):
         cfg = NODE_HYBRID_SEARCH_RRF.model_copy(deep=True)
     else:
         cfg = COMBINED_HYBRID_SEARCH_RRF.model_copy(deep=True)
-
     cfg.limit = num_results
     cfg.reranker_min_score = config.graph_rag_min_score
     return cfg
-
-
-def _results_to_chunks(results, max_chunks: int) -> List[Dict]:
+def _results_to_chunks(results, max_chunks: int) -> list[dict]:
     """
     Convierte un `SearchResults` de Graphiti a la lista de chunks que
     espera el `Generator` estándar (claves: chunk_id, content, title,
-    doc_title, pages, score, reranker_score, metadata).
+    doc_title, pages, score, reranker_score, metadata)
     """
-    chunks: List[Dict] = []
-
+    chunks: list[dict] = []
     # Episodes (texto original) — los más informativos
     for ep in (results.episodes or []):
         content = getattr(ep, "content", None) or getattr(ep, "name", "") or ""
@@ -162,7 +134,6 @@ def _results_to_chunks(results, max_chunks: int) -> List[Dict]:
             "reranker_score": 1.0,
             "metadata":       {"type": "episode"},
         })
-
     # Edges (hechos / relaciones) — comprimen información del grafo
     for edge in (results.edges or []):
         fact = getattr(edge, "fact", "") or ""
@@ -179,7 +150,6 @@ def _results_to_chunks(results, max_chunks: int) -> List[Dict]:
             "reranker_score": 0.9,
             "metadata":       {"type": "edge"},
         })
-
     # Nodes (entidades + resúmenes)
     for node in (results.nodes or []):
         summary = getattr(node, "summary", "") or ""
@@ -197,59 +167,41 @@ def _results_to_chunks(results, max_chunks: int) -> List[Dict]:
             "reranker_score": 0.8,
             "metadata":       {"type": "node"},
         })
-
     return chunks[:max_chunks]
-
-
-async def _search_async(use_case: str, query: str) -> List[Dict]:
+async def _search_async(use_case: str, query: str) -> list[dict]:
     database = _resolve_database(use_case)
     graphiti = await _get_or_create_graphiti(database)
-
     num_results = config.graph_rag_top_k
     search_cfg  = _build_search_config(num_results)
-
     results = await graphiti.search_(query=query, config=search_cfg)
     return _results_to_chunks(results, max_chunks=config.graph_rag_max_chunks)
-
-
 def _run_async(coro):
-    """Ejecuta una coroutine en un loop dedicado **persistente**.
-
+    """Ejecuta una coroutine en un loop dedicado **persistente**
     El driver async de Neo4j (y el cliente AsyncOpenAI) atan los sockets al
     event loop en el que se crearon. Si abrimos un loop nuevo por cada query
     y lo cerramos, los siguientes intentos de usar las conexiones cacheadas
     en ``_GRAPHITI_INSTANCES`` revientan con::
-
         AttributeError: 'NoneType' object has no attribute 'send'
         (asyncio.proactor_events on Windows)
-
     La solución: un **único** loop vivo en un thread dedicado, reutilizado
-    para todas las corrutinas mientras dure el proceso.
+    para todas las corrutinas mientras dure el proceso
     """
     loop, _thread = _get_persistent_loop()
     fut = asyncio.run_coroutine_threadsafe(coro, loop)
     return fut.result()
-
-
 _PERSISTENT_LOOP: Optional[asyncio.AbstractEventLoop] = None
 _PERSISTENT_THREAD = None
 _PERSISTENT_LOCK = None  # threading.Lock perezoso para evitar import en top-level
 _AUTH_FAILURE_DISABLED = False
-
-
 def _get_persistent_loop():
     global _PERSISTENT_LOOP, _PERSISTENT_THREAD, _PERSISTENT_LOCK
     import threading
-
     if _PERSISTENT_LOCK is None:
         _PERSISTENT_LOCK = threading.Lock()
-
     with _PERSISTENT_LOCK:
         if _PERSISTENT_LOOP is not None and _PERSISTENT_LOOP.is_running():
             return _PERSISTENT_LOOP, _PERSISTENT_THREAD
-
         ready = threading.Event()
-
         def _runner():
             global _PERSISTENT_LOOP
             loop = asyncio.new_event_loop()
@@ -264,32 +216,24 @@ def _get_persistent_loop():
                 except Exception:
                     pass
                 loop.close()
-
         _PERSISTENT_THREAD = threading.Thread(
             target=_runner, name="graph-rag-loop", daemon=True,
         )
         _PERSISTENT_THREAD.start()
         ready.wait()
         return _PERSISTENT_LOOP, _PERSISTENT_THREAD
-
-
 class GraphRagStrategy(BaseStrategy):
-    """Retrieval sobre Knowledge Graph en Neo4j (Graphiti)."""
-
+    """Retrieval sobre Knowledge Graph en Neo4j (Graphiti)"""
     name = "graph_rag"
-
-    def retrieve(self, state: Dict) -> Dict:
+    def retrieve(self, state: dict) -> dict:
         global _AUTH_FAILURE_DISABLED
-
         use_case = state.get("use_case", "")
         query    = state.get("query", "")
         language = state.get("language", "")
-
         print(
             f"   🌐 Strategy=graph_rag [use_case={use_case}, lang={language}, "
             f"mode={config.graph_rag_mode}, top_k={config.graph_rag_top_k}]"
         )
-
         neo4j_password = (config.neo4j_password or "").strip()
         if not neo4j_password:
             print("   ❌ GraphRAG desactivado: NEO4J_PASSWORD vacio o invalido en configuracion")
@@ -297,14 +241,12 @@ class GraphRagStrategy(BaseStrategy):
             state["synthetic_queries"] = [query]
             state["chunks_retrieved"] = chunks
             return state
-
         if _AUTH_FAILURE_DISABLED:
             print("   ⚠️  GraphRAG omitido: error previo de autenticacion Neo4j (reinicia tras corregir credenciales)")
             chunks = []
             state["synthetic_queries"] = [query]
             state["chunks_retrieved"] = chunks
             return state
-
         try:
             chunks = _run_async(_search_async(use_case, query))
         except Exception as e:
@@ -323,11 +265,8 @@ class GraphRagStrategy(BaseStrategy):
                 print(f"   ❌ Error en GraphRAG retrieval: {e}")
                 import traceback; traceback.print_exc()
             chunks = []
-
         print(f"   ✅ {len(chunks)} elementos de KG recuperados")
         state["synthetic_queries"] = [query]
         state["chunks_retrieved"]  = chunks
         return state
-
-
 __all__ = ["GraphRagStrategy"]

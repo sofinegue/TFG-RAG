@@ -1,0 +1,326 @@
+[
+  {
+    "id": 1,
+    "type": "same_person_different_facts",
+    "articles": ["Romanticism.txt", "Romantic literature.txt", "Decadent movement.txt", "Symbolism (movement).txt"],
+    "entity": "Charles Baudelaire",
+    "details": {
+      "Romanticism.txt": "Baudelaire defined Romanticism: 'Romanticism is precisely situated neither in choice of subject nor exact truth, but in the way of feeling.'",
+      "Romantic literature.txt": "Not directly mentioned as a Romantic author; Romanticism preceded the movements he founded.",
+      "Decadent movement.txt": "Baudelaire referred to himself as decadent in his 1857 edition of Les Fleurs du mal and exalted the Roman decline as a model for modern poets.",
+      "Symbolism (movement).txt": "In literature, the style [of Symbolism] originates with the 1857 publication of Charles Baudelaire's Les Fleurs du mal. The Symbolist Manifesto names Baudelaire as one of the three leading poets of the movement."
+    },
+    "question": "How did Baudelaire's Les Fleurs du mal (1857) simultaneously serve as a foundational text for both the Decadent movement and the Symbolist movement, and what was Baudelaire's own view of Romanticism?",
+    "answer": "Baudelaire's Les Fleurs du mal is cited as the origin of Symbolism in literature (per Symbolism article) and also marks the beginning of French Decadence, where Baudelaire proudly called himself 'decadent' and exalted Roman decline as a model for modern poets (per Decadent movement article). Baudelaire also provided one of the definitions of Romanticism as being about 'the way of feeling' (per Romanticism article). Thus, one poet's single work bridges three movements."
+  },
+  {
+    "id": 2,
+    "type": "same_person_different_facts",
+    "articles": ["Parnassianism.txt", "Symbolism (movement).txt", "Decadent movement.txt", "Romanticism.txt"],
+    "entity": "Théophile Gautier",
+    "details": {
+      "Parnassianism.txt": "The Parnassians were influenced by Théophile Gautier and his doctrine of 'art for art's sake'.",
+      "Symbolism (movement).txt": "The Symbolists continued to admire Théophile Gautier's motto of 'art for art's sake', and retained and modified Parnassianism's mood of ironic detachment.",
+      "Decadent movement.txt": "Gautier wrote a lengthy introduction to Baudelaire's 1868 Les Fleurs du mal, initially rejecting the term 'decadent' but ultimately admitting decadence on Baudelaire's own terms.",
+      "Romanticism.txt": "listed among French Romantic poets of the 1830s to 1850s: 'the flamboyant Théophile Gautier, whose prolific output in various forms continued until his death in 1872'."
+    },
+    "question": "What role did Théophile Gautier play across four literary movements: Romanticism, Parnassianism, the Decadent movement, and Symbolism?",
+    "answer": "Gautier was a French Romantic poet active from the 1830s to 1872 (Romanticism article). His 'art for art's sake' doctrine became foundational for Parnassianism (Parnassianism article). The Symbolists also admired this same motto (Symbolism article). He wrote the lengthy 1868 introduction to Baudelaire's Les Fleurs du mal, initially rejecting the label 'decadent' but eventually accepting it on Baudelaire's terms (Decadent movement article). He is thus a single figure who bridges four successive movements."
+  },
+  {
+    "id": 3,
+    "type": "same_person_different_facts",
+    "articles": ["Symbolism (movement).txt", "Decadent movement.txt", "Parnassianism.txt"],
+    "entity": "Paul Verlaine",
+    "details": {
+      "Parnassianism.txt": "Verlaine published early works in Le Parnasse contemporain (1866, 1871, 1876 anthologies).",
+      "Symbolism (movement).txt": "Verlaine published his 1884 essays on the poètes maudits (accursed poets), naming Rimbaud, Mallarmé, Corbière and others. He is one of the three leading poets named in the Symbolist Manifesto.",
+      "Decadent movement.txt": "Verlaine initially embraced the 'decadent' label, applauding it as a brilliant marketing choice by Baju. Later he soured on Baju personally and 'eventually rejected the label'."
+    },
+    "question": "How did Paul Verlaine's literary allegiances shift from Parnassianism through Decadence to Symbolism?",
+    "answer": "Verlaine published early works in the Parnassian anthology Le Parnasse contemporain (Parnassianism article). He then initially embraced the 'decadent' label as 'a brilliant marketing choice by Baju' but later soured on Baju and rejected the label (Decadent movement article). He is named as one of the three leading poets of the Symbolist Manifesto and wrote the influential poètes maudits essays in 1884 (Symbolism article). His trajectory thus crosses all three movements."
+  },
+  {
+    "id": 4,
+    "type": "same_person_different_facts",
+    "articles": ["Symbolism (movement).txt", "Decadent movement.txt", "Parnassianism.txt"],
+    "entity": "Stéphane Mallarmé",
+    "details": {
+      "Parnassianism.txt": "Mallarmé published early works in Le Parnasse contemporain.",
+      "Decadent movement.txt": "Huysmans' character Des Esseintes in À rebours (1884) hailed Mallarmé among the Decadent writers for 'creativity and craftsmanship'. Barrès referred to Mallarmé as a symbolist even while calling others decadents.",
+      "Symbolism (movement).txt": "Mallarmé defined Symbolism in 1891: 'To name an object is to suppress three-quarters of the delight of the poem... to suggest is, that is the dream.' His poem 'Le cygne' is analyzed as a key Symbolist work."
+    },
+    "question": "How was Stéphane Mallarmé classified differently by the Parnassians, the Decadents, and the Symbolists?",
+    "answer": "Mallarmé published early works in the Parnassian anthology Le Parnasse contemporain (Parnassianism article). Huysmans' fictional character Des Esseintes in the Decadent novel À rebours (1884) hailed Mallarmé for 'creativity and craftsmanship' among Decadent writers (Decadent movement article). Yet Mallarmé himself defined Symbolism in 1891, emphasizing suggestion and mystery (Symbolism article). He was thus claimed by all three movements at different times."
+  },
+  {
+    "id": 5,
+    "type": "bidirectional_reference",
+    "articles": ["Romanticism.txt", "Neo-romanticism.txt"],
+    "relationship": "Romanticism mentions Neo-romantic revivals; Neo-romanticism explicitly defines itself as incorporating elements from the era of Romanticism",
+    "details": {
+      "Romanticism.txt": "States that 'a Late Romantic period and Neoromantic revivals are also discussed' and that these extensions 'continued the Romantic ideal, stressing depth of emotion in art and music while showcasing technical mastery in a mature Romantic style'.",
+      "Neo-romanticism.txt": "Defines itself as covering 'movements in philosophy, literature, music, painting, and architecture that exist after and incorporate elements from the era of Romanticism'. States neo-romanticism is 'considered in opposition to naturalism'."
+    },
+    "question": "What is the relationship between Romanticism and Neo-romanticism, and how does each movement describe the other?",
+    "answer": "Romanticism acknowledges Neo-romantic revivals as extensions that 'continued the Romantic ideal, stressing depth of emotion' (Romanticism article). Neo-romanticism defines itself as incorporating elements from the era of Romanticism, and Carl Dahlhaus describes Wagner's music as 'a late flowering of romanticism in a positivist age', dating the movement from about 1850 to 1890 (Neo-romanticism article). Both articles confirm the continuity."
+  },
+  {
+    "id": 6,
+    "type": "bidirectional_reference",
+    "articles": ["Decadent movement.txt", "Symbolism (movement).txt"],
+    "relationship": "The Decadent movement discusses its distinction from Symbolism and how Moréas broke away; the Symbolism article discusses confusion with the Decadent movement and how Moréas' manifesto was a response to the 'decadent' label",
+    "details": {
+      "Decadent movement.txt": "Jean Moréas published his Symbolist Manifesto 'largely to escape association with the Decadent movement, despite their shared heritage'. Verlaine initially embraced but later rejected the decadent label.",
+      "Symbolism (movement).txt": "States the symbolist style 'has frequently been confused with the Decadent movement'. Moréas' manifesto was 'largely a response to this polemic'. 'By the late 1880s, the terms symbolism and decadence were understood to be almost synonymous.'"
+    },
+    "question": "Why did Jean Moréas publish the Symbolist Manifesto in 1886, and how did the Decadent movement and Symbolism view each other?",
+    "answer": "Moréas published the Symbolist Manifesto largely to escape association with the Decadent movement, despite their shared heritage in Baudelaire (Decadent movement article). The Symbolism article confirms this was a response to the 'decadent' polemic, noting that by the late 1880s 'symbolism and decadence were understood to be almost synonymous.' Both articles describe the shared roots and the subsequent split, but from opposite perspectives."
+  },
+  {
+    "id": 7,
+    "type": "chain_of_influence",
+    "articles": ["Sentimentalism (literature).txt", "Romanticism.txt", "Naturalism (literature).txt"],
+    "chain": "Sentimentalism → Romanticism → Naturalism (as rejection)",
+    "details": {
+      "Sentimentalism (literature).txt": "Religious sentimentalism has often been considered as inspiration for François-René de Chateaubriand and his creation of Romanticism.",
+      "Romanticism.txt": "Chateaubriand is described as the first major figure of French Romanticism. The movement declined partly due to 'the rise of Realism and Naturalism'.",
+      "Naturalism (literature).txt": "Naturalism is 'similar to literary realism in its rejection of Romanticism' and traces to Émile Zola's 'The Experimental Novel' (1880)."
+    },
+    "question": "Trace the chain of literary influence from Sentimentalism through Romanticism to Naturalism.",
+    "answer": "Sentimentalism inspired Chateaubriand's creation of Romanticism (Sentimentalism article). Chateaubriand became the first major figure of French Romanticism (Romanticism article). Romanticism was then explicitly rejected by Naturalism, which traces to Zola's 'The Experimental Novel' (1880) and embraced determinism, scientific objectivism, and social commentary in opposition to Romantic ideals (Naturalism (literature) article)."
+  },
+  {
+    "id": 8,
+    "type": "chain_of_influence",
+    "articles": ["Négritude.txt", "Créolité.txt", "Créolie.txt"],
+    "chain": "Négritude → Créolité → Créolie (as contrast)",
+    "details": {
+      "Négritude.txt": "Négritude inspired the birth of many movements across the Afro-Diasporic world, including Créolité. Progenitors were Aimé Césaire, Léopold Sédar Senghor, and Léon Damas.",
+      "Créolité.txt": "Published Eloge de la créolité (1989) as a response to the 'perceived inadequacies of the négritude movement'. Seeks heterogeneous identity: 'neither Europeans, nor Africans, nor Asians, we proclaim ourselves Créoles'.",
+      "Créolie.txt": "Term coined in 1970. 'In contrast to the créolité movement, créolie is a traditional, conservative, and apolitical movement.' Its 'perspective of history is similar to négritude, in that créolie seeks to challenge history and come up with pride'."
+    },
+    "question": "How do Négritude, Créolité, and Créolie form a chain of Caribbean literary movements that each respond to the previous one?",
+    "answer": "Négritude (1930s) raised Black consciousness, led by Césaire, Senghor, and Damas. Créolité (1989) responded to Négritude's 'perceived inadequacies', rejecting its monolithic view of Blackness in favor of heterogeneous Creole identity. Créolie (coined 1970, formalized 1978) developed in Réunion 'in contrast to the créolité movement' but shares Négritude's goal of challenging history and cultivating pride, while being more conservative and integrating with French identity."
+  },
+  {
+    "id": 9,
+    "type": "chain_of_influence",
+    "articles": ["Parnassianism.txt", "Symbolism (movement).txt", "Decadent movement.txt"],
+    "chain": "Parnassianism → Symbolism/Decadence (as reaction and continuation)",
+    "details": {
+      "Parnassianism.txt": "Parnassianism occurred 'after romanticism and prior to symbolism' (1860s-1890s). Influenced by Gautier's 'art for art's sake' and Schopenhauer.",
+      "Symbolism (movement).txt": "Symbolist poets 'have a more complex relationship with Parnassianism'. They retained 'Parnassianism's love of word play and concern for the musical qualities of verse' and the motto of 'art for art's sake', but rejected Parnassian clarity and objectivity.",
+      "Decadent movement.txt": "Many Decadents were also associated with Symbolism, and both shared descent from Baudelaire, who was influenced by Parnassian ideals."
+    },
+    "question": "How did Parnassianism give rise to both Symbolism and the Decadent movement, and what did each retain or reject?",
+    "answer": "Parnassianism (1860s-1890s) emphasized exact workmanship and 'art for art's sake' (Parnassianism article). Symbolism retained Parnassianism's love of word play and musical verse qualities but rejected its clarity and objectivity, preferring suggestion and mystery (Symbolism article). The Decadent movement shared descent from Baudelaire, who was influenced by Parnassian ideas through Gautier, but pushed toward excess and artificiality (Decadent movement article). Key figures like Verlaine and Mallarmé published in the Parnassian anthology before becoming Symbolists."
+  },
+  {
+    "id": 10,
+    "type": "same_person_different_facts",
+    "articles": ["Romanticism.txt", "Romantic literature.txt", "Ultra-Romanticism.txt", "Novel.txt"],
+    "entity": "Lord Byron",
+    "details": {
+      "Romanticism.txt": "Byron had success with Childe Harold's Pilgrimage (1812) and four 'Turkish tales'. His death at 36 in 1824 helping the Greek War of Independence entrenched his legend. Goethe called Byron 'undoubtedly the greatest genius of our century'.",
+      "Romantic literature.txt": "Same biographical facts but adds that Byron 'is now most highly regarded for his short lyrics and his generally unromantic prose writings, especially his letters, and his unfinished satire Don Juan'.",
+      "Ultra-Romanticism.txt": "Brazilian Ultra-Romantics were 'heavily influenced by German Romanticism and works by Lord Byron and Alfred de Musset'. Goethe and Lord Byron are 'commonly quoted' in Ultra-Romantic works.",
+      "Novel.txt": "Byron's Don Juan (1824) cited as an example of a verse novel alongside Pushkin's Eugene Onegin."
+    },
+    "question": "How did Lord Byron's influence extend from English Romanticism to Brazilian Ultra-Romanticism, and how is his literary legacy assessed differently across these articles?",
+    "answer": "In Romanticism and Romantic literature, Byron achieved enormous fame in Europe; Goethe called him 'undoubtedly the greatest genius of our century'. His death at 36 during the Greek War of Independence entrenched his legend. However, the Romantic literature article notes he is 'now most highly regarded for his short lyrics and his unromantic prose writings.' In Brazil, Ultra-Romantic writers were heavily influenced by Byron, with his works commonly quoted (Ultra-Romanticism article). The Novel article cites his Don Juan as an example of the verse novel form."
+  },
+  {
+    "id": 11,
+    "type": "same_person_different_facts",
+    "articles": ["Symbolism (movement).txt", "Decadent movement.txt", "Romantic literature.txt", "Poetry.txt"],
+    "entity": "Edgar Allan Poe",
+    "details": {
+      "Symbolism (movement).txt": "The works of Edgar Allan Poe, which Baudelaire 'admired greatly and translated into French, were a significant influence and the source of many stock tropes and images' for Symbolism.",
+      "Decadent movement.txt": "Decadent writers were 'also influenced by Gothic novels and the poetry and fiction of Edgar Allan Poe'.",
+      "Romantic literature.txt": "Poe's 'tales of the macabre and his balladic poetry were more influential in France than at home'.",
+      "Poetry.txt": "Poe's 'The Raven' cited as an example of trochaic octameter. Poe is 'sometimes seen as the father of speculative poetry'."
+    },
+    "question": "How did Edgar Allan Poe's influence differ in America versus France, and which French literary movements did he inspire?",
+    "answer": "Poe's tales of the macabre were 'more influential in France than at home' (Romantic literature article). In France, Baudelaire admired him greatly, translated his works into French, and they became 'the source of many stock tropes and images' for Symbolism (Symbolism article). He also influenced the Decadent movement through his Gothic poetry and fiction (Decadent movement article). In poetry studies, Poe is known for the trochaic octameter of 'The Raven' and is considered 'the father of speculative poetry' (Poetry article)."
+  },
+  {
+    "id": 12,
+    "type": "bidirectional_reference",
+    "articles": ["Naturalism (literature).txt", "Naturalism (theatre).txt"],
+    "relationship": "Both articles reference Émile Zola as founder but describe different manifestations of the same philosophy",
+    "details": {
+      "Naturalism (literature).txt": "Traces to Zola's 'The Experimental Novel' (1880). Emphasizes determinism, detachment, scientific objectivism. In America, Frank Norris thought naturalism was Romantic, disagreeing with Zola.",
+      "Naturalism (theatre).txt": "Zola's term for naturalism is 'la nouvelle formule'. The three primary principles are 'faire vrai, faire grand and faire simple'. The most successful example is Strindberg's Miss Julie. Darwinism pervades naturalistic plays."
+    },
+    "question": "How did Zola's naturalism manifest differently in literature versus theatre, and what were the key principles in each domain?",
+    "answer": "In literature, Zola's 'The Experimental Novel' (1880) treated characters as phenomena in controlled experiments, emphasizing determinism and scientific objectivism (Naturalism (literature) article). In theatre, Zola called his approach 'la nouvelle formule' with three principles: 'faire vrai, faire grand and faire simple' (be realistic, be significant, be simple). The most successful theatrical example was Strindberg's Miss Julie, set entirely in a kitchen. American naturalist Frank Norris notably disagreed with Zola, considering naturalism to be Romantic (Naturalism (literature) article)."
+  },
+  {
+    "id": 13,
+    "type": "same_person_different_facts",
+    "articles": ["Romanticism.txt", "Romantic literature.txt", "Sentimentalism (literature).txt", "Poetry.txt", "Novel.txt"],
+    "entity": "Johann Wolfgang von Goethe",
+    "details": {
+      "Romanticism.txt": "Goethe's 1774 novel The Sorrows of Young Werther 'began to shape the Romanticist movement and its ideals'. At that time Germany was a multitude of small separate states, and Goethe's works had 'a seminal influence in developing a unifying sense of nationalism'.",
+      "Romantic literature.txt": "Same facts about Werther having 'young men throughout Europe emulating its protagonist, a young artist with a very sensitive and passionate temperament'.",
+      "Sentimentalism (literature).txt": "Goethe's 'Die Leiden des jungen Werthers (1774)' described as 'a high-point of Sturm und Drang' within the discussion of sentimentalism.",
+      "Poetry.txt": "Goethe's West-östlicher Diwan, 'a collection of lyrical poems, is inspired by the Persian poet Hafez'.",
+      "Novel.txt": "The sentimental novel genre evolved in the 1770s with 'Werther in Goethe's The Sorrows of Young Werther (1774) realising that it is impossible for him to integrate into the new conformist society'."
+    },
+    "question": "How is Goethe's The Sorrows of Young Werther classified differently across Romanticism, Sentimentalism, and Novel history, and what other literary traditions did Goethe engage with?",
+    "answer": "The Sorrows of Young Werther (1774) is described as shaping the Romantic movement (Romanticism article), as a high-point of Sturm und Drang within sentimentalism (Sentimentalism article), and as a key sentimental novel about the impossibility of social integration (Novel article). Beyond these Western connections, Goethe's West-östlicher Diwan was inspired by the Persian poet Hafez's ghazals (Poetry article), showing his engagement with Eastern literary traditions."
+  },
+  {
+    "id": 14,
+    "type": "implicit_connection",
+    "articles": ["Decadent movement.txt", "Symbolism (movement).txt"],
+    "entity": "Joris-Karl Huysmans",
+    "details": {
+      "Decadent movement.txt": "Huysmans' À rebours (1884) is described as a defining Decadent novel. Later, 'Huysmans grew to consider Against Nature as the starting point on his journey into Roman Catholic symbolist work and the acceptance of hope'.",
+      "Symbolism (movement).txt": "Some writers, such as Joris-Karl Huysmans, 'began as naturalists before becoming symbolists; for Huysmans, this change represented his increasing interest in religion and spirituality'. À rebours 'explored many themes that became associated with the symbolist aesthetic'."
+    },
+    "question": "How did Huysmans' novel À rebours (1884) serve as both the defining work of the Decadent movement and a precursor to Symbolism, and what was Huysmans' own evolving view of it?",
+    "answer": "À rebours is considered the defining Decadent novel, with its character Des Esseintes cataloging material excess and artificial pleasure (Decadent movement article). Yet the Symbolism article notes that Huysmans 'began as a naturalist before becoming a symbolist' and À rebours explored themes that became associated with Symbolist aesthetics. The Decadent movement article adds that Huysmans himself later considered the novel 'the starting point on his journey into Roman Catholic symbolist work and the acceptance of hope' — a complete reversal of the novel's apparent nihilism."
+  },
+  {
+    "id": 15,
+    "type": "chain_of_influence",
+    "articles": ["Romanticism.txt", "Ultra-Romanticism.txt", "Romantic literature.txt"],
+    "chain": "Romanticism → Ultra-Romanticism (as exaggeration)",
+    "details": {
+      "Romanticism.txt": "In Portugal, 'António Feliciano de Castilho made the case for Ultra-Romanticism, publishing the poems A Noite no Castelo and Os Ciúmes do Bardo, both in 1836'.",
+      "Romantic literature.txt": "In Brazil, 'The second period, sometimes called Ultra-Romanticism, is marked by a profound influence of European themes and traditions, involving the melancholy, sadness and despair related to unobtainable love.' Authors include Álvares de Azevedo, Casimiro de Abreu.",
+      "Ultra-Romanticism.txt": "Defined as a movement that 'exaggerated the norms and ideals of Romanticism, namely the value of subjectivity, individualism, amorous idealism, nature and the medieval world.' In Portugal, the first piece was 'O noivado do sepulcro' by Soares de Passos. In Brazil, it is called 'the second phase of Brazilian Romanticism'."
+    },
+    "question": "How did Ultra-Romanticism develop from Romanticism in both Portugal and Brazil, and what distinguishes it from its parent movement?",
+    "answer": "In Portugal, Castilho advocated Ultra-Romanticism with poems from 1836 (Romanticism article), while Soares de Passos wrote the first Ultra-Romantic piece 'O noivado do sepulcro' (Ultra-Romanticism article). In Brazil, Ultra-Romanticism is 'the second phase of Brazilian Romanticism' (Ultra-Romanticism article), marked by 'melancholy, sadness and despair related to unobtainable love' with influences from Byron and Musset (Romantic literature article). The key distinction is that Ultra-Romanticism 'exaggerated the norms and ideals of Romanticism' to include morbidness, Satanism, and a fascination with death (Ultra-Romanticism article)."
+  },
+  {
+    "id": 16,
+    "type": "bidirectional_reference",
+    "articles": ["Decadent movement.txt", "Neo-Decadence.txt"],
+    "relationship": "The Decadent movement is the historical predecessor; Neo-Decadence is the contemporary revival that references it",
+    "details": {
+      "Decadent movement.txt": "The original movement 'first flourished in France' centered on Baudelaire, Huysmans, Baju, and 'followed an aesthetic ideology of excess and artificiality'. It essentially ended when Le Décadent closed in 1889.",
+      "Neo-Decadence.txt": "Though influenced by the aesthetic ideology of the Decadent movement, Neo-Decadence 'might be seen as much as a reaction against other trends in contemporary literature as a resurrection of the original movement'. It 'has more in common with avant-garde literary movements (Symbolism, Decadence and Futurism) than with genre fiction categories'. Term first used in 2005."
+    },
+    "question": "How does Neo-Decadence relate to the original Decadent movement, and what other literary movements does it draw from?",
+    "answer": "Neo-Decadence is influenced by the Decadent movement's 'aesthetic ideology' but is also 'a reaction against other trends in contemporary literature' rather than a pure resurrection (Neo-Decadence article). While the original Decadent movement (1880s-1889) centered on excess and artificiality in France (Decadent movement article), Neo-Decadence (from 2005) draws from Symbolism, Decadence, and Futurism simultaneously, placing it closer to avant-garde literary movements than to genre fiction (Neo-Decadence article)."
+  },
+  {
+    "id": 17,
+    "type": "implicit_connection",
+    "articles": ["Symbolism (movement).txt", "Parnassianism.txt", "Neo-romanticism.txt"],
+    "entity": "Arthur Schopenhauer",
+    "details": {
+      "Symbolism (movement).txt": "Verlaine 'referred indirectly to the aesthetics of Arthur Schopenhauer, the philosopher of pessimism, who maintained that the purpose of art was to provide a temporary refuge from the world of strife'. Schopenhauer's aesthetics 'represented shared concerns with the symbolist programme'.",
+      "Parnassianism.txt": "The Parnassian style 'was influenced by the author Théophile Gautier as well as by the philosophical ideas of Arthur Schopenhauer'. 'Elements of this detachment were derived from the philosophical work of Schopenhauer'.",
+      "Neo-romanticism.txt": "The aesthetic philosophy of Arthur Schopenhauer and Friedrich Nietzsche 'has contributed greatly to neo-romantic thinking'."
+    },
+    "question": "How did Arthur Schopenhauer's philosophy differently influence Parnassianism, Symbolism, and Neo-romanticism?",
+    "answer": "Schopenhauer influenced Parnassianism through his ideas of emotional detachment, which the Parnassians used to achieve impersonal, formally precise poetry (Parnassianism article). For Symbolism, his view that art provides 'a temporary refuge from the world of strife' resonated with the symbolist programme of mysticism and otherworldliness (Symbolism article). For Neo-romanticism, his 'aesthetic philosophy' more broadly 'contributed greatly to neo-romantic thinking' alongside Nietzsche (Neo-romanticism article). The same philosopher thus inspired detachment in one movement, mystical retreat in another, and romantic renewal in a third."
+  },
+  {
+    "id": 18,
+    "type": "same_person_different_facts",
+    "articles": ["Romanticism.txt", "Romantic literature.txt", "Novel.txt"],
+    "entity": "Walter Scott",
+    "details": {
+      "Romanticism.txt": "Scott 'was effectively inventing the historical novel, beginning in 1814 with Waverley'. Goethe called Byron the greatest genius; Scott achieved fame 'throughout Europe with works exploiting the violence and drama of their exotic and historical settings'.",
+      "Romantic literature.txt": "Same biographical details. Scott 'probably did more than any other figure to define and popularise Scottish cultural identity in the nineteenth century'.",
+      "Novel.txt": "Scott's Waverley (1814) is called the work that invented 'the true historical novel'. He 'hoped to do for the Scottish border what Goethe and other German poets had done for the Middle Ages'. He was 'the most famous novelist of his generation, throughout Europe'."
+    },
+    "question": "How do different articles assess Walter Scott's contribution to the historical novel and to Scottish identity?",
+    "answer": "The Romanticism and Romantic literature articles both credit Scott with inventing the historical novel with Waverley (1814) and note his European fame. The Romantic literature article adds he 'did more than any other figure to define and popularise Scottish cultural identity'. The Novel article provides additional context: Scott 'hoped to do for the Scottish border what Goethe and other German poets had done for the Middle Ages' and calls him 'the most famous novelist of his generation, throughout Europe'. Only by combining all three can one fully understand both his literary innovation and his cultural significance."
+  },
+  {
+    "id": 19,
+    "type": "implicit_connection",
+    "articles": ["Impressionism (literature).txt", "Symbolism (movement).txt", "Decadent movement.txt"],
+    "relationship": "Literary Impressionism is subsumed into both Symbolism and Modernism; the Decadent movement article discusses Arthur Symons' earlier view that Decadence included both Symbolism and Impressionism",
+    "details": {
+      "Impressionism (literature).txt": "Much of 'impressionist' literature 'is subsumed into several other categories, especially Modernism and Symbolism'.",
+      "Symbolism (movement).txt": "N/A (doesn't directly mention Impressionism).",
+      "Decadent movement.txt": "Arthur Symons 'at one time considered Decadence in literature to be a parent category that included both Symbolism and Impressionism, as rebellions against realism'."
+    },
+    "question": "How was literary Impressionism classified in relation to Symbolism and the Decadent movement by contemporaries and by modern scholars?",
+    "answer": "The Decadent movement article reveals that critic Arthur Symons initially considered Decadence as a parent category encompassing both Symbolism and Impressionism, viewing them as 'rebellions against realism.' However, the Impressionism (literature) article notes that modern scholars subsume literary Impressionism 'into several other categories, especially Modernism and Symbolism,' suggesting the original three-way framework collapsed into a two-way Modernism/Symbolism classification."
+  },
+  {
+    "id": 20,
+    "type": "same_person_different_facts",
+    "articles": ["Négritude.txt", "Créolité.txt"],
+    "entity": "Aimé Césaire",
+    "details": {
+      "Négritude.txt": "Césaire was a poet, playwright, and politician from Martinique. He coined the term Négritude in 1935. He 'saw Négritude as the fact of being black, acceptance of this fact, and appreciation of the history and culture'. After returning to Martinique, he was elected mayor of Fort de France and pushed for departmentalization with France.",
+      "Créolité.txt": "Describes négritude as a movement 'spearheaded by Aimé Césaire, Léopold Sédar Senghor and Léon Damas in the 1930s'. The Créolité movement was developed 'as a response to the perceived inadequacies of the négritude movement' that Césaire led."
+    },
+    "question": "How is Aimé Césaire viewed differently by the Négritude and Créolité movements?",
+    "answer": "The Négritude article portrays Césaire as a revolutionary intellectual who coined 'Négritude' in 1935, saw it as 'the fact of being black' and the means for 'decolonization of the mind,' yet pragmatically pushed for Martinique's departmentalization with France. The Créolité article frames Césaire as the leader of a movement whose 'perceived inadequacies' necessitated the development of Créolité in 1989, because Négritude's monolithic view of Blackness didn't capture the heterogeneous Creole identity of the Caribbean."
+  },
+  {
+    "id": 21,
+    "type": "chain_of_influence",
+    "articles": ["Romanticism.txt", "Naturalism (literature).txt", "Symbolism (movement).txt", "Neo-romanticism.txt"],
+    "chain": "Romanticism → (rejected by) Naturalism → (reacted against by) Symbolism → Neo-romanticism",
+    "details": {
+      "Romanticism.txt": "Romanticism declined partly due to the rise of Realism and Naturalism.",
+      "Naturalism (literature).txt": "Naturalism is described as 'similar to literary realism in its rejection of Romanticism'.",
+      "Symbolism (movement).txt": "Symbolism was 'largely a reaction against naturalism and realism' and 'a reaction in favour of spirituality, imagination, and dreams'.",
+      "Neo-romanticism.txt": "Neo-romanticism 'is considered in opposition to naturalism' and is applied to writers who 'rejected, abandoned, or opposed realism, naturalism, or avant-garde modernism'."
+    },
+    "question": "Trace the four-movement chain from Romanticism through Naturalism and Symbolism to Neo-romanticism, showing how each movement reacted against its predecessor.",
+    "answer": "Romanticism (peaked 1800-1850) declined with the rise of Naturalism. Naturalism explicitly rejected Romanticism (Naturalism article). Symbolism then arose as 'a reaction against naturalism and realism' in favor of spirituality and dreams (Symbolism article). Neo-romanticism defined itself 'in opposition to naturalism' and incorporated Romantic elements back into art (Neo-romanticism article). This creates a dialectical chain where each movement reacts against the last: Romanticism → Naturalism (anti-Romantic) → Symbolism (anti-Naturalism) → Neo-romanticism (anti-Naturalism, pro-Romanticism)."
+  },
+  {
+    "id": 22,
+    "type": "same_person_different_facts",
+    "articles": ["Decadent movement.txt", "Symbolism (movement).txt", "Novel.txt"],
+    "entity": "Oscar Wilde",
+    "details": {
+      "Decadent movement.txt": "Wilde wrote The Picture of Dorian Gray under influence of Huysmans and Rachilde. He articulated Decadent doctrines in The Decay of Lying: 'Art never expresses anything but itself' and 'Lying, the telling of beautiful untrue things, is the proper aim of Art.' He 'published an entire work exploring socialism as a liberating force'.",
+      "Symbolism (movement).txt": "Richard Strauss's 1905 opera Salomé was 'based on the play by Oscar Wilde, uses a subject frequently depicted by symbolist artists'.",
+      "Novel.txt": "Mentions Wilde's idea of 'art for art's sake' and Swinburne's aestheticism in the context of 19th-century debates about artistic integrity."
+    },
+    "question": "How did Oscar Wilde bridge the Decadent movement, Symbolism, and broader literary debates about art's purpose?",
+    "answer": "Wilde was a leading Decadent figure in Britain, with The Picture of Dorian Gray showing direct influence from Huysmans' À rebours, and his essay The Decay of Lying articulating key Decadent doctrines like 'Lying is the proper aim of Art' (Decadent movement article). His play Salomé became a Symbolist touchstone when Strauss adapted it into an opera in 1905 (Symbolism article). The Novel article places Wilde in the broader 19th-century debate about 'art for art's sake' versus social responsibility."
+  },
+  {
+    "id": 23,
+    "type": "implicit_connection",
+    "articles": ["Latin American Boom.txt", "Novel.txt"],
+    "relationship": "The Latin American Boom is described in both articles with complementary details",
+    "details": {
+      "Latin American Boom.txt": "The Boom is most closely associated with Julio Cortázar, Carlos Fuentes, Mario Vargas Llosa, and Gabriel García Márquez. García Márquez introduced magical realism 'into vogue' with One Hundred Years of Solitude (1967). The movement was influenced by European and North American Modernism and the Latin American Vanguardia.",
+      "Novel.txt": "Latin American 'self-awareness in the wake of the leftist revolutions of the 1960s and 1970s resulted in a Latin American Boom, linked to the names of novelists Julio Cortázar, Mario Vargas Llosa, Carlos Fuentes and Gabriel García Márquez, along with the invention of a special brand of postmodern magic realism'."
+    },
+    "question": "What does combining the Novel article's and the Latin American Boom article's accounts reveal about the origins and nature of magical realism in the Boom?",
+    "answer": "The Novel article describes the Boom as resulting from Latin American 'self-awareness in the wake of leftist revolutions' and links it to 'a special brand of postmodern magic realism.' The Latin American Boom article provides far more depth: the movement was influenced by European Modernism and the Vanguardia movement, García Márquez brought magical realism 'into vogue' with One Hundred Years of Solitude (1967), and the aesthetic was tied to the Cuban Revolution (1959) and its aftermath. The Novel article treats it as one episode in novel history; the Boom article shows it as a complex political-literary phenomenon."
+  },
+  {
+    "id": 24,
+    "type": "same_person_different_facts",
+    "articles": ["Ultra-Romanticism.txt", "Romantic literature.txt", "Romanticism.txt"],
+    "entity": "Álvares de Azevedo",
+    "details": {
+      "Ultra-Romanticism.txt": "Álvares de Azevedo (1831-1852) wrote the first major Brazilian Ultra-Romantic works: Lira dos Vinte Anos (Twenty-year-old Lyre) and Noite na Taverna (A Night at the Tavern).",
+      "Romantic literature.txt": "listed among 'the most notable authors' of the Ultra-Romantic phase in Brazil, alongside Casimiro de Abreu, Fagundes Varela and Junqueira Freire.",
+      "Romanticism.txt": "Same listing within the South America section of the broader Romanticism article."
+    },
+    "question": "What specific works did Álvares de Azevedo write that made him the foundational figure of Brazilian Ultra-Romanticism?",
+    "answer": "The Ultra-Romanticism article identifies his Lira dos Vinte Anos and Noite na Taverna as 'the first major Ultra-Romantic works' in Brazil. The Romantic literature and Romanticism articles only list him among notable Ultra-Romantic authors without specifying individual works. He died at just 21 (1831-1852), making these early works his entire literary output."
+  },
+  {
+    "id": 25,
+    "type": "bidirectional_reference",
+    "articles": ["Négritude.txt", "Créolité.txt"],
+    "relationship": "Négritude acknowledges inspiring Créolité; Créolité defines itself in response to Négritude's inadequacies",
+    "details": {
+      "Négritude.txt": "Négritude 'inspired the birth of many movements across the Afro-Diasporic world, including... Créolité and Antillanité in the Caribbean'. Edouard Glissant is not named here but his concept of Antillanité is referenced.",
+      "Créolité.txt": "The Créolité movement explicitly defines itself 'in contrast with the movement that preceded it, la négritude'. Edouard Glissant 'came to reject the monolithic view of blackness portrayed in the négritude movement' and advanced 'Antillanité' before Créolité emerged. Créolistes describe créolité as 'an annihilation of false universality, of monolinguism, and of purity'."
+    },
+    "question": "How did the Créolité movement build upon yet challenge Négritude, and what intermediate movement connected them?",
+    "answer": "Négritude explicitly acknowledges inspiring Créolité and Antillanité (Négritude article). However, the Créolité article reveals the connection was not simple: Edouard Glissant first rejected Négritude's monolithic Blackness and developed the intermediate concept of Antillanité ('Caribbeanness'). Créolité then built on both, defining itself as 'an annihilation of false universality' and proclaiming a heterogeneous identity: 'neither Europeans, nor Africans, nor Asians, we proclaim ourselves Créoles.' The chain is Négritude → Antillanité → Créolité."
+  }
+]

@@ -51,7 +51,7 @@ Azure Blob Storage and Table Storage operations for managing files and configura
 
 **Functions:**
 - `upload_json_config_to_blob(account_name, account_key, container_name, json_content, blob_name)` — Upload JSON configuration to blob storage with automatic .json extension handling
-- `list_json_configs_from_blob(account_name, account_key, container_name, prefix)` — List all JSON blobs under a given prefix
+- `list_json_configs_from_blob(account_name, account_key, container_name, prefix)` — list all JSON blobs under a given prefix
 - `download_json_config_from_blob(account_name, account_key, container_name, blob_name)` — Download and parse JSON configuration from blob
 - `delete_json_config_from_blob(account_name, account_key, container_name, blob_name)` — Move blob to deleted container and remove
 - `upload_blob_file_async(account_name, account_key, container_name, input_file, destination_blob, content_type)` — Async upload of binary files, returns BlobRef object
@@ -60,7 +60,7 @@ Azure Blob Storage and Table Storage operations for managing files and configura
 - `generate_shared_access_signature_blob_files(blob_file_name, account_name, account_key, container_name)` — Generate 1-hour SAS URL for blob access
 - `upload_assistant_config_to_blob(assistant_config, assistant_id)` — Wrapper for uploading assistant configurations
 - `download_assistant_config_from_blob(assistant_id)` — Wrapper for downloading assistant configurations
-- `list_assistant_configs_from_blob()` — List and validate all assistant configurations (checks for required fields: api_key, endpoint, deployment)
+- `list_assistant_configs_from_blob()` — list and validate all assistant configurations (checks for required fields: api_key, endpoint, deployment)
 - `get_users_from_table(account_name, account_key, table_name, query_filter, select_fields)` — Query Azure Table Storage with filters and field selection
 
 ### cosmos_service.py
@@ -126,7 +126,7 @@ Document processing models and status definitions.
   - `usuario: Optional[str]` — User identifier
   - `equipo: str` — Team identifier
   - `get_formula: bool` — Enable formula extraction (default: False)
-  - `documentos: List[Documento]` — List of documents to process
+  - `documentos: list[Documento]` — list of documents to process
 
 ## document_ingestion
 
@@ -338,11 +338,11 @@ Each chunk includes the candidate's `nombre_apellidos` for cross-referencing.
 - **`CVProcessor`** — Structured CV data processor
   - `nombre_apellidos: str` — Full name
   - `puesto: str` — Job position
-  - `experiencia: List[str]` — Professional experience entries
-  - `estudios: List[str]` — Education entries
-  - `hard_skills: List[str]` — Technical skills (accepts `"hard_skills"` or `"hard skills"`)
-  - `soft_skills: List[str]` — Soft/transversal skills
-  - `otros: List[str]` — Additional information (languages, certifications, etc.)
+  - `experiencia: list[str]` — Professional experience entries
+  - `estudios: list[str]` — Education entries
+  - `hard_skills: list[str]` — Technical skills (accepts `"hard_skills"` or `"hard skills"`)
+  - `soft_skills: list[str]` — Soft/transversal skills
+  - `otros: list[str]` — Additional information (languages, certifications, etc.)
 
 **Methods:**
 - `from_dict(cls, d)` — Class method to construct CVProcessor from raw dictionary
@@ -358,12 +358,12 @@ CLI runner for batch processing all CV JSONs from Azure Blob Storage into Cosmos
 
 **Functions:**
 - `run_cv_chunking(language)` — Process all CVs for a given language:
-  - Lists all JSON blobs under `data/cvs/<language>/`
+  - lists all JSON blobs under `data/cvs/<language>/`
   - Creates `DocEntity` per CV with `cv_id = <lang>/cv_XXX.json`
   - Calls `get_text_split_cv` for each CV
   - Prints summary with OK/error counts
 - `main(language)` — Entry point: processes given language or auto-discovers all languages
-- `_list_cv(language)` — List all JSON blobs under `data/cvs/<language>/`
+- `_list_cv(language)` — list all JSON blobs under `data/cvs/<language>/`
 - `_discover_languages()` — Auto-discover available languages by scanning blob prefixes
 - `_generate_session_id(language)` — Generate timestamped session ID (`CVS_ES_YYYYMMDD_HHMMSS`)
 

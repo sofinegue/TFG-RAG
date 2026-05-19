@@ -152,7 +152,7 @@ export default function ChatPanel({
         </div>
       )}
 
-      {/* Lista de mensajes */}
+      {/* lista de mensajes */}
       {hasMessages && (
         <div className="chat-panel__messages">
           {messages.map(msg => (

@@ -1,74 +1,59 @@
 """
-Orquestación del RAG usando LangGraph – adaptado para tres casos de uso.
+Orquestación del RAG usando LangGraph – adaptado para tres casos de uso
 Flujo: validate → [guardrails_input] → classify → [retrieve] → generate → [guardrails_output] → END
 """
 import asyncio
 import concurrent.futures
 from datetime import datetime
-from typing import Dict, List, Optional, TypedDict
-
+from typing import Optional, TypedDict
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
-
 from src.config import config
 from src.rag.models.generator import Generator
 from src.rag.handler import get_handler
 from src.rag.strategies import get_strategy
 from src.rag.guardrails import guardrails_manager, GuardRailsViolation
-
-
 class RAGState(TypedDict):
     # ── Input ──────────────────────────────────────────────────────────
     query: str
     user_id: str
     use_case: str                     # "cvs" | "eu" | "wiki"
     language: str                     # "es" | "en" | "fr" | "it" | "pt"
-    conversation_history: List[Dict]
-
+    conversation_history: list[dict]
     # ── Clasificación ──────────────────────────────────────────────────
     needs_context: bool
     use_retrieval: bool
-
     # ── Retrieval ──────────────────────────────────────────────────────
-    synthetic_queries: List[str]
-    chunks_retrieved: List[Dict]
-
+    synthetic_queries: list[str]
+    chunks_retrieved: list[dict]
     # ── CVS pipeline ───────────────────────────────────────────────────
-    cvs_groups: Dict          # resultado de process_query por grupo
-
+    cvs_groups: dict          # resultado de process_query por grupo
     # ── Generación ─────────────────────────────────────────────────────
     answer: str
-    chunks_used: List[Dict]
-    metadata: Dict
-    timestamps: Dict
-
+    chunks_used: list[dict]
+    metadata: dict
+    timestamps: dict
     # ── Control ────────────────────────────────────────────────────────
     error: str
-    input_validation: Dict
-    output_validation: Dict
-
+    input_validation: dict
+    output_validation: dict
     # ── Modo RAG ───────────────────────────────────────────────────────
     rag_mode: str           # "gpt" | "assistant"
     assistant_id: Optional[str]
-    gpt_config: Dict
-
+    gpt_config: dict
     # ── Strategy ───────────────────────────────────────────────────────
     strategy_name: str      # "basic_fusion" | "cvs_parallel" | "graph_rag"
-
-
 class RAGGraph:
     def __init__(self):
         print("🔧 Inicializando RAGGraph multi-caso-de-uso...")
         self.generator = Generator()
         self.graph = self._build_graph()
         print("✅ RAGGraph listo")
-
     # ------------------------------------------------------------------
     # Construcción del grafo
     # ------------------------------------------------------------------
     def _build_graph(self) -> StateGraph:
         wf = StateGraph(RAGState)
-
         wf.add_node("validate_user_input", self.validate_user_input)
         wf.add_node("select_strategy",     self.select_strategy)
         wf.add_node("classify_context",    self.classify_context)
@@ -76,58 +61,46 @@ class RAGGraph:
         wf.add_node("strategy_pipeline",   self.run_strategy_pipeline)
         wf.add_node("generate",            self.generate_answer_async)
         wf.add_node("handle_error",        self.handle_error)
-
         if config.enable_input_guardrails:
             wf.add_node("guardrails_input", self.check_input_guardrails)
         if config.enable_output_guardrails:
             wf.add_node("guardrails_output", self.check_output_guardrails)
-
         wf.set_entry_point("validate_user_input")
-
         after_validate = "guardrails_input" if config.enable_input_guardrails else "select_strategy"
         wf.add_conditional_edges(
             "validate_user_input",
             self.should_continue_after_validation,
             {"continue": after_validate, "error": "handle_error"},
         )
-
         if config.enable_input_guardrails:
             wf.add_conditional_edges(
                 "guardrails_input",
                 self.should_continue_after_input_guardrails,
                 {"continue": "select_strategy", "error": "handle_error"},
             )
-
         wf.add_edge("select_strategy", "classify_context")
-
         wf.add_conditional_edges(
             "classify_context",
             self.should_retrieve,
             {"retrieve": "retrieve", "generate": "generate"},
         )
-
         wf.add_conditional_edges(
             "retrieve",
             self.should_use_strategy_pipeline,
             {"strategy_pipeline": "strategy_pipeline", "generate": "generate"},
         )
-
         if config.enable_output_guardrails:
             wf.add_edge("strategy_pipeline", "guardrails_output")
         else:
             wf.add_edge("strategy_pipeline", END)
-
         if config.enable_output_guardrails:
             wf.add_edge("generate", "guardrails_output")
             wf.add_edge("guardrails_output", END)
         else:
             wf.add_edge("generate", END)
-
         wf.add_edge("handle_error", END)
-
         memory = MemorySaver()
         return wf.compile(checkpointer=memory)
-
     # ------------------------------------------------------------------
     # Nodos
     # ------------------------------------------------------------------
@@ -138,7 +111,6 @@ class RAGGraph:
         if "timestamps" not in state:
             state["timestamps"] = {}
         return state
-
     def check_input_guardrails(self, state: RAGState) -> RAGState:
         try:
             is_safe, result = guardrails_manager.validate_input(
@@ -154,7 +126,6 @@ class RAGGraph:
             state["error"] = "guardrails_violation"
             state["answer"] = f"<p>❌ {e}</p>"
         return state
-
     def classify_context(self, state: RAGState) -> RAGState:
         rag_mode = state.get("rag_mode", "gpt")
         if rag_mode == "assistant":
@@ -164,16 +135,14 @@ class RAGGraph:
             state["needs_context"]  = True
             state["use_retrieval"]  = True
         return state
-
     def select_strategy(self, state: RAGState) -> RAGState:
-        """Selecciona la estrategia RAG en función de (use_case, language)."""
+        """Selecciona la estrategia RAG en función de (use_case, language)"""
         use_case = state.get("use_case", "cvs")
         language = state.get("language", "es")
         strategy = get_strategy(use_case, language)
         state["strategy_name"] = strategy.name
         print(f"   🧭 Strategy seleccionada: {strategy.name} (use_case={use_case}, lang={language})")
         return state
-
     def retrieve_chunks(self, state: RAGState) -> RAGState:
         try:
             strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
@@ -197,16 +166,13 @@ class RAGGraph:
             state["chunks_retrieved"]  = []
             state["synthetic_queries"] = []
         return state
-
     def run_strategy_pipeline(self, state: RAGState) -> RAGState:
-        """Ejecuta el pipeline propio de la estrategia (solo cvs_parallel hoy)."""
+        """Ejecuta el pipeline propio de la estrategia (solo cvs_parallel hoy)"""
         strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
         return strategy.run_pipeline(state)
-
     def generate_answer_async(self, state: RAGState) -> RAGState:
         """Wrapper síncrono que corre la generación async en un thread dedicado."""
         state_copy = dict(state)
-
         def run_in_new_loop():
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
@@ -214,17 +180,13 @@ class RAGGraph:
                 return loop.run_until_complete(self._generate_async(state_copy))
             finally:
                 loop.close()
-
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             result = executor.submit(run_in_new_loop).result()
-
         for k, v in result.items():
             state[k] = v
         return state
-
     async def _generate_async(self, state: RAGState) -> RAGState:
         history = state.get("conversation_history", []) if state.get("needs_context", True) else []
-
         gen_state = {
             "query":                state["query"],
             "user_id":              state.get("user_id", "anonymous"),
@@ -240,7 +202,6 @@ class RAGGraph:
             "assistant_id":         state.get("assistant_id"),
             "gpt_config":           state.get("gpt_config", {}),
         }
-
         updated = await self.generator.generate(gen_state)
         state["answer"]     = updated["answer"]
         state["chunks_used"] = updated.get("chunks_used", [])
@@ -252,7 +213,6 @@ class RAGGraph:
             "use_case":         state.get("use_case", "cvs"),
         })
         return state
-
     def check_output_guardrails(self, state: RAGState) -> RAGState:
         try:
             _, result = guardrails_manager.validate_output(
@@ -268,7 +228,6 @@ class RAGGraph:
             print(f"   ⚠️ Output guardrails error: {e}")
         state["timestamps"]["total"] = sum(state.get("timestamps", {}).values())
         return state
-
     def handle_error(self, state: RAGState) -> RAGState:
         if not state.get("answer"):
             state["answer"] = f"<p>Lo siento, ocurrió un error: {state.get('error', 'desconocido')}</p>"
@@ -277,28 +236,23 @@ class RAGGraph:
             state["metadata"] = {}
         state["metadata"]["error"] = state.get("error")
         return state
-
     # ------------------------------------------------------------------
     # Condicionales
     # ------------------------------------------------------------------
     def should_continue_after_validation(self, state: RAGState) -> str:
         return "error" if state.get("error") else "continue"
-
     def should_continue_after_input_guardrails(self, state: RAGState) -> str:
         return "error" if state.get("error") in ("input_violation", "guardrails_violation") else "continue"
-
     def should_retrieve(self, state: RAGState) -> str:
         return "retrieve" if state.get("use_retrieval", True) else "generate"
-
     def should_use_strategy_pipeline(self, state: RAGState) -> str:
-        """Tras retrieve, si la strategy tiene pipeline propio, lo ejecuta; si no, va a generate."""
+        """Tras retrieve, si la strategy tiene pipeline propio, lo ejecuta; si no, va a generate"""
         strategy = get_strategy(state.get("use_case", "cvs"), state.get("language", "es"))
         return "strategy_pipeline" if strategy.has_custom_pipeline() else "generate"
-
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
-    def _violation_message(self, result: Dict) -> str:
+    def _violation_message(self, result: dict) -> str:
         msgs = {
             "prompt_injection": "Detectamos un intento de manipulación. Por favor reformula tu pregunta.",
             "content_moderation": "Tu mensaje contiene contenido inapropiado.",
@@ -309,7 +263,6 @@ class RAGGraph:
             if v in msgs:
                 return f"<p>❌ {msgs[v]}</p>"
         return "<p>❌ Tu consulta no pudo ser procesada. Por favor reformúlala.</p>"
-
     # ------------------------------------------------------------------
     # Interfaz pública
     # ------------------------------------------------------------------
@@ -317,19 +270,18 @@ class RAGGraph:
         self,
         query: str,
         user_id: str = "anonymous",
-        conversation_history: List[Dict] = None,
+        conversation_history: list[dict] = None,
         rag_mode: str = "gpt",
         use_case: str = "cvs",
         language: str = "es",
         assistant_id: str = None,
-        gpt_config: Dict = None,
-    ) -> Dict:
+        gpt_config: dict = None,
+    ) -> dict:
         start = datetime.now()
         print(f"\n{'='*60}")
         print(f"🚀 RAG [{use_case.upper()}] │ mode={rag_mode} │ lang={language} │ user={user_id}")
         print(f"   Query: {query[:60]}{'...' if len(query) > 60 else ''}")
         print(f"{'='*60}")
-
         initial_state = RAGState(
             query=query,
             user_id=user_id,
@@ -353,7 +305,6 @@ class RAGGraph:
             gpt_config=gpt_config or {},
             strategy_name="",
         )
-
         try:
             final = self.graph.invoke(
                 initial_state,
@@ -363,7 +314,6 @@ class RAGGraph:
             final["timestamps"]["total"] = total
             print(f"✅ Completado en {total:.2f}s\n{'='*60}\n")
             return final
-
         except Exception as e:
             total = (datetime.now() - start).total_seconds()
             print(f"❌ Error crítico: {e}")
@@ -380,8 +330,6 @@ class RAGGraph:
                 "timestamps": {"total": total},
                 "error": str(e),
             }
-
-
 # Instancia global (se crea al importar el módulo)
 print("📄 Creando instancia global RAGGraph...")
 rag_graph = RAGGraph()
