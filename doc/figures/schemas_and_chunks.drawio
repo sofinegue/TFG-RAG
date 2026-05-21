@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-05-13T12:00:00.000Z" agent="5.0" etag="abc123" version="24.0" type="device">
+  <diagram id="schemas_chunks" name="Esquemas y Chunks">
+    <mxGraphModel dx="1450" dy="820" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1400" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Título principal -->
+        <mxCell id="title" value="Esquemas de entrada (.json) y esquemas de chunks por caso de uso" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="10" width="1160" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- ================ INPUTS (Esquemas de entrada) ================ -->
+        
+        <!-- CVs JSON Input -->
+        <mxCell id="cvs_json_title" value="Schema JSON CV (entrada)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#0066cc;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="cvs_json_fields" value="nombre_apellidos: string&#xa;puesto: string&#xa;experiencia: string[]&#xa;estudios: string[]&#xa;hard_skills: string[]&#xa;soft_skills: string[]&#xa;otros: string[]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f4f8;strokeColor=#0066cc;fontSize=10;align=left;fontFamily=monospace;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="390" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Wikipedia JSON Input -->
+        <mxCell id="wiki_json_title" value="Schema JSON Wikipedia (entrada)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="70" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="wiki_json_fields" value="title: string&#xa;language: string (es,en)&#xa;pageid: integer&#xa;categories: string[]&#xa;url: uri&#xa;text: string" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0f8e8;strokeColor=#82b366;fontSize=10;align=left;fontFamily=monospace;" vertex="1" parent="1">
+          <mxGeometry x="500" y="100" width="390" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- EU PDF Input -->
+        <mxCell id="eu_input_title" value="Entrada Legislación UE (PDF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="960" y="70" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="eu_input_fields" value="Documentos EUR-Lex (idiomas: es,en,fr,it,pt)&#xa;&#xa;Preproceso: Azure Document Intelligence&#xa;↓&#xa;Markdown + estructura normalizada" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d6b656;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="390" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- ================ PROCESSING (Chunking) ================ -->
+        
+        <mxCell id="arrow1" edge="1" parent="1" source="cvs_json_fields" target="processing1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow2" edge="1" parent="1" source="wiki_json_fields" target="processing2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow3" edge="1" parent="1" source="eu_input_fields" target="processing3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Procesamiento CVs -->
+        <mxCell id="processing1" value="Chunking Semántico&#xa;(Experiencia | Estudios | Skills)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="390" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Procesamiento Wiki -->
+        <mxCell id="processing2" value="Normalización a Markdown&#xa;+ Jerarquía de Secciones" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="280" width="390" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Procesamiento EU -->
+        <mxCell id="processing3" value="Layout PDF + Header Split&#xa;Chunking por Cabeceras" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="960" y="280" width="390" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ================ OUTPUTS (Chunk Schemas) ================ -->
+
+        <!-- Flecha hacia outputs -->
+        <mxCell id="arrow4" edge="1" parent="1" source="processing1" target="cvs_chunks_title">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow5" edge="1" parent="1" source="processing2" target="wiki_chunks_title">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow6" edge="1" parent="1" source="processing3" target="eu_chunks_title">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CVs Chunk Output -->
+        <mxCell id="cvs_chunks_title" value="Chunk Schema CVs (Cosmos DB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#0066cc;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="390" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="cvs_chunks_common" value="Campos comunes:&#xa;id, chunkId, docTitle, sourcePath&#xa;sourceCollection, sourceLanguage&#xa;content, embedding, isDeleted, nChunk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f4f8;strokeColor=#0066cc;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="390" height="80" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="cvs_chunks_specific" value="Campos específicos CV:&#xa;chunk_type (experience|education|skills)&#xa;metadata: nombre_apellidos, puesto&#xa;skill_domains, years_of_experience" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cc9900;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="390" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Wikipedia Chunk Output -->
+        <mxCell id="wiki_chunks_title" value="Chunk Schema Wikipedia (Cosmos DB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="390" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="wiki_chunks_common" value="Campos comunes:&#xa;id, chunkId, docTitle, sourcePath&#xa;sourceCollection, sourceLanguage&#xa;content, embedding, isDeleted, nChunk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0f8e8;strokeColor=#82b366;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="500" y="420" width="390" height="80" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="wiki_chunks_specific" value="Campos específicos Wikipedia:&#xa;categories[], wiki_url, pageid&#xa;Sections (ruta jerárquica)&#xa;language" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cc9900;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="500" y="500" width="390" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- EU Chunk Output -->
+        <mxCell id="eu_chunks_title" value="Chunk Schema UE (Cosmos DB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="960" y="390" width="390" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="eu_chunks_common" value="Campos comunes:&#xa;id, chunkId, docTitle, sourcePath&#xa;sourceCollection, sourceLanguage&#xa;content, embedding, isDeleted, nChunk" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d6b656;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="960" y="420" width="390" height="80" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="eu_chunks_specific" value="Campos específicos UE:&#xa;doc_type (Directiva|Reglamento)&#xa;Sections (jerarquía normativa)&#xa;legal_reference" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#cc9900;fontSize=9;align=left;" vertex="1" parent="1">
+          <mxGeometry x="960" y="500" width="390" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ================ STORAGE (Azure Cosmos DB) ================ -->
+
+        <mxCell id="arrow7" edge="1" parent="1" source="cvs_chunks_specific" target="cosmos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow8" edge="1" parent="1" source="wiki_chunks_specific" target="cosmos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="arrow9" edge="1" parent="1" source="eu_chunks_specific" target="cosmos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="cosmos" value="Azure Cosmos DB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="360" y="640" width="680" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="cosmos_detail" value="Containers: Chunks-CVs | Chunks-Wikipedia | Chunks-EU&#xa;Operaciones: Upsert + Borrado lógico (isDeleted) + Índices para recuperación" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fadad4;strokeColor=#b85450;fontSize=9;align=center;" vertex="1" parent="1">
+          <mxGeometry x="360" y="680" width="680" height="60" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

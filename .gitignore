@@ -10,7 +10,5 @@ data/wikipedia/*
 data/eu/*
 data/historial/*
 
-doc/*
-
 frontend/build/*
 frontend/node_modules/*
