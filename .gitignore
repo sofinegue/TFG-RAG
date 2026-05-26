@@ -12,3 +12,10 @@ data/historial/*
 
 frontend/build/*
 frontend/node_modules/*
+
+doc/demo_examples/
+doc/DOCUMENTOS_ENTREGA/
+doc/figures/
+doc/images/
+doc/investigation/
+doc/papers/
